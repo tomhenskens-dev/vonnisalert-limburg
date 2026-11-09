@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Vonnisalert Limburg – prototype</title>
+<style>
+:root{--ink:#172536;--muted:#687789;--line:#e4e9ef;--bg:#f4f7fa;--blue:#173f67;--blue2:#245b8d;--teal:#dff3ee;--tealink:#176b58;--amber:#fff1d6;--amberink:#94600a;--red:#fde8e7;--redink:#a33b35;--white:#fff}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.5 Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif}
+header{background:linear-gradient(115deg,#132f4d,#245b8d);color:#fff;padding:25px max(22px,calc((100% - 1180px)/2)) 28px}
+.top{display:flex;justify-content:space-between;align-items:center;gap:18px}.brand{font-size:22px;font-weight:750;letter-spacing:-.4px}.brand span{color:#a9d9d1}.sub{color:#d2dfeb;margin-top:5px;font-size:13px}.demo{font-size:12px;border:1px solid #8ca8c1;border-radius:30px;padding:6px 11px;color:#e8f1f8;white-space:nowrap}
+main{max-width:1180px;margin:26px auto;padding:0 22px}.toolbar{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:20px;flex-wrap:wrap}
+h1{font-size:25px;letter-spacing:-.5px;margin:0 0 4px}.intro{color:var(--muted);margin:0}
+button{border:0;border-radius:9px;padding:10px 15px;font:600 14px inherit;cursor:pointer}.primary{background:var(--blue2);color:#fff}.primary:hover{background:var(--blue)}.secondary{background:#edf2f7;color:#243c54}.small{padding:7px 10px;font-size:12px}
+.cards{display:grid;grid-template-columns:repeat(4,1fr);gap:13px;margin:18px 0 22px}.card{background:#fff;border:1px solid var(--line);border-radius:13px;padding:16px}.card .label{color:var(--muted);font-size:12px}.card .num{font-size:27px;font-weight:750;margin-top:4px}.card .hint{font-size:11px;color:var(--muted);margin-top:2px}
+.panel{background:#fff;border:1px solid var(--line);border-radius:14px;overflow:hidden}.panelhead{padding:17px 19px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}.panelhead h2{font-size:17px;margin:0}.filters{display:flex;gap:8px;flex-wrap:wrap}input,select,textarea{font:inherit;border:1px solid #d7dfe8;border-radius:8px;padding:9px 10px;background:#fff;color:var(--ink)}input:focus,select:focus,textarea:focus{outline:2px solid #c4d9ec;border-color:#7ea7ca}
+.filters input{min-width:210px}.tablewrap{overflow-x:auto}table{width:100%;border-collapse:collapse;min-width:760px}th{text-align:left;color:#718093;font-size:11px;text-transform:uppercase;letter-spacing:.55px;background:#fafbfd;padding:12px 17px}td{padding:14px 17px;border-top:1px solid #edf0f4;vertical-align:top}tr:hover td{background:#fbfcfe}.case{font-weight:700}.meta{color:var(--muted);font-size:12px;margin-top:3px}.pill{display:inline-block;border-radius:30px;padding:4px 9px;font-size:11px;font-weight:700;white-space:nowrap}.p-today{background:var(--amber);color:var(--amberink)}.p-check{background:#edf0f4;color:#536274}.p-done{background:var(--teal);color:var(--tealink)}.p-late{background:var(--red);color:var(--redink)}
+.empty{padding:35px;text-align:center;color:var(--muted)}.foot{font-size:12px;color:var(--muted);margin:13px 2px}
+.morning{background:#fff;border:1px solid var(--line);border-left:4px solid #73b7a5;border-radius:13px;padding:17px 20px;margin-bottom:20px;box-shadow:0 3px 12px #1b35500a}
+.morning-kicker{font-size:11px;font-weight:800;letter-spacing:1px;color:#24745f;margin-bottom:5px}
+.morning-text{font-size:16px;font-weight:650;color:#20364c}
+.morning-signoff{font-size:12px;color:var(--muted);margin-top:7px}
+.notice{margin-top:18px;background:#edf4fa;border:1px solid #d8e5f0;border-radius:12px;padding:14px 16px;color:#38516a;font-size:13px}
+dialog{border:0;border-radius:16px;padding:0;width:min(620px,calc(100% - 28px));box-shadow:0 20px 70px #10243a44}dialog::backdrop{background:#10243a77}.modalhead{padding:18px 22px;background:#f8fafc;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:center}.modalhead h2{font-size:18px;margin:0}.modalbody{padding:20px 22px}.formgrid{display:grid;grid-template-columns:1fr 1fr;gap:13px}.field{display:flex;flex-direction:column;gap:5px}.field.full{grid-column:1/-1}.field label{font-size:12px;font-weight:700;color:#526174}.field input,.field select,.field textarea{width:100%}.field textarea{min-height:75px;resize:vertical}.modalfoot{display:flex;justify-content:flex-end;gap:8px;padding:14px 22px;border-top:1px solid var(--line)}
+@media(max-width:720px){.cards{grid-template-columns:repeat(2,1fr)}.top{align-items:flex-start;flex-direction:column}.toolbar{align-items:flex-start}main{padding:0 13px;margin-top:19px}.formgrid{grid-template-columns:1fr}.field.full{grid-column:auto}.cards{gap:9px}.card{padding:13px}}
+</style>
+
+  <meta name="theme-color" content="#173f67">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="Vonnisalert">
+  <link rel="manifest" href="/manifest.webmanifest">
+  <link rel="apple-touch-icon" href="/icon-180.png">
+  <link rel="icon" type="image/png" href="/icon-192.png">
+
+</head>
+<body>
+<header><div class="top"><div><div class="brand">Vonnisalert <span>Limburg</span></div><div class="sub">Opvolging van aangekondigde uitspraken · Rechtbank Limburg</div></div><div class="demo">INTERACTIEF PROTOTYPE</div></div></header>
+<main>
+  <section class="morning" aria-live="polite">
+    <div class="morning-kicker">☀️ GOEDEMORGEN GEERT</div>
+    <div class="morning-text" id="morningText"></div>
+    <div class="morning-signoff" id="morningSignoff"></div>
+  </section>
+  <div class="toolbar"><div><h1>Overzicht uitspraken</h1><p class="intro">Alle aangekondigde vonnissen op één plaats.</p></div><button class="primary" id="addBtn">＋ Nieuwe zaak toevoegen</button></div>
+  <section class="cards">
+    <div class="card"><div class="label">Opvolgde dossiers</div><div class="num" id="totalCount">1</div><div class="hint">In het overzicht</div></div>
+    <div class="card"><div class="label">Uitspraak vandaag</div><div class="num" id="todayCount">0</div><div class="hint">Volgens de geregistreerde datum</div></div>
+    <div class="card"><div class="label">Nog te controleren</div><div class="num" id="checkCount">1</div><div class="hint">Menselijke verificatie nodig</div></div>
+    <div class="card"><div class="label">Uitspraak bevestigd</div><div class="num" id="doneCount">0</div><div class="hint">Effectief nagekeken</div></div>
+  </section>
+  <section class="panel">
+    <div class="panelhead"><h2>Dossiers</h2><div class="filters"><input id="search" placeholder="Zoek op zaak, beklaagde …"><select id="statusFilter"><option value="">Alle statussen</option><option value="check">Nog te controleren</option><option value="today">Uitspraak vandaag</option><option value="done">Uitspraak bevestigd</option><option value="postponed">Uitgesteld</option></select></div></div>
+    <div class="tablewrap"><table><thead><tr><th>Zaak</th><th>Uitspraakdatum</th><th>Rechtbank</th><th>Status</th><th>Bron</th><th></th></tr></thead><tbody id="rows"></tbody></table></div>
+  </section>
+  <section class="panel" style="margin-top:18px">
+    <div class="panelhead"><h2>Uitspraken gisteren – resultaat nog niet gevonden</h2><span class="pill p-late" id="yesterdayBadge">0 op te volgen</span></div>
+    <div class="tablewrap"><table><thead><tr><th>Zaak</th><th>Aangekondigd voor</th><th>Rechtbank</th><th>Opvolging</th><th></th></tr></thead><tbody id="yesterdayRows"></tbody></table></div>
+  </section>
+  <div class="notice"><strong>Belangrijk:</strong> dit is een eerste prototype met één testdossier. De datum van 9 november 2026 is afgeleid uit het woord “maandag” in het artikel van 8 november en moet dus nog bevestigd worden. De demo verstuurt nog geen automatische meldingen om 07.00 uur en haalt nog niet zelfstandig artikels van HBVL op.</div>
+  <p class="foot">Gegevens die je hier toevoegt, worden lokaal in deze browser bewaard. Ze worden nog niet gedeeld of gesynchroniseerd met een andere computer.</p>
+</main>
+<dialog id="caseDialog">
+  <form id="caseForm">
+    <div class="modalhead"><h2 id="dialogTitle">Nieuwe zaak</h2><button type="button" class="secondary small" id="closeBtn">Sluiten</button></div>
+    <div class="modalbody"><input type="hidden" id="caseId"><div class="formgrid">
+      <div class="field full"><label for="title">Zaak / omschrijving *</label><input id="title" required placeholder="Bijv. Truiense reisagente"></div>
+      <div class="field"><label for="defendant">Beklaagde</label><input id="defendant" placeholder="Naam of initialen"></div>
+      <div class="field"><label for="author">Auteur</label><input id="author" placeholder="Naam auteur"></div>
+      <div class="field"><label for="publication">Publicatiedatum</label><input id="publication" type="date"></div>
+      <div class="field"><label for="verdict">Verwachte uitspraakdatum</label><input id="verdict" type="date"></div>
+      <div class="field"><label for="court">Rechtbank / afdeling</label><select id="court"><option value="Te controleren">Te controleren</option><option value="Hasselt">Hasselt</option><option value="Tongeren">Tongeren</option></select></div>
+      <div class="field"><label for="status">Status</label><select id="status"><option value="check">Nog te controleren</option><option value="today">Uitspraak vandaag</option><option value="done">Uitspraak bevestigd</option><option value="postponed">Uitgesteld</option></select></div>
+      <div class="field full"><label for="url">Link naar HBVL-artikel</label><input id="url" type="url" placeholder="https://www.hbvl.be/..."></div>
+      <div class="field full"><label for="notes">Notities</label><textarea id="notes" placeholder="Bijv. datum afgeleid uit ‘maandag’; parket vordert 37 maanden cel met uitstel."></textarea></div>
+    </div></div>
+    <div class="modalfoot"><button type="button" class="secondary" id="cancelBtn">Annuleren</button><button type="submit" class="primary">Bewaren</button></div>
+  </form>
+</dialog>
+<script>
+// De ochtendbegroeting wisselt dagelijks. De knipoog naar Tom verschijnt slechts af en toe.
+const morningLines = [
+  "Heb je goed geslapen en lekker gedroomd? Terwijl jij rustig ontbijt en van je kop koffie geniet, heb ik de eerste zaken al voor je klaargezet.",
+  "Koffie klaar, Geert? Ik heb intussen de rechtbankberichten nagekeken. Hieronder vind je wat vandaag je aandacht verdient.",
+  "Een goeie morgen! Hopelijk heb je heerlijk geslapen. Neem rustig je ontbijt; ik heb alvast het ochtendoverzicht voor je voorbereid.",
+  "Tijd voor koffie en de krant, Geert. Ik heb de aangekondigde vonnissen alvast op een rij gezet.",
+  "Goedemorgen Geert! Eerst een slok koffie, dan het nieuws. Ik heb alvast uitgezocht welke uitspraken je best opvolgt."
+];
+const tomWinks = [
+  "Enne… vergeet niet: je vriend Tom heeft dit met plezier voor jou in elkaar gestoken. Af en toe bedanken en trakteren op een frisse Duvel mag dus gerust. 😉",
+  "Kleine vriendelijke herinnering: Tom heeft hier achter de schermen wat werk in gestoken. Een bedankje en ooit eens een Duvel zouden hem waarschijnlijk plezieren. 🍺",
+  "PS: denk ook nog eens aan Tom, de man achter dit handige hulpmiddel. Een bedankje kost niets; een Duvel is natuurlijk nog beter. 😉",
+  "Niet vergeten: Vonnisalert is mee mogelijk gemaakt door Tom. Geef die man af en toe eens een schouderklopje… of een Duvel."
+];
+function dailyPick(list, seed) {
+  let h = 0;
+  for (let i = 0; i < seed.length; i++) h = (h * 31 + seed.charCodeAt(i)) >>> 0;
+  return list[h % list.length];
+}
+function showMorningGreeting() {
+  const now = new Date();
+  const dayKey = `${now.getFullYear()}-${now.getMonth()+1}-${now.getDate()}`;
+  $("morningText").textContent = dailyPick(morningLines, dayKey);
+  const hash = [...dayKey].reduce((h,ch)=>(h*31+ch.charCodeAt(0))>>>0,0);
+  $("morningSignoff").textContent = hash % 4 === 0 ? dailyPick(tomWinks, dayKey + "-tom") : "☕ Jij geniet van je koffie, ik hou de vonnissen in de gaten.";
+}
+const seed=[{id:"demo-1",title:"Truiense reisagente – 64 spookreizen",defendant:"E. S. (37)",author:"Geert Houben (te verifiëren)",publication:"2026-11-08",verdict:"2026-11-09",court:"Hasselt",status:"check",url:"",notes:"Artikel vermeldt: ‘Maandag kent ze het verdict.’ Datum 9 november 2026 is afgeleid uit de publicatiedatum en moet bevestigd worden. Proces vond plaats in de Hasseltse rechtbank. Parket vorderde 37 maanden cel met uitstel."}];
+let cases=JSON.parse(localStorage.getItem("vonnisalert_cases")||"null")||seed;
+const $=id=>document.getElementById(id);
+const labels={check:"Nog te controleren",today:"Uitspraak vandaag",done:"Uitspraak bevestigd",postponed:"Uitgesteld"};
+const classes={check:"p-check",today:"p-today",done:"p-done",postponed:"p-late"};
+function esc(s=""){return String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));}
+function date(s){if(!s)return "Niet ingevuld";let [y,m,d]=s.split("-");return `${d}/${m}/${y}`;}
+function localISO(d){const y=d.getFullYear(),m=String(d.getMonth()+1).padStart(2,"0"),day=String(d.getDate()).padStart(2,"0");return `${y}-${m}-${day}`;}
+function render(){
+ const q=$("search").value.toLowerCase(),f=$("statusFilter").value;
+ const filtered=cases.filter(c=>(!f||c.status===f)&&[c.title,c.defendant,c.author,c.court].join(" ").toLowerCase().includes(q));
+ $("rows").innerHTML=filtered.length?filtered.map(c=>`<tr><td><div class="case">${esc(c.title)}</div><div class="meta">${esc(c.defendant||"Beklaagde niet vermeld")} · ${esc(c.author||"Auteur niet ingevuld")}</div></td><td>${date(c.verdict)}<div class="meta">Artikel: ${date(c.publication)}</div></td><td>${esc(c.court||"Te controleren")}</td><td><span class="pill ${classes[c.status]||"p-check"}">${labels[c.status]||labels.check}</span></td><td>${c.url?`<a href="${esc(c.url)}" target="_blank" rel="noopener">Open artikel ↗</a>`:"Niet gekoppeld"}</td><td><button class="secondary small" onclick="editCase('${c.id}')">Bewerken</button></td></tr>`).join(""):`<tr><td colspan="6" class="empty">Geen dossiers gevonden.</td></tr>`;
+ const yesterday=new Date();yesterday.setDate(yesterday.getDate()-1);const yday=localISO(yesterday);
+ const pendingYesterday=cases.filter(c=>c.verdict===yday&&c.status!=="done"&&c.status!=="postponed");
+ $("yesterdayBadge").textContent=`${pendingYesterday.length} op te volgen`;
+ $("yesterdayRows").innerHTML=pendingYesterday.length?pendingYesterday.map(c=>`<tr><td><div class="case">${esc(c.title)}</div><div class="meta">${esc(c.defendant||"Beklaagde niet vermeld")}</div></td><td>${date(c.verdict)}</td><td>${esc(c.court||"Te controleren")}</td><td><span class="pill p-late">Resultaat niet bevestigd</span></td><td><button class="secondary small" onclick="editCase('${c.id}')">Opvolgen</button></td></tr>`).join(""):`<tr><td colspan="5" class="empty">Geen openstaande dossiers met een uitspraakdatum gisteren.</td></tr>`;
+ $("totalCount").textContent=cases.length;$("todayCount").textContent=cases.filter(c=>c.status==="today").length;$("checkCount").textContent=cases.filter(c=>c.status==="check").length;$("doneCount").textContent=cases.filter(c=>c.status==="done").length;
+ localStorage.setItem("vonnisalert_cases",JSON.stringify(cases));
+}
+function openNew(){ $("caseForm").reset();$("caseId").value="";$("dialogTitle").textContent="Nieuwe zaak";$("caseDialog").showModal();}
+window.editCase=id=>{let c=cases.find(x=>x.id===id);if(!c)return;$("caseId").value=c.id;["title","defendant","author","publication","verdict","court","status","url","notes"].forEach(k=>$(k).value=c[k]||"");$("dialogTitle").textContent="Dossier bewerken";$("caseDialog").showModal();};
+$("addBtn").onclick=openNew;$("closeBtn").onclick=$("cancelBtn").onclick=()=>$("caseDialog").close();
+$("search").oninput=render;$("statusFilter").onchange=render;
+$("caseForm").onsubmit=e=>{e.preventDefault();let id=$("caseId").value;let c={id:id||("case-"+Date.now())};["title","defendant","author","publication","verdict","court","status","url","notes"].forEach(k=>c[k]=$(k).value.trim());if(id){cases=cases.map(x=>x.id===id?c:x)}else cases.unshift(c);$("caseDialog").close();render();};
+showMorningGreeting();
+render();
+
+if ("serviceWorker" in navigator) {
+  window.addEventListener("load", () => {
+    navigator.serviceWorker.register("/sw.js").catch(() => {});
+  });
+}
+
+</script>
+</body></html>
