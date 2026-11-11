@@ -10,7 +10,7 @@
 //  4. Om 18.00 uur: herinnering voor de uitspraken van morgen.
 
 import { createClient, type SupabaseClient } from "npm:@supabase/supabase-js@2";
-import { brusselsParts } from "../_shared/parser.js";
+import { brusselsParts, isGeertHouben } from "../_shared/parser.js";
 import {
   parseRss, processItems, statusUpdates, buildDigest, buildReminder, HBVL_RSS, GOOGLE_NEWS_RSS,
 } from "../_shared/engine.js";
@@ -113,20 +113,25 @@ async function applyChanges(db: SupabaseClient, r: { inserts?: any[]; updates?: 
   }
 }
 
-async function pollFeeds(db: SupabaseClient, now: Date, minute: number, force: boolean) {
+async function pollFeeds(db: SupabaseClient, now: Date, minute: number, force: boolean, onlyGeert: boolean) {
   const report: Record<string, unknown> = {};
   const items = [];
   try {
     items.push(...parseRss(await fetchText(HBVL_URL), "hbvl"));
     report.hbvl = items.length;
   } catch (e) { report.hbvl_error = errText(e); }
-  // Google News (alleen titels, ruimere periode) één keer per uur
-  if (force || minute < 15) {
+  // Google News (alleen titels, zonder auteur) één keer per uur – niet bij filter op Geert
+  if (!onlyGeert && (force || minute < 15)) {
     try {
       const g = parseRss(await fetchText(GOOGLE_URL), "google");
       items.push(...g);
       report.google = g.length;
     } catch (e) { report.google_error = errText(e); }
+  }
+  if (onlyGeert) {
+    const before = items.length;
+    items.splice(0, items.length, ...items.filter((i) => isGeertHouben(i.author)));
+    report.van_geert = `${items.length} van ${before}`;
   }
   if (!items.length) return report;
 
@@ -145,7 +150,7 @@ async function run(db: SupabaseClient, opts: { force?: boolean; action?: string 
   const state = await getState(db);
   const report: Record<string, unknown> = { today, hour, minute };
 
-  if (state.rss_enabled === true) report.feeds = await pollFeeds(db, now, minute, Boolean(opts.force));
+  if (state.rss_enabled === true) report.feeds = await pollFeeds(db, now, minute, Boolean(opts.force), state.only_geert !== false);
   else report.feeds = "uitgeschakeld";
 
   const cases = await loadCases(db);

@@ -244,8 +244,10 @@ function renderSettings() {
   const s = state.settings;
   const lr = s.last_run, ld = s.last_digest;
   app.innerHTML = `<h1>Instellingen</h1><div class="settings">
-    <div class="row"><div><strong>Automatische HBVL-opvolging</strong><p>Elke 15 minuten de publieke HBVL-RSS-feed (titel, intro, auteur) en elk uur Google News (titels) controleren op aangekondigde uitspraken.<br><span class="flag">Let op:</span> HBVL behoudt zich in zijn robots.txt het recht voor om automatische gegevensverzameling te verbieden (art. 4 DSM-richtlijn). Zet dit pas aan als je daarvoor toestemming hebt.</p></div>
+    <div class="row"><div><strong>Automatische HBVL-opvolging</strong><p>Elke 15 minuten de publieke HBVL-RSS-feed (titel, intro, auteur) controleren op aangekondigde uitspraken.<br><span class="flag">Let op:</span> HBVL behoudt zich in zijn robots.txt het recht voor om automatische gegevensverzameling te verbieden (art. 4 DSM-richtlijn). Zet dit pas aan als je daarvoor toestemming hebt.</p></div>
       <label class="switch"><input type="checkbox" id="sRss" ${s.rss_enabled ? "checked" : ""}><span></span></label></div>
+    <div class="row"><div><strong>Alleen artikels van Geert Houben</strong><p>Enkel artikels uit de HBVL-feed waarvan Geert Houben (mee-)auteur is. Uit: alle HBVL-artikels plus Google News.</p></div>
+      <label class="switch"><input type="checkbox" id="sGeert" ${s.only_geert !== false ? "checked" : ""}><span></span></label></div>
     <div class="row"><div><strong>Ochtendmail om 07.00 uur</strong><p>Overzicht van nieuwe aankondigingen, uitspraken vandaag en morgen, onbevestigde en uitgestelde zaken.</p></div>
       <label class="switch"><input type="checkbox" id="sMail" ${s.mail_enabled !== false ? "checked" : ""}><span></span></label></div>
     <div class="row"><div><strong>Herinnering om 18.00 uur</strong><p>Mail de avond voordien als er de volgende dag uitspraken verwacht worden.</p></div>
@@ -262,7 +264,7 @@ function renderSettings() {
     if (error) { el.checked = !el.checked; return toast("Fout: " + error.message); }
     state.settings[key] = el.checked; updateBadges(); toast("Bewaard");
   });
-  toggle("rss_enabled", $("sRss")); toggle("mail_enabled", $("sMail")); toggle("reminder_enabled", $("sRem"));
+  toggle("rss_enabled", $("sRss")); toggle("only_geert", $("sGeert")); toggle("mail_enabled", $("sMail")); toggle("reminder_enabled", $("sRem"));
   $("runNow").onclick = () => callFn("run", $("runNow"));
   $("testMail").onclick = () => callFn("testmail", $("testMail"));
   $("logout").onclick = () => db.auth.signOut();
