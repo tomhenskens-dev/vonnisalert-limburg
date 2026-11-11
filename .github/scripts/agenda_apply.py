@@ -100,6 +100,18 @@ for path in sorted(glob.glob("agenda/updates/*.json")):
             f"(select 1 from public.cases where lower(title) = lower({lit(f['title'])})) returning id) "
             f"insert into public.case_events (case_id, kind, message) select id, 'aangemaakt', {lit(msg)} from ins;"
         )
+    # Gerechtsartikels (enkel titel, link, auteur en datum – geen artikeltekst in de publieke repo)
+    for a in data.get("articles", []):
+        if not a.get("article_id") or not a.get("url") or not a.get("title"):
+            raise ValueError("artikel zonder id, link of titel")
+        if not re.match(r"^https?://", a["url"]): raise ValueError("ongeldige link")
+        src = a.get("source", "hln")
+        sql.append(
+            "insert into public.articles (article_id, source, url, title, author, published_at, premium, court_related, announcement) "
+            f"values ({lit(a['article_id'])}, {lit(src)}, {lit(a['url'])}, {lit(a['title'])}, {lit(a.get('author'))}, "
+            f"{lit(a.get('published_at'))}{'::timestamptz' if a.get('published_at') else ''}, {'true' if a.get('premium') else 'false'}, true, false) "
+            "on conflict (article_id) do nothing;"
+        )
     for rq in data.get("requests_done", []):
         if not UUID.match(rq.get("id", "")):
             raise ValueError("ongeldig aanvraag-id")

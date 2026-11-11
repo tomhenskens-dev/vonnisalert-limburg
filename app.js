@@ -81,9 +81,14 @@ setTodayLabel();
 
 function updateBadges() {
   $("badgeCheck").textContent = state.cases.filter(isOpenCheck).length;
-  $("badgeArt").textContent = state.articles.length;
+  $("badgeArt").textContent = state.articles.filter((a) => !isColleagueItem(a.author)).length;
+  $("authorTabs").innerHTML = colleagues().map((c) => {
+    const n = state.articles.filter((a) => ownerOf(a.author)?.name === c.name).length;
+    const h = "j/" + slug(c.name);
+    return `<a href="#${h}" data-view="${h}" class="${location.hash === "#" + h ? "active" : ""}">${esc(c.name.split(" ")[0])} <span class="badge">${n}</span></a>`;
+  }).join("");
   const lr = state.settings.last_run?.at;
-  $("footer").innerHTML = `Ingelogd als ${esc(state.user?.email || "")} · laatste automatische controle: ${lr ? new Date(lr).toLocaleString("nl-BE", { timeZone: "Europe/Brussels" }) : "nog niet"} · automatische HBVL-opvolging: <strong>${state.settings.rss_enabled ? "aan" : "uit"}</strong>`;
+  $("footer").innerHTML = `Ingelogd als ${esc(state.user?.email || "")} · laatste automatische controle: ${lr ? new Date(lr).toLocaleString("nl-BE", { timeZone: "Europe/Brussels" }) : "nog niet"} · automatische opvolging: <strong>${state.settings.rss_enabled ? "aan" : "uit"}</strong>`;
 }
 
 window.addEventListener("hashchange", () => state.user && route());
@@ -153,6 +158,10 @@ function bindItems() {
 function route() {
   const h = location.hash.replace(/^#/, "") || "vandaag";
   if (h.startsWith("dossier/")) { renderToday(); openCase(h.split("/")[1]); return; }
+  if (h.startsWith("j/")) {
+    document.querySelectorAll("nav a").forEach((a) => a.classList.toggle("active", a.dataset.view === h));
+    renderJournalist(h.slice(2)); bindItems(); return;
+  }
   document.querySelectorAll("nav a").forEach((a) => a.classList.toggle("active", a.dataset.view === h));
   ({ vandaag: renderToday, komend: renderUpcoming, week: renderWeek, controle: renderCheck, artikels: renderArticles, agenda: renderAgenda, alle: renderAll, archief: renderArchive, instellingen: renderSettings }[h] || renderToday)();
   bindItems();
@@ -219,15 +228,19 @@ function renderCheck() {
   app.innerHTML = `<h1>Nog te controleren</h1><p class="muted">Dossiers met een afgeleide of onzekere datum, een onbekende rechtbank of auteur, of een verstreken datum zonder bevestiging. Open een dossier, controleer en vink “gecontroleerd” aan.</p>${list(arr, "Niets te controleren. 🎉")}`;
 }
 
-function renderArticles() {
-  const arts = state.articles;
-  app.innerHTML = `<h1>Gerechtsartikels</h1>
-    <p class="muted">Artikels van de gevolgde journalisten met een gerechtelijke context, maar zonder herkende aankondiging in titel of intro. De aankondiging staat soms pas verderop in het artikel: open het, en plak de tekst als dossier als er een uitspraak wordt aangekondigd.</p>
-    ${state.settings.rss_enabled ? "" : `<div class="notice">De automatische opvolging staat uit, dus deze lijst wordt niet aangevuld.</div>`}
-    ${arts.length ? `<div class="list">${arts.map((a) => `<div class="item" style="cursor:default"><div class="main"><div class="title">${esc(a.title)}</div>
+// Artikels per journalist: de eerste in de lijst (Geert) is de hoofdgebruiker; collega's krijgen een eigen tabblad
+const slug = (n) => String(n || "").toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
+const colleagues = () => authors().slice(1);
+const ownerOf = (author) => followedAuthor(author, authors());
+const isColleagueItem = (author) => { const o = ownerOf(author); return Boolean(o && colleagues().some((c) => c.name === o.name)); };
+
+function artItem(a) {
+  return `<div class="item" style="cursor:default"><div class="main"><div class="title">${esc(a.title)}</div>
       <div class="meta"><span>${a.published_at ? new Date(a.published_at).toLocaleString("nl-BE", { timeZone: "Europe/Brussels", dateStyle: "short", timeStyle: "short" }) : ""}</span><span>${esc(a.author || "auteur onbekend")}</span>${a.premium ? "<span>Plus</span>" : ""}<span class="mtag">${a.source === "google" ? "Google News" : a.source === "hln" ? "HLN" : "HBVL"}</span></div>
       ${a.lead ? `<div class="small muted" style="margin-top:6px">${esc(a.lead.slice(0, 260))}${a.lead.length > 260 ? "…" : ""}</div>` : ""}</div>
-      <div class="side"><a class="btn secondary sm" href="${esc(a.url)}" target="_blank" rel="noopener">Open ↗</a><button class="primary sm" data-mk="${esc(a.article_id)}">Maak dossier</button><button class="secondary sm" data-dis="${esc(a.article_id)}">Negeer</button></div></div>`).join("")}</div>` : `<div class="empty">Geen openstaande gerechtsartikels.</div>`}`;
+      <div class="side"><a class="btn secondary sm" href="${esc(a.url)}" target="_blank" rel="noopener">Open ↗</a><button class="primary sm" data-mk="${esc(a.article_id)}">Maak dossier</button><button class="secondary sm" data-dis="${esc(a.article_id)}">Negeer</button></div></div>`;
+}
+function bindArticleButtons() {
   app.querySelectorAll("[data-dis]").forEach((b) => (b.onclick = async () => {
     const { error } = await db.from("articles").update({ dismissed: true }).eq("article_id", b.dataset.dis);
     if (error) return toast("Fout: " + error.message);
@@ -237,6 +250,31 @@ function renderArticles() {
     const a = state.articles.find((x) => x.article_id === b.dataset.mk);
     openNew({ url: a.url, text: [a.title, a.lead].filter(Boolean).join("\n"), pub: a.published_at, author: a.author, articleId: a.article_id });
   }));
+}
+
+function renderArticles() {
+  const arts = state.articles.filter((a) => !isColleagueItem(a.author));
+  app.innerHTML = `<h1>Gerechtsartikels</h1>
+    <p class="muted">Rechtbankartikels zonder herkende aankondiging in titel of intro. De aankondiging staat soms pas verderop in het artikel: open het, en plak de tekst als dossier als er een uitspraak wordt aangekondigd.${colleagues().length ? ` Artikels van ${colleagues().map((c) => esc(c.name)).join(", ")} staan in een eigen tabblad.` : ""}</p>
+    ${state.settings.rss_enabled ? "" : `<div class="notice">De automatische opvolging staat uit, dus deze lijst wordt niet automatisch aangevuld.</div>`}
+    ${arts.length ? `<div class="list">${arts.map(artItem).join("")}</div>` : `<div class="empty">Geen openstaande gerechtsartikels.</div>`}`;
+  bindArticleButtons();
+}
+
+function renderJournalist(sl) {
+  const j = colleagues().find((c) => slug(c.name) === sl);
+  if (!j) { location.hash = "#vandaag"; return; }
+  const own = (x) => ownerOf(x)?.name === j.name;
+  const cases = state.cases.filter((c) => own(c.author) && !isArchived(c)).sort(sortDate);
+  const arch = state.cases.filter((c) => own(c.author) && isArchived(c)).sort((a, b) => sortDate(b, a));
+  const arts = state.articles.filter((a) => own(a.author));
+  app.innerHTML = `<h1>${esc(j.name)} <span class="mtag" style="font-size:13px;vertical-align:middle">${esc(j.medium || "")}</span></h1>
+    <p class="muted">Alles van ${esc(j.name.split(" ")[0])} op één plaats: dossiers met een aangekondigde uitspraak en rechtbankartikels om na te kijken.</p>
+    ${block("Dossiers", cases, "Nog geen dossiers.")}
+    <section class="block"><div class="blockhead"><h2>Rechtbankartikels om na te kijken <span class="muted small">(${arts.length})</span></h2></div>
+      ${arts.length ? `<div class="list">${arts.map(artItem).join("")}</div>` : `<div class="empty">Geen openstaande artikels.</div>`}</section>
+    ${arch.length ? block("Afgewerkt", arch, "") : ""}`;
+  bindArticleButtons();
 }
 
 function renderAll() {

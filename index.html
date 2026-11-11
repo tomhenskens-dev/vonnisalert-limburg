@@ -30,6 +30,7 @@
     <a href="#week" data-view="week">Week</a>
     <a href="#controle" data-view="controle">Te controleren <span class="badge" id="badgeCheck">0</span></a>
     <a href="#artikels" data-view="artikels">Gerechtsartikels <span class="badge" id="badgeArt">0</span></a>
+    <span id="authorTabs" style="display:contents"></span>
     <a href="#agenda" data-view="agenda">Agenda</a>
     <a href="#alle" data-view="alle">Zoeken</a>
     <a href="#archief" data-view="archief">Archief</a>
@@ -122,7 +123,7 @@
   </form>
 </dialog>
 
-<script type="module" src="/app.js?v=5"></script>
+<script type="module" src="/app.js?v=6"></script>
 <script>
 if ("serviceWorker" in navigator) window.addEventListener("load", () => navigator.serviceWorker.register("/sw.js").catch(() => {}));
 </script>
