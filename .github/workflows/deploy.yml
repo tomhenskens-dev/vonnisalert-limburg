@@ -55,15 +55,22 @@ jobs:
             echo "configured=false" >> "$GITHUB_OUTPUT"
             exit 0
           fi
-          if ! [[ "$GEERT_EMAIL" =~ ^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$ ]]; then echo "::error::GEERT_EMAIL is geen geldig adres"; exit 1; fi
-          if [ ${#GEERT_PASSWORD} -lt 10 ]; then echo "::error::GEERT_PASSWORD moet minstens 10 tekens hebben"; exit 1; fi
-          if ! [[ "$REF" =~ ^[a-z0-9]{20}$ ]]; then echo "::error::SUPABASE_PROJECT_REF moet de projectcode van 20 tekens zijn (uit de Supabase-URL)"; exit 1; fi
+          fail() { echo "::error::$1"; echo "$1" > /tmp/status/fout.txt; exit 1; }
+          GEERT_EMAIL_T=$(echo "$GEERT_EMAIL" | tr -d '[:space:]')
+          REF_T=$(echo "$REF" | tr -d '[:space:]')
+          if ! [[ "$GEERT_EMAIL_T" =~ ^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$ ]]; then fail "GEERT_EMAIL is geen geldig e-mailadres"; fi
+          if [ ${#GEERT_PASSWORD} -lt 10 ]; then fail "GEERT_PASSWORD heeft minder dan 10 tekens (${#GEERT_PASSWORD})"; fi
+          if ! [[ "$REF_T" =~ ^[a-z0-9]{20}$ ]]; then fail "Project-ref heeft niet de vorm van 20 kleine letters/cijfers (lengte ${#REF_T}, begint met https: $([[ $REF_T == https* ]] && echo ja || echo nee))"; fi
+          echo "REF=$REF_T" >> "$GITHUB_ENV"
+          echo "GEERT_EMAIL=$GEERT_EMAIL_T" >> "$GITHUB_ENV"
           echo "configured=true" >> "$GITHUB_OUTPUT"
 
       - name: Databank (migraties)
         if: steps.check.outputs.configured == 'true'
         run: |
-          q() { jq -n --arg q "$1" '{query:$q}' | curl -sS -f -X POST "https://api.supabase.com/v1/projects/$REF/database/query" \
+          echo "Databank (migraties)" > /tmp/status/stap.txt
+          exec 2> >(tee -a /tmp/status/stderr.txt >&2)
+          q() { jq -n --arg q "$1" '{query:$q}' | curl -sS --fail-with-body -X POST "https://api.supabase.com/v1/projects/$REF/database/query" \
                 -H "Authorization: Bearer $SUPABASE_ACCESS_TOKEN" -H "Content-Type: application/json" --data @- ; }
           q "create table if not exists public._migrations (name text primary key, applied_at timestamptz default now()); alter table public._migrations enable row level security; revoke all on public._migrations from anon, authenticated;" > /dev/null
           applied=$(q "select coalesce(json_agg(name),'[]') as n from public._migrations" | jq -r '.[0].n | if type=="string" then fromjson else . end | .[]' || true)
@@ -77,6 +84,8 @@ jobs:
       - name: Edge Function en geheimen
         if: steps.check.outputs.configured == 'true'
         run: |
+          echo "Edge Function en geheimen" > /tmp/status/stap.txt
+          exec 2> >(tee -a /tmp/status/stderr.txt >&2)
           curl -sSL https://github.com/supabase/cli/releases/latest/download/supabase_linux_amd64.tar.gz | tar xz -C /usr/local/bin supabase
           supabase --version
           echo "CRON_SECRET=$(openssl rand -hex 32)" >> "$GITHUB_ENV"
@@ -92,7 +101,9 @@ jobs:
       - name: Geplande taak (elke 15 minuten) en gebruiker Geert
         if: steps.check.outputs.configured == 'true'
         run: |
-          q() { jq -n --arg q "$1" '{query:$q}' | curl -sS -f -X POST "https://api.supabase.com/v1/projects/$REF/database/query" \
+          echo "Geplande taak (elke 15 minuten) en gebruiker Geert" > /tmp/status/stap.txt
+          exec 2> >(tee -a /tmp/status/stderr.txt >&2)
+          q() { jq -n --arg q "$1" '{query:$q}' | curl -sS --fail-with-body -X POST "https://api.supabase.com/v1/projects/$REF/database/query" \
                 -H "Authorization: Bearer $SUPABASE_ACCESS_TOKEN" -H "Content-Type: application/json" --data @- ; }
           EMAIL_SQL=$(printf "%s" "$GEERT_EMAIL" | tr 'A-Z' 'a-z' | sed "s/'/''/g")
           q "create extension if not exists pg_cron; create extension if not exists pg_net;" > /dev/null
@@ -109,7 +120,7 @@ jobs:
              \$cron\$);" > /dev/null
           q "select jobname, schedule, active from cron.job where jobname='vonnisalert'"
 
-          KEYS=$(curl -sS -f "https://api.supabase.com/v1/projects/$REF/api-keys?reveal=true" -H "Authorization: Bearer $SUPABASE_ACCESS_TOKEN")
+          KEYS=$(curl -sS --fail-with-body "https://api.supabase.com/v1/projects/$REF/api-keys?reveal=true" -H "Authorization: Bearer $SUPABASE_ACCESS_TOKEN")
           PUB=$(echo "$KEYS" | jq -r '[.[] | select(.type=="publishable")][0].api_key // empty')
           [ -z "$PUB" ] && PUB=$(echo "$KEYS" | jq -r '[.[] | select(.name=="anon")][0].api_key')
           SRV=$(echo "$KEYS" | jq -r '[.[] | select(.name=="service_role")][0].api_key // empty')
@@ -124,19 +135,21 @@ jobs:
           if [ "$code" != "200" ] && [ "$code" != "201" ]; then
             UID_=$(curl -sS "$BASE?per_page=1000" "${H[@]}" | jq -r --arg e "$(echo "$GEERT_EMAIL" | tr A-Z a-z)" '.users[] | select((.email|ascii_downcase)==$e) | .id')
             [ -z "$UID_" ] && { echo "::error::Gebruiker kon niet aangemaakt worden: $(cat /tmp/u.json)"; exit 1; }
-            curl -sS -f -X PUT "$BASE/$UID_" "${H[@]}" --data "$(jq -n --arg p "$GEERT_PASSWORD" '{password:$p}')" > /dev/null
+            curl -sS --fail-with-body -X PUT "$BASE/$UID_" "${H[@]}" --data "$(jq -n --arg p "$GEERT_PASSWORD" '{password:$p}')" > /dev/null
             echo "Gebruiker Geert bestond al – wachtwoord bijgewerkt."
           else
             echo "Gebruiker Geert aangemaakt."
           fi
           # Registratie afsluiten: niemand anders kan een account maken
-          curl -sS -f -X PATCH "https://api.supabase.com/v1/projects/$REF/config/auth" \
+          curl -sS --fail-with-body -X PATCH "https://api.supabase.com/v1/projects/$REF/config/auth" \
             -H "Authorization: Bearer $SUPABASE_ACCESS_TOKEN" -H "Content-Type: application/json" \
             --data "$(jq -n --arg u "$APP_URL" '{disable_signup:true, site_url:$u, uri_allow_list:($u + "/**")}')" > /dev/null
 
       - name: Rooktest geplande taak
         if: steps.check.outputs.configured == 'true'
         run: |
+          echo "Rooktest geplande taak" > /tmp/status/stap.txt
+          exec 2> >(tee -a /tmp/status/stderr.txt >&2)
           sleep 5
           curl -sS -X POST "https://$REF.supabase.co/functions/v1/vonnisalert" \
             -H "Content-Type: application/json" -H "x-cron-secret: $CRON_SECRET" \
@@ -149,6 +162,8 @@ jobs:
       - name: Frontend-configuratie (publieke sleutel) bijwerken
         if: steps.check.outputs.configured == 'true'
         run: |
+          echo "Frontend-configuratie (publieke sleutel) bijwerken" > /tmp/status/stap.txt
+          exec 2> >(tee -a /tmp/status/stderr.txt >&2)
           cat > config.js <<EOF
           // Automatisch gegenereerd door de installatie. Bevat enkel publieke gegevens
           // (projecturl en publishable/anon key). Beveiliging gebeurt via RLS in de databank.
@@ -168,7 +183,16 @@ jobs:
         if: always()
         run: |
           mkdir -p /tmp/status
-          [ -f /tmp/status/status.json ] || echo "{\"ok\":false,\"stap\":\"mislukt – zie Actions-log\",\"at\":\"$(date -u +%FT%TZ)\"}" > /tmp/status/status.json
+          if [ ! -f /tmp/status/status.json ]; then
+            jq -n --arg stap "$(cat /tmp/status/stap.txt 2>/dev/null || echo controle)" --arg fout "$(cat /tmp/status/fout.txt 2>/dev/null)" \
+              --arg stderr "$(tail -c 3000 /tmp/status/stderr.txt 2>/dev/null)" --arg at "$(date -u +%FT%TZ)" \
+              '{ok:false, mislukt_bij:$stap, fout:$fout, stderr:$stderr, at:$at}' > /tmp/status/status.json
+          fi
+          rm -f /tmp/status/stap.txt /tmp/status/fout.txt /tmp/status/stderr.txt
+          # geheime waarden wegschrijven is uitgesloten: vervang ze voor de zekerheid
+          for v in "$SUPABASE_ACCESS_TOKEN" "$GEERT_PASSWORD" "$RESEND_API_KEY" "$CRON_SECRET" "$GEERT_EMAIL"; do
+            [ -n "$v" ] && [ ${#v} -ge 4 ] && python3 -c "import sys;p='/tmp/status/status.json';d=open(p).read().replace(sys.argv[1],'***');open(p,'w').write(d)" "$v"
+          done
           cd /tmp/status && git init -q && git config user.name bot && git config user.email bot@users.noreply.github.com
           git checkout -q -b deploy-status && git add . && git commit -qm status
           git push -fq "https://x-access-token:${{ github.token }}@github.com/${{ github.repository }}" deploy-status
