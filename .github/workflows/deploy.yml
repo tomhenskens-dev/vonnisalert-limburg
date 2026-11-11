@@ -95,8 +95,8 @@ jobs:
           [ -n "$RESEND_API_KEY" ] && args+=("RESEND_API_KEY=$RESEND_API_KEY")
           [ -n "$MAIL_FROM" ] && args+=("MAIL_FROM=$MAIL_FROM")
           [ -n "$MAIL_CC" ] && args+=("MAIL_CC=$MAIL_CC")
-          supabase secrets set --project-ref "$REF" "${args[@]}" > /dev/null
-          supabase functions deploy vonnisalert --project-ref "$REF" --no-verify-jwt --use-api
+          supabase secrets set --yes --project-ref "$REF" "${args[@]}" > /dev/null
+          supabase functions deploy vonnisalert --yes --project-ref "$REF" --no-verify-jwt --use-api
 
       - name: Geplande taak (elke 15 minuten) en gebruiker Geert
         if: steps.check.outputs.configured == 'true'
