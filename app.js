@@ -14,7 +14,7 @@ const $ = (id) => document.getElementById(id);
 const esc = (s = "") => String(s ?? "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
 const app = $("app");
 
-let state = { cases: [], articles: [], settings: {}, user: null, filter: { q: "", court: "", status: "" }, weekOffset: 0 };
+let state = { cases: [], articles: [], events: [], settings: {}, user: null, filter: { q: "", court: "", status: "" }, weekOffset: 0, agendaYear: 2027 };
 const today = () => brusselsDate(new Date());
 
 function toast(msg, ms = 2800) {
@@ -56,12 +56,14 @@ async function boot() {
 }
 
 async function loadAll() {
-  const [c, a, s] = await Promise.all([
+  const [c, a, s, ev] = await Promise.all([
     db.from("cases").select("*").order("verdict_date", { ascending: true, nullsFirst: false }),
     db.from("articles").select("article_id,source,url,title,lead,author,category,published_at,premium,announcement,analysis,case_id,dismissed").is("case_id", null).eq("dismissed", false).order("published_at", { ascending: false }).limit(150),
     db.from("app_state").select("key,value,updated_at"),
+    db.from("agenda_events").select("*").order("start_date", { ascending: true, nullsFirst: false }),
   ]);
   for (const r of [c, a, s]) if (r.error) throw r.error;
+  state.events = ev.error ? [] : ev.data || [];
   state.cases = c.data || [];
   state.articles = a.data || [];
   state.settings = Object.fromEntries((s.data || []).map((r) => [r.key, r.value]));
@@ -147,7 +149,7 @@ function route() {
   const h = location.hash.replace(/^#/, "") || "vandaag";
   if (h.startsWith("dossier/")) { renderToday(); openCase(h.split("/")[1]); return; }
   document.querySelectorAll("nav a").forEach((a) => a.classList.toggle("active", a.dataset.view === h));
-  ({ vandaag: renderToday, komend: renderUpcoming, week: renderWeek, controle: renderCheck, artikels: renderArticles, alle: renderAll, archief: renderArchive, instellingen: renderSettings }[h] || renderToday)();
+  ({ vandaag: renderToday, komend: renderUpcoming, week: renderWeek, controle: renderCheck, artikels: renderArticles, agenda: renderAgenda, alle: renderAll, archief: renderArchive, instellingen: renderSettings }[h] || renderToday)();
   bindItems();
 }
 
@@ -176,7 +178,11 @@ function renderToday() {
     ${block("Uitspraken morgen", morgen, "Morgen geen aangekondigde uitspraken.")}
     ${block("Nieuw (laatste 36 uur)", nieuw, "Geen nieuwe aankondigingen.")}
     ${block("Aangekondigd, nog niet bevestigd", onbevestigd, "Alles is bijgewerkt.")}
-    ${block("Uitgesteld of gewijzigd", uitgesteld, "Geen uitgestelde zaken.")}`;
+    ${block("Uitgesteld of gewijzigd", uitgesteld, "Geen uitgestelde zaken.")}
+    ${(() => {
+      const evs = state.events.filter((e) => e.start_date && (e.end_date || e.start_date) >= t && e.start_date <= addDays(t, 7));
+      return evs.length ? `<section class="block"><div class="blockhead"><h2>Agenda komende 7 dagen <span class="muted small">(${evs.length})</span></h2><a href="#agenda" class="small">Volledige agenda →</a></div><div class="list">${evs.map((e) => `<div class="item ev-${esc(e.status)}" onclick="location.hash='agenda'"><div class="main"><div class="title">${esc(e.title)}</div><div class="meta">${e.place ? esc(e.place) : ""}</div></div><div class="side"><span class="date">${evDateLabel(e)}</span><span class="pill e-${esc(e.status)}">${EV_STATUS[e.status]}</span></div></div>`).join("")}</div></section>` : "";
+    })()}`;
 }
 
 function renderUpcoming() {
@@ -294,6 +300,83 @@ async function callFn(action, btn) {
   } catch (e) { toast("Fout: " + e.message); }
   btn.disabled = false; btn.textContent = old;
 }
+
+// ---------- agenda ----------
+
+const EV_STATUS = { bevestigd: "Bevestigd", te_bevestigen: "Te bevestigen", voorspelling: "Voorspelling", eenmalig: "Eenmalig" };
+const MONTHS_NL = ["januari", "februari", "maart", "april", "mei", "juni", "juli", "augustus", "september", "oktober", "november", "december"];
+
+function evDateLabel(e) {
+  if (!e.start_date) return e.status === "eenmalig" ? "Niet verwacht" : "Datum onbekend";
+  const a = formatDateNL(e.start_date).replace(/ \d{4}$/, "");
+  if (!e.end_date || e.end_date === e.start_date) return a;
+  return `${a} – ${formatDateNL(e.end_date).replace(/ \d{4}$/, "")}`;
+}
+
+function renderAgenda() {
+  const y = state.agendaYear;
+  const inYear = state.events.filter((e) => e.start_date ? e.start_date.startsWith(String(y)) : true);
+  const years = [...new Set(state.events.map((e) => e.start_date?.slice(0, 4)).filter(Boolean))].sort();
+  if (!years.includes(String(y))) years.push(String(y));
+  const byMonth = {};
+  for (const e of inYear) { const k = e.start_date ? Number(e.start_date.slice(5, 7)) - 1 : 99; (byMonth[k] ||= []).push(e); }
+  const t = today();
+  const evItem = (e) => {
+    const past = e.end_date ? e.end_date < t : e.start_date && e.start_date < t;
+    return `<div class="item ev-${esc(e.status)}" data-ev="${esc(e.id)}" style="${past ? "opacity:.6" : ""}">
+      <div class="main"><div class="title">${esc(e.title)}</div>
+        <div class="meta">${e.place ? `<span>📍 ${esc(e.place)}</span>` : ""}${e.previous ? `<span>vorige editie: ${esc(e.previous)}</span>` : ""}</div>
+        ${e.basis ? `<div class="basis">${esc(e.basis)}</div>` : ""}</div>
+      <div class="side"><span class="date">${evDateLabel(e)}</span><span class="pill e-${esc(e.status)}">${EV_STATUS[e.status] || e.status}</span></div></div>`;
+  };
+  app.innerHTML = `<h1>Agenda ${y}</h1>
+    <p class="muted">Terugkerende evenementen om op te volgen voor verslaggeving. Kijk “te bevestigen” en “voorspelling” na zodra de organisatie de datum bekendmaakt.</p>
+    <div class="filters"><select id="agYear">${years.map((yy) => `<option ${String(y) === yy ? "selected" : ""}>${yy}</option>`).join("")}</select>
+      <button class="primary sm" id="evAdd">＋ Evenement</button></div>
+    <div class="legend"><span class="pill e-bevestigd">Bevestigd</span> datum officieel <span class="pill e-te_bevestigen">Te bevestigen</span> bijna zeker <span class="pill e-voorspelling">Voorspelling</span> afgeleid uit vorige jaren <span class="pill e-eenmalig">Eenmalig</span> geen nieuwe editie verwacht</div>
+    ${Object.keys(byMonth).sort((a, b) => a - b).map((k) => `<h2 class="monthhead">${k == 99 ? "Zonder datum" : MONTHS_NL[k] + " " + y}</h2><div class="list">${byMonth[k].map(evItem).join("")}</div>`).join("") || `<div class="empty">Nog geen evenementen voor ${y}.</div>`}`;
+  $("agYear").onchange = (e) => { state.agendaYear = Number(e.target.value); route(); };
+  $("evAdd").onclick = () => openEvent(null);
+  app.querySelectorAll("[data-ev]").forEach((el) => (el.onclick = () => openEvent(el.dataset.ev)));
+}
+
+const evDlg = $("evDialog");
+evDlg.querySelectorAll("[data-evclose]").forEach((b) => (b.onclick = () => evDlg.close()));
+function openEvent(id) {
+  const e = id ? state.events.find((x) => x.id === id) : { status: "voorspelling", start_date: `${state.agendaYear}-01-01` };
+  $("evTitle").textContent = id ? "Evenement" : "Nieuw evenement";
+  $("e_id").value = id || "";
+  $("e_title").value = e.title || ""; $("e_place").value = e.place || "";
+  $("e_start").value = id ? e.start_date || "" : ""; $("e_end").value = e.end_date || "";
+  $("e_status").value = e.status || "voorspelling"; $("e_prev").value = e.previous || "";
+  $("e_basis").value = e.basis || ""; $("e_url").value = e.source_url || ""; $("e_notes").value = e.notes || "";
+  $("evDelete").hidden = !id; $("evOpen").hidden = !e.source_url; if (e.source_url) $("evOpen").href = e.source_url;
+  evDlg.showModal();
+}
+$("evForm").onsubmit = async (ev) => {
+  ev.preventDefault();
+  const id = $("e_id").value;
+  const row = {
+    title: $("e_title").value.trim(), place: $("e_place").value.trim() || null,
+    start_date: $("e_start").value || null, end_date: $("e_end").value || null,
+    status: $("e_status").value, previous: $("e_prev").value.trim() || null,
+    basis: $("e_basis").value.trim() || null, source_url: $("e_url").value.trim() || null, notes: $("e_notes").value.trim() || null,
+  };
+  if (!row.title) return toast("Geef een naam voor het evenement.");
+  if (row.end_date && row.start_date && row.end_date < row.start_date) return toast("De einddatum ligt voor de startdatum.");
+  const res = id ? await db.from("agenda_events").update(row).eq("id", id) : await db.from("agenda_events").insert(row);
+  if (res.error) return toast("Fout: " + res.error.message, 4500);
+  evDlg.close(); toast("Evenement bewaard");
+  if (row.start_date) state.agendaYear = Number(row.start_date.slice(0, 4));
+  await loadAll(); route();
+};
+$("evDelete").onclick = async () => {
+  const id = $("e_id").value;
+  if (!id || !confirm("Dit evenement verwijderen?")) return;
+  const { error } = await db.from("agenda_events").delete().eq("id", id);
+  if (error) return toast("Fout: " + error.message);
+  evDlg.close(); await loadAll(); route();
+};
 
 // ---------- dossier toevoegen / bewerken ----------
 

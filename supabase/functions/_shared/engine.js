@@ -273,8 +273,10 @@ function caseRowHtml(c, appUrl) {
   return `<li style="margin:0 0 12px">${parts.join("<br>")}${links.length ? `<br>${links.join(" · ")}` : ""}</li>`;
 }
 
-/** @param {{cases:any[], events?:any[], today:string, since?:string, appUrl?:string}} p */
-export function buildDigest({ cases, events = [], today, since, appUrl = "" }) {
+const EV_LABEL = { bevestigd: "bevestigd", te_bevestigen: "te bevestigen", voorspelling: "voorspelling", eenmalig: "eenmalig" };
+
+/** @param {{cases:any[], events?:any[], agenda?:any[], today:string, since?:string, appUrl?:string}} p */
+export function buildDigest({ cases, events = [], agenda = [], today, since, appUrl = "" }) {
   const s = digestSections(cases, events, today, since);
   const g = greetingFor(today);
   const blocks = [
@@ -284,17 +286,23 @@ export function buildDigest({ cases, events = [], today, since, appUrl = "" }) {
     ["4. Aangekondigd maar nog niet bevestigd", s.onbevestigd],
     ["5. Uitgesteld of gewijzigd", s.gewijzigd],
   ];
+  const week = addDays(today, 7);
+  const agendaWeek = agenda.filter((e) => e.start_date && (e.end_date || e.start_date) >= today && e.start_date <= week)
+    .sort((a, b) => a.start_date.localeCompare(b.start_date));
+  const agendaHtml = agendaWeek.length ? `<h3 style="margin:22px 0 8px;font-size:16px">Agenda komende 7 dagen (${agendaWeek.length})</h3><ul style="padding-left:18px;margin:0">${agendaWeek.map((e) => `<li style="margin:0 0 8px"><strong>${esc(e.title)}</strong><br><span style="color:#55657a">${formatDateNL(e.start_date)}${e.end_date && e.end_date !== e.start_date ? ` – ${formatDateNL(e.end_date)}` : ""}${e.place ? ` · ${esc(e.place)}` : ""} · datum ${EV_LABEL[e.status] || e.status}</span></li>`).join("")}</ul>` : "";
   const total = s.vandaag.length + s.morgen.length;
   const subject = `Vonnisalert ${formatDateNL(today, false)}: ${s.vandaag.length} vandaag, ${s.morgen.length} morgen${s.nieuw.length ? `, ${s.nieuw.length} nieuw` : ""}`;
   const html = `<!doctype html><html><body style="font:15px/1.5 -apple-system,Segoe UI,sans-serif;color:#172536;max-width:640px;margin:auto;padding:16px">
 <h2 style="margin:0 0 6px;color:#173f67">Vonnisalert Limburg</h2>
 <p style="margin:0 0 4px">${esc(g.line)}</p>${g.tom ? `<p style="color:#55657a;font-size:13px">${esc(g.tom)}</p>` : ""}
 ${blocks.map(([h, list]) => `<h3 style="margin:22px 0 8px;font-size:16px">${h} (${list.length})</h3>${list.length ? `<ul style="padding-left:18px;margin:0">${list.map((c) => caseRowHtml(c, appUrl)).join("")}</ul>` : `<p style="color:#7a8797;margin:0">Niets te melden.</p>`}`).join("\n")}
+${agendaHtml}
 ${appUrl ? `<p style="margin-top:26px"><a href="${esc(appUrl)}" style="background:#245b8d;color:#fff;padding:10px 16px;border-radius:8px;text-decoration:none">Open Vonnisalert</a></p>` : ""}
 <p style="color:#8a97a6;font-size:12px;margin-top:20px">Datums met “afgeleid” of “onzeker” zijn berekend uit de tekst en moeten nagekeken worden. Een uitspraak wordt nooit automatisch als bevestigd gemarkeerd.</p>
 </body></html>`;
   const text = [g.line, g.tom || "", ...blocks.map(([h, list]) => `\n${h} (${list.length})\n${list.map((c) => `- ${c.title} | ${c.court} | ${c.verdict_date || c.verdict_date_text || "datum onbekend"} | ${STATUS[c.status]}${c.article_url ? ` | ${c.article_url}` : ""}`).join("\n") || "Niets te melden."}`)].join("\n");
-  return { subject, html, text, sections: s, total };
+  const agendaText = agendaWeek.length ? `\n\nAgenda komende 7 dagen\n${agendaWeek.map((e) => `- ${e.title} | ${e.start_date}${e.end_date ? ` – ${e.end_date}` : ""} | ${EV_LABEL[e.status]}`).join("\n")}` : "";
+  return { subject, html, text: text + agendaText, sections: s, total, agendaWeek };
 }
 
 /** @param {{cases:any[], today:string, appUrl?:string}} p */

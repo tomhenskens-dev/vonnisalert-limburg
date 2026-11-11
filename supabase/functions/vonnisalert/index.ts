@@ -92,6 +92,11 @@ async function loadCases(db: SupabaseClient) {
   return data || [];
 }
 
+async function loadAgenda(db: SupabaseClient) {
+  const { data } = await db.from("agenda_events").select("title,place,start_date,end_date,status");
+  return data || [];
+}
+
 async function applyChanges(db: SupabaseClient, r: { inserts?: any[]; updates?: any[]; events?: any[]; articles?: any[] }) {
   if (r.inserts?.length) {
     const rows = r.inserts.map(({ ...c }) => c);
@@ -163,7 +168,7 @@ async function run(db: SupabaseClient, opts: { force?: boolean; action?: string 
     const fresh = await loadCases(db);
     const since = state.last_digest_at || new Date(now.getTime() - 86400000).toISOString();
     const { data: events } = await db.from("case_events").select("case_id,kind,at").gte("at", since);
-    const d = buildDigest({ cases: fresh, events: events || [], today, since, appUrl: APP_URL });
+    const d = buildDigest({ cases: fresh, events: events || [], agenda: await loadAgenda(db), today, since, appUrl: APP_URL });
     let mail: unknown = { sent: false, reason: "Mail uitgeschakeld in instellingen." };
     if (mailOn) mail = await sendMail(d.subject, d.html, d.text);
     await setState(db, "last_digest", { subject: d.subject, at: now.toISOString(), mail, counts: Object.fromEntries(Object.entries(d.sections).map(([k, v]) => [k, (v as unknown[]).length])) });
@@ -209,11 +214,11 @@ Deno.serve(async (req) => {
       const state = await getState(db);
       const since = state.last_digest_at || new Date(Date.now() - 86400000).toISOString();
       const { data: events } = await db.from("case_events").select("case_id,kind,at").gte("at", since);
-      return json(buildDigest({ cases: await loadCases(db), events: events || [], today, since, appUrl: APP_URL }));
+      return json(buildDigest({ cases: await loadCases(db), events: events || [], agenda: await loadAgenda(db), today, since, appUrl: APP_URL }));
     }
     if (action === "testmail") {
       const { date: today } = brusselsParts(nowFn());
-      const d = buildDigest({ cases: await loadCases(db), events: [], today, since: new Date(Date.now() - 86400000).toISOString(), appUrl: APP_URL });
+      const d = buildDigest({ cases: await loadCases(db), events: [], agenda: await loadAgenda(db), today, since: new Date(Date.now() - 86400000).toISOString(), appUrl: APP_URL });
       const mail = await sendMail(`[TEST] ${d.subject}`, d.html, d.text);
       return json({ ok: true, mail });
     }

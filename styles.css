@@ -122,3 +122,11 @@ nav a.active{background:#f2f5f9}
 .login h1{text-align:center}.login .lsub{text-align:center}
 footer{text-align:center}
 @media(max-width:720px){.greet{padding:15px 15px 15px 60px}.greet .gi{left:14px;font-size:30px}.greet .gt{font-size:15px}.logo{width:38px;height:38px}}
+
+/* ---------- agenda ---------- */
+.e-bevestigd{background:var(--teal);color:var(--tealink)}.e-te_bevestigen{background:var(--amber);color:var(--amberink)}
+.e-voorspelling{background:#e6eefb;color:#2a4f86}.e-eenmalig{background:var(--grey);color:var(--greyink)}
+.item.ev-bevestigd{border-left-color:#2f8a6f}.item.ev-te_bevestigen{border-left-color:#e7a531}.item.ev-voorspelling{border-left-color:#2f6db0}.item.ev-eenmalig{border-left-color:#aab5c2}
+.legend{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 14px;font-size:12.5px;color:var(--muted);align-items:center}
+.monthhead{font-size:15px;margin:18px 2px 8px;color:#2c445c;text-transform:capitalize}
+.item .basis{font-size:12.5px;color:#55657a;margin-top:5px}

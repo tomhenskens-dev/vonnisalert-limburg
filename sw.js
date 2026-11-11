@@ -1,6 +1,6 @@
 // Netwerk eerst, cache enkel als terugval zonder verbinding.
 // Gegevens (Supabase) worden nooit gecachet.
-const CACHE = "vonnisalert-v3";
+const CACHE = "vonnisalert-v4";
 const ASSETS = ["/", "/index.html", "/styles.css", "/app.js", "/config.js", "/vendor/supabase-2.119.0.js", "/supabase/functions/_shared/parser.js", "/manifest.webmanifest", "/logo.svg", "/icon-192.png", "/icon-512.png", "/icon-180.png"];
 self.addEventListener("install", (e) => { e.waitUntil(caches.open(CACHE).then((c) => c.addAll(ASSETS)).catch(() => {})); self.skipWaiting(); });
 self.addEventListener("activate", (e) => {

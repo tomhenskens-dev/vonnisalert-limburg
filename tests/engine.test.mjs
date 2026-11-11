@@ -99,3 +99,15 @@ test("dagelijkse statusovergangen en ochtendmail", () => {
   const rem = buildReminder({ cases: after, today: "2026-11-11" });
   assert.equal(rem.count, 1);
 });
+
+test("ochtendmail toont evenementen van de komende 7 dagen", () => {
+  const agenda = [
+    { title: "Jeneverfeesten", start_date: "2027-10-16", end_date: "2027-10-17", status: "voorspelling", place: "Hasselt" },
+    { title: "Halloween", start_date: "2027-10-31", status: "bevestigd" },
+    { title: "Lopend festival", start_date: "2027-10-10", end_date: "2027-10-14", status: "bevestigd" },
+  ];
+  const d = buildDigest({ cases: [], agenda, today: "2027-10-12", since: "2027-10-11T06:00:00Z" });
+  assert.deepEqual(d.agendaWeek.map((e) => e.title), ["Lopend festival", "Jeneverfeesten"]);
+  assert.match(d.html, /Agenda komende 7 dagen \(2\)/);
+  assert.match(d.html, /datum voorspelling/);
+});

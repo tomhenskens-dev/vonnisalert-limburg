@@ -13,7 +13,7 @@
 <link rel="apple-touch-icon" href="/icon-180.png">
 <link rel="icon" type="image/svg+xml" href="/logo.svg">
 <link rel="alternate icon" type="image/png" href="/icon-192.png">
-<link rel="stylesheet" href="/styles.css?v=3">
+<link rel="stylesheet" href="/styles.css?v=4">
 <script src="/config.js?v=2"></script>
 <script src="/vendor/supabase-2.119.0.js"></script>
 </head>
@@ -30,6 +30,7 @@
     <a href="#week" data-view="week">Week</a>
     <a href="#controle" data-view="controle">Te controleren <span class="badge" id="badgeCheck">0</span></a>
     <a href="#artikels" data-view="artikels">Gerechtsartikels <span class="badge" id="badgeArt">0</span></a>
+    <a href="#agenda" data-view="agenda">Agenda</a>
     <a href="#alle" data-view="alle">Zoeken</a>
     <a href="#archief" data-view="archief">Archief</a>
     <a href="#instellingen" data-view="instellingen">⚙︎</a>
@@ -86,7 +87,27 @@
   </form>
 </dialog>
 
-<script type="module" src="/app.js?v=3"></script>
+<dialog id="evDialog">
+  <form id="evForm" method="dialog">
+    <div class="modalhead"><h2 id="evTitle">Evenement</h2><button type="button" class="secondary sm" data-evclose>Sluiten</button></div>
+    <div class="modalbody"><input type="hidden" id="e_id"><div class="formgrid">
+      <div class="field full"><label for="e_title">Evenement *</label><input id="e_title" required maxlength="200"></div>
+      <div class="field full"><label for="e_place">Plaats</label><input id="e_place" maxlength="120"></div>
+      <div class="field"><label for="e_start">Van</label><input id="e_start" type="date"></div>
+      <div class="field"><label for="e_end">Tot (optioneel)</label><input id="e_end" type="date"></div>
+      <div class="field"><label for="e_status">Status datum</label>
+        <select id="e_status"><option value="bevestigd">Bevestigd</option><option value="te_bevestigen">Te bevestigen</option><option value="voorspelling">Voorspelling</option><option value="eenmalig">Eenmalig (niet verwacht)</option></select></div>
+      <div class="field"><label for="e_prev">Vorige editie</label><input id="e_prev" maxlength="200" placeholder="bv. 17–18 oktober 2026"></div>
+      <div class="field full"><label for="e_basis">Waarop is de datum gebaseerd?</label><textarea id="e_basis" maxlength="1000"></textarea></div>
+      <div class="field full"><label for="e_url">Bron (link)</label><input id="e_url" type="url" placeholder="https://…"></div>
+      <div class="field full"><label for="e_notes">Notities</label><textarea id="e_notes" maxlength="3000"></textarea></div>
+    </div></div>
+    <div class="modalfoot"><div><button type="button" class="danger sm" id="evDelete" hidden>Verwijderen</button> <a class="btn secondary sm" id="evOpen" target="_blank" rel="noopener" hidden>Open bron ↗</a></div>
+      <div><button type="button" class="secondary" data-evclose>Annuleren</button> <button type="submit" class="primary">Bewaren</button></div></div>
+  </form>
+</dialog>
+
+<script type="module" src="/app.js?v=4"></script>
 <script>
 if ("serviceWorker" in navigator) window.addEventListener("load", () => navigator.serviceWorker.register("/sw.js").catch(() => {}));
 </script>
