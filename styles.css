@@ -131,3 +131,21 @@ footer{text-align:center}
 .monthhead{font-size:15px;margin:18px 2px 8px;color:#2c445c;text-transform:capitalize}
 .item .basis{font-size:12.5px;color:#55657a;margin-top:5px}
 .mtag{display:inline-block;background:#eef2f7;color:#3b5068;border-radius:5px;padding:0 6px;font-size:11px;font-weight:700;letter-spacing:.3px}
+
+/* ---------- artikel schrijven ---------- */
+.wsteps{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0 16px}
+.wsteps span{background:#fff;border:1px solid var(--line);border-radius:30px;padding:5px 12px 5px 6px;font-size:12.5px;color:#3b5068}
+.wsteps b{display:inline-grid;place-items:center;width:20px;height:20px;border-radius:50%;background:var(--gold);color:#0f2a45;margin-right:6px;font-size:11px}
+.wbox{background:#fff;border:1px solid var(--line);border-radius:14px;padding:15px 17px;margin-bottom:14px}
+.wbox h2{font-size:16px;display:flex;align-items:center;gap:8px}
+.wbtns{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.seg{display:flex;gap:0;border:1px solid #d3dce6;border-radius:9px;overflow:hidden;width:max-content}
+.seg button{border-radius:0;background:#fff;color:#243c54;padding:9px 18px}.seg button.on{background:var(--blue2);color:#fff}
+.wpre{white-space:pre-wrap;background:#f6f9fc;border:1px solid var(--line);border-radius:10px;padding:12px;font-size:12px;max-height:340px;overflow:auto}
+.wcount{display:flex;gap:16px;align-items:center;border-radius:12px;padding:12px 15px;margin-top:10px;font-size:13.5px}
+.wcount .big{font-size:28px;font-weight:800;letter-spacing:-.5px}.wcount .big span{font-size:15px;font-weight:600;opacity:.7}
+.wcount.ok{background:var(--teal);color:var(--tealink)}.wcount.over{background:var(--red);color:var(--redink)}
+.field .check{font-weight:500;color:var(--ink);font-size:13.5px}
+.field .check input{width:auto;flex:0 0 auto;margin:0}
+.field .check{justify-content:flex-start;padding:3px 0}
+.wcount .big{white-space:nowrap}

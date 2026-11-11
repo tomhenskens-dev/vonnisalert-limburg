@@ -23,6 +23,10 @@ Webapp voor Geert Houben om aangekondigde uitspraken van de Rechtbank Limburg (H
 - De rechtbank wordt alleen ingevuld als die uitdrukkelijk in een gerechtelijke context staat. Anders: *Te controleren*.
 - Bij de auteur wordt bijgehouden of het effectief Geert Houben is.
 
+## Artikel schrijven
+
+Tabblad **✍︎ Artikel** maakt een prompt met Geerts stijlgids, de gekozen tekenlimiet (2.100 of 3.300 incl. spaties) en de dossiergegevens. Geert plakt die in zijn eigen Claude-account, met het vonnis als bijlage. De app roept zelf geen AI-dienst aan en bewaart geen bronteksten. Het resultaat terugplakken geeft een tekenteller en een inkort-opdracht. De stijlgids is aanpasbaar en wordt bewaard in `app_state.style_guide`.
+
 ## Eenmalige installatie (Tom)
 
 Zet in GitHub → **Settings → Secrets and variables → Actions → New repository secret**:

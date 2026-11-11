@@ -5,6 +5,7 @@ import {
   analyzeArticle, STATUS, brusselsDate, addDays, weekday, formatDateNL, greetingFor, diffDays,
   articleIdFromUrl, isGeertHouben, greetingAt, followedAuthor, DEFAULT_AUTHORS,
 } from "/supabase/functions/_shared/parser.js";
+import { LIMITS, KINDS, DEFAULT_STYLE, buildArticlePrompt, buildProjectInstructions, buildShortenPrompt, countChars, fmt } from "/artikel.js?v=1";
 
 const cfg = window.VONNISALERT_CONFIG || {};
 const configured = Boolean(cfg.supabaseUrl && cfg.supabaseKey);
@@ -163,7 +164,7 @@ function route() {
     renderJournalist(h.slice(2)); bindItems(); return;
   }
   document.querySelectorAll("nav a").forEach((a) => a.classList.toggle("active", a.dataset.view === h));
-  ({ vandaag: renderToday, komend: renderUpcoming, week: renderWeek, controle: renderCheck, artikels: renderArticles, agenda: renderAgenda, alle: renderAll, archief: renderArchive, instellingen: renderSettings }[h] || renderToday)();
+  ({ vandaag: renderToday, komend: renderUpcoming, week: renderWeek, controle: renderCheck, artikels: renderArticles, agenda: renderAgenda, schrijven: renderWrite, alle: renderAll, archief: renderArchive, instellingen: renderSettings }[h] || renderToday)();
   bindItems();
 }
 
@@ -365,6 +366,131 @@ async function callFn(action, btn) {
     await loadAll();
   } catch (e) { toast("Fout: " + e.message); }
   btn.disabled = false; btn.textContent = old;
+}
+
+// ---------- artikel schrijven (prompt voor Geerts eigen Claude-account) ----------
+
+// Blijft alleen in het geheugen van deze pagina: bronteksten en notities worden niet bewaard.
+const draft = { kind: "combi", limit: 3300, titleCounts: true, useProject: false, caseId: "", att: { zitting: true, vonnis: true, eerder: false }, notes: "", pasted: "", result: "" };
+const styleText = () => (typeof state.settings.style_guide === "string" && state.settings.style_guide.trim() ? state.settings.style_guide : DEFAULT_STYLE);
+
+async function copyText(txt, label = "Gekopieerd") {
+  try { await navigator.clipboard.writeText(txt); }
+  catch {
+    const t = document.createElement("textarea"); t.value = txt; t.style.position = "fixed"; t.style.opacity = "0";
+    document.body.appendChild(t); t.select(); document.execCommand("copy"); t.remove();
+  }
+  toast(label);
+}
+
+function currentPrompt() {
+  const att = [];
+  if (draft.att.zitting) att.push("Mijn zittingsverslag (artikel dat ik na de zitting schreef)");
+  if (draft.att.vonnis) att.push("Het vonnis (PDF, bijgevoegd)");
+  if (draft.att.eerder) att.push("Een eerder artikel over deze zaak");
+  if (draft.pasted.trim()) att.push("De tekst tussen <bron>-tags hieronder");
+  return buildArticlePrompt({ kind: draft.kind, limit: draft.limit, titleCounts: draft.titleCounts, useProject: draft.useProject, style: styleText(), caseRow: state.cases.find((c) => c.id === draft.caseId) || null, attachments: att, notes: draft.notes, pasted: draft.pasted });
+}
+
+function renderWrite() {
+  const cases = state.cases.filter((c) => !c.archived).sort((a, b) => String(b.verdict_date || "").localeCompare(String(a.verdict_date || "")));
+  const custom = typeof state.settings.style_guide === "string" && state.settings.style_guide.trim();
+  app.innerHTML = `<h1>Artikel schrijven</h1>
+    <p class="muted">De tool maakt de juiste opdracht (prompt) met jouw schrijfstijl. Die plak je in je eigen Claude-account, samen met het vonnis. Er gaat niets automatisch naar Claude, en bronteksten worden hier niet bewaard.</p>
+    <div class="wsteps"><span><b>1</b> Kies en vul aan</span><span><b>2</b> Kopieer de prompt</span><span><b>3</b> Plak in Claude + vonnis-PDF</span><span><b>4</b> Plak het resultaat terug voor de teller</span></div>
+
+    <section class="wbox"><h2>1 · Wat schrijf je?</h2>
+      <div class="formgrid" style="margin-top:10px">
+        <div class="field full"><label>Soort artikel</label><select id="wKind">${Object.entries(KINDS).map(([k, v]) => `<option value="${k}" ${draft.kind === k ? "selected" : ""}>${esc(v)}</option>`).join("")}</select></div>
+        <div class="field"><label>Maximum aantal tekens (incl. spaties)</label>
+          <div class="seg">${LIMITS.map((l) => `<button type="button" data-lim="${l}" class="${draft.limit === l ? "on" : ""}">${fmt(l)}</button>`).join("")}</div></div>
+        <div class="field"><label>&nbsp;</label><label class="check"><input type="checkbox" id="wTitle" ${draft.titleCounts ? "checked" : ""}> Kop telt mee</label></div>
+        <div class="field full"><label>Dossier (optioneel, vult zaak, initialen en data in)</label><select id="wCase"><option value="">— geen dossier —</option>${cases.map((c) => `<option value="${esc(c.id)}" ${draft.caseId === c.id ? "selected" : ""}>${esc(c.title.slice(0, 90))}${c.verdict_date ? " · " + esc(formatDateNL(c.verdict_date)) : ""}</option>`).join("")}</select></div>
+        <div class="field full"><label>Wat voeg je in Claude toe?</label>
+          <label class="check"><input type="checkbox" data-att="zitting" ${draft.att.zitting ? "checked" : ""}> Mijn zittingsverslag</label>
+          <label class="check"><input type="checkbox" data-att="vonnis" ${draft.att.vonnis ? "checked" : ""}> Het vonnis (PDF)</label>
+          <label class="check"><input type="checkbox" data-att="eerder" ${draft.att.eerder ? "checked" : ""}> Een eerder artikel over de zaak</label></div>
+        <div class="field full"><label>Eigen notities (reacties in de zaal, wie er was, wat je zelf weet)</label><textarea id="wNotes" placeholder="bv. Beklaagde was niet aanwezig. Slachtoffer X reageerde opgelucht: “…”">${esc(draft.notes)}</textarea></div>
+        <div class="field full"><label>Brontekst plakken (optioneel – bv. je zittingsverslag; anders voeg je die in Claude toe)</label><textarea id="wPasted" style="min-height:110px">${esc(draft.pasted)}</textarea></div>
+        <div class="field full"><label class="check"><input type="checkbox" id="wProj" ${draft.useProject ? "checked" : ""}> Ik gebruik een Claude-project met de stijlgids (kortere prompt, zie onderaan)</label></div>
+      </div></section>
+
+    <section class="wbox"><h2>2 · Prompt kopiëren en in Claude plakken</h2>
+      <p class="muted small" style="margin:6px 0 10px">Open Claude, start een nieuw gesprek, plak de prompt, voeg met de paperclip het vonnis${draft.att.zitting && !draft.pasted.trim() ? " en je zittingsverslag" : ""} toe en verstuur.</p>
+      <div class="wbtns"><button class="primary" id="wCopy">📋 Kopieer prompt</button><a class="btn secondary" href="https://claude.ai/new" target="_blank" rel="noopener">Open Claude ↗</a><span class="muted small" id="wPLen"></span></div>
+      <details style="margin-top:10px"><summary class="small">Prompt bekijken</summary><pre class="wpre" id="wPrompt"></pre></details></section>
+
+    <section class="wbox"><h2>3 · Resultaat terugplakken: tekenteller</h2>
+      <p class="muted small" style="margin:6px 0 8px">Plak hier het artikel uit Claude. De lijst “Om na te kijken” onder de streep telt niet mee, regeleinden ook niet.</p>
+      <textarea id="wResult" style="width:100%;min-height:150px" placeholder="Plak hier het artikel">${esc(draft.result)}</textarea>
+      <div id="wCount"></div></section>
+
+    <section class="wbox"><h2>Stijlgids ${custom ? `<span class="mtag">aangepast</span>` : `<span class="mtag">standaard</span>`}</h2>
+      <p class="muted small" style="margin:6px 0 8px">Dit is wat Claude over jouw schrijfstijl te horen krijgt. Pas gerust aan (bv. “nooit…”, “altijd…”) en bewaar. Je aanpassing geldt voor elke volgende prompt.</p>
+      <details><summary class="small">Stijlgids openen en aanpassen</summary>
+        <textarea id="wStyle" style="width:100%;min-height:320px;margin-top:8px;font-size:13px">${esc(styleText())}</textarea>
+        <div class="wbtns" style="margin-top:8px"><button class="primary sm" id="wStyleSave">Bewaar stijlgids</button>${custom ? `<button class="secondary sm" id="wStyleReset">Terug naar standaard</button>` : ""}</div></details></section>
+
+    <section class="wbox"><h2>Tip: eenmalig een Claude-project maken</h2>
+      <ol class="small" style="margin:8px 0 8px;padding-left:18px">
+        <li>In Claude: <b>Projecten</b> → <b>Nieuw project</b>, naam bv. “Vonnisartikels”.</li>
+        <li>Bij <b>Instructies</b>: plak de projectinstructies (knop hieronder).</li>
+        <li>Optioneel bij <b>Kennis</b>: upload 3 à 5 van je eigen gepubliceerde artikels als stijlvoorbeeld.</li>
+        <li>Start voortaan elk artikel in dat project en vink hierboven “Ik gebruik een Claude-project” aan.</li></ol>
+      <button class="secondary sm" id="wProjCopy">📋 Kopieer projectinstructies</button></section>`;
+
+  const refresh = () => {
+    const p = currentPrompt();
+    $("wPrompt").textContent = p;
+    $("wPLen").textContent = `prompt: ${fmt(p.length)} tekens`;
+  };
+  const count = () => {
+    const r = countChars(draft.result);
+    const n = draft.titleCounts ? r.withTitle : r.withoutTitle;
+    if (!draft.result.trim()) { $("wCount").innerHTML = ""; return; }
+    const over = n - draft.limit;
+    $("wCount").innerHTML = `<div class="wcount ${over > 0 ? "over" : "ok"}">
+        <div class="big">${fmt(n)} <span>/ ${fmt(draft.limit)}</span></div>
+        <div>${over > 0 ? `<b>${fmt(over)} tekens te lang</b>` : `<b>Past</b> – nog ${fmt(-over)} tekens over`}<br>
+        <span class="small">Met kop ${fmt(r.withTitle)} · zonder kop ${fmt(r.withoutTitle)}${r.checks ? ` · <b>${r.checks}× [CHECK]</b> na te kijken` : ""}</span></div></div>
+      <div class="wbtns" style="margin-top:8px">${over > 0 ? `<button class="primary sm" id="wShort">📋 Kopieer inkort-opdracht voor Claude</button>` : ""}
+        ${LIMITS.filter((l) => l !== draft.limit).map((l) => `<button class="secondary sm" data-alt="${l}">Ook een versie van ${fmt(l)}</button>`).join("")}</div>`;
+    const sb = $("wShort");
+    if (sb) sb.onclick = () => copyText(buildShortenPrompt({ limit: draft.limit, current: n, titleCounts: draft.titleCounts }), "Inkort-opdracht gekopieerd – plak ze in hetzelfde Claude-gesprek");
+    app.querySelectorAll("[data-alt]").forEach((b) => (b.onclick = () => {
+      const l = Number(b.dataset.alt);
+      copyText(buildShortenPrompt({ limit: l, current: n, titleCounts: draft.titleCounts }).replace(/^Het artikel telt nu/, "Maak ook een versie van dit artikel. Het telt nu").replace("Kort het in tot", l > n ? "Breid het uit, alleen met feiten uit de bronnen, tot" : "Kort het in tot"), "Opdracht gekopieerd – plak ze in hetzelfde Claude-gesprek");
+    }));
+  };
+
+  $("wKind").onchange = (e) => { draft.kind = e.target.value; refresh(); };
+  app.querySelectorAll("[data-lim]").forEach((b) => (b.onclick = () => {
+    draft.limit = Number(b.dataset.lim);
+    app.querySelectorAll("[data-lim]").forEach((x) => x.classList.toggle("on", x === b));
+    refresh(); count();
+  }));
+  $("wTitle").onchange = (e) => { draft.titleCounts = e.target.checked; refresh(); count(); };
+  $("wCase").onchange = (e) => { draft.caseId = e.target.value; refresh(); };
+  app.querySelectorAll("[data-att]").forEach((el) => (el.onchange = () => { draft.att[el.dataset.att] = el.checked; refresh(); }));
+  $("wNotes").oninput = (e) => { draft.notes = e.target.value; refresh(); };
+  $("wPasted").oninput = (e) => { draft.pasted = e.target.value; refresh(); };
+  $("wProj").onchange = (e) => { draft.useProject = e.target.checked; refresh(); };
+  $("wCopy").onclick = () => copyText(currentPrompt(), "Prompt gekopieerd – plak hem in Claude");
+  $("wProjCopy").onclick = () => copyText(buildProjectInstructions(styleText()), "Projectinstructies gekopieerd");
+  $("wResult").oninput = (e) => { draft.result = e.target.value; count(); };
+  const saveStyle = async (value) => {
+    const { data, error } = await db.from("app_state").update({ value, updated_at: new Date().toISOString() }).eq("key", "style_guide").select("key");
+    if (error) return toast("Fout bij bewaren: " + error.message);
+    if (!data?.length) return toast("Kon niet bewaren: de databank is nog niet bijgewerkt.");
+    state.settings.style_guide = value; toast("Stijlgids bewaard"); renderWrite();
+  };
+  $("wStyleSave").onclick = () => {
+    const v = $("wStyle").value.trim();
+    if (v.length < 50) return toast("De stijlgids is te kort.");
+    saveStyle(v === DEFAULT_STYLE.trim() ? "" : v);
+  };
+  if ($("wStyleReset")) $("wStyleReset").onclick = () => { if (confirm("Je eigen stijlgids vervangen door de standaardversie?")) saveStyle(""); };
+  refresh(); count();
 }
 
 // ---------- agenda ----------
