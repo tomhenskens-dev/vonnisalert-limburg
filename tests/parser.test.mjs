@@ -195,3 +195,10 @@ test("Geerts vaste formulering: 'Vonnis op …'", () => {
   }
   assert.equal(an("Het vonnis op 2 december was streng.").hasAnnouncement, false);
 });
+
+test("aangekondigde zitting wordt als zittingsdatum herkend, niet als uitspraak", () => {
+  const r = analyzeArticle({ title: "Looise thuisverpleegster int onterecht 572.500 euro", text: "Maandag vond in de Hasseltse rechtbank een inleidingszitting plaats. Verder is het afwachten tot 6 september 2027 wat ze te vertellen heeft, wanneer de eigenlijke zitting is gepland.", publishedAt: "2026-11-09T15:40:00Z" });
+  assert.equal(r.hasAnnouncement, false);
+  assert.equal(r.hearingDate, "2027-09-06");
+  assert.equal(r.court, "Hasselt");
+});

@@ -120,6 +120,7 @@ export function processItems(items, { cases = [], knownArticles = {}, now = new 
     if (known && known.updated_at_src === item.updatedAt && !known.reprocess) continue; // niets veranderd
 
     const analysis = analyzeArticle({ title: item.title, text: item.lead, publishedAt: item.publishedAt, author: item.author });
+    const futureHearing = analysis.hearingDate && analysis.pubDate && analysis.hearingDate > analysis.pubDate;
     if (!analysis.isCourtRelated && !analysis.hasAnnouncement) continue;
 
     const article = {
@@ -167,10 +168,11 @@ export function processItems(items, { cases = [], knownArticles = {}, now = new 
         out.updates.push({ id: c.id, patch });
         for (const e of ev) out.events.push({ case_id: c.id, ...e });
       }
-    } else if (analysis.hasAnnouncement) {
+    } else if (analysis.hasAnnouncement || futureHearing) {
       const id = cryptoId();
       const notes = [];
       if (analysis.announcement?.sentence) notes.push(`Aankondiging in artikel: “${analysis.announcement.sentence}”`);
+      if (!analysis.hasAnnouncement && futureHearing) notes.push(`Zitting gepland op ${formatDateNL(analysis.hearingDate)}; uitspraakdatum nog niet bekend.`);
       if (item.premium) notes.push("Plus-artikel: volledige tekst alleen voor abonnees.");
       if (item.source === "google") notes.push("Gevonden via Google News (alleen titel).");
       const c = {
@@ -191,7 +193,7 @@ export function processItems(items, { cases = [], knownArticles = {}, now = new 
         status_manual: false,
         needs_review: analysis.status !== "aangekondigd" || analysis.court === "Te controleren" || !item.author,
         notes: notes.join("\n"),
-        review_reasons: analysis.reasons,
+        review_reasons: analysis.hasAnnouncement ? analysis.reasons : [`Zitting gepland op ${formatDateNL(analysis.hearingDate)}; de uitspraakdatum volgt later.`, ...analysis.reasons],
         source: item.source === "google" ? "google" : item.source === "hln" ? "hln" : "rss",
         extra_links: [],
         created_at: now.toISOString(),

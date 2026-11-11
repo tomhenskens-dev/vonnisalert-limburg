@@ -1,0 +1,33 @@
+{
+  "cases": [
+    {
+      "title": "Truiense reisagente – 64 spookreizen (De Witte Merel)",
+      "defendant": "E. S. (37)",
+      "author": "Geert Houben",
+      "published_at": "2026-11-08T19:30:00+01:00",
+      "verdict_date": "2026-11-09",
+      "verdict_date_text": "maandag",
+      "date_certainty": "exact",
+      "court": "Hasselt",
+      "status": "bevestigd",
+      "status_manual": true,
+      "needs_review": false,
+      "source": "geplakt",
+      "notes": "Zitting in oktober 2026 (Hasseltse rechtbank). Parket vorderde 37 maanden cel met uitstel, bestuurdersverbod van tien jaar en 40.000 euro boete voor de vennootschap. Advocaat: Jürgen Millen (vroeg verval wegens overschrijding redelijke termijn).\nVONNIS 9/11/2026 (Hasseltse strafrechter): werkstraf van 240 uur (vervangend één jaar cel), bestuurdersverbod van tien jaar, 130.000 euro aan 64 burgerlijke partijen, 32.000 euro boete voor de vennootschap, geen verbeurdverklaring van de 237.000 euro. Beklaagde niet aanwezig bij de uitspraak.",
+      "event": "Toegevoegd door Claude uit het zittingsverslag (8/11) en het vonnisartikel (9/11); uitspraak bevestigd."
+    },
+    {
+      "title": "Looise thuisverpleegster – sociale fraude van 572.500 euro",
+      "defendant": "41-jarige thuisverpleegkundige uit Tessenderlo-Ham",
+      "author": "Geert Houben",
+      "published_at": "2026-11-09T16:40:00+01:00",
+      "hearing_date": "2027-09-06",
+      "court": "Hasselt",
+      "status": "check",
+      "needs_review": true,
+      "source": "geplakt",
+      "notes": "Inleidingszitting op 9/11/2026 voor de Hasseltse correctionele rechtbank; beklaagde betwist de feiten niet. Fictieve prestaties tussen januari 2020 en april 2024, volgens het arbeidsauditoraat 572.500 euro. Eigenlijke zitting gepland op 6 september 2027; uitspraakdatum nog niet bekend.\nAdvocaten: Ignace Vermeersch (beklaagde), Vincent Coigniez (RIZIV, burgerlijke partij), Eline Verhelst (andere burgerlijke partijen).",
+      "event": "Toegevoegd door Claude uit het artikel van 9/11/2026: zitting op 6 september 2027, uitspraakdatum volgt."
+    }
+  ]
+}

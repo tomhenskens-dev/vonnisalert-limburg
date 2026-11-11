@@ -318,6 +318,13 @@ export function detectDefendant(text) {
 }
 
 export function detectHearingDate(text, pubDate) {
+  // Aangekondigde (toekomstige) zitting: "de eigenlijke zitting is gepland op 6 september 2027", "wordt vervolgd op ..."
+  for (const s of splitSentences(text)) {
+    if (/\b(zitting|proces|behandeling|pleidooien)\b[^.]{0,60}\b(gepland|vastgelegd|voorzien|verdaagd|uitgesteld)\b|\b(gepland|vastgelegd)\b[^.]{0,40}\b(zitting|proces)\b|\bwordt\b[^.]{0,30}\bvervolgd\b|\b(eigenlijke|inhoudelijke|volgende)\s+(zitting|behandeling)\b/i.test(s) && !VERDICT_WORD_RE.test(s)) {
+      const w = parseWhen(s, pubDate);
+      if (w?.date && w.date >= pubDate) return w.date;
+    }
+  }
   for (const s of splitSentences(text)) {
     const m = s.match(/\b(?:zitting|terechtzitting|proces|pleidooien)\s+(?:van|op)\s+([^,.;]{3,40})/i);
     if (m) {
