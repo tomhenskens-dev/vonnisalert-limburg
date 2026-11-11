@@ -13,16 +13,15 @@ jobs:
           mkdir out; cd out
           UA="Mozilla/5.0 (compatible; VonnisalertLimburg/0.1; persoonlijk gebruik)"
           get(){ n=$1; u=$2; echo "== $u" >> index.txt; curl -sSL -A "$UA" -m 30 -o "$n" -w "%{http_code} %{content_type} %{size_download}\n" "$u" >> index.txt 2>&1 || echo fail >> index.txt; }
-          get robots.txt https://www.hbvl.be/robots.txt
-          get home.html https://www.hbvl.be/
-          get rss.xml https://www.hbvl.be/rss
-          get rss2.xml https://www.hbvl.be/rss.xml
-          get feed.xml https://www.hbvl.be/feed
-          get sport.xml https://www.hbvl.be/rss/section/0aecea6e-9e2f-4509-a874-a2ad00adeaa4
-          get regio.html https://www.hbvl.be/regio
-          get sitemap.xml https://www.hbvl.be/sitemap.xml
-          get newssitemap.xml https://www.hbvl.be/sitemap-news.xml
-          get gn.xml "https://news.google.com/rss/search?q=site:hbvl.be+rechtbank&hl=nl&gl=BE&ceid=BE:nl"
+          get robots.txt https://www.hln.be/robots.txt
+          get rss.xml https://www.hln.be/rss.xml
+          get home.xml https://www.hln.be/home/rss.xml
+          get limburg.xml https://www.hln.be/limburg/rss.xml
+          get regio.xml https://www.hln.be/regio/limburg/rss.xml
+          get justitie.xml https://www.hln.be/justitie/rss.xml
+          get binnenland.xml https://www.hln.be/binnenland/rss.xml
+          get hasselt.xml https://www.hln.be/hasselt/rss.xml
+          get gn.xml "https://news.google.com/rss/search?q=%22Nienke+Horemans%22&hl=nl&gl=BE&ceid=BE:nl"
           grep -oiE '<link[^>]+(rss|atom)[^>]*>' home.html > home_feeds.txt || true
           grep -oiE 'https://www\.hbvl\.be/[^"]*rss[^"]*' home.html | sort -u >> home_feeds.txt || true
           grep -oiE 'https://www\.hbvl\.be/cnt/[a-z0-9_]+' home.html | sort -u | head -5 > arts.txt || true
