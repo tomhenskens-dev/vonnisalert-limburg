@@ -202,6 +202,8 @@ const FUTURE_PATTERNS = [
   // de beklaagde kent maandag zijn straf / maandag kent ze het verdict
   { re: /\b(kent|kennen|krijgt|krijgen|hoort|horen|verneemt|vernemen)\b[^.]{0,60}?\b(?:zijn|haar|hun|het|de)\s+(?:straf|strafmaat|vonnis|verdict|lot|uitspraak|vonnissen)\b/i, weight: 3 },
   { re: /\b(velt|vellen)\b[^.]{0,40}?\b(?:zijn|haar|hun|het|een)\s+(?:vonnis|oordeel|eindoordeel|uitspraak)\b/i, weight: 3 },
+  // Geerts vaste formulering: "Vonnis op 2 december." / "Vonnis op maandag."
+  { re: /\b(?:vonnis|uitspraak|verdict)\s+(?:volgt\s+|valt\s+)?op\s+(?:\d{1,2}(?:\/|\s)|(?:maandag|dinsdag|woensdag|donderdag|vrijdag|zaterdag|zondag|morgen|overmorgen)\b)/i, weight: 3 },
   // in beraad tot ... / uitspraak op 12 november
   { re: /\bin beraad\b[^.]{0,40}?\b(tot|op|genomen tot)\b/i, weight: 3 },
   { re: new RegExp(`^\\s*(?:het\\s+|de\\s+)?${NOUN}\\s+(?:op|is op|volgt op|valt op)\\b`, "i"), weight: 2 },
@@ -478,4 +480,75 @@ export function greetingFor(iso) {
   if (showTom) return { line: TOM[hash(iso + "w") % TOM.length], tom: null, isTomDay: true };
   const line = MORNING[hash(iso) % MORNING.length] + (WEEKDAY_EXTRA[weekday(iso)] || "");
   return { line, tom: null, isTomDay: false };
+}
+
+// ---------- begroeting volgens het uur (webapp) ----------
+
+const PERIODS = {
+  ochtend: {
+    kicker: "☀️ GOEDEMORGEN GEERT",
+    lines: null, // gebruikt MORNING hierboven
+  },
+  middag: {
+    kicker: "🌤️ GOEIEMIDDAG GEERT",
+    lines: [
+      "Goeiemiddag Geert! Lekker gegeten? Hier is de stand van zaken voor vandaag.",
+      "Dag Geert, halverwege de dag al. Even checken wat er nog op de rol staat?",
+      "Goeiemiddag Geert! Tijd voor een koffie na de middag, en een snelle blik op de vonnissen.",
+      "Hallo Geert, de rechtbank draait op volle toeren. Ik hou alles voor je in de gaten.",
+      "Goeiemiddag Geert! Alles netjes bijgewerkt, je hoeft niets te missen.",
+    ],
+  },
+  avond: {
+    kicker: "🌆 GOEIENAVOND GEERT",
+    lines: [
+      "Goeienavond Geert! Even vooruitkijken: dit staat er morgen op de agenda.",
+      "Dag Geert, de werkdag zit erop. Hier nog een laatste blik op wat er komt.",
+      "Goeienavond Geert! Zet je voeten maar omhoog, ik waak over de vonnissen.",
+      "Hallo Geert, nog even werken? Hier is het overzicht van vandaag en morgen.",
+      "Goeienavond Geert! Morgenvroeg staat je samenvatting weer klaar in je mailbox.",
+    ],
+  },
+  nacht: {
+    kicker: "🌙 NOG WAKKER, GEERT?",
+    lines: [
+      "Nog wakker, Geert? De vonnissen lopen niet weg. Morgen om 7 uur krijg je alles in je mailbox.",
+      "Dag nachtuil! Ik hou de wacht, ga gerust slapen.",
+      "Laat geworden, Geert? Hier is het overzicht, en daarna snel je bed in.",
+      "Goeienacht Geert! Terwijl jij slaapt, blijf ik elke 15 minuten opletten.",
+    ],
+  },
+};
+const TOM_PERIOD = {
+  middag: [
+    "Goeiemiddag Geert! Weet je nog wie deze tool maakte? Juist, Tom. Een frisse Duvel bij de volgende gelegenheid? 🍺",
+    "Dag Geert, kleine reminder deze middag: zonder je vriend Tom geen Vonnisalert. 😉",
+  ],
+  avond: [
+    "Goeienavond Geert! Perfect moment om je vriend Tom eens te bedanken… met een frisse Duvel. 🍺",
+    "Dag Geert, mooie avond voor een Duvel. Tom (de maker van deze tool) zegt alvast santé! 😄",
+  ],
+  nacht: [
+    "Nog wakker, Geert? Tom heeft deze tool gemaakt zodat jij gerust kan slapen. Een Duvel zou hem plezieren. 🍺",
+  ],
+};
+
+export function periodFor(hour) {
+  if (hour >= 5 && hour < 12) return "ochtend";
+  if (hour >= 12 && hour < 17) return "middag";
+  if (hour >= 17 && hour < 23) return "avond";
+  return "nacht";
+}
+
+/** Begroeting voor de webapp, afhankelijk van dag en uur. */
+export function greetingAt(iso, hour) {
+  const period = periodFor(hour);
+  const day = greetingFor(iso);
+  if (period === "ochtend") return { period, kicker: PERIODS.ochtend.kicker, line: day.line, isTomDay: day.isTomDay };
+  if (day.isTomDay) {
+    const list = TOM_PERIOD[period];
+    return { period, kicker: PERIODS[period].kicker, line: list[hash(iso + period) % list.length], isTomDay: true };
+  }
+  const list = PERIODS[period].lines;
+  return { period, kicker: PERIODS[period].kicker, line: list[hash(iso + period) % list.length], isTomDay: false };
 }

@@ -87,3 +87,38 @@ footer{max-width:1100px;margin:0 auto 30px;padding:0 16px;color:#8b98a8;font-siz
   .item{flex-direction:column}.item .side{flex-direction:row;align-items:center;align-self:stretch;justify-content:space-between}
   header{padding-top:14px}.brand{font-size:19px}
 }
+
+/* ---------- design v3 ---------- */
+:root{--gold:#d9b25a;--navy:#0f2a45}
+body{background:#f2f5f9}
+header{background:radial-gradient(1200px 300px at 85% -40%,#2d6aa3 0%,transparent 60%),linear-gradient(120deg,#0f2a45,#1d4c7a)}
+.brandwrap{display:flex;align-items:center;gap:12px}
+.logo{width:44px;height:44px;filter:drop-shadow(0 3px 8px #0006)}
+.brand span{color:var(--gold)}
+.sub span{opacity:.85}
+nav a.active{background:#f2f5f9}
+.ghost{border-color:#ffffff40;background:#ffffff14}
+.ghost:hover{background:#ffffff26}
+.greet{position:relative;overflow:hidden;border-radius:16px;padding:18px 20px 18px 74px;margin-bottom:18px;color:#1c2f44;border:1px solid #e3e9f0;box-shadow:0 6px 20px #1b355012}
+.greet .gi{position:absolute;left:18px;top:16px;font-size:36px;line-height:1}
+.greet .gk{font-size:11px;font-weight:800;letter-spacing:1.2px;opacity:.75;margin-bottom:4px}
+.greet .gt{font-size:16px;font-weight:620;line-height:1.45}
+.greet.tom .gt:after{content:"";}
+.g-ochtend{background:linear-gradient(120deg,#fff8e6,#ffe9c2 60%,#ffd9a0)}
+.g-middag{background:linear-gradient(120deg,#eaf5ff,#d6ebff)}
+.g-avond{background:linear-gradient(120deg,#ffe8de,#f6d3e4 55%,#dcd3f5)}
+.g-nacht{background:linear-gradient(120deg,#1a2b4a,#24365e);color:#e6edf7;border-color:#2d4370}
+.g-nacht .gk{color:#b9c8e6}
+.cards .card{position:relative;border:1px solid #e3e9f0;box-shadow:0 2px 10px #1b35500a;transition:transform .12s}
+.cards .card:hover{transform:translateY(-2px)}
+.card .ci{position:absolute;right:12px;top:10px;font-size:20px;opacity:.85}
+.card.c-vandaag{border-top:4px solid #e7a531}.card.c-morgen{border-top:4px solid #7a68d6}.card.c-week{border-top:4px solid #2f6db0}.card.c-check{border-top:4px solid #8494a8}
+.item{border-left:5px solid #c9d4e0;box-shadow:0 1px 6px #1b355008}
+.item.st-vandaag{border-left-color:#e7a531}.item.st-morgen{border-left-color:#7a68d6}.item.st-aangekondigd{border-left-color:#2f6db0}
+.item.st-bevestigd{border-left-color:#2f8a6f}.item.st-uitgesteld{border-left-color:#c8524a}.item.st-check{border-left-color:#8494a8}
+.blockhead h2{display:flex;align-items:center;gap:8px}
+.login{text-align:left;box-shadow:0 10px 40px #1b355018}
+.login .llogo{display:block;width:72px;height:72px;margin:0 auto 10px}
+.login h1{text-align:center}.login .lsub{text-align:center}
+footer{text-align:center}
+@media(max-width:720px){.greet{padding:15px 15px 15px 60px}.greet .gi{left:14px;font-size:30px}.greet .gt{font-size:15px}.logo{width:38px;height:38px}}

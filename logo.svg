@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" role="img" aria-label="Vonnisalert Limburg">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#1d4c7a"/><stop offset="1" stop-color="#0f2a45"/>
+    </linearGradient>
+    <linearGradient id="gold" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#f3d58a"/><stop offset="1" stop-color="#c99a3b"/>
+    </linearGradient>
+  </defs>
+  <!-- schild -->
+  <path d="M60 6 L104 20 V56 C104 84 85 104 60 114 C35 104 16 84 16 56 V20 Z" fill="url(#bg)" stroke="url(#gold)" stroke-width="4" stroke-linejoin="round"/>
+  <!-- weegschaal -->
+  <g fill="none" stroke="#e3bd66" stroke-width="4" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M60 30 V84"/>
+    <path d="M36 40 H84"/>
+    <path d="M48 88 H72"/>
+    <path d="M36 40 L26 62 M36 40 L46 62"/>
+    <path d="M84 40 L74 62 M84 40 L94 62"/>
+  </g>
+  <g fill="url(#gold)">
+    <circle cx="60" cy="27" r="4.5"/>
+    <path d="M24 62 H48 C47 70 41 74 36 74 C31 74 25 70 24 62 Z"/>
+    <path d="M72 62 H96 C95 70 89 74 84 74 C79 74 73 70 72 62 Z"/>
+  </g>
+</svg>

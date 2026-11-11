@@ -3,7 +3,7 @@
 const { createClient } = window.supabase;
 import {
   analyzeArticle, STATUS, brusselsDate, addDays, weekday, formatDateNL, greetingFor, diffDays,
-  articleIdFromUrl, isGeertHouben,
+  articleIdFromUrl, isGeertHouben, greetingAt,
 } from "/supabase/functions/_shared/parser.js";
 
 const cfg = window.VONNISALERT_CONFIG || {};
@@ -68,6 +68,12 @@ async function loadAll() {
   updateBadges();
 }
 
+function setTodayLabel() {
+  const el = $("todayLabel");
+  if (el) el.textContent = " · " + formatDateNL(today()).replace(/ \d{4}$/, "");
+}
+setTodayLabel();
+
 function updateBadges() {
   $("badgeCheck").textContent = state.cases.filter(isOpenCheck).length;
   $("badgeArt").textContent = state.articles.length;
@@ -83,9 +89,12 @@ document.addEventListener("visibilitychange", async () => {
 // ---------- login ----------
 
 function renderLogin() {
+  const hr = Number(new Intl.DateTimeFormat("en-GB", { timeZone: "Europe/Brussels", hour: "2-digit", hour12: false }).format(new Date())) % 24;
+  const hi = { ochtend: "Goedemorgen", middag: "Goeiemiddag", avond: "Goeienavond", nacht: "Goeienacht" }[greetingAt(today(), hr).period];
   app.innerHTML = `<form class="login" id="loginForm">
-    <h1>Aanmelden</h1>
-    <p class="muted small">Alleen voor Geert. Je blijft op dit toestel aangemeld.</p>
+    <img src="/logo.svg" alt="" class="llogo">
+    <h1>${hi} Geert</h1>
+    <p class="muted small lsub">Meld je aan om je vonnissen te bekijken. Je blijft op dit toestel aangemeld.</p>
     <div class="field"><label for="le">E-mailadres</label><input id="le" type="email" autocomplete="username" required></div>
     <div class="field"><label for="lp">Wachtwoord</label><input id="lp" type="password" autocomplete="current-password" required></div>
     <button class="primary" style="width:100%;justify-content:center">Aanmelden</button>
@@ -119,7 +128,7 @@ function item(c) {
   if (c.court === "Te controleren") flags.push("rechtbank?");
   if (c.author_is_geert == null) flags.push("auteur?");
   const author = c.author ? (c.author_is_geert === true ? "Geert Houben ✓" : esc(c.author)) : "auteur onbekend";
-  return `<div class="item" data-id="${esc(c.id)}">
+  return `<div class="item st-${esc(c.status)}" data-id="${esc(c.id)}">
     <div class="main"><div class="title">${esc(c.title)}</div>
       <div class="meta"><span>${esc(c.defendant || "beklaagde niet vermeld")}</span><span>${esc(c.court)}</span><span>${author}</span>${c.needs_review && flags.length ? `<span class="flag">⚠ ${flags.join(", ")}</span>` : ""}</div></div>
     <div class="side"><span class="date">${dateLabel(c)}</span><span class="pill s-${esc(c.status)}">${esc(STATUS[c.status] || c.status)}</span></div></div>`;
@@ -151,18 +160,17 @@ function renderToday() {
   const onbevestigd = open.filter((c) => c.verdict_date && c.verdict_date < t && c.status !== "uitgesteld").sort(sortDate);
   const uitgesteld = open.filter((c) => c.status === "uitgesteld").sort(sortDate);
   const week = open.filter((c) => c.verdict_date && diffDays(t, c.verdict_date) >= 0 && diffDays(t, c.verdict_date) < 7);
-  const g = greetingFor(t);
-  const hour = Number(new Intl.DateTimeFormat("en-GB", { timeZone: "Europe/Brussels", hour: "2-digit", hour12: false }).format(new Date()));
-  // De begroeting van de dag blijft de hele dag staan; enkel "goedemorgen" past zich aan het uur aan
-  const hello = hour < 12 ? g.line : g.line.replace(/Goe(de|ie)morgen/, hour < 18 ? "Goeiemiddag" : "Goeienavond");
+  const hour = Number(new Intl.DateTimeFormat("en-GB", { timeZone: "Europe/Brussels", hour: "2-digit", hour12: false }).format(new Date())) % 24;
+  const g = greetingAt(t, hour);
+  const icon = { ochtend: "☀️", middag: "🌤️", avond: "🌆", nacht: "🌙" }[g.period];
   app.innerHTML = `
-    <section class="morning"><div class="morning-kicker">${hour < 12 ? "☀️ GOEDEMORGEN GEERT" : hour < 18 ? "👋 GOEIEMIDDAG GEERT" : "🌙 GOEIENAVOND GEERT"}</div><div class="morning-text">${esc(hello)}</div>${g.tom ? `<div class="morning-tom">${esc(g.tom)}</div>` : ""}</section>
+    <section class="greet g-${g.period}${g.isTomDay ? " tom" : ""}"><div class="gi">${g.isTomDay ? "🍺" : icon}</div><div class="gk">${esc(g.kicker.replace(/^\S+\s/, ""))}</div><div class="gt">${esc(g.line)}</div></section>
     ${state.settings.rss_enabled ? "" : `<div class="notice">Automatische HBVL-opvolging staat <strong>uit</strong>. Nieuwe zaken voeg je toe met <strong>＋ Dossier</strong> (artikel plakken). Zie ⚙︎ Instellingen.</div>`}
     <div class="cards">
-      <a class="card" href="#vandaag"><div class="label">Uitspraak vandaag</div><div class="num">${vandaag.length}</div></a>
-      <a class="card" href="#vandaag"><div class="label">Uitspraak morgen</div><div class="num">${morgen.length}</div></a>
-      <a class="card" href="#week"><div class="label">Komende 7 dagen</div><div class="num">${week.length}</div></a>
-      <a class="card" href="#controle"><div class="label">Nog te controleren</div><div class="num">${state.cases.filter(isOpenCheck).length}</div></a>
+      <a class="card c-vandaag" href="#vandaag"><span class="ci">⚖️</span><div class="label">Uitspraak vandaag</div><div class="num">${vandaag.length}</div></a>
+      <a class="card c-morgen" href="#vandaag"><span class="ci">⏰</span><div class="label">Uitspraak morgen</div><div class="num">${morgen.length}</div></a>
+      <a class="card c-week" href="#week"><span class="ci">📅</span><div class="label">Komende 7 dagen</div><div class="num">${week.length}</div></a>
+      <a class="card c-check" href="#controle"><span class="ci">🔍</span><div class="label">Nog te controleren</div><div class="num">${state.cases.filter(isOpenCheck).length}</div></a>
     </div>
     ${block("Uitspraken vandaag", vandaag, "Vandaag geen aangekondigde uitspraken.")}
     ${block("Uitspraken morgen", morgen, "Morgen geen aangekondigde uitspraken.")}

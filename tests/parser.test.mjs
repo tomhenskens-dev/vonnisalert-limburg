@@ -171,3 +171,18 @@ test("extra formuleringen en valse positieven", () => {
     "De Rode Duivels kennen maandag hun tegenstander.",
   ]) assert.equal(an(t).hasAnnouncement, false, t);
 });
+
+test("Geerts vaste formulering: 'Vonnis op …'", () => {
+  for (const [t, d] of [
+    ["Vonnis op 2 december.", "2026-12-02"],
+    ["Het parket vroeg vier jaar cel. Vonnis op 2 december.", "2026-12-02"],
+    ["De verdediging vroeg de vrijspraak, vonnis op 2 december.", "2026-12-02"],
+    ["Vonnis op maandag.", "2026-11-16"],
+    ["Vonnis op 2/12.", "2026-12-02"],
+  ]) {
+    const r = an(t);
+    assert.equal(r.verdictDate, d, t);
+    assert.equal(r.status, "aangekondigd", t);
+  }
+  assert.equal(an("Het vonnis op 2 december was streng.").hasAnnouncement, false);
+});
