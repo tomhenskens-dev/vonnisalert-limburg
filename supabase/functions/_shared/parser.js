@@ -219,7 +219,7 @@ const POSTPONE_RE = /\b(uitgesteld|verdaagd|verschoven|uitstel|opgeschoven|naar 
 const VERDICT_WORD_RE = /\b(vonnis|uitspraak|verdict|beslissing|arrest|strafmaat)\b/i;
 const OUTCOME_RE = /\b(veroordeeld tot|veroordeelt|vrijgesproken|vrijspraak|krijgt|kreeg|legde .{0,30}op|celstraf van|gevangenisstraf van|werkstraf van|opschorting|probatie|cel met uitstel|jaar cel|maanden cel|jaar effectief|boete van)\b/i;
 
-export const COURT_RE = /\b(rechtbank|rechter|rechters|vonnis|parket|beklaagde|beklaagden|proces|correctionele|assisen|strafzaak|celstraf|gevangenisstraf|werkstraf|vrijgesproken|veroordeeld|veroordeling|openbaar ministerie|raadkamer|vordert|vorderde|eiste|eist|strafpleiter|aanklager|procureur|politierechter|politierechtbank|terechtstaan|terecht|zitting|uitspraak|verdict|advocaat|meester)\b/gi;
+export const COURT_RE = /\b(rechtbank|rechter|rechters|strafrechter|strafrechters|politierechter|riskeert|cel|verdachte|beklaagd|vonnis|parket|beklaagde|beklaagden|proces|correctionele|assisen|strafzaak|celstraf|gevangenisstraf|werkstraf|vrijgesproken|veroordeeld|veroordeling|openbaar ministerie|raadkamer|vordert|vorderde|eiste|eist|strafpleiter|aanklager|procureur|politierechter|politierechtbank|terechtstaan|terecht|zitting|uitspraak|verdict|advocaat|meester)\b/gi;
 
 // ---------- detectie ----------
 
@@ -342,6 +342,17 @@ export function isGeertHouben(author) {
   return /\bgeert\s+houben\b/i.test(String(author || ""));
 }
 
+export const DEFAULT_AUTHORS = [{ name: "Geert Houben", medium: "HBVL" }, { name: "Nienke Horemans", medium: "HLN" }];
+
+function normName(s) { return String(s || "").toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/\s+/g, " ").trim(); }
+
+/** Geeft de gevolgde journalist terug als die (mee-)auteur is, anders null. */
+export function followedAuthor(author, list = DEFAULT_AUTHORS) {
+  const a = normName(author);
+  if (!a) return null;
+  return (list || []).find((x) => x?.name && a.split(/\s*[,;&]\s*|\s+en\s+/).some((part) => part === normName(x.name)) ) || null;
+}
+
 /**
  * Volledige analyse van een artikel.
  * @param {{title?:string, text:string, publishedAt?:string|Date, author?:string, url?:string}} a
@@ -433,7 +444,10 @@ export function normalizeDefendant(s) {
 }
 
 export function articleIdFromUrl(url) {
-  const m = String(url || "").match(/\/(\d{6,})\.html/) || String(url || "").match(/\/cnt\/([a-z0-9_]+)/i);
+  const u = String(url || "");
+  const hln = u.match(/~a([0-9a-f]{6,})/i);
+  if (hln) return "hln:" + hln[1];
+  const m = u.match(/\/(\d{6,})\.html/) || u.match(/\/cnt\/([a-z0-9_]+)/i);
   return m ? m[1] : null;
 }
 

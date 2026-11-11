@@ -3,7 +3,7 @@
 const { createClient } = window.supabase;
 import {
   analyzeArticle, STATUS, brusselsDate, addDays, weekday, formatDateNL, greetingFor, diffDays,
-  articleIdFromUrl, isGeertHouben, greetingAt,
+  articleIdFromUrl, isGeertHouben, greetingAt, followedAuthor, DEFAULT_AUTHORS,
 } from "/supabase/functions/_shared/parser.js";
 
 const cfg = window.VONNISALERT_CONFIG || {};
@@ -14,7 +14,8 @@ const $ = (id) => document.getElementById(id);
 const esc = (s = "") => String(s ?? "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
 const app = $("app");
 
-let state = { cases: [], articles: [], events: [], settings: {}, user: null, filter: { q: "", court: "", status: "" }, weekOffset: 0, agendaYear: 2027 };
+let state = { cases: [], articles: [], events: [], requests: [], settings: {}, user: null, filter: { q: "", court: "", status: "", author: "" }, weekOffset: 0, agendaYear: 2027 };
+const authors = () => (Array.isArray(state.settings.followed_authors) && state.settings.followed_authors.length ? state.settings.followed_authors : DEFAULT_AUTHORS);
 const today = () => brusselsDate(new Date());
 
 function toast(msg, ms = 2800) {
@@ -56,14 +57,16 @@ async function boot() {
 }
 
 async function loadAll() {
-  const [c, a, s, ev] = await Promise.all([
+  const [c, a, s, ev, rq] = await Promise.all([
     db.from("cases").select("*").order("verdict_date", { ascending: true, nullsFirst: false }),
     db.from("articles").select("article_id,source,url,title,lead,author,category,published_at,premium,announcement,analysis,case_id,dismissed").is("case_id", null).eq("dismissed", false).order("published_at", { ascending: false }).limit(150),
     db.from("app_state").select("key,value,updated_at"),
     db.from("agenda_events").select("*").order("start_date", { ascending: true, nullsFirst: false }),
+    db.from("agenda_requests").select("*").order("created_at", { ascending: false }).limit(20),
   ]);
   for (const r of [c, a, s]) if (r.error) throw r.error;
   state.events = ev.error ? [] : ev.data || [];
+  state.requests = rq.error ? [] : rq.data || [];
   state.cases = c.data || [];
   state.articles = a.data || [];
   state.settings = Object.fromEntries((s.data || []).map((r) => [r.key, r.value]));
@@ -128,11 +131,13 @@ function item(c) {
   if (c.date_certainty === "afgeleid") flags.push("datum afgeleid");
   if (c.date_certainty === "onzeker") flags.push("datum onzeker");
   if (c.court === "Te controleren") flags.push("rechtbank?");
-  if (c.author_is_geert == null) flags.push("auteur?");
-  const author = c.author ? (c.author_is_geert === true ? "Geert Houben ✓" : esc(c.author)) : "auteur onbekend";
+  if (!c.author) flags.push("auteur?");
+  const fa = followedAuthor(c.author, authors());
+  const author = c.author ? (fa ? `${esc(fa.name)} ✓` : esc(c.author)) : "auteur onbekend";
+  const medium = c.source === "hln" ? "HLN" : c.source === "rss" ? "HBVL" : fa?.medium || "";
   return `<div class="item st-${esc(c.status)}" data-id="${esc(c.id)}">
     <div class="main"><div class="title">${esc(c.title)}</div>
-      <div class="meta"><span>${esc(c.defendant || "beklaagde niet vermeld")}</span><span>${esc(c.court)}</span><span>${author}</span>${c.needs_review && flags.length ? `<span class="flag">⚠ ${flags.join(", ")}</span>` : ""}</div></div>
+      <div class="meta"><span>${esc(c.defendant || "beklaagde niet vermeld")}</span><span>${esc(c.court)}</span><span>${author}</span>${medium ? `<span class="mtag">${esc(medium)}</span>` : ""}${c.needs_review && flags.length ? `<span class="flag">⚠ ${flags.join(", ")}</span>` : ""}</div></div>
     <div class="side"><span class="date">${dateLabel(c)}</span><span class="pill s-${esc(c.status)}">${esc(STATUS[c.status] || c.status)}</span></div></div>`;
 }
 
@@ -217,10 +222,10 @@ function renderCheck() {
 function renderArticles() {
   const arts = state.articles;
   app.innerHTML = `<h1>Gerechtsartikels</h1>
-    <p class="muted">Artikels uit de feeds met een gerechtelijke context, maar zonder herkende aankondiging in titel of intro. De aankondiging staat soms pas verderop in het artikel: open het, en plak de tekst als dossier als er een uitspraak wordt aangekondigd.</p>
+    <p class="muted">Artikels van de gevolgde journalisten met een gerechtelijke context, maar zonder herkende aankondiging in titel of intro. De aankondiging staat soms pas verderop in het artikel: open het, en plak de tekst als dossier als er een uitspraak wordt aangekondigd.</p>
     ${state.settings.rss_enabled ? "" : `<div class="notice">De automatische opvolging staat uit, dus deze lijst wordt niet aangevuld.</div>`}
     ${arts.length ? `<div class="list">${arts.map((a) => `<div class="item" style="cursor:default"><div class="main"><div class="title">${esc(a.title)}</div>
-      <div class="meta"><span>${a.published_at ? new Date(a.published_at).toLocaleString("nl-BE", { timeZone: "Europe/Brussels", dateStyle: "short", timeStyle: "short" }) : ""}</span><span>${esc(a.author || "auteur onbekend")}</span>${a.premium ? "<span>Plus</span>" : ""}<span>${a.source === "google" ? "via Google News" : "HBVL-feed"}</span></div>
+      <div class="meta"><span>${a.published_at ? new Date(a.published_at).toLocaleString("nl-BE", { timeZone: "Europe/Brussels", dateStyle: "short", timeStyle: "short" }) : ""}</span><span>${esc(a.author || "auteur onbekend")}</span>${a.premium ? "<span>Plus</span>" : ""}<span class="mtag">${a.source === "google" ? "Google News" : a.source === "hln" ? "HLN" : "HBVL"}</span></div>
       ${a.lead ? `<div class="small muted" style="margin-top:6px">${esc(a.lead.slice(0, 260))}${a.lead.length > 260 ? "…" : ""}</div>` : ""}</div>
       <div class="side"><a class="btn secondary sm" href="${esc(a.url)}" target="_blank" rel="noopener">Open ↗</a><button class="primary sm" data-mk="${esc(a.article_id)}">Maak dossier</button><button class="secondary sm" data-dis="${esc(a.article_id)}">Negeer</button></div></div>`).join("")}</div>` : `<div class="empty">Geen openstaande gerechtsartikels.</div>`}`;
   app.querySelectorAll("[data-dis]").forEach((b) => (b.onclick = async () => {
@@ -239,15 +244,18 @@ function renderAll() {
   const q = f.q.toLowerCase();
   const arr = state.cases.filter((c) =>
     (!f.court || c.court === f.court) && (!f.status || c.status === f.status) &&
+    (!f.author || (followedAuthor(c.author, authors())?.name === f.author)) &&
     (!q || [c.title, c.defendant, c.author, c.notes, c.court].join(" ").toLowerCase().includes(q))).sort(sortDate);
   app.innerHTML = `<h1>Zoeken</h1>
     <div class="filters"><input id="fq" placeholder="Zoek op zaak, beklaagde, auteur, notities…" value="${esc(f.q)}">
     <select id="fc"><option value="">Hasselt + Tongeren</option><option ${f.court === "Hasselt" ? "selected" : ""}>Hasselt</option><option ${f.court === "Tongeren" ? "selected" : ""}>Tongeren</option><option ${f.court === "Te controleren" ? "selected" : ""}>Te controleren</option></select>
+    <select id="fa"><option value="">Alle journalisten</option>${authors().map((x) => `<option ${f.author === x.name ? "selected" : ""}>${esc(x.name)}</option>`).join("")}</select>
     <select id="fs"><option value="">Alle statussen</option>${Object.entries(STATUS).map(([k, v]) => `<option value="${k}" ${f.status === k ? "selected" : ""}>${v}</option>`).join("")}</select></div>
     <p class="muted small">${arr.length} dossier(s)</p><div id="res">${list(arr, "Geen dossiers gevonden.")}</div>`;
   $("fq").oninput = (e) => { f.q = e.target.value; const pos = e.target.selectionStart; route(); $("fq").focus(); $("fq").setSelectionRange(pos, pos); };
   $("fc").onchange = (e) => { f.court = e.target.value; route(); };
   $("fs").onchange = (e) => { f.status = e.target.value; route(); };
+  $("fa").onchange = (e) => { f.author = e.target.value; route(); };
 }
 
 function renderArchive() {
@@ -259,9 +267,12 @@ function renderSettings() {
   const s = state.settings;
   const lr = s.last_run, ld = s.last_digest;
   app.innerHTML = `<h1>Instellingen</h1><div class="settings">
-    <div class="row"><div><strong>Automatische HBVL-opvolging</strong><p>Elke 15 minuten de publieke HBVL-RSS-feed (titel, intro, auteur) controleren op aangekondigde uitspraken.<br><span class="flag">Let op:</span> HBVL behoudt zich in zijn robots.txt het recht voor om automatische gegevensverzameling te verbieden (art. 4 DSM-richtlijn). Zet dit pas aan als je daarvoor toestemming hebt.</p></div>
+    <div class="row"><div><strong>Automatische HBVL-opvolging</strong><p>Elke 15 minuten de publieke RSS-feeds van HBVL en HLN (regio Hasselt) controleren op aangekondigde uitspraken (titel, intro, auteur).<br><span class="flag">Let op:</span> HBVL en DPG Media (HLN) behouden zich het recht voor om automatische gegevensverzameling te verbieden. Zet dit pas aan als je daarvoor toestemming hebt.</p></div>
       <label class="switch"><input type="checkbox" id="sRss" ${s.rss_enabled ? "checked" : ""}><span></span></label></div>
-    <div class="row"><div><strong>Alleen artikels van Geert Houben</strong><p>Enkel artikels uit de HBVL-feed waarvan Geert Houben (mee-)auteur is. Uit: alle HBVL-artikels plus Google News.</p></div>
+    <div class="row" style="display:block"><strong>Gevolgde journalisten</strong><p>De automatische opvolging zoekt in de HBVL-feed en de HLN-feed (regio Hasselt) naar artikels van deze journalisten. Schrijf de naam zoals ze onder het artikel staat.</p>
+      <div id="authList" style="margin-top:8px"></div>
+      <div class="filters" style="margin-top:8px"><input id="newAuth" placeholder="Naam journalist"><select id="newMed"><option>HBVL</option><option>HLN</option></select><button class="secondary sm" id="addAuth">＋ Toevoegen</button></div></div>
+    <div class="row"><div><strong>Alleen artikels van gevolgde journalisten</strong><p>Aan: enkel artikels van bovenstaande journalisten. Uit: alle artikels uit de feeds plus Google News.</p></div>
       <label class="switch"><input type="checkbox" id="sGeert" ${s.only_geert !== false ? "checked" : ""}><span></span></label></div>
     <div class="row"><div><strong>Ochtendmail om 07.00 uur</strong><p>Overzicht van nieuwe aankondigingen, uitspraken vandaag en morgen, onbevestigde en uitgestelde zaken.</p></div>
       <label class="switch"><input type="checkbox" id="sMail" ${s.mail_enabled !== false ? "checked" : ""}><span></span></label></div>
@@ -274,12 +285,29 @@ function renderSettings() {
     <pre class="log" id="runOut" hidden></pre>
     <div class="row"><div><strong>Afmelden</strong><p>${esc(state.user?.email || "")}</p></div><button class="secondary sm" id="logout">Afmelden</button></div></div>`;
   const toggle = (key, el) => (el.onchange = async () => {
-    if (key === "rss_enabled" && el.checked && !confirm("Bevestig dat jullie toestemming hebben om de HBVL-feed automatisch te verwerken.")) { el.checked = false; return; }
+    if (key === "rss_enabled" && el.checked && !confirm("Bevestig dat jullie toestemming hebben om de feeds van HBVL en HLN automatisch te verwerken.")) { el.checked = false; return; }
     const { error } = await db.from("app_state").update({ value: el.checked, updated_at: new Date().toISOString() }).eq("key", key);
     if (error) { el.checked = !el.checked; return toast("Fout: " + error.message); }
     state.settings[key] = el.checked; updateBadges(); toast("Bewaard");
   });
   toggle("rss_enabled", $("sRss")); toggle("only_geert", $("sGeert")); toggle("mail_enabled", $("sMail")); toggle("reminder_enabled", $("sRem"));
+  const renderAuth = () => {
+    $("authList").innerHTML = authors().map((x, i) => `<div class="item" style="cursor:default;padding:8px 12px;margin-bottom:6px"><div class="main"><div class="title">${esc(x.name)} <span class="mtag">${esc(x.medium || "")}</span></div></div><div class="side"><button class="secondary sm" data-rmauth="${i}">Verwijderen</button></div></div>`).join("");
+    $("authList").querySelectorAll("[data-rmauth]").forEach((b) => (b.onclick = () => saveAuth(authors().filter((_, i) => i !== Number(b.dataset.rmauth)))));
+  };
+  const saveAuth = async (list) => {
+    if (!list.length) return toast("Er moet minstens één journalist overblijven.");
+    const { error } = await db.from("app_state").update({ value: list, updated_at: new Date().toISOString() }).eq("key", "followed_authors");
+    if (error) return toast("Fout: " + error.message);
+    state.settings.followed_authors = list; renderAuth(); toast("Bewaard");
+  };
+  renderAuth();
+  $("addAuth").onclick = () => {
+    const name = $("newAuth").value.trim().replace(/\s+/g, " ");
+    if (name.length < 3) return toast("Geef een volledige naam.");
+    if (authors().some((x) => x.name.toLowerCase() === name.toLowerCase())) return toast("Staat al in de lijst.");
+    saveAuth([...authors(), { name, medium: $("newMed").value }]);
+  };
   $("runNow").onclick = () => callFn("run", $("runNow"));
   $("testMail").onclick = () => callFn("testmail", $("testMail"));
   $("logout").onclick = () => db.auth.signOut();
@@ -332,11 +360,13 @@ function renderAgenda() {
   app.innerHTML = `<h1>Agenda ${y}</h1>
     <p class="muted">Terugkerende evenementen om op te volgen voor verslaggeving. Kijk “te bevestigen” en “voorspelling” na zodra de organisatie de datum bekendmaakt.</p>
     <div class="filters"><select id="agYear">${years.map((yy) => `<option ${String(y) === yy ? "selected" : ""}>${yy}</option>`).join("")}</select>
-      <button class="primary sm" id="evAdd">＋ Evenement</button></div>
+      <button class="primary sm" id="evAdd">＋ Evenement</button> <button class="secondary sm" id="reqAdd">📋 Lijst laten checken</button></div>
+    ${state.requests.length ? `<div class="notice"><strong>Lijsten om te checken</strong>${state.requests.slice(0, 5).map((r) => `<div style="margin-top:6px">${r.status === "wachtend" ? "⏳" : r.status === "verwerkt" ? "✅" : "⚠️"} ${new Date(r.created_at).toLocaleDateString("nl-BE")} · ${r.target_year} · ${esc(r.content.split("\n").filter((l) => l.trim()).length)} regels · <strong>${esc(r.status)}</strong>${r.result_note ? ` – ${esc(r.result_note)}` : r.status === "wachtend" ? " – wordt bij de volgende automatische controle opgezocht" : ""}</div>`).join("")}</div>` : ""}
     <div class="legend"><span class="pill e-bevestigd">Bevestigd</span> datum officieel <span class="pill e-te_bevestigen">Te bevestigen</span> bijna zeker <span class="pill e-voorspelling">Voorspelling</span> afgeleid uit vorige jaren <span class="pill e-eenmalig">Eenmalig</span> geen nieuwe editie verwacht</div>
     ${Object.keys(byMonth).sort((a, b) => a - b).map((k) => `<h2 class="monthhead">${k == 99 ? "Zonder datum" : MONTHS_NL[k] + " " + y}</h2><div class="list">${byMonth[k].map(evItem).join("")}</div>`).join("") || `<div class="empty">Nog geen evenementen voor ${y}.</div>`}`;
   $("agYear").onchange = (e) => { state.agendaYear = Number(e.target.value); route(); };
   $("evAdd").onclick = () => openEvent(null);
+  $("reqAdd").onclick = () => { $("rq_year").value = String(state.agendaYear); $("rq_text").value = ""; $("rq_file").value = ""; rqDlg.showModal(); };
   app.querySelectorAll("[data-ev]").forEach((el) => (el.onclick = () => openEvent(el.dataset.ev)));
 }
 
@@ -376,6 +406,25 @@ $("evDelete").onclick = async () => {
   const { error } = await db.from("agenda_events").delete().eq("id", id);
   if (error) return toast("Fout: " + error.message);
   evDlg.close(); await loadAll(); route();
+};
+
+const rqDlg = $("rqDialog");
+rqDlg.querySelectorAll("[data-rqclose]").forEach((b) => (b.onclick = () => rqDlg.close()));
+$("rq_file").onchange = async (e) => {
+  const f = e.target.files[0];
+  if (!f) return;
+  if (f.size > 200000) return toast("Bestand te groot (max. 200 kB).");
+  if (!/\.(txt|csv|md|tsv)$/i.test(f.name) && !f.type.startsWith("text/")) return toast("Gebruik een tekstbestand (.txt of .csv), of kopieer de lijst uit Word en plak ze hier.");
+  $("rq_text").value = (await f.text()).slice(0, 20000);
+};
+$("rqForm").onsubmit = async (e) => {
+  e.preventDefault();
+  const content = $("rq_text").value.trim();
+  if (content.length < 3) return toast("Plak of upload eerst een lijst.");
+  const { error } = await db.from("agenda_requests").insert({ content: content.slice(0, 20000), target_year: Number($("rq_year").value) });
+  if (error) return toast("Fout: " + error.message);
+  rqDlg.close(); toast("Lijst ontvangen – wordt bij de volgende controle opgezocht");
+  await loadAll(); route();
 };
 
 // ---------- dossier toevoegen / bewerken ----------

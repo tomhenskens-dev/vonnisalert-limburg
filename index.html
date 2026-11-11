@@ -13,7 +13,7 @@
 <link rel="apple-touch-icon" href="/icon-180.png">
 <link rel="icon" type="image/svg+xml" href="/logo.svg">
 <link rel="alternate icon" type="image/png" href="/icon-192.png">
-<link rel="stylesheet" href="/styles.css?v=4">
+<link rel="stylesheet" href="/styles.css?v=5">
 <script src="/config.js?v=2"></script>
 <script src="/vendor/supabase-2.119.0.js"></script>
 </head>
@@ -107,7 +107,22 @@
   </form>
 </dialog>
 
-<script type="module" src="/app.js?v=4"></script>
+<dialog id="rqDialog">
+  <form id="rqForm" method="dialog">
+    <div class="modalhead"><h2>Lijst laten checken</h2><button type="button" class="secondary sm" data-rqclose>Sluiten</button></div>
+    <div class="modalbody">
+      <p class="muted small" style="margin-top:0">Plak de lijst met evenementen (bv. per maand met de data van dit jaar), of upload een tekstbestand. Claude zoekt de datums voor het gekozen jaar op en zet ze in de agenda als <b>bevestigd</b>, <b>te bevestigen</b> of <b>voorspelling</b>, met bron.</p>
+      <div class="formgrid">
+        <div class="field"><label for="rq_year">Datums zoeken voor</label><select id="rq_year"><option>2027</option><option>2028</option></select></div>
+        <div class="field"><label for="rq_file">Of upload (.txt / .csv)</label><input id="rq_file" type="file" accept=".txt,.csv,.md,.tsv,text/plain"></div>
+        <div class="field full"><label for="rq_text">Lijst</label><textarea id="rq_text" rows="10" placeholder="Bv.&#10;Oktober&#10;3 · Weekend van de Klant (tot 4/10)&#10;11 · Dwars door Hasselt&#10;17 · Jeneverfeesten (tot 18/10)"></textarea></div>
+      </div>
+    </div>
+    <div class="modalfoot"><div></div><div><button type="button" class="secondary" data-rqclose>Annuleren</button> <button type="submit" class="primary">Versturen</button></div></div>
+  </form>
+</dialog>
+
+<script type="module" src="/app.js?v=5"></script>
 <script>
 if ("serviceWorker" in navigator) window.addEventListener("load", () => navigator.serviceWorker.register("/sw.js").catch(() => {}));
 </script>

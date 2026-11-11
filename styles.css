@@ -130,3 +130,4 @@ footer{text-align:center}
 .legend{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 14px;font-size:12.5px;color:var(--muted);align-items:center}
 .monthhead{font-size:15px;margin:18px 2px 8px;color:#2c445c;text-transform:capitalize}
 .item .basis{font-size:12.5px;color:#55657a;margin-top:5px}
+.mtag{display:inline-block;background:#eef2f7;color:#3b5068;border-radius:5px;padding:0 6px;font-size:11px;font-weight:700;letter-spacing:.3px}

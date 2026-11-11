@@ -3,10 +3,11 @@
 
 import {
   analyzeArticle, autoStatus, brusselsDate, addDays, diffDays, formatDateNL,
-  normalizeDefendant, articleIdFromUrl, greetingFor, STATUS,
+  normalizeDefendant, articleIdFromUrl, greetingFor, STATUS, followedAuthor,
 } from "./parser.js";
 
 export const HBVL_RSS = "https://www.hbvl.be/rss";
+export const HLN_RSS = "https://www.hln.be/hasselt/rss.xml";
 export const GOOGLE_NEWS_RSS =
   "https://news.google.com/rss/search?q=site:hbvl.be+(vonnis+OR+uitspraak+OR+verdict+OR+rechtbank+OR+rechter)+when:7d&hl=nl&gl=BE&ceid=BE:nl";
 
@@ -26,13 +27,14 @@ function tag(block, name) {
   return m ? decode(m[1].replace(/^\s*<!\[CDATA\[([\s\S]*?)\]\]>\s*$/, "$1")) : "";
 }
 
+/** @param {string} xml @param {string} [source] */
 export function parseRss(xml, source = "hbvl") {
   const items = [];
   for (const m of String(xml).matchAll(/<item>([\s\S]*?)<\/item>/g)) {
     const b = m[1];
     let title = tag(b, "title");
     let url = tag(b, "link");
-    const author = tag(b, "dc:creator") || null;
+    const author = tag(b, "dc:creator") || tag(b, "author") || null;
     const published = tag(b, "pubDate");
     const updated = tag(b, "atom:updated") || published;
     let lead = tag(b, "description");
@@ -42,6 +44,7 @@ export function parseRss(xml, source = "hbvl") {
       lead = ""; // Google News levert alleen titels; de beschrijving herhaalt de titel
       id = null;
     }
+    if (!url || url.replace(/\/$/, "").match(/^https?:\/\/[^/]+$/)) url = tag(b, "guid") || url;
     if (!title || !url) continue;
     items.push({
       source,
@@ -53,7 +56,7 @@ export function parseRss(xml, source = "hbvl") {
       category: tag(b, "category") || null,
       publishedAt: published ? new Date(published).toISOString() : null,
       updatedAt: updated ? new Date(updated).toISOString() : null,
-      premium: /<premium>true<\/premium>/.test(b),
+      premium: /<premium>true<\/premium>/.test(b) || /paid[^>]*>\s*true/i.test(b),
     });
   }
   return items;
@@ -98,10 +101,10 @@ export function findMatchingCase(item, analysis, cases) {
 /**
  * Verwerkt nieuwe of gewijzigde feed-items.
  * @param {any[]} items
- * @param {{cases?: any[], knownArticles?: Record<string, any>, now?: Date}} [opts]
+ * @param {{cases?: any[], knownArticles?: Record<string, any>, now?: Date, authors?: any[]}} [opts]
  * @returns {{articles:any[], inserts:any[], updates:any[], events:any[]}}
  */
-export function processItems(items, { cases = [], knownArticles = {}, now = new Date() } = {}) {
+export function processItems(items, { cases = [], knownArticles = {}, now = new Date(), authors } = {}) {
   const out = { articles: [], inserts: [], updates: [], events: [] };
   const workingCases = cases.map((c) => ({ ...c }));
   const seen = new Set();
@@ -175,7 +178,7 @@ export function processItems(items, { cases = [], knownArticles = {}, now = new 
         title: item.title,
         defendant: analysis.defendant,
         author: item.author || null,
-        author_is_geert: item.author ? analysis.authorIsGeert : null,
+        author_is_geert: item.author ? Boolean(followedAuthor(item.author, authors)) : null,
         article_url: item.url,
         article_id: item.id,
         published_at: item.publishedAt,
@@ -189,7 +192,7 @@ export function processItems(items, { cases = [], knownArticles = {}, now = new 
         needs_review: analysis.status !== "aangekondigd" || analysis.court === "Te controleren" || !item.author,
         notes: notes.join("\n"),
         review_reasons: analysis.reasons,
-        source: item.source === "google" ? "google" : "rss",
+        source: item.source === "google" ? "google" : item.source === "hln" ? "hln" : "rss",
         extra_links: [],
         created_at: now.toISOString(),
       };
@@ -197,7 +200,7 @@ export function processItems(items, { cases = [], knownArticles = {}, now = new 
       article.case_id = id;
       workingCases.push(c);
       out.inserts.push(c);
-      out.events.push({ case_id: id, kind: "aangemaakt", message: `Automatisch aangemaakt uit ${item.source === "google" ? "Google News" : "de HBVL-feed"}: “${item.title}”` });
+      out.events.push({ case_id: id, kind: "aangemaakt", message: `Automatisch aangemaakt uit ${item.source === "google" ? "Google News" : item.source === "hln" ? "de HLN-feed" : "de HBVL-feed"}: “${item.title}”` });
     }
     out.articles.push(article);
   }

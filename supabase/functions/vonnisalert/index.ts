@@ -10,9 +10,9 @@
 //  4. Om 18.00 uur: herinnering voor de uitspraken van morgen.
 
 import { createClient, type SupabaseClient } from "npm:@supabase/supabase-js@2";
-import { brusselsParts, isGeertHouben } from "../_shared/parser.js";
+import { brusselsParts, followedAuthor, DEFAULT_AUTHORS } from "../_shared/parser.js";
 import {
-  parseRss, processItems, statusUpdates, buildDigest, buildReminder, HBVL_RSS, GOOGLE_NEWS_RSS,
+  parseRss, processItems, statusUpdates, buildDigest, buildReminder, HBVL_RSS, HLN_RSS, GOOGLE_NEWS_RSS,
 } from "../_shared/engine.js";
 
 const SUPABASE_URL = Deno.env.get("SUPABASE_URL")!;
@@ -26,6 +26,7 @@ const APP_URL = (Deno.env.get("APP_URL") || "https://vonnisalert-limburg.vercel.
 // Alleen voor lokale tests; in productie niet ingesteld.
 const HBVL_URL = Deno.env.get("HBVL_RSS_URL") || HBVL_RSS;
 const GOOGLE_URL = Deno.env.get("GOOGLE_NEWS_RSS_URL") || GOOGLE_NEWS_RSS;
+const HLN_URL = Deno.env.get("HLN_RSS_URL") || HLN_RSS;
 const RESEND_URL = Deno.env.get("RESEND_API_URL") || "https://api.resend.com/emails";
 const nowFn = () => (Deno.env.get("NOW_OVERRIDE") ? new Date(Deno.env.get("NOW_OVERRIDE")!) : new Date());
 const UA = "VonnisalertLimburg/1.0 (RSS-lezer voor persoonlijk gebruik)";
@@ -118,25 +119,28 @@ async function applyChanges(db: SupabaseClient, r: { inserts?: any[]; updates?: 
   }
 }
 
-async function pollFeeds(db: SupabaseClient, now: Date, minute: number, force: boolean, onlyGeert: boolean) {
+async function pollFeeds(db: SupabaseClient, now: Date, minute: number, force: boolean, onlyFollowed: boolean, authors: any[]) {
   const report: Record<string, unknown> = {};
-  const items = [];
-  try {
-    items.push(...parseRss(await fetchText(HBVL_URL), "hbvl"));
-    report.hbvl = items.length;
-  } catch (e) { report.hbvl_error = errText(e); }
-  // Google News (alleen titels, zonder auteur) één keer per uur – niet bij filter op Geert
-  if (!onlyGeert && (force || minute < 15)) {
+  const items: any[] = [];
+  for (const [source, url] of [["hbvl", HBVL_URL], ["hln", HLN_URL]]) {
+    try {
+      const got = parseRss(await fetchText(url), source);
+      items.push(...got);
+      report[source] = got.length;
+    } catch (e) { report[source + "_error"] = errText(e); }
+  }
+  // Google News (alleen titels, zonder auteur) één keer per uur – niet bij filter op journalisten
+  if (!onlyFollowed && (force || minute < 15)) {
     try {
       const g = parseRss(await fetchText(GOOGLE_URL), "google");
       items.push(...g);
       report.google = g.length;
     } catch (e) { report.google_error = errText(e); }
   }
-  if (onlyGeert) {
+  if (onlyFollowed) {
     const before = items.length;
-    items.splice(0, items.length, ...items.filter((i) => isGeertHouben(i.author)));
-    report.van_geert = `${items.length} van ${before}`;
+    items.splice(0, items.length, ...items.filter((i) => followedAuthor(i.author, authors)));
+    report.van_gevolgde_journalisten = `${items.length} van ${before}`;
   }
   if (!items.length) return report;
 
@@ -144,7 +148,7 @@ async function pollFeeds(db: SupabaseClient, now: Date, minute: number, force: b
   const { data: known } = await db.from("articles").select("article_id,updated_at_src").in("article_id", ids);
   const knownArticles = Object.fromEntries((known || []).map((k) => [k.article_id, { updated_at_src: k.updated_at_src ? new Date(k.updated_at_src).toISOString() : null }]));
   const cases = await loadCases(db);
-  const r = processItems(items, { cases, knownArticles, now });
+  const r = processItems(items, { cases, knownArticles, now, authors });
   await applyChanges(db, r);
   return { ...report, nieuwe_dossiers: r.inserts.length, bijgewerkt: r.updates.length, gerechtsartikels: r.articles.length };
 }
@@ -155,7 +159,8 @@ async function run(db: SupabaseClient, opts: { force?: boolean; action?: string 
   const state = await getState(db);
   const report: Record<string, unknown> = { today, hour, minute };
 
-  if (state.rss_enabled === true) report.feeds = await pollFeeds(db, now, minute, Boolean(opts.force), state.only_geert !== false);
+  if (state.rss_enabled === true) report.feeds = await pollFeeds(db, now, minute, Boolean(opts.force), state.only_geert !== false,
+    Array.isArray(state.followed_authors) && state.followed_authors.length ? state.followed_authors : DEFAULT_AUTHORS);
   else report.feeds = "uitgeschakeld";
 
   const cases = await loadCases(db);

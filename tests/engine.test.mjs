@@ -111,3 +111,20 @@ test("ochtendmail toont evenementen van de komende 7 dagen", () => {
   assert.match(d.html, /Agenda komende 7 dagen \(2\)/);
   assert.match(d.html, /datum voorspelling/);
 });
+
+test("HLN-feed: auteur uit <author>, artikel-id uit ~a-code, filter op gevolgde journalisten", async () => {
+  const { followedAuthor } = await import("../supabase/functions/_shared/parser.js");
+  const xml = `<rss><channel><link>https://www.hln.be</link><item><title>Hasseltse man kent maandag zijn straf</title><link>https://www.hln.be/hasselt/man-kent-straf~ab9e5e4c/</link><guid>https://www.hln.be/hasselt/man-kent-straf~ab9e5e4c/</guid><author>Nienke Horemans</author><description>Een 44-jarige man stond terecht voor de Hasseltse strafrechter. Vonnis op 2 december.</description><pubDate>Wed, 11 Nov 2026 08:43:00 GMT</pubDate><dpg:paid xmlns:dpg="x">true</dpg:paid></item></channel></rss>`;
+  const items = parseRss(xml, "hln");
+  assert.equal(items[0].author, "Nienke Horemans");
+  assert.equal(items[0].id, "hln:b9e5e4c");
+  assert.equal(items[0].premium, true);
+  assert.ok(followedAuthor("Nienke Horemans"));
+  assert.ok(followedAuthor("Jan Peeters, Geert Houben"));
+  assert.equal(followedAuthor("Redactie"), null);
+  const r = processItems(items, { now: new Date("2026-11-11T09:00:00Z") });
+  assert.equal(r.inserts[0].source, "hln");
+  assert.equal(r.inserts[0].verdict_date, "2026-12-02");
+  assert.equal(r.inserts[0].court, "Hasselt");
+  assert.equal(r.inserts[0].author_is_geert, true); // = auteur is een gevolgde journalist
+});

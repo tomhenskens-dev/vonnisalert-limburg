@@ -184,6 +184,12 @@ jobs:
             git add config.js && git commit -m "Supabase-configuratie frontend bijwerken" && git push
           fi
 
+      - name: Agenda-updates toepassen en agenda exporteren
+        if: steps.check.outputs.configured == 'true'
+        run: |
+          echo "Agenda-updates" > /tmp/status/stap.txt
+          GITHUB_TOKEN="${{ github.token }}" bash .github/scripts/agenda_sync.sh
+
       - name: Status bewaren (branch deploy-status)
         if: always()
         run: |
