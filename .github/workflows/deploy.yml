@@ -150,12 +150,17 @@ jobs:
         run: |
           echo "Rooktest geplande taak" > /tmp/status/stap.txt
           exec 2> >(tee -a /tmp/status/stderr.txt >&2)
-          sleep 5
-          curl -sS -X POST "https://$REF.supabase.co/functions/v1/vonnisalert" \
-            -H "Content-Type: application/json" -H "x-cron-secret: $CRON_SECRET" \
-            --data '{"action":"preview"}' -o /tmp/preview.json -w "HTTP %{http_code}\n" | tee /tmp/code.txt
+          ok=""
+          for i in 1 2 3 4 5 6 7 8; do
+            sleep 8
+            code=$(curl -sS -X POST "https://$REF.supabase.co/functions/v1/vonnisalert" \
+              -H "Content-Type: application/json" -H "x-cron-secret: $CRON_SECRET" \
+              --data '{"action":"preview"}' -o /tmp/preview.json -w "%{http_code}")
+            echo "poging $i: HTTP $code"
+            if [ "$code" = "200" ]; then ok=1; break; fi
+          done
+          if [ -z "$ok" ]; then echo "Antwoord functie (HTTP $code): $(head -c 800 /tmp/preview.json)" > /tmp/status/fout.txt; exit 1; fi
           jq '{subject, total}' /tmp/preview.json
-          grep -q "HTTP 200" /tmp/code.txt
           jq -n --arg ref "$REF" --arg subj "$(jq -r .subject /tmp/preview.json)" --arg at "$(date -u +%FT%TZ)" \
             '{ok:true, stap:"klaar", project:$ref, testonderwerp:$subj, at:$at}' > /tmp/status/status.json
 
