@@ -153,9 +153,10 @@ function renderToday() {
   const week = open.filter((c) => c.verdict_date && diffDays(t, c.verdict_date) >= 0 && diffDays(t, c.verdict_date) < 7);
   const g = greetingFor(t);
   const hour = Number(new Intl.DateTimeFormat("en-GB", { timeZone: "Europe/Brussels", hour: "2-digit", hour12: false }).format(new Date()));
-  const hello = hour < 12 ? g.line : hour < 18 ? "Goeiemiddag Geert! Hier is de stand van zaken." : "Goeieavond Geert! Even kijken wat morgen op de rol staat.";
+  // De begroeting van de dag blijft de hele dag staan; enkel "goedemorgen" past zich aan het uur aan
+  const hello = hour < 12 ? g.line : g.line.replace(/Goe(de|ie)morgen/, hour < 18 ? "Goeiemiddag" : "Goeienavond");
   app.innerHTML = `
-    <section class="morning"><div class="morning-kicker">${hour < 12 ? "☀️ GOEDEMORGEN GEERT" : "👋 DAG GEERT"}</div><div class="morning-text">${esc(hello)}</div>${g.tom ? `<div class="morning-tom">${esc(g.tom)}</div>` : ""}</section>
+    <section class="morning"><div class="morning-kicker">${hour < 12 ? "☀️ GOEDEMORGEN GEERT" : hour < 18 ? "👋 GOEIEMIDDAG GEERT" : "🌙 GOEIENAVOND GEERT"}</div><div class="morning-text">${esc(hello)}</div>${g.tom ? `<div class="morning-tom">${esc(g.tom)}</div>` : ""}</section>
     ${state.settings.rss_enabled ? "" : `<div class="notice">Automatische HBVL-opvolging staat <strong>uit</strong>. Nieuwe zaken voeg je toe met <strong>＋ Dossier</strong> (artikel plakken). Zie ⚙︎ Instellingen.</div>`}
     <div class="cards">
       <a class="card" href="#vandaag"><div class="label">Uitspraak vandaag</div><div class="num">${vandaag.length}</div></a>

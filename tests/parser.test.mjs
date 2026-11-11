@@ -141,12 +141,12 @@ test("Tom-knipoog: af en toe, nooit twee dagen na elkaar", () => {
   let count = 0, prev = false;
   for (let i = 0; i < 365; i++) {
     const g = greetingFor(addDays("2026-01-01", i));
-    const on = Boolean(g.tom);
+    const on = g.isTomDay;
     assert.ok(!(on && prev), "twee dagen na elkaar");
     if (on) count++;
     prev = on;
   }
-  assert.ok(count > 30 && count < 110, `aantal keer: ${count}`);
+  assert.ok(count > 60 && count < 140, `aantal keer: ${count}`);
 });
 
 test("artikel-id uit HBVL-url", () => {

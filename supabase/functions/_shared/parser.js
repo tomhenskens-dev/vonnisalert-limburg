@@ -437,25 +437,45 @@ export function articleIdFromUrl(url) {
 // ---------- begroeting ----------
 
 const MORNING = [
-  "Goedemorgen Geert, heb je goed geslapen en lekker gedroomd? Als jij ondertussen geniet van een lekker ontbijt en een kop koffie, doe ik alvast de eerste taken voor jou.",
-  "Koffie klaar, Geert? Ik heb intussen de rechtbankberichten nagekeken. Hieronder vind je wat vandaag je aandacht verdient.",
-  "Goeiemorgen Geert! Neem rustig je ontbijt; het ochtendoverzicht staat al klaar.",
-  "Tijd voor koffie en de krant, Geert. De aangekondigde vonnissen staan alvast op een rij.",
-  "Goedemorgen Geert! Eerst een slok koffie, dan het nieuws. Ik heb uitgezocht welke uitspraken je best opvolgt.",
+  "Goedemorgen Geert, goed geslapen en lekker gedroomd? Neem alvast een koffie, dan zet ik de samenvatting voor vandaag klaar.",
+  "Goedemorgen Geert! Als jij geniet van een lekker ontbijt en een kop koffie, doe ik alvast de eerste taken voor jou.",
+  "Goeiemorgen Geert, de koffie staat (hopelijk) al te pruttelen. Ik heb de rechtbankagenda al voor je doorgenomen.",
+  "Dag Geert, uitgerust? Schenk jezelf een koffie in, de vonnissen van vandaag staan hieronder netjes op een rij.",
+  "Goedemorgen Geert! Eerst een slok koffie, dan het nieuws. Ik heb al uitgezocht welke uitspraken je best opvolgt.",
+  "Hallo Geert, een nieuwe dag in Hasselt en Tongeren. Neem rustig je ontbijt, het overzicht staat al klaar.",
+  "Goedemorgen Geert, lekker geslapen? Ik heb vannacht de wacht gehouden, zodat jij niets mist.",
+  "Goeiemorgen Geert! Koffie in de ene hand, Vonnisalert in de andere: zo begint een goede werkdag.",
+  "Dag Geert! Terwijl jij wakker wordt, heb ik de aangekondigde uitspraken al nagekeken.",
+  "Goedemorgen Geert, de toga's worden gestreken en de rechters zoeken hun hamer. Hier is wat er vandaag op de rol staat.",
+  "Goeiemorgen Geert, ontbijtje gehad? Dan kunnen we eraan beginnen: hier is je overzicht.",
+  "Goedemorgen Geert! Geen enkel vonnis ontsnapt vandaag aan ons. Neem gerust eerst een koffie.",
 ];
+const WEEKDAY_EXTRA = {
+  1: " Fijne start van de week!",
+  5: " Het is vrijdag, het weekend is in zicht!",
+  6: " Een rustige zaterdag gewenst.",
+  0: " Geniet van je zondag.",
+};
 const TOM = [
-  "Enne… vergeet niet: je vriend Tom heeft dit met plezier voor jou in elkaar gestoken. Af en toe bedanken en trakteren op een frisse Duvel mag dus gerust. 😉",
-  "Kleine vriendelijke herinnering: Tom heeft hier achter de schermen wat werk in gestoken. Een bedankje en ooit eens een Duvel zouden hem waarschijnlijk plezieren. 🍺",
-  "PS: denk ook nog eens aan Tom, de man achter dit handige hulpmiddel. Een bedankje kost niets; een Duvel is natuurlijk nog beter. 😉",
-  "Niet vergeten: Vonnisalert is mee mogelijk gemaakt door Tom. Geef die man af en toe eens een schouderklopje… of een Duvel.",
+  "Goedemorgen Geert, bedenk vandaag eens dat jouw vriend Tom deze tool heeft gemaakt. Trakteer hem volgende keer maar eens op een frisse Duvel! 🍺",
+  "Goeiemorgen Geert! Kleine herinnering: zonder Tom geen Vonnisalert. Een Duvel bij de volgende gelegenheid lijkt me op zijn plaats. 😉",
+  "Goedemorgen Geert, goed geslapen? Tom heeft ervoor gezorgd dat jij geen vonnis meer mist. Een frisse Duvel zou hem enorm plezieren. 🍺",
+  "Dag Geert! Weet je wie je dit overzicht bezorgt? Juist, je vriend Tom. Vergeet hem niet te bedanken, liefst met een Duvel. 😄",
+  "Goedemorgen Geert, terwijl jij je koffie drinkt, denk ik aan Tom: hij maakte deze tool. Hij drinkt zijn Duvel graag fris. 🍺",
+  "Goeiemorgen Geert! Vandaag sponsort Tom je ochtendoverzicht. De rekening? Eén frisse Duvel, te betalen bij de volgende ontmoeting. 😉",
 ];
 
 function hash(s) { let h = 2166136261; for (const ch of s) { h ^= ch.charCodeAt(0); h = Math.imul(h, 16777619) >>> 0; } return h; }
-function tomDay(iso) { return hash(iso + "-tom") % 5 === 0; }
+function tomDay(iso) { return hash(iso + "-tom") % 3 === 0; }
 
-/** Tom-knipoog ongeveer één keer per vijf dagen, nooit twee dagen na elkaar. */
+/**
+ * Ochtendbegroeting: elke dag een andere zin. Ongeveer om de drie dagen een knipoog
+ * naar Tom (de maker), nooit twee dagen na elkaar.
+ * Geeft { line, tom } terug; op een Tom-dag is `line` zelf de Tom-begroeting.
+ */
 export function greetingFor(iso) {
-  const line = MORNING[hash(iso) % MORNING.length];
   const showTom = tomDay(iso) && !tomDay(addDays(iso, -1));
-  return { line, tom: showTom ? TOM[hash(iso + "w") % TOM.length] : null };
+  if (showTom) return { line: TOM[hash(iso + "w") % TOM.length], tom: null, isTomDay: true };
+  const line = MORNING[hash(iso) % MORNING.length] + (WEEKDAY_EXTRA[weekday(iso)] || "");
+  return { line, tom: null, isTomDay: false };
 }
