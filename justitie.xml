@@ -1,0 +1,2936 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="nl" class="no-js   layout--sidebar-mobile">
+
+	<head>
+		<meta charset="utf-8"/>
+<meta http-equiv="x-ua-compatible" content="ie=edge"/>
+
+<!-- meta data -->
+
+<meta name="copyright" content="DPG Media NV"/>
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+<meta name="apple-itunes-app" content="app-id=403025567"/>
+<meta name="twitter:app:id:iphone" content="403025567"/><meta name="twitter:app:id:ipad" content="403025567"/><meta name="twitter:app:id:googleplay" content="be.persgroep.android.news.mobilehln"/><meta name="twitter:card" content="app"/><meta name="twitter:description" content="HLN - Het Laatste Nieuws - Volg het nieuws op de nr1 nieuwssite in België, HLN.be brengt je het allerlaatste nieuws 24/24 en 7/7, uit binnen - en buitenland, evenals dichtbij met nieuws uit je eigen regio. | hln.be"/>
+
+<meta property="fb:app_id" content="572171546166129"/>
+<meta property="og:site_name" content="hln.be"/><meta property="og:locale" content="nl_BE"/><meta property="og:url" content="https://www.hln.be/justitie/rss.xml"/><meta property="og:title" content="Er ging iets fout"/><meta property="og:description" content="HLN - Het Laatste Nieuws - Volg het nieuws op de nr1 nieuwssite in België, HLN.be brengt je het allerlaatste nieuws 24/24 en 7/7, uit binnen - en buitenland, evenals dichtbij met nieuws uit je eigen regio."/><meta property="og:type" content="website"/>
+
+
+
+
+<title>Er ging iets fout | hln.be</title>
+
+<!-- preconnect/dns-prefetch -->
+<link rel="preconnect" href="https://statics.hln.be/"/>
+<link rel="preconnect" href="https://myprivacy-static.dpgmedia.net"/>
+<link rel="preconnect" href="https://advertising-cdn.dpgmedia.cloud"/>
+<link rel="preconnect" href="https://s1.mychannels.video"/>
+<link rel="preconnect" href="https://t.hln.be"/>
+<link rel="preconnect" href="https://images.hln.be"/>
+
+<link rel="dns-prefetch" href="https://statics.hln.be/"/>
+<link rel="dns-prefetch" href="https://myprivacy-static.dpgmedia.net"/>
+<link rel="dns-prefetch" href="https://advertising-cdn.dpgmedia.cloud"/>
+<link rel="dns-prefetch" href="https://s1.mychannels.video"/>
+<link rel="dns-prefetch" href="https://t.hln.be"/>
+<link rel="dns-prefetch" href="https://images.hln.be"/>
+
+<!-- styles -->
+<link href="https://statics.hln.be/css/main-2d28edf7c0.css" rel="stylesheet"/>
+
+<!-- scripts -->
+<script>
+	var dataLayer = [{"user":{"account_id":""},"brand":{"id":"1001","language":"BE-nl"},"page":{"category":"home","categoryid":"HLN_HOME","subcategory":"","subcategoryid":"","type":"home"},"content":{"access":"FREE","navpath":"|Home|"},"web_version":"3.35.0","pageview_id":""}];
+</script>
+
+<!--include App script config-->
+<script type="text/javascript">
+	window.App = {
+		'config': {
+			'advertising': null || {},
+			'authenticationUrls':{"loginUrls":{"default":"https://www.hln.be/login?redirect_url=https://www.hln.be/justitie/rss.xml","menuLogin":"https://www.hln.be/login?dpg_source=hln&dpg_campaign=stdc_hln&dpg_medium=menu&redirect_url=https://www.hln.be/justitie/rss.xml","placeCommentLogin":"https://www.hln.be/login?dpg_source=hln&dpg_campaign=stdc_hln&dpg_medium=comments_plaatsen&redirect_url=https://www.hln.be/justitie/rss.xml"},"logoutUrl":"https://www.hln.be/logout"} || {},
+			'brand': "hln" || '',
+			'breakpoints': {
+				'small': 0,
+				'medium': 430,
+				'large': 600,
+				'xlarge': 768,
+				'xxlarge': 906
+			},
+			'comments': {"active":false} || {},
+			'features': {"trending_teasers":true,"news_letter":true,"migrate_legacy_regio":false,"login":true,"mychannels_v3_player":false,"show_current_section_when_empty_menu":true,"piano":false,"viafoura_active":false,"vwo_ab_testing":true,"receive_cookie_deprecation":false,"mobile_app_deeplinking":true,"reduced_content":true,"region_search":false,"multilevel_navigations":false,"move_regio_menu_up":false,"live_video_button":true} || {},
+			'language': "nl" || 'nl',
+			'staticUrl': 'https://statics.hln.be/' || '',
+			'temptationTrackingIdCookieName': '',
+			'user': {},
+		},
+		'jsdata': {},
+		'main': {},
+		'modules': {},
+		'pageType': 'section',
+		'version': '0.1',
+		'views': {}
+	};
+</script>
+
+
+
+<script>
+	window.App.config.temptationTrackingIdCookieName = 'temptationTrackingId';
+</script>
+
+
+
+<!-- google tag manager -->
+
+  <script>
+    (function () {
+      var pageviewId =
+        window.crypto && crypto.randomUUID ? crypto.randomUUID() : null;
+
+      if (pageviewId) {
+        /*
+         * advert-xandr.js reads the pageview id from window.openDataLayer, so it
+         * must be exposed before gtm.js and advert-xandr.js execute (FREE-5107).
+         * The same id is written to dataLayer[0].pageview_id below: the dataLayer
+         * is initialized by our back-end, so the server-rendered entry is always
+         * the first entry. Legacy browsers without crypto.randomUUID fall back to
+         * the GTM-generated pageview_id (allowed for <1% of page loads).
+         */
+        window.openDataLayer = window.openDataLayer || {};
+        window.openDataLayer.pageViewId = pageviewId;
+      }
+
+      var entry = dataLayer.find(function (item) {
+        return item["pageview_id"] === "" && !!item["user"];
+      });
+
+      if (!entry) {
+        return;
+      }
+
+      if (
+        App.config.user &&
+        App.config.user.id &&
+        typeof entry.user === "object"
+      ) {
+        entry.user.account_id = App.config.user.id;
+      }
+
+      if (pageviewId) {
+        entry.pageview_id = pageviewId;
+      }
+    })();
+  </script>
+
+  
+    <script>
+      (function (w, d, s, l, u, p, i) {
+      	w[l] = w[l] || [];
+      	w[l].push({'gtm.start': new Date().getTime(), event: 'gtm.js'});
+      	var f = d.getElementsByTagName(s)[0], j = d.createElement(s),
+      			dl = l != 'dataLayer' ? '&amp;l=' + l : '';
+      	j.async = true;
+      	j.src = u + p + '?id=' + i + dl;
+      	f.parentNode.insertBefore(j, f);
+      })(window, document, 'script', 'dataLayer', "https:\/\/t.hln.be", "\/gtm.js", "GTM-WCJFQQ");
+    </script>
+  
+
+
+
+<!-- main script -->
+<script defer src="https://statics.hln.be/js/head-8fb7a9a3bb.js"></script>
+
+<!-- inline scripts -->
+<script type="text/javascript">
+	// chartbeat
+	var _sf_startpt = (new Date()).getTime();
+</script>
+
+
+
+
+<script type="application/ld+json">
+	{"@type":"WebSite","publisher":{"@type":"Organization","name":"HLN","logo":{"@type":"ImageObject","width":"600","url":"https:\/\/statics.hln.be\/img\/amp-image.png","height":"60"}},"@context":"http:\/\/schema.org","sameAs":"https:\/\/www.wikidata.org\/wiki\/Q1457499"}
+</script>
+
+<!-- TemptationJS -->
+<script type="text/javascript">
+	window.temptationConfig = {
+		temptationAPIKey: 'z9wq8ns8AS5B4oLYaKIHD7cEryxl0kXU8RyqbPy2',
+		temptationBaseURL: 'https://temptation.hln.be',
+		trackingIdCookieName: 'temptationTrackingId',
+		jwtTokenCookieName: 'dpg-component-at',
+		zone: 'surabaya',
+		contentId: '',
+		contentType: '',
+		freeParams: {},
+		paid: false
+	};
+</script>
+
+
+<!-- includes/fonts/fonts-preload-hln.html -->
+<link rel="preload" href="https://statics.hln.be/fonts/Stag-Medium-Web-8fcbd0fe6b.woff2" as="font" type="font/woff2" crossorigin="anonymous"/>
+<link rel="preload" href="https://statics.hln.be/fonts/StagSans-Medium-Web-1db4220319.woff2" as="font" type="font/woff2" crossorigin="anonymous"/>
+<link rel="preload" href="https://statics.hln.be/fonts/RamaGothicE_SemiBold-webfont-38b3737434.woff" as="font" type="font/woff" crossorigin="anonymous"/>
+<!-- / includes/fonts/fonts-preload-hln.html -->
+
+<!-- extra scripts -->
+<script type="text/javascript">
+if (!window.mychannels) {
+	window.mychannels = {};
+}
+</script>
+
+<script>
+function getCookieValue(name) {
+	var matches = document.cookie.match('(^|;)\\s*' + name + '\\s*=\\s*([^;]+)');
+
+	if (matches && matches.length > 0) {
+		return matches.pop();
+	}
+
+	return '';
+}
+
+var trackingIdCookieValue = getCookieValue('temptationTrackingId');
+
+if (trackingIdCookieValue.length > 0) {
+	window.mychannels.trackingId = trackingIdCookieValue;
+}
+</script>
+
+
+
+
+
+<script src="//embed.mychannels.video/sdk?brand=hln" async></script>
+
+<!-- cmp.html -->
+
+	<script type="text/javascript">
+		window.cmpProperties = {
+			baseUrl: 'https://www.hln.be',
+			cmpCname: 'https://cmp.hln.be',
+			language: 'nl'
+		}
+		window._privacy = window._privacy || [];
+	</script>
+
+	<script async type="text/javascript" src="https://myprivacy-static.dpgmedia.net/consent.js"></script>
+
+<!-- /cmp.html -->
+
+
+<!-- sso-session-detection.html -->
+
+
+	<script type="text/javascript">
+		window.App.config.ssoConfig = {
+			topLevelDomain: 'be',
+			logoutUrl: 'https://www.hln.be/logout',
+			authorizeUrl: () => 'https://www.hln.be/login?redirect_url=https://www.hln.be/justitie/rss.xml',
+			bannerConfig: 'BE-Newspaper',
+			logoUrl: 'https://statics.hln.be/img/brand-logo-24b5235f6d.png',
+			loggedInEmail: '',
+
+			intraSsoEnabled: true,
+			automaticLoginEnabled: true,
+			multipleSessionsPopupEnabled: true,
+			multipleSessionsPopupDismissTimeout: 24
+		}
+	</script>
+
+	<script async
+			onLoad="if(window.ssoDetection && window.App.config.ssoConfig) {window.ssoDetection.trigger(window.App.config.ssoConfig);}"
+			src="https://login-static.dpgmedia.net/ssosession/main.js"
+			type="text/javascript">
+	</script>
+
+<!-- /sso-session-detection.html -->
+
+
+
+	<!-- Start VWO Async SmartCode -->
+	<link rel="preconnect" href="https://dev.visualwebsiteoptimizer.com" />
+	<script type='text/javascript' id='vwoCode'>
+		window._privacy.push([
+				'marketing',
+				// eslint-disable-next-line no-empty-function
+				function() {
+					window._vwo_code || (function() {
+						var account_id='770989',
+							version=2.1,
+							settings_tolerance=2000,
+							hide_element='body',
+							hide_element_style = 'opacity:0 !important;filter:alpha(opacity=0) !important;background:none !important',
+							/* DO NOT EDIT BELOW THIS LINE */
+							f=false,w=window,d=document,v=d.querySelector('#vwoCode'),cK='_vwo_'+account_id+'_settings',cc={};try{var c=JSON.parse(localStorage.getItem('_vwo_'+account_id+'_config'));cc=c&&typeof c==='object'?c:{}}catch(e){}var stT=cc.stT==='session'?w.sessionStorage:w.localStorage;code={use_existing_jquery:function(){return typeof use_existing_jquery!=='undefined'?use_existing_jquery:undefined},library_tolerance:function(){return typeof library_tolerance!=='undefined'?library_tolerance:undefined},settings_tolerance:function(){return cc.sT||settings_tolerance},hide_element_style:function(){return'{'+(cc.hES||hide_element_style)+'}'},hide_element:function(){if(performance.getEntriesByName('first-contentful-paint')[0]){return''}return typeof cc.hE==='string'?cc.hE:hide_element},getVersion:function(){return version},finish:function(e){if(!f){f=true;var t=d.getElementById('_vis_opt_path_hides');if(t)t.parentNode.removeChild(t);if(e)(new Image).src='https://dev.visualwebsiteoptimizer.com/ee.gif?a='+account_id+e}},finished:function(){return f},addScript:function(e){var t=d.createElement('script');t.type='text/javascript';if(e.src){t.src=e.src}else{t.text=e.text}d.getElementsByTagName('head')[0].appendChild(t)},load:function(e,t){var i=this.getSettings(),n=d.createElement('script'),r=this;t=t||{};if(i){n.textContent=i;d.getElementsByTagName('head')[0].appendChild(n);if(!w.VWO||VWO.caE){stT.removeItem(cK);r.load(e)}}else{var o=new XMLHttpRequest;o.open('GET',e,true);o.withCredentials=!t.dSC;o.responseType=t.responseType||'text';o.onload=function(){if(t.onloadCb){return t.onloadCb(o,e)}if(o.status===200){_vwo_code.addScript({text:o.responseText})}else{_vwo_code.finish('&e=loading_failure:'+e)}};o.onerror=function(){if(t.onerrorCb){return t.onerrorCb(e)}_vwo_code.finish('&e=loading_failure:'+e)};o.send()}},getSettings:function(){try{var e=stT.getItem(cK);if(!e){return}e=JSON.parse(e);if(Date.now()>e.e){stT.removeItem(cK);return}return e.s}catch(e){return}},init:function(){if(d.URL.indexOf('__vwo_disable__')>-1)return;var e=this.settings_tolerance();w._vwo_settings_timer=setTimeout(function(){_vwo_code.finish();stT.removeItem(cK)},e);var t;if(this.hide_element()!=='body'){t=d.createElement('style');var i=this.hide_element(),n=i?i+this.hide_element_style():'',r=d.getElementsByTagName('head')[0];t.setAttribute('id','_vis_opt_path_hides');v&&t.setAttribute('nonce',v.nonce);t.setAttribute('type','text/css');if(t.styleSheet)t.styleSheet.cssText=n;else t.appendChild(d.createTextNode(n));r.appendChild(t)}else{t=d.getElementsByTagName('head')[0];var n=d.createElement('div');n.style.cssText='z-index: 2147483647 !important;position: fixed !important;left: 0 !important;top: 0 !important;width: 100% !important;height: 100% !important;background: white !important;';n.setAttribute('id','_vis_opt_path_hides');n.classList.add('_vis_hide_layer');t.parentNode.insertBefore(n,t.nextSibling)}var o='https://dev.visualwebsiteoptimizer.com/j.php?a='+account_id+'&u='+encodeURIComponent(d.URL)+'&vn='+version;if(w.location.search.indexOf('_vwo_xhr')!==-1){this.addScript({src:o})}else{this.load(o+'&x=true')}}};w._vwo_code=code;code.init();})();				}
+			]);
+	</script>
+	<!-- End VWO Async SmartCode -->
+
+
+
+<!-- advertising -->
+<script async src="https://statics.hln.be/js/advertising-dbc43085ca.js"></script>
+
+
+<!-- icons -->
+<link rel="icon" href="https://statics.hln.be/img/favicon-fd9a23b3e3.png" type="image/x-icon"/>
+<link rel="shortcut icon" href="https://statics.hln.be/img/favicon-fd9a23b3e3.png" type="image/x-icon"/>
+
+<link rel="apple-touch-icon-precomposed"
+	sizes="120x120" href="https://statics.hln.be//img/apple-touch-icon-120x120-precomposed.png"/><link rel="apple-touch-icon-precomposed"
+	sizes="152x152" href="https://statics.hln.be//img/apple-touch-icon-152x152-precomposed.png"/><link rel="apple-touch-icon-precomposed"
+	sizes="72x72" href="https://statics.hln.be//img/apple-touch-icon-72-precomposed.png"/>
+
+<link rel="manifest" href="/manifest.json" />
+
+<!-- rsslLink -->
+
+
+<!-- canonicalUrl -->
+<link rel="canonical" href="https://www.hln.be/justitie/rss.xml/"/>
+
+
+
+		<script>
+		addEventListener('DOMContentLoaded', function () {
+			if (!dataLayer) {
+				return;
+			}
+
+			dataLayer.push({
+				'event': 'error',
+				'action': '404',
+				'label': 'https://www.hln.be/justitie/rss.xml/'
+			});
+		});
+	</script>
+	</head>
+
+<body class="theme--home pagetype--section">
+
+<!-- SVG CLIPPING CIRCLE -->
+<!-- htmllint tag-name-lowercase="false"  -->
+<svg aria-hidden="true" width="0" height="0" style="position: absolute;">
+	<clipPath id="circle-32">
+		<circle cx="32" cy="32" r="32"/>
+	</clipPath>
+</svg>
+<!-- includes/header.html -->
+<h1 class="sr-only">Home</h1>
+<header class="page-header" data-type="fixed">
+	<!--navigation for all brands except idb-->
+<!--a11y bar, always hidden-->
+<div class="a11y-bar">
+	<div class="a11y-bar__background"></div>
+	<a class="a11y-bar__skip-link button" href="#page-main-content">ga naar de inhoud</a>
+</div>
+
+
+<button id="mobile-nav-trigger" aria-expanded="false" aria-controls="#mobile-menu" aria-label="menu openen" class="mobile-menu__trigger">
+	<svg aria-hidden="true" width="24" height="24" viewBox="0 0 22 19" class="icons icon-menu" version="1.1" xmlns="http://www.w3.org/2000/svg">
+	<title>Menu</title>
+	<g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+		<rect fill="#FFFFFF" fill-rule="nonzero" x="0" y="16" width="22" height="2.51716247" />
+		<rect fill="#FFFFFF" fill-rule="nonzero" x="0" y="8" width="22" height="2.51716247" />
+		<rect fill="#FFFFFF" fill-rule="nonzero" x="0" y="0" width="22" height="2.51716247" />
+	</g>
+</svg>
+	<svg aria-hidden="true" width="22" height="22" viewBox="0 0 22 22" class="icons icon-close" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+	<title>Sluit</title>
+	<g stroke-width="1" fill-rule="evenodd">
+		<g fill-rule="nonzero">
+			<polygon transform="translate(10.721268, 10.721268) rotate(-45.000000) translate(-10.721268, -10.721268)" points="-2.75490586 9.43428332 24.2365593 9.07439713 24.1974412 12.0082521 -2.79402392 12.3681382"/>
+			<polygon transform="translate(10.721268, 10.721268) rotate(45.000000) translate(-10.721268, -10.721268)" points="-2.79402392 9.07439713 24.1974412 9.43428332 24.2365593 12.3681382 -2.75490586 12.0082521"/>
+		</g>
+	</g>
+</svg>
+</button>
+<div class="page-header__section--secondary" data-nosnippet="true">
+	<div class="container nav--top-container">
+		<nav class="nav nav--secondary" aria-label="snel naar">
+			<ul class="nav__list">
+				<li class="nav__list-item nav__list-item--weather">
+					<a href="https://www.hln.be/integratie/weer/?utm_source=HLN&amp;utm_medium=tekstlink&amp;utm_content=siteheader&amp;utm_campaign=weer" class="nav__list-link" rel="noopener" target="_self" title="Weer" data-gtm="hoofdnavigatie/weer">
+						<svg class="icons" width="20" height="20" viewBox="0 0 20 20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+	<path d="M8.29647 17.8713L9.11237 16.4409C9.25635 16.1827 9.18779 15.8687 8.93411 15.7152C8.67357 15.5617 8.39246 15.6594 8.23477 15.9315L7.41201 17.3689C7.27489 17.6131 7.32974 17.9271 7.59028 18.0806C7.85082 18.2272 8.15249 18.1225 8.29647 17.8713ZM3.1337 17.8783L3.94959 16.4409C4.09358 16.1897 4.02501 15.8687 3.77133 15.7152C3.51079 15.5686 3.22969 15.6594 3.07199 15.9315L2.24924 17.3689C2.11211 17.6201 2.16696 17.9341 2.4275 18.0806C2.68118 18.2342 2.98972 18.1225 3.1337 17.8783ZM10.3465 19.7204L11.1624 18.29C11.3064 18.0318 11.2378 17.7178 10.9841 17.5643C10.7236 17.4108 10.4425 17.5085 10.2848 17.7806L9.4689 19.218C9.32491 19.4692 9.37976 19.7763 9.6403 19.9298C9.90084 20.0763 10.2025 19.9716 10.3465 19.7204ZM5.18372 19.7274L5.99962 18.29C6.1436 18.0388 6.07504 17.7178 5.82136 17.5643C5.56082 17.4178 5.27971 17.5085 5.12202 17.7806L4.29926 19.218C4.16214 19.4692 4.21699 19.7832 4.47753 19.9298C4.73807 20.0833 5.03974 19.9716 5.18372 19.7274Z"/>
+	<path d="M10.5792 14.3463H2.83164C1.15185 14.3463 0 13.2508 0 11.6389C0 10.362 0.767903 9.33626 1.95404 9.01528C2.13916 6.70563 4.03835 4.96118 6.34205 4.96118C8.3578 4.96118 9.62621 6.07065 10.305 7.36154C12.3824 7.35456 13.8977 8.85479 13.8977 10.8923C13.8977 12.8531 12.4647 14.3463 10.5792 14.3463Z"/>
+	<path d="M13.7401 1.93983C13.7401 2.33756 13.411 2.67947 13.0133 2.67947C12.6225 2.67947 12.2934 2.33756 12.2934 1.93983V0.746624C12.2934 0.334934 12.6225 0 13.0133 0C13.411 0 13.7401 0.334934 13.7401 0.746624V1.93983Z"/>
+	<path d="M9.93485 3.98432C9.6606 4.26343 9.19437 4.26343 8.90641 3.97036L8.08366 3.12605C7.80255 2.83996 7.78884 2.36547 8.06994 2.08636C8.35105 1.80027 8.82413 1.79329 9.09839 2.08636L9.928 2.93765C10.2022 3.23769 10.216 3.69823 9.93485 3.98432Z"/>
+	<path d="M17.1339 3.97734C16.8528 4.26343 16.3797 4.27041 16.1055 3.9913C15.8244 3.70521 15.8244 3.22374 16.1055 2.93765L16.942 2.10032C17.2299 1.81423 17.6893 1.80725 17.9704 2.08636C18.2447 2.37245 18.2447 2.84694 17.9635 3.13303L17.1339 3.97734Z"/>
+	<path d="M16.3729 7.11037C16.3729 8.27566 15.797 9.3014 14.9331 9.90846C14.5903 7.91282 12.979 6.48237 10.9633 6.35677C10.7576 5.94508 10.5039 5.60317 10.2022 5.30312C10.737 4.37507 11.8066 3.71218 13.027 3.71218C14.8714 3.71218 16.3729 5.23334 16.3729 7.11037Z"/>
+	<path d="M19.2731 7.84304H18.1007C17.703 7.84304 17.3671 7.52206 17.3671 7.11735C17.3671 6.71264 17.703 6.3777 18.1007 6.3777H19.2731C19.6708 6.3777 19.9999 6.71264 19.9999 7.11735C19.9999 7.52206 19.6708 7.84304 19.2731 7.84304Z"/>
+	<path d="M17.9635 12.1553C17.6824 12.4344 17.2231 12.4344 16.9351 12.1414L16.1055 11.297C15.8312 11.011 15.8175 10.5365 16.0986 10.2574C16.3729 9.97126 16.8528 9.97126 17.1271 10.2574L17.9498 11.1086C18.2309 11.4017 18.2447 11.8692 17.9635 12.1553Z"/>
+</svg>
+
+						<span class="nav__list-label">Weer</span>
+						<span class="nav__list-label-long">Weer voor 10 dagen</span>
+					</a>
+				</li>
+				<li class="nav__list-item nav__list-item--tv-gids">
+					<a href="https://www.hln.be/tv-gids" class="nav__list-link" rel="noopener" target="_self" title="TV-Gids" data-gtm="hoofdnavigatie/tv-gids">
+						<svg class="icons" width="20" height="20" viewBox="0 0 20 20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+	<path d="M17.1241 5.60873H11.9716L13.8012 2.52787C13.9599 2.26077 13.8775 1.91226 13.6172 1.74948C13.357 1.58663 13.0173 1.67125 12.8587 1.93835L10.6791 5.60873H9.32088L7.14123 1.93835C6.98262 1.67132 6.64303 1.58674 6.38277 1.74948C6.1225 1.9123 6.04009 2.26077 6.19873 2.52787L8.02831 5.60873H2.87578C2.20905 5.60873 1.66663 6.16541 1.66663 6.84963V17.0924C1.66663 17.7766 2.20905 18.3333 2.87578 18.3333H17.1241C17.7909 18.3333 18.3333 17.7766 18.3333 17.0924V6.84963C18.3333 6.16541 17.7908 5.60873 17.1241 5.60873ZM13.3545 15.6037C13.3545 15.9763 13.0602 16.2783 12.6972 16.2783H4.28575C3.92277 16.2783 3.62851 15.9763 3.62851 15.6037V8.33833C3.62851 7.96581 3.92277 7.66378 4.28579 7.66378H12.6972C13.0602 7.66378 13.3545 7.96581 13.3545 8.33833V15.6037ZM15.787 15.3882C15.1581 15.3882 14.6464 14.8631 14.6464 14.2177C14.6464 13.5722 15.1581 13.0471 15.787 13.0471C16.4159 13.0471 16.9275 13.5722 16.9275 14.2177C16.9275 14.8631 16.4159 15.3882 15.787 15.3882ZM15.787 10.8949C15.1581 10.8949 14.6464 10.3698 14.6464 9.72441C14.6464 9.07896 15.1581 8.55389 15.787 8.55389C16.4159 8.55389 16.9275 9.07896 16.9275 9.72441C16.9275 10.3698 16.4159 10.8949 15.787 10.8949Z"/>
+</svg>
+
+						<span class="nav__list-label">TV-Gids</span>
+						<span class="nav__list-label-long">TV-Gids</span>
+					</a>
+				</li>
+				<li class="nav__list-item nav__list-item--4040">
+					<a href="https://www.hln.be/4040" class="nav__list-link" rel="noopener" target="_self" title="Meld Nieuws" data-gtm="hoofdnavigatie/4040">
+						<svg class="icons" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+	<path fill-rule="evenodd" clip-rule="evenodd" d="M0.750001 6.00002H1.92695C3.40025 3.03226 6.46185 0.992432 9.9999 0.992432C13.5379 0.992432 16.5995 3.03226 18.0728 6.00002H19.25C19.6642 6.00002 20 6.33581 20 6.75002V13.25C20 13.6642 19.6642 14 19.25 14H18.0728C16.5995 16.9678 13.5379 19.0076 9.9999 19.0076C6.46188 19.0076 3.40028 16.9678 1.92698 14H0.750002C0.335787 14 0 13.6642 0 13.25V6.75002C0 6.33581 0.335787 6.00002 0.750001 6.00002ZM4.95737 6.00002H2.52277C3.95164 3.33462 6.76407 1.52184 9.9999 1.52184C13.2357 1.52184 16.0482 3.33462 17.477 6.00002H15.0427C13.8636 4.51559 12.043 3.56373 10 3.56373C7.95705 3.56373 6.1364 4.51559 4.95737 6.00002ZM9.9999 18.4781C13.2357 18.4781 16.0481 16.6654 17.477 14H15.0424C13.8634 15.4843 12.0428 16.436 10 16.436C7.95719 16.436 6.13666 15.4843 4.95762 14H2.5228C3.95168 16.6654 6.76409 18.4781 9.9999 18.4781ZM10 4.09314C11.7193 4.09314 13.267 4.82767 14.3464 6.00002H5.65364C6.73308 4.82767 8.28077 4.09314 10 4.09314ZM14.3461 14H5.65393C6.73336 15.1722 8.28092 15.9066 10 15.9066C11.7191 15.9066 13.2667 15.1722 14.3461 14ZM3.14366 11.6873H3.42778C3.51425 11.6873 3.60072 11.5761 3.60072 11.4958V11.1685H1.79719V10.4335L3.65013 7.87641H4.54572V10.5632H5.00278V11.1685H4.54572V11.4958C4.54572 11.5761 4.62602 11.6873 4.71867 11.6873H5.00278V12.2H3.14366V11.6873ZM3.57602 8.86465L2.36543 10.5385V10.5632H3.60072V8.86465H3.57602ZM9.54259 10.0382C9.54259 11.5391 8.65936 12.2494 7.67112 12.2494C6.68288 12.2494 5.79965 11.5391 5.79965 10.0382C5.79965 8.5373 6.68288 7.827 7.67112 7.827C8.65936 7.827 9.54259 8.5373 9.54259 10.0382ZM6.78788 10.0567C6.78788 11.2179 7.11524 11.6317 7.67112 11.6317C8.22083 11.6317 8.55436 11.2179 8.55436 10.0567C8.55436 8.88936 8.22083 8.46936 7.67112 8.46936C7.11524 8.46936 6.78788 8.88936 6.78788 10.0567ZM11.6834 11.6873H11.9675C12.054 11.6873 12.1404 11.5761 12.1404 11.4958V11.1685H10.3369V10.4335L12.1898 7.87641H13.0854V10.5632H13.5425V11.1685H13.0854V11.4958C13.0854 11.5761 13.1657 11.6873 13.2584 11.6873H13.5425V12.2H11.6834V11.6873ZM12.1157 8.86465L10.9051 10.5385V10.5632H12.1404V8.86465H12.1157ZM18.0823 10.0382C18.0823 11.5391 17.1991 12.2494 16.2108 12.2494C15.2226 12.2494 14.3394 11.5391 14.3394 10.0382C14.3394 8.5373 15.2226 7.827 16.2108 7.827C17.1991 7.827 18.0823 8.5373 18.0823 10.0382ZM15.3276 10.0567C15.3276 11.2179 15.6549 11.6317 16.2108 11.6317C16.7605 11.6317 17.0941 11.2179 17.0941 10.0567C17.0941 8.88936 16.7605 8.46936 16.2108 8.46936C15.6549 8.46936 15.3276 8.88936 15.3276 10.0567Z"/>
+</svg>
+
+						<span class="nav__list-label">Meld Nieuws</span>
+						<span class="nav__list-label-long"></span>
+					</a>
+				</li>
+				<li class="nav__list-item nav__list-item--digitale-krant">
+					<a href="https://krant.hln.be" class="nav__list-link" rel="noopener" target="_blank" title="Digitale Krant" data-gtm="hoofdnavigatie/digitale-krant">
+						<svg width="20" height="20"  class="icons" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+	<path fill-rule="evenodd" clip-rule="evenodd" d="M18 5.51282C18 5.11694 17.6752 4.79487 17.276 4.79487H16.19L16.19 14.3199C16.19 14.5105 16.0355 14.6649 15.845 14.6649C15.6545 14.6649 15.5 14.5105 15.5 14.3199L15.5 4.79487V3.71795C15.5 3.32207 15.1592 3 14.76 3H2.72398C2.32478 3 2 3.32207 2 3.71795V15.2051C2 16.1948 2.81195 17 3.80995 17H16.19C17.1881 17 18 16.1948 18 15.2051V5.51282ZM4.18011 13.9734H7.83622C8.03614 13.9734 8.19821 14.1281 8.19821 14.3189C8.19821 14.5098 8.03614 14.6645 7.83622 14.6645H4.18011C3.98018 14.6645 3.81812 14.5098 3.81812 14.3189C3.81812 14.1281 3.98018 13.9734 4.18011 13.9734ZM13.3025 13.9734H9.64635C9.44643 13.9734 9.28436 14.1281 9.28436 14.3189C9.28436 14.5098 9.44643 14.6645 9.64635 14.6645H13.3025C13.5024 14.6645 13.6645 14.5098 13.6645 14.3189C13.6645 14.1281 13.5024 13.9734 13.3025 13.9734ZM4.18011 5.33521H13.3023C13.5022 5.33521 13.6643 5.4899 13.6643 5.68074C13.6643 5.87158 13.5022 6.02628 13.3023 6.02628H4.18011C3.98018 6.02628 3.81812 5.87158 3.81812 5.68074C3.81812 5.4899 3.98018 5.33521 4.18011 5.33521ZM13.3025 7.06287H9.64635C9.44643 7.06287 9.28436 7.21756 9.28436 7.4084C9.28436 7.59924 9.44643 7.75394 9.64635 7.75394H13.3025C13.5024 7.75394 13.6645 7.59924 13.6645 7.4084C13.6645 7.21756 13.5024 7.06287 13.3025 7.06287ZM9.64635 8.79059H13.3025C13.5024 8.79059 13.6645 8.94529 13.6645 9.13613C13.6645 9.32696 13.5024 9.48166 13.3025 9.48166H9.64635C9.44643 9.48166 9.28436 9.32696 9.28436 9.13613C9.28436 8.94529 9.44643 8.79059 9.64635 8.79059ZM13.3025 10.5182H9.64635C9.44643 10.5182 9.28436 10.6729 9.28436 10.8638C9.28436 11.0546 9.44643 11.2093 9.64635 11.2093H13.3025C13.5024 11.2093 13.6645 11.0546 13.6645 10.8638C13.6645 10.6729 13.5024 10.5182 13.3025 10.5182ZM9.64635 12.2457H13.3025C13.5024 12.2457 13.6645 12.4004 13.6645 12.5913C13.6645 12.7821 13.5024 12.9368 13.3025 12.9368H9.64635C9.44643 12.9368 9.28436 12.7821 9.28436 12.5913C9.28436 12.4004 9.44643 12.2457 9.64635 12.2457ZM7.83622 12.2457H4.18011C3.98018 12.2457 3.81812 12.4004 3.81812 12.5913C3.81812 12.7821 3.98018 12.9368 4.18011 12.9368H7.83622C8.03614 12.9368 8.19821 12.7821 8.19821 12.5913C8.19821 12.4004 8.03614 12.2457 7.83622 12.2457ZM4.18011 7.06287H7.83622C8.03614 7.06287 8.19821 7.21756 8.19821 7.4084V10.8983C8.19821 11.0892 8.03614 11.2439 7.83622 11.2439H4.18011C3.98018 11.2439 3.81812 11.0892 3.81812 10.8983V7.4084C3.81812 7.21756 3.98018 7.06287 4.18011 7.06287Z"/>
+</svg>
+
+						<span class="nav__list-label">Digitale Krant</span>
+						<span class="nav__list-label-long">Digitale Krant</span>
+					</a>
+				</li>
+				<li class="nav__list-item nav__list-item--shop">
+					<a href="https://shop.hln.be/?utm_source=hln&amp;utm_medium=referral&amp;utm_content=link-topnavigatie&amp;_ga=2.59370026.668906282.1584347945-115901266.1583739021" class="nav__list-link" rel="noopener" target="_blank" title="Shop" data-gtm="hoofdnavigatie/shop">
+						<svg width="20" height="20" class="icons" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+	<path d="M8.92387,16.3804 C8.92387,17.1729 8.28151,17.8153 7.4891,17.8153 C6.6967,17.8153 6.05432,17.1729 6.05432,16.3804 C6.05432,15.69135 6.54018345,15.1156766 7.1880438,14.9773386 L6.77174,14.9782 C6.13722,14.9782 5.59821,14.7505 5.21981,14.3532 C4.85079,13.9657 4.67663,13.4611 4.67663,12.9728 C4.67663,12.4846 4.85079,11.98 5.21981,11.5925 C5.39979,11.4035 5.61613,11.2528 5.86179,11.1469 L4.30261,4.71214 L4.02293,3.5 L1.75,3.5 C1.33579,3.5 1,3.16421 1,2.75 C1,2.33579 1.33579,2 1.75,2 L4.61957,2 C4.96881,2 5.27183,2.24106 5.35036,2.58136 L5.63008,3.79348 L18.25,3.79348 C18.4871,3.79348 18.7102,3.90557 18.8517,4.09578 C18.9933,4.28599 19.0365,4.53191 18.9684,4.75899 L16.8162,11.9329 C16.7211,12.2502 16.429,12.4674 16.0978,12.4674 L6.77174,12.4674 C6.50952,12.4674 6.37598,12.5535 6.30601,12.627 C6.22666,12.7103 6.17663,12.8334 6.17663,12.9728 C6.17663,13.1123 6.22666,13.2354 6.30601,13.3187 C6.37598,13.3921 6.50952,13.4782 6.77174,13.4782 L16.0978,13.4782 C16.512,13.4782 16.8478,13.8141 16.8478,14.2282 C16.8478,14.6425 16.512,14.9782 16.0978,14.9782 L15.6814913,14.9773386 C16.3294214,15.1156766 16.8153,15.69135 16.8153,16.3804 C16.8153,17.1729 16.1729,17.8153 15.3804,17.8153 C14.5881,17.8153 13.9457,17.1729 13.9457,16.3804 C13.9457,15.69135 14.4315786,15.1156766 15.0793771,14.9773386 L7.79015869,14.9773386 C8.43802168,15.1156766 8.92387,15.69135 8.92387,16.3804 Z" />
+</svg>
+						<span class="nav__list-label">Shop</span>
+						<span class="nav__list-label-long">Shop</span>
+					</a>
+				</li>
+				<li class="nav__list-item nav__list-item--over-ons">
+					<a href="https://valley.hln.be/custom-build/hartslag-van-vlaanderen/" class="nav__list-link" rel="noopener" target="_blank" title="Over Ons" data-gtm="hoofdnavigatie/over-ons">
+						<!-- htmllint tag-name-lowercase="false"  -->
+<svg width="20" height="20"  class="icons" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+	<g clip-path="url(#clip0_9270_2047)">
+		<path d="M16.83 2.00003H3.17C2.52383 2.00003 2 2.52386 2 3.17003V16.83C2 17.4762 2.52383 18 3.17 18H16.83C17.4762 18 18 17.4762 18 16.83V3.17003C18 2.52386 17.4762 2.00003 16.83 2.00003Z"/>
+		<path d="M10.3481 5.57063V6.08824L10.3152 6.10527C10.0716 6.2308 9.98938 6.32896 9.98938 6.49456V13.6934H10.4915C10.7408 13.6934 10.972 13.549 11.1599 13.2757C11.2466 13.1639 11.329 12.9198 11.3771 12.6355C11.4175 12.3614 11.7121 12.2636 11.9745 12.2636H12.0345V14.4443H8.27864V13.8501L8.31475 13.8341C8.34406 13.8212 8.37245 13.8091 8.39962 13.7974C8.6143 13.7056 8.7092 13.6592 8.7092 13.5204V6.49456C8.7092 6.32581 8.59102 6.2308 8.35822 6.10463L8.3264 6.08736V5.57063H10.3481ZM13.8496 5.57063L13.8641 5.61069L15.5656 10.3293V6.49456C15.5656 6.30028 15.4583 6.2178 15.2181 6.10632L15.1829 6.09005V5.57063H16.6664V6.09005L16.6312 6.10632C16.404 6.2116 16.3673 6.30698 16.3673 6.49456V14.4443H15.7988L15.7843 14.4039L13.6883 8.50677V13.5078C13.6883 13.708 13.7232 13.8078 13.9403 13.9084L13.9754 13.9247V14.4443H12.4441V13.9255L12.4781 13.9089C12.723 13.7895 12.8747 13.6807 12.8747 13.5078V6.49456C12.8747 6.30738 12.7431 6.23436 12.5104 6.12156L12.4441 6.08917V5.57063H13.8496ZM7.86627 5.55557V5.99917L7.83336 6.0162C7.69958 6.08503 7.54339 6.25418 7.54339 6.504V13.4805C7.54339 13.6919 7.60525 13.7817 7.81914 13.8809L7.85429 13.8972V14.4414H5.85661V13.8972L5.89176 13.8809C6.13264 13.7693 6.2632 13.6723 6.2632 13.4805V10.5099C6.2632 10.3262 6.1292 10.1766 5.96446 10.1766L5.27174 10.1888C5.09123 10.1888 4.98395 10.3583 4.98395 10.5222V13.4928C4.98395 13.7107 5.07357 13.8453 5.28366 13.9427L5.31881 13.959V14.4414H3.33301V13.8972L3.36821 13.8809C3.61907 13.7646 3.70371 13.6636 3.70371 13.4805V6.504C3.70371 6.33007 3.61907 6.2322 3.36821 6.11588L3.33301 6.0996V5.56781H5.28297V6.0257L5.24782 6.04197C5.01857 6.1482 4.98395 6.2186 4.98395 6.40549V9.41343H6.2632V6.49176C6.2632 6.31018 6.13264 6.21516 5.89176 6.10351L5.85661 6.08724V5.55557H7.86627Z" fill="white"/>
+	</g>
+	<defs>
+		<clipPath id="clip0_9270_2047">
+			<rect x="2" y="2.00003" width="16" height="16" rx="1.77778" fill="white"/>
+		</clipPath>
+	</defs>
+</svg>
+
+						<span class="nav__list-label">Over Ons</span>
+						<span class="nav__list-label-long">Over Ons</span>
+					</a>
+				</li>
+				<li class="nav__list-item nav__list-item--aanvullingen-en-correcties">
+					<a href="https://valley.hln.be/custom-build/hartslag-van-vlaanderen/aanvullingen/" class="nav__list-link" rel="noopener" target="_blank" title="Aanvullingen en correcties" data-gtm="hoofdnavigatie/aanvullingen-en-correcties">
+						<!-- htmllint tag-name-lowercase="false"  -->
+<svg width="20" height="20"  class="icons" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+	<path d="M2 3C2 2.44772 2.44772 2 3 2H13C13.5523 2 14 2.44772 14 3V17C14 17.5523 13.5523 18 13 18H3C2.44772 18 2 17.5523 2 17V3Z"/>
+	<path d="M4.5 5.625C4.5 5.41789 4.66789 5.25 4.875 5.25H11.125C11.3321 5.25 11.5 5.41789 11.5 5.625C11.5 5.83211 11.3321 6 11.125 6H4.875C4.66789 6 4.5 5.83211 4.5 5.625Z" fill="white"/>
+	<path d="M4.5 7.375C4.5 7.16789 4.66789 7 4.875 7H11.125C11.3321 7 11.5 7.16789 11.5 7.375C11.5 7.58211 11.3321 7.75 11.125 7.75H4.875C4.66789 7.75 4.5 7.58211 4.5 7.375Z" fill="white"/>
+	<path d="M4.5 9.125C4.5 8.91789 4.66789 8.75 4.875 8.75H9.125C9.33211 8.75 9.5 8.91789 9.5 9.125C9.5 9.33211 9.33211 9.5 9.125 9.5H4.875C4.66789 9.5 4.5 9.33211 4.5 9.125Z" fill="white"/>
+	<path d="M4.5 10.875C4.5 10.6679 4.66789 10.5 4.875 10.5H8.125C8.33211 10.5 8.5 10.6679 8.5 10.875C8.5 11.0821 8.33211 11.25 8.125 11.25H4.875C4.66789 11.25 4.5 11.0821 4.5 10.875Z" fill="white"/>
+	<path d="M4.5 12.625C4.5 12.4179 4.66789 12.25 4.875 12.25H7.125C7.33211 12.25 7.5 12.4179 7.5 12.625C7.5 12.8321 7.33211 13 7.125 13H4.875C4.66789 13 4.5 12.8321 4.5 12.625Z" fill="white"/>
+	<path d="M4.5 14.375C4.5 14.1679 4.66789 14 4.875 14H7.125C7.33211 14 7.5 14.1679 7.5 14.375C7.5 14.5821 7.33211 14.75 7.125 14.75H4.875C4.66789 14.75 4.5 14.5821 4.5 14.375Z" fill="white"/>
+	<path d="M19 14C19 16.7614 16.7614 19 14 19C11.2386 19 9 16.7614 9 14C9 11.2386 11.2386 9 14 9C16.7614 9 19 11.2386 19 14Z" fill="white"/>
+	<path fill-rule="evenodd" clip-rule="evenodd" d="M14 10C16.2091 10 18 11.7909 18 14C18 16.2091 16.2091 18 14 18C11.7909 18 10 16.2091 10 14C10 11.7909 11.7909 10 14 10ZM15.8076 12.1025C15.5959 11.929 15.3014 11.9819 15.1484 12.2188L13.5898 14.6514L12.8018 13.7568C12.6194 13.55 12.3191 13.55 12.1367 13.7568C11.9544 13.9636 11.9545 14.3039 12.1367 14.5107L13.3135 15.8457C13.4105 15.9556 13.5455 16.009 13.6836 15.999C13.8218 15.989 13.946 15.909 14.0283 15.7822L15.9102 12.8457C16.0628 12.609 16.016 12.2761 15.8076 12.1025Z"/>
+</svg>
+
+						<span class="nav__list-label">Aanvullingen en correcties</span>
+						<span class="nav__list-label-long">Aanvullingen en correcties</span>
+					</a>
+				</li>
+			</ul>
+		</nav>
+		<nav class="nav nav--tertiary" aria-label="diensten">
+			<ul class="nav__list">
+				<li class="nav__list-item">
+					<a href="https://mijnomgeving.hln.be" class="nav__list-link"
+	target="_blank"
+	data-gtm="hoofdnavigatie/sub/klantenservice"
+	rel="noreferrer">
+	<span class="nav__list-label">Klantenservice</span>
+</a>
+				</li>
+			</ul>
+		</nav>
+	</div>
+</div>
+<div class="page-header__section--spacer" data-nosnippet="true">
+	<div class="container">
+		<div class="brand-title">
+			<a href="https://www.hln.be/" data-gtm="hoofdnavigatie/logo" class="brand-title__link"></a>
+		</div>
+	</div>
+</div>
+<div class="page-header__section--primary fjs-hide-subnav" data-nosnippet="true">
+	<div class="primary-nav">
+		<div class="container">
+			<div class="identity">
+				<a href="https://www.hln.be/" aria-label="homepage" data-gtm="hoofdnavigatie/logo" class="identity__link">
+					<div class="identity__image is-desktop">
+						<div class="desktop">
+							<svg class="brand-logo" aria-hidden="true" viewBox="0 0 100 100" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+	<title>HLN logo</title>
+	<rect class="has-color-on-default has-white-on-reversed" fill="#EE0000" fill-rule="nonzero" x="0" y="0" width="100" height="100" rx="7.3125" />
+	<path class="has-white-on-default has-color-on-reversed" d="M52.1773,22.3163 L52.1773,25.5514 L51.9716,25.6578 C50.4489,26.4424 49.9353,27.0559 49.9353,28.0909 L49.9353,73.0838 L53.0733,73.0838 C54.6318,73.0838 56.0765,72.1808 57.2509,70.4729 C57.7927,69.7744 58.3077,68.2483 58.6084,66.4715 C58.861,64.7584 60.7024,64.1474 62.3423,64.1474 L62.7175,64.1474 L62.7175,77.7765 L39.2432,77.7765 L39.2432,74.0627 L39.4689,73.9628 C39.6521,73.8822 39.8295,73.8068 39.9993,73.7335 C41.3411,73.1597 41.9342,72.8698 41.9342,72.0026 L41.9342,28.0909 C41.9342,27.0362 41.1956,26.4424 39.7406,25.6538 L39.5417,25.5459 L39.5417,22.3163 L52.1773,22.3163 Z M74.0615,22.3163 L74.1522,22.5667 L84.7866,52.0578 L84.7866,28.0909 C84.7866,26.8766 84.1161,26.3611 82.6145,25.6644 L82.3948,25.5627 L82.3948,22.3163 L91.6664,22.3163 L91.6664,25.5627 L91.4467,25.6644 C90.0268,26.3224 89.7975,26.9185 89.7975,28.0909 L89.7975,77.7765 L86.2442,77.7765 L86.1538,77.5242 L73.0534,40.6672 L73.0534,71.9238 C73.0534,73.1746 73.272,73.7987 74.6285,74.4272 L74.8481,74.529 L74.8481,77.7765 L65.2773,77.7765 L65.2773,74.5341 L65.4899,74.4302 C67.0205,73.6843 67.9684,73.004 67.9684,71.9238 L67.9684,28.0909 C67.9684,26.921 67.1459,26.4646 65.6916,25.7596 L65.2773,25.5572 L65.2773,22.3163 L74.0615,22.3163 Z M36.6659,22.2222 L36.6659,24.9947 L36.4602,25.1011 C35.6241,25.5313 34.6479,26.5885 34.6479,28.1499 L34.6479,71.7531 C34.6479,73.0743 35.0345,73.6357 36.3713,74.2555 L36.591,74.3572 L36.591,77.7589 L24.1055,77.7589 L24.1055,74.3572 L24.3252,74.2555 C25.8307,73.5577 26.6467,72.9518 26.6467,71.7531 L26.6467,53.1868 C26.6467,52.0385 25.8092,51.1037 24.7796,51.1037 L20.4501,51.1799 C19.3219,51.1799 18.6514,52.2393 18.6514,53.2634 L18.6514,71.8297 C18.6514,73.1917 19.2115,74.0327 20.5246,74.6416 L20.7443,74.7433 L20.7443,77.7589 L8.33301,77.7589 L8.33301,74.3572 L8.55305,74.2555 C10.1209,73.5286 10.6499,72.8971 10.6499,71.7531 L10.6499,28.1499 C10.6499,27.0628 10.1209,26.4511 8.55305,25.7241 L8.33301,25.6224 L8.33301,22.2987 L20.5203,22.2987 L20.5203,25.1605 L20.3006,25.2622 C18.8678,25.9261 18.6514,26.3661 18.6514,27.5342 L18.6514,46.3338 L26.6467,46.3338 L26.6467,28.0734 C26.6467,26.9385 25.8307,26.3446 24.3252,25.6468 L24.1055,25.5451 L24.1055,22.2222 L36.6659,22.2222 Z" fill="#FFFFFF" />
+</svg>
+						</div>
+					</div>
+					<div class="identity__title"></div>
+				</a>
+			</div>
+			<div class="nav primary-nav__wrapper">
+				<a class="identity__image is-mobile" aria-label="homepage" href="https://www.hln.be/" data-gtm="hoofdnavigatie/logo">
+						<div class="header__mobile-logo">
+							<svg class="brand-logo" aria-hidden="true" width="50" height="50" viewBox="0 0 100 100" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+	<title>HLN logo</title>
+	<rect class="has-color-on-default has-white-on-reversed" fill="#EE0000" fill-rule="nonzero" x="0" y="0" width="100" height="100" rx="7.3125" />
+	<path class="has-white-on-default has-color-on-reversed" d="M52.1773,22.3163 L52.1773,25.5514 L51.9716,25.6578 C50.4489,26.4424 49.9353,27.0559 49.9353,28.0909 L49.9353,73.0838 L53.0733,73.0838 C54.6318,73.0838 56.0765,72.1808 57.2509,70.4729 C57.7927,69.7744 58.3077,68.2483 58.6084,66.4715 C58.861,64.7584 60.7024,64.1474 62.3423,64.1474 L62.7175,64.1474 L62.7175,77.7765 L39.2432,77.7765 L39.2432,74.0627 L39.4689,73.9628 C39.6521,73.8822 39.8295,73.8068 39.9993,73.7335 C41.3411,73.1597 41.9342,72.8698 41.9342,72.0026 L41.9342,28.0909 C41.9342,27.0362 41.1956,26.4424 39.7406,25.6538 L39.5417,25.5459 L39.5417,22.3163 L52.1773,22.3163 Z M74.0615,22.3163 L74.1522,22.5667 L84.7866,52.0578 L84.7866,28.0909 C84.7866,26.8766 84.1161,26.3611 82.6145,25.6644 L82.3948,25.5627 L82.3948,22.3163 L91.6664,22.3163 L91.6664,25.5627 L91.4467,25.6644 C90.0268,26.3224 89.7975,26.9185 89.7975,28.0909 L89.7975,77.7765 L86.2442,77.7765 L86.1538,77.5242 L73.0534,40.6672 L73.0534,71.9238 C73.0534,73.1746 73.272,73.7987 74.6285,74.4272 L74.8481,74.529 L74.8481,77.7765 L65.2773,77.7765 L65.2773,74.5341 L65.4899,74.4302 C67.0205,73.6843 67.9684,73.004 67.9684,71.9238 L67.9684,28.0909 C67.9684,26.921 67.1459,26.4646 65.6916,25.7596 L65.2773,25.5572 L65.2773,22.3163 L74.0615,22.3163 Z M36.6659,22.2222 L36.6659,24.9947 L36.4602,25.1011 C35.6241,25.5313 34.6479,26.5885 34.6479,28.1499 L34.6479,71.7531 C34.6479,73.0743 35.0345,73.6357 36.3713,74.2555 L36.591,74.3572 L36.591,77.7589 L24.1055,77.7589 L24.1055,74.3572 L24.3252,74.2555 C25.8307,73.5577 26.6467,72.9518 26.6467,71.7531 L26.6467,53.1868 C26.6467,52.0385 25.8092,51.1037 24.7796,51.1037 L20.4501,51.1799 C19.3219,51.1799 18.6514,52.2393 18.6514,53.2634 L18.6514,71.8297 C18.6514,73.1917 19.2115,74.0327 20.5246,74.6416 L20.7443,74.7433 L20.7443,77.7589 L8.33301,77.7589 L8.33301,74.3572 L8.55305,74.2555 C10.1209,73.5286 10.6499,72.8971 10.6499,71.7531 L10.6499,28.1499 C10.6499,27.0628 10.1209,26.4511 8.55305,25.7241 L8.33301,25.6224 L8.33301,22.2987 L20.5203,22.2987 L20.5203,25.1605 L20.3006,25.2622 C18.8678,25.9261 18.6514,26.3661 18.6514,27.5342 L18.6514,46.3338 L26.6467,46.3338 L26.6467,28.0734 C26.6467,26.9385 25.8307,26.3446 24.3252,25.6468 L24.1055,25.5451 L24.1055,22.2222 L36.6659,22.2222 Z" fill="#FFFFFF" />
+</svg>
+						</div>
+				</a>
+				
+				<nav class="primary-nav__listholder" aria-label="secties">
+					<ul class="primary-nav__list">
+						<li class="primary-nav__list-item  ">
+							<a href="https://www.hln.be/nieuws/" target="_self" class="primary-nav__list-link"
+									data-gtm="hoofdnavigatie/Nieuws">
+								
+								<span class="primary-nav__list-text">Nieuws</span>
+							</a>
+						</li>
+						<li class="primary-nav__list-item  ">
+							<a href="https://www.hln.be/sport/" target="_self" class="primary-nav__list-link"
+									data-gtm="hoofdnavigatie/Sport">
+								
+								<span class="primary-nav__list-text">Sport</span>
+							</a>
+						</li>
+						<li class="primary-nav__list-item  ">
+							<a href="https://www.hln.be/showbizz/" target="_self" class="primary-nav__list-link"
+									data-gtm="hoofdnavigatie/Showbizz">
+								
+								<span class="primary-nav__list-text">Showbizz</span>
+							</a>
+						</li>
+						<li class="primary-nav__list-item  ">
+							<a href="https://www.hln.be/nina/" target="_self" class="primary-nav__list-link"
+									data-gtm="hoofdnavigatie/Nina">
+								
+								<span class="primary-nav__list-text">Nina</span>
+							</a>
+						</li>
+						<li class="primary-nav__list-item  ">
+							<a href="https://www.hln.be/regio/" target="_self" class="primary-nav__list-link"
+									data-gtm="hoofdnavigatie/Regio">
+								
+								<span class="primary-nav__list-text">Regio</span>
+							</a>
+						</li>
+						<li class="primary-nav__list-item  ">
+							<a href="https://www.hln.be/videos" target="_self" class="primary-nav__list-link"
+									data-gtm="hoofdnavigatie/Kijk">
+								
+								<span class="primary-nav__list-text">Kijk</span>
+							</a>
+						</li>
+						<li class="primary-nav__list-item  ">
+							<a href="https://www.hln.be/fun" target="_self" class="primary-nav__list-link"
+									data-gtm="hoofdnavigatie/Puzzel">
+								
+								<span class="primary-nav__list-text">Puzzel</span>
+							</a>
+						</li>
+						<li class="primary-nav__list-item  ">
+							<a href="https://www.hln.be/podcasts" target="_self" class="primary-nav__list-link"
+									data-gtm="hoofdnavigatie/Podcast">
+								
+								<span class="primary-nav__list-text">Podcast</span>
+							</a>
+						</li>
+					</ul>
+					<div class="primary-nav__list-item--search">
+						<a class="primary-nav__list-link"
+								data-gtm="hoofdnavigatie/zoeken"
+								aria-label="Zoeken"
+								href="https://www.hln.be/zoeken/">
+								<span class="primary-nav__list-text" aria-hidden="true">
+									<svg aria-hidden="true" class="icons icon-search" width="22" height="26" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+	<path d="M9.37478 1.32619C5.12921 1.32619 1.67415 4.78125 1.67415 9.02681C1.67415 13.2724 5.12921 16.7274 9.37478 16.7274C10.9133 16.7274 12.3808 16.2804 13.6502 15.4274L13.7854 15.3344L14.1717 15.063L19.3994 20.5001C19.5005 20.6051 19.6329 20.6615 19.7784 20.6615C19.9158 20.6615 20.044 20.6099 20.1425 20.515C20.339 20.326 20.3564 20.019 20.1904 19.8096L20.1572 19.7715L14.95 14.3558L15.2689 13.9768C16.4377 12.5873 17.0754 10.8417 17.0754 9.02681C17.0754 4.78125 13.6203 1.32619 9.37478 1.32619ZM9.37478 2.37759C13.0417 2.37759 16.024 5.35987 16.024 9.02681C16.024 12.6938 13.0417 15.676 9.37478 15.676C5.70784 15.676 2.72555 12.6938 2.72555 9.02681C2.72555 5.35987 5.70784 2.37759 9.37478 2.37759Z" fill="inherit" stroke="inherit" stroke-width="1.5" />
+</svg>
+
+								</span>
+						</a>
+					</div>
+				</nav>
+				<!-- includes/header/mobile-nav.html -->
+<div id="mobile-menu" class="nav mobile-nav js-mobile-nav" aria-label="mobile menu" aria-hidden="true">
+	<div id="menu-status" class="sr-only" aria-live="assertive" tabindex="-1"></div>
+	<nav class="mobile-nav__secondary" aria-label="snel naar">
+		<ul class="mobile-nav__meta">
+			<li class="mobile-nav__meta-item mobile-nav__meta-item--weather">
+				<a href="https://www.hln.be/integratie/weer/?utm_source=HLN&amp;utm_medium=tekstlink&amp;utm_content=siteheader&amp;utm_campaign=weer" class="mobile-nav__meta-item-link" data-gtm="hoofdnavigatie/weer">
+					<span class="mobile-nav__meta-icon">
+						<svg class="icons" width="20" height="20" viewBox="0 0 20 20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+	<path d="M8.29647 17.8713L9.11237 16.4409C9.25635 16.1827 9.18779 15.8687 8.93411 15.7152C8.67357 15.5617 8.39246 15.6594 8.23477 15.9315L7.41201 17.3689C7.27489 17.6131 7.32974 17.9271 7.59028 18.0806C7.85082 18.2272 8.15249 18.1225 8.29647 17.8713ZM3.1337 17.8783L3.94959 16.4409C4.09358 16.1897 4.02501 15.8687 3.77133 15.7152C3.51079 15.5686 3.22969 15.6594 3.07199 15.9315L2.24924 17.3689C2.11211 17.6201 2.16696 17.9341 2.4275 18.0806C2.68118 18.2342 2.98972 18.1225 3.1337 17.8783ZM10.3465 19.7204L11.1624 18.29C11.3064 18.0318 11.2378 17.7178 10.9841 17.5643C10.7236 17.4108 10.4425 17.5085 10.2848 17.7806L9.4689 19.218C9.32491 19.4692 9.37976 19.7763 9.6403 19.9298C9.90084 20.0763 10.2025 19.9716 10.3465 19.7204ZM5.18372 19.7274L5.99962 18.29C6.1436 18.0388 6.07504 17.7178 5.82136 17.5643C5.56082 17.4178 5.27971 17.5085 5.12202 17.7806L4.29926 19.218C4.16214 19.4692 4.21699 19.7832 4.47753 19.9298C4.73807 20.0833 5.03974 19.9716 5.18372 19.7274Z"/>
+	<path d="M10.5792 14.3463H2.83164C1.15185 14.3463 0 13.2508 0 11.6389C0 10.362 0.767903 9.33626 1.95404 9.01528C2.13916 6.70563 4.03835 4.96118 6.34205 4.96118C8.3578 4.96118 9.62621 6.07065 10.305 7.36154C12.3824 7.35456 13.8977 8.85479 13.8977 10.8923C13.8977 12.8531 12.4647 14.3463 10.5792 14.3463Z"/>
+	<path d="M13.7401 1.93983C13.7401 2.33756 13.411 2.67947 13.0133 2.67947C12.6225 2.67947 12.2934 2.33756 12.2934 1.93983V0.746624C12.2934 0.334934 12.6225 0 13.0133 0C13.411 0 13.7401 0.334934 13.7401 0.746624V1.93983Z"/>
+	<path d="M9.93485 3.98432C9.6606 4.26343 9.19437 4.26343 8.90641 3.97036L8.08366 3.12605C7.80255 2.83996 7.78884 2.36547 8.06994 2.08636C8.35105 1.80027 8.82413 1.79329 9.09839 2.08636L9.928 2.93765C10.2022 3.23769 10.216 3.69823 9.93485 3.98432Z"/>
+	<path d="M17.1339 3.97734C16.8528 4.26343 16.3797 4.27041 16.1055 3.9913C15.8244 3.70521 15.8244 3.22374 16.1055 2.93765L16.942 2.10032C17.2299 1.81423 17.6893 1.80725 17.9704 2.08636C18.2447 2.37245 18.2447 2.84694 17.9635 3.13303L17.1339 3.97734Z"/>
+	<path d="M16.3729 7.11037C16.3729 8.27566 15.797 9.3014 14.9331 9.90846C14.5903 7.91282 12.979 6.48237 10.9633 6.35677C10.7576 5.94508 10.5039 5.60317 10.2022 5.30312C10.737 4.37507 11.8066 3.71218 13.027 3.71218C14.8714 3.71218 16.3729 5.23334 16.3729 7.11037Z"/>
+	<path d="M19.2731 7.84304H18.1007C17.703 7.84304 17.3671 7.52206 17.3671 7.11735C17.3671 6.71264 17.703 6.3777 18.1007 6.3777H19.2731C19.6708 6.3777 19.9999 6.71264 19.9999 7.11735C19.9999 7.52206 19.6708 7.84304 19.2731 7.84304Z"/>
+	<path d="M17.9635 12.1553C17.6824 12.4344 17.2231 12.4344 16.9351 12.1414L16.1055 11.297C15.8312 11.011 15.8175 10.5365 16.0986 10.2574C16.3729 9.97126 16.8528 9.97126 17.1271 10.2574L17.9498 11.1086C18.2309 11.4017 18.2447 11.8692 17.9635 12.1553Z"/>
+</svg>
+
+					</span>
+					<span class="mobile-nav__meta-label">Weer</span>
+				</a>
+			</li>
+			<li class="mobile-nav__meta-item mobile-nav__meta-item--tv-gids">
+				<a href="https://www.hln.be/tv-gids" class="mobile-nav__meta-item-link" data-gtm="hoofdnavigatie/tv-gids">
+					<span class="mobile-nav__meta-icon">
+						<svg class="icons" width="20" height="20" viewBox="0 0 20 20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+	<path d="M17.1241 5.60873H11.9716L13.8012 2.52787C13.9599 2.26077 13.8775 1.91226 13.6172 1.74948C13.357 1.58663 13.0173 1.67125 12.8587 1.93835L10.6791 5.60873H9.32088L7.14123 1.93835C6.98262 1.67132 6.64303 1.58674 6.38277 1.74948C6.1225 1.9123 6.04009 2.26077 6.19873 2.52787L8.02831 5.60873H2.87578C2.20905 5.60873 1.66663 6.16541 1.66663 6.84963V17.0924C1.66663 17.7766 2.20905 18.3333 2.87578 18.3333H17.1241C17.7909 18.3333 18.3333 17.7766 18.3333 17.0924V6.84963C18.3333 6.16541 17.7908 5.60873 17.1241 5.60873ZM13.3545 15.6037C13.3545 15.9763 13.0602 16.2783 12.6972 16.2783H4.28575C3.92277 16.2783 3.62851 15.9763 3.62851 15.6037V8.33833C3.62851 7.96581 3.92277 7.66378 4.28579 7.66378H12.6972C13.0602 7.66378 13.3545 7.96581 13.3545 8.33833V15.6037ZM15.787 15.3882C15.1581 15.3882 14.6464 14.8631 14.6464 14.2177C14.6464 13.5722 15.1581 13.0471 15.787 13.0471C16.4159 13.0471 16.9275 13.5722 16.9275 14.2177C16.9275 14.8631 16.4159 15.3882 15.787 15.3882ZM15.787 10.8949C15.1581 10.8949 14.6464 10.3698 14.6464 9.72441C14.6464 9.07896 15.1581 8.55389 15.787 8.55389C16.4159 8.55389 16.9275 9.07896 16.9275 9.72441C16.9275 10.3698 16.4159 10.8949 15.787 10.8949Z"/>
+</svg>
+
+					</span>
+					<span class="mobile-nav__meta-label">TV-Gids</span>
+				</a>
+			</li>
+			<li class="mobile-nav__meta-item mobile-nav__meta-item--4040">
+				<a href="https://www.hln.be/4040" class="mobile-nav__meta-item-link" data-gtm="hoofdnavigatie/4040">
+					<span class="mobile-nav__meta-icon">
+						<svg class="icons" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+	<path fill-rule="evenodd" clip-rule="evenodd" d="M0.750001 6.00002H1.92695C3.40025 3.03226 6.46185 0.992432 9.9999 0.992432C13.5379 0.992432 16.5995 3.03226 18.0728 6.00002H19.25C19.6642 6.00002 20 6.33581 20 6.75002V13.25C20 13.6642 19.6642 14 19.25 14H18.0728C16.5995 16.9678 13.5379 19.0076 9.9999 19.0076C6.46188 19.0076 3.40028 16.9678 1.92698 14H0.750002C0.335787 14 0 13.6642 0 13.25V6.75002C0 6.33581 0.335787 6.00002 0.750001 6.00002ZM4.95737 6.00002H2.52277C3.95164 3.33462 6.76407 1.52184 9.9999 1.52184C13.2357 1.52184 16.0482 3.33462 17.477 6.00002H15.0427C13.8636 4.51559 12.043 3.56373 10 3.56373C7.95705 3.56373 6.1364 4.51559 4.95737 6.00002ZM9.9999 18.4781C13.2357 18.4781 16.0481 16.6654 17.477 14H15.0424C13.8634 15.4843 12.0428 16.436 10 16.436C7.95719 16.436 6.13666 15.4843 4.95762 14H2.5228C3.95168 16.6654 6.76409 18.4781 9.9999 18.4781ZM10 4.09314C11.7193 4.09314 13.267 4.82767 14.3464 6.00002H5.65364C6.73308 4.82767 8.28077 4.09314 10 4.09314ZM14.3461 14H5.65393C6.73336 15.1722 8.28092 15.9066 10 15.9066C11.7191 15.9066 13.2667 15.1722 14.3461 14ZM3.14366 11.6873H3.42778C3.51425 11.6873 3.60072 11.5761 3.60072 11.4958V11.1685H1.79719V10.4335L3.65013 7.87641H4.54572V10.5632H5.00278V11.1685H4.54572V11.4958C4.54572 11.5761 4.62602 11.6873 4.71867 11.6873H5.00278V12.2H3.14366V11.6873ZM3.57602 8.86465L2.36543 10.5385V10.5632H3.60072V8.86465H3.57602ZM9.54259 10.0382C9.54259 11.5391 8.65936 12.2494 7.67112 12.2494C6.68288 12.2494 5.79965 11.5391 5.79965 10.0382C5.79965 8.5373 6.68288 7.827 7.67112 7.827C8.65936 7.827 9.54259 8.5373 9.54259 10.0382ZM6.78788 10.0567C6.78788 11.2179 7.11524 11.6317 7.67112 11.6317C8.22083 11.6317 8.55436 11.2179 8.55436 10.0567C8.55436 8.88936 8.22083 8.46936 7.67112 8.46936C7.11524 8.46936 6.78788 8.88936 6.78788 10.0567ZM11.6834 11.6873H11.9675C12.054 11.6873 12.1404 11.5761 12.1404 11.4958V11.1685H10.3369V10.4335L12.1898 7.87641H13.0854V10.5632H13.5425V11.1685H13.0854V11.4958C13.0854 11.5761 13.1657 11.6873 13.2584 11.6873H13.5425V12.2H11.6834V11.6873ZM12.1157 8.86465L10.9051 10.5385V10.5632H12.1404V8.86465H12.1157ZM18.0823 10.0382C18.0823 11.5391 17.1991 12.2494 16.2108 12.2494C15.2226 12.2494 14.3394 11.5391 14.3394 10.0382C14.3394 8.5373 15.2226 7.827 16.2108 7.827C17.1991 7.827 18.0823 8.5373 18.0823 10.0382ZM15.3276 10.0567C15.3276 11.2179 15.6549 11.6317 16.2108 11.6317C16.7605 11.6317 17.0941 11.2179 17.0941 10.0567C17.0941 8.88936 16.7605 8.46936 16.2108 8.46936C15.6549 8.46936 15.3276 8.88936 15.3276 10.0567Z"/>
+</svg>
+
+					</span>
+					<span class="mobile-nav__meta-label">Meld Nieuws</span>
+				</a>
+			</li>
+			<li class="mobile-nav__meta-item mobile-nav__meta-item--digitale-krant">
+				<a href="https://krant.hln.be" class="mobile-nav__meta-item-link" data-gtm="hoofdnavigatie/digitale-krant">
+					<span class="mobile-nav__meta-icon">
+						<svg width="20" height="20"  class="icons" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+	<path fill-rule="evenodd" clip-rule="evenodd" d="M18 5.51282C18 5.11694 17.6752 4.79487 17.276 4.79487H16.19L16.19 14.3199C16.19 14.5105 16.0355 14.6649 15.845 14.6649C15.6545 14.6649 15.5 14.5105 15.5 14.3199L15.5 4.79487V3.71795C15.5 3.32207 15.1592 3 14.76 3H2.72398C2.32478 3 2 3.32207 2 3.71795V15.2051C2 16.1948 2.81195 17 3.80995 17H16.19C17.1881 17 18 16.1948 18 15.2051V5.51282ZM4.18011 13.9734H7.83622C8.03614 13.9734 8.19821 14.1281 8.19821 14.3189C8.19821 14.5098 8.03614 14.6645 7.83622 14.6645H4.18011C3.98018 14.6645 3.81812 14.5098 3.81812 14.3189C3.81812 14.1281 3.98018 13.9734 4.18011 13.9734ZM13.3025 13.9734H9.64635C9.44643 13.9734 9.28436 14.1281 9.28436 14.3189C9.28436 14.5098 9.44643 14.6645 9.64635 14.6645H13.3025C13.5024 14.6645 13.6645 14.5098 13.6645 14.3189C13.6645 14.1281 13.5024 13.9734 13.3025 13.9734ZM4.18011 5.33521H13.3023C13.5022 5.33521 13.6643 5.4899 13.6643 5.68074C13.6643 5.87158 13.5022 6.02628 13.3023 6.02628H4.18011C3.98018 6.02628 3.81812 5.87158 3.81812 5.68074C3.81812 5.4899 3.98018 5.33521 4.18011 5.33521ZM13.3025 7.06287H9.64635C9.44643 7.06287 9.28436 7.21756 9.28436 7.4084C9.28436 7.59924 9.44643 7.75394 9.64635 7.75394H13.3025C13.5024 7.75394 13.6645 7.59924 13.6645 7.4084C13.6645 7.21756 13.5024 7.06287 13.3025 7.06287ZM9.64635 8.79059H13.3025C13.5024 8.79059 13.6645 8.94529 13.6645 9.13613C13.6645 9.32696 13.5024 9.48166 13.3025 9.48166H9.64635C9.44643 9.48166 9.28436 9.32696 9.28436 9.13613C9.28436 8.94529 9.44643 8.79059 9.64635 8.79059ZM13.3025 10.5182H9.64635C9.44643 10.5182 9.28436 10.6729 9.28436 10.8638C9.28436 11.0546 9.44643 11.2093 9.64635 11.2093H13.3025C13.5024 11.2093 13.6645 11.0546 13.6645 10.8638C13.6645 10.6729 13.5024 10.5182 13.3025 10.5182ZM9.64635 12.2457H13.3025C13.5024 12.2457 13.6645 12.4004 13.6645 12.5913C13.6645 12.7821 13.5024 12.9368 13.3025 12.9368H9.64635C9.44643 12.9368 9.28436 12.7821 9.28436 12.5913C9.28436 12.4004 9.44643 12.2457 9.64635 12.2457ZM7.83622 12.2457H4.18011C3.98018 12.2457 3.81812 12.4004 3.81812 12.5913C3.81812 12.7821 3.98018 12.9368 4.18011 12.9368H7.83622C8.03614 12.9368 8.19821 12.7821 8.19821 12.5913C8.19821 12.4004 8.03614 12.2457 7.83622 12.2457ZM4.18011 7.06287H7.83622C8.03614 7.06287 8.19821 7.21756 8.19821 7.4084V10.8983C8.19821 11.0892 8.03614 11.2439 7.83622 11.2439H4.18011C3.98018 11.2439 3.81812 11.0892 3.81812 10.8983V7.4084C3.81812 7.21756 3.98018 7.06287 4.18011 7.06287Z"/>
+</svg>
+
+					</span>
+					<span class="mobile-nav__meta-label">Digitale Krant</span>
+				</a>
+			</li>
+			<li class="mobile-nav__meta-item mobile-nav__meta-item--shop">
+				<a href="https://shop.hln.be/?utm_source=hln&amp;utm_medium=referral&amp;utm_content=link-topnavigatie&amp;_ga=2.59370026.668906282.1584347945-115901266.1583739021" class="mobile-nav__meta-item-link" data-gtm="hoofdnavigatie/shop">
+					<span class="mobile-nav__meta-icon">
+						<svg width="20" height="20" class="icons" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+	<path d="M8.92387,16.3804 C8.92387,17.1729 8.28151,17.8153 7.4891,17.8153 C6.6967,17.8153 6.05432,17.1729 6.05432,16.3804 C6.05432,15.69135 6.54018345,15.1156766 7.1880438,14.9773386 L6.77174,14.9782 C6.13722,14.9782 5.59821,14.7505 5.21981,14.3532 C4.85079,13.9657 4.67663,13.4611 4.67663,12.9728 C4.67663,12.4846 4.85079,11.98 5.21981,11.5925 C5.39979,11.4035 5.61613,11.2528 5.86179,11.1469 L4.30261,4.71214 L4.02293,3.5 L1.75,3.5 C1.33579,3.5 1,3.16421 1,2.75 C1,2.33579 1.33579,2 1.75,2 L4.61957,2 C4.96881,2 5.27183,2.24106 5.35036,2.58136 L5.63008,3.79348 L18.25,3.79348 C18.4871,3.79348 18.7102,3.90557 18.8517,4.09578 C18.9933,4.28599 19.0365,4.53191 18.9684,4.75899 L16.8162,11.9329 C16.7211,12.2502 16.429,12.4674 16.0978,12.4674 L6.77174,12.4674 C6.50952,12.4674 6.37598,12.5535 6.30601,12.627 C6.22666,12.7103 6.17663,12.8334 6.17663,12.9728 C6.17663,13.1123 6.22666,13.2354 6.30601,13.3187 C6.37598,13.3921 6.50952,13.4782 6.77174,13.4782 L16.0978,13.4782 C16.512,13.4782 16.8478,13.8141 16.8478,14.2282 C16.8478,14.6425 16.512,14.9782 16.0978,14.9782 L15.6814913,14.9773386 C16.3294214,15.1156766 16.8153,15.69135 16.8153,16.3804 C16.8153,17.1729 16.1729,17.8153 15.3804,17.8153 C14.5881,17.8153 13.9457,17.1729 13.9457,16.3804 C13.9457,15.69135 14.4315786,15.1156766 15.0793771,14.9773386 L7.79015869,14.9773386 C8.43802168,15.1156766 8.92387,15.69135 8.92387,16.3804 Z" />
+</svg>
+					</span>
+					<span class="mobile-nav__meta-label">Shop</span>
+				</a>
+			</li>
+			<li class="mobile-nav__meta-item mobile-nav__meta-item--over-ons">
+				<a href="https://valley.hln.be/custom-build/hartslag-van-vlaanderen/" class="mobile-nav__meta-item-link" data-gtm="hoofdnavigatie/over-ons">
+					<span class="mobile-nav__meta-icon">
+						<!-- htmllint tag-name-lowercase="false"  -->
+<svg width="20" height="20"  class="icons" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+	<g clip-path="url(#clip0_9270_2047)">
+		<path d="M16.83 2.00003H3.17C2.52383 2.00003 2 2.52386 2 3.17003V16.83C2 17.4762 2.52383 18 3.17 18H16.83C17.4762 18 18 17.4762 18 16.83V3.17003C18 2.52386 17.4762 2.00003 16.83 2.00003Z"/>
+		<path d="M10.3481 5.57063V6.08824L10.3152 6.10527C10.0716 6.2308 9.98938 6.32896 9.98938 6.49456V13.6934H10.4915C10.7408 13.6934 10.972 13.549 11.1599 13.2757C11.2466 13.1639 11.329 12.9198 11.3771 12.6355C11.4175 12.3614 11.7121 12.2636 11.9745 12.2636H12.0345V14.4443H8.27864V13.8501L8.31475 13.8341C8.34406 13.8212 8.37245 13.8091 8.39962 13.7974C8.6143 13.7056 8.7092 13.6592 8.7092 13.5204V6.49456C8.7092 6.32581 8.59102 6.2308 8.35822 6.10463L8.3264 6.08736V5.57063H10.3481ZM13.8496 5.57063L13.8641 5.61069L15.5656 10.3293V6.49456C15.5656 6.30028 15.4583 6.2178 15.2181 6.10632L15.1829 6.09005V5.57063H16.6664V6.09005L16.6312 6.10632C16.404 6.2116 16.3673 6.30698 16.3673 6.49456V14.4443H15.7988L15.7843 14.4039L13.6883 8.50677V13.5078C13.6883 13.708 13.7232 13.8078 13.9403 13.9084L13.9754 13.9247V14.4443H12.4441V13.9255L12.4781 13.9089C12.723 13.7895 12.8747 13.6807 12.8747 13.5078V6.49456C12.8747 6.30738 12.7431 6.23436 12.5104 6.12156L12.4441 6.08917V5.57063H13.8496ZM7.86627 5.55557V5.99917L7.83336 6.0162C7.69958 6.08503 7.54339 6.25418 7.54339 6.504V13.4805C7.54339 13.6919 7.60525 13.7817 7.81914 13.8809L7.85429 13.8972V14.4414H5.85661V13.8972L5.89176 13.8809C6.13264 13.7693 6.2632 13.6723 6.2632 13.4805V10.5099C6.2632 10.3262 6.1292 10.1766 5.96446 10.1766L5.27174 10.1888C5.09123 10.1888 4.98395 10.3583 4.98395 10.5222V13.4928C4.98395 13.7107 5.07357 13.8453 5.28366 13.9427L5.31881 13.959V14.4414H3.33301V13.8972L3.36821 13.8809C3.61907 13.7646 3.70371 13.6636 3.70371 13.4805V6.504C3.70371 6.33007 3.61907 6.2322 3.36821 6.11588L3.33301 6.0996V5.56781H5.28297V6.0257L5.24782 6.04197C5.01857 6.1482 4.98395 6.2186 4.98395 6.40549V9.41343H6.2632V6.49176C6.2632 6.31018 6.13264 6.21516 5.89176 6.10351L5.85661 6.08724V5.55557H7.86627Z" fill="white"/>
+	</g>
+	<defs>
+		<clipPath id="clip0_9270_2047">
+			<rect x="2" y="2.00003" width="16" height="16" rx="1.77778" fill="white"/>
+		</clipPath>
+	</defs>
+</svg>
+
+					</span>
+					<span class="mobile-nav__meta-label">Over Ons</span>
+				</a>
+			</li>
+			<li class="mobile-nav__meta-item mobile-nav__meta-item--aanvullingen-en-correcties">
+				<a href="https://valley.hln.be/custom-build/hartslag-van-vlaanderen/aanvullingen/" class="mobile-nav__meta-item-link" data-gtm="hoofdnavigatie/aanvullingen-en-correcties">
+					<span class="mobile-nav__meta-icon">
+						<!-- htmllint tag-name-lowercase="false"  -->
+<svg width="20" height="20"  class="icons" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+	<path d="M2 3C2 2.44772 2.44772 2 3 2H13C13.5523 2 14 2.44772 14 3V17C14 17.5523 13.5523 18 13 18H3C2.44772 18 2 17.5523 2 17V3Z"/>
+	<path d="M4.5 5.625C4.5 5.41789 4.66789 5.25 4.875 5.25H11.125C11.3321 5.25 11.5 5.41789 11.5 5.625C11.5 5.83211 11.3321 6 11.125 6H4.875C4.66789 6 4.5 5.83211 4.5 5.625Z" fill="white"/>
+	<path d="M4.5 7.375C4.5 7.16789 4.66789 7 4.875 7H11.125C11.3321 7 11.5 7.16789 11.5 7.375C11.5 7.58211 11.3321 7.75 11.125 7.75H4.875C4.66789 7.75 4.5 7.58211 4.5 7.375Z" fill="white"/>
+	<path d="M4.5 9.125C4.5 8.91789 4.66789 8.75 4.875 8.75H9.125C9.33211 8.75 9.5 8.91789 9.5 9.125C9.5 9.33211 9.33211 9.5 9.125 9.5H4.875C4.66789 9.5 4.5 9.33211 4.5 9.125Z" fill="white"/>
+	<path d="M4.5 10.875C4.5 10.6679 4.66789 10.5 4.875 10.5H8.125C8.33211 10.5 8.5 10.6679 8.5 10.875C8.5 11.0821 8.33211 11.25 8.125 11.25H4.875C4.66789 11.25 4.5 11.0821 4.5 10.875Z" fill="white"/>
+	<path d="M4.5 12.625C4.5 12.4179 4.66789 12.25 4.875 12.25H7.125C7.33211 12.25 7.5 12.4179 7.5 12.625C7.5 12.8321 7.33211 13 7.125 13H4.875C4.66789 13 4.5 12.8321 4.5 12.625Z" fill="white"/>
+	<path d="M4.5 14.375C4.5 14.1679 4.66789 14 4.875 14H7.125C7.33211 14 7.5 14.1679 7.5 14.375C7.5 14.5821 7.33211 14.75 7.125 14.75H4.875C4.66789 14.75 4.5 14.5821 4.5 14.375Z" fill="white"/>
+	<path d="M19 14C19 16.7614 16.7614 19 14 19C11.2386 19 9 16.7614 9 14C9 11.2386 11.2386 9 14 9C16.7614 9 19 11.2386 19 14Z" fill="white"/>
+	<path fill-rule="evenodd" clip-rule="evenodd" d="M14 10C16.2091 10 18 11.7909 18 14C18 16.2091 16.2091 18 14 18C11.7909 18 10 16.2091 10 14C10 11.7909 11.7909 10 14 10ZM15.8076 12.1025C15.5959 11.929 15.3014 11.9819 15.1484 12.2188L13.5898 14.6514L12.8018 13.7568C12.6194 13.55 12.3191 13.55 12.1367 13.7568C11.9544 13.9636 11.9545 14.3039 12.1367 14.5107L13.3135 15.8457C13.4105 15.9556 13.5455 16.009 13.6836 15.999C13.8218 15.989 13.946 15.909 14.0283 15.7822L15.9102 12.8457C16.0628 12.609 16.016 12.2761 15.8076 12.1025Z"/>
+</svg>
+
+					</span>
+					<span class="mobile-nav__meta-label">Aanvullingen en correcties</span>
+				</a>
+			</li>
+		</ul>
+
+		<div class="mobile-nav__search fjs-mobile-nav-search">
+			<a class="button--list-block has-border has-brand-bordercolor" data-gtm="hoofdnavigatie/zoeken" role="button" aria-label="Zoeken"	href="https://www.hln.be/zoeken/">Zoeken</a>
+		</div>
+	</nav>
+	<nav class="mobile-nav__primary" aria-label="secties">
+		<ul class="mobile-nav__list">
+			<li class="mobile-nav__list-item">
+				<!-- includes/general/includes/nav-item-link.html -->
+<input type="radio"
+	name="mobile-subnav"
+	checked="checked" class="mobile-subnav__trigger trigger--hide"
+	id="mobile-subnav-home" />
+<div class="mobile-subnav">
+	<label for="mobile-subnav-home">
+		<a href="https://www.hln.be/" target="_self" data-gtm="hoofdnavigatie/Home" class="mobile-nav__list-label">
+			<span class="mobile-nav__list-text">Home</span>
+		</a>
+	</label>
+</div>
+<!-- includes/general/includes/nav-item-link.html -->
+
+				
+			</li>
+			<li class="mobile-nav__list-item">
+				<!-- includes/general/includes/nav-item-link.html -->
+<input type="radio"
+	name="mobile-subnav"
+	class="mobile-subnav__trigger trigger--hide"
+	id="mobile-subnav-net-binnen" />
+<div class="mobile-subnav">
+	<label for="mobile-subnav-net-binnen">
+		<a href="https://www.hln.be/net-binnen/" target="_self" data-gtm="hoofdnavigatie/Net binnen" class="mobile-nav__list-label">
+			<span class="mobile-nav__list-text">Net binnen</span>
+		</a>
+	</label>
+</div>
+<!-- includes/general/includes/nav-item-link.html -->
+
+				
+			</li>
+			<li class="mobile-nav__list-item">
+				
+				<!-- includes/general/includes/nav-item-label.html -->
+<input type="radio"
+	name="mobile-subnav"
+	class="mobile-subnav__trigger trigger--hide"
+	id="mobile-subnav-sport"/>
+<div class="mobile-subnav">
+	<label for="mobile-subnav-sport" class="mobile-nav__list-label"
+		data-gtm="hoofdnavigatie/Sport">
+		<span class="mobile-nav__list-text">Sport</span>
+	</label>
+	<ul class="mobile-subnav__list"
+		id="mobile-subnav__list-sport">
+		<li class="mobile-subnav__list-item">
+			<a class="mobile-subnav__link"
+				data-gtm="hoofdnavigatie/sub/Alle artikelen"
+				href="https://www.hln.be/sport/"
+				target="_self">Alle artikelen</a>
+		</li>
+		<li class="mobile-subnav__list-item">
+			<a class="mobile-subnav__link"
+				data-gtm="hoofdnavigatie/sub/Voetbal"
+				href="https://www.hln.be/voetbal/"
+				target="_self">Voetbal</a>
+		</li>
+		<li class="mobile-subnav__list-item">
+			<a class="mobile-subnav__link"
+				data-gtm="hoofdnavigatie/sub/Wielrennen"
+				href="https://www.hln.be/wielrennen/"
+				target="_self">Wielrennen</a>
+		</li>
+		<li class="mobile-subnav__list-item">
+			<a class="mobile-subnav__link"
+				data-gtm="hoofdnavigatie/sub/Tennis"
+				href="https://www.hln.be/tennis/"
+				target="_self">Tennis</a>
+		</li>
+		<li class="mobile-subnav__list-item">
+			<a class="mobile-subnav__link"
+				data-gtm="hoofdnavigatie/sub/Formule 1"
+				href="https://www.hln.be/formule-1/"
+				target="_self">Formule 1</a>
+		</li>
+		<li class="mobile-subnav__list-item">
+			<a class="mobile-subnav__link"
+				data-gtm="hoofdnavigatie/sub/Darts"
+				href="https://www.hln.be/darts/"
+				target="_self">Darts</a>
+		</li>
+		<li class="mobile-subnav__list-item">
+			<a class="mobile-subnav__link"
+				data-gtm="hoofdnavigatie/sub/Meer Sport"
+				href="https://www.hln.be/meer-sport/"
+				target="_self">Meer Sport</a>
+		</li>
+		<li class="mobile-subnav__list-item">
+			<a class="mobile-subnav__link"
+				data-gtm="hoofdnavigatie/sub/Sport in de buurt"
+				href="https://www.hln.be/sport-in-de-buurt/"
+				target="_self">Sport in de buurt</a>
+		</li>
+	</ul>
+</div>
+<!-- / includes/general/includes/nav-item-label.html -->
+
+			</li>
+			<li class="mobile-nav__list-item">
+				
+				<!-- includes/general/includes/nav-item-label.html -->
+<input type="radio"
+	name="mobile-subnav"
+	class="mobile-subnav__trigger trigger--hide"
+	id="mobile-subnav-showbizz"/>
+<div class="mobile-subnav">
+	<label for="mobile-subnav-showbizz" class="mobile-nav__list-label"
+		data-gtm="hoofdnavigatie/Showbizz">
+		<span class="mobile-nav__list-text">Showbizz</span>
+	</label>
+	<ul class="mobile-subnav__list"
+		id="mobile-subnav__list-showbizz">
+		<li class="mobile-subnav__list-item">
+			<a class="mobile-subnav__link"
+				data-gtm="hoofdnavigatie/sub/Alle artikelen"
+				href="https://www.hln.be/showbizz/"
+				target="_self">Alle artikelen</a>
+		</li>
+		<li class="mobile-subnav__list-item">
+			<a class="mobile-subnav__link"
+				data-gtm="hoofdnavigatie/sub/BV"
+				href="https://www.hln.be/bv/"
+				target="_self">BV</a>
+		</li>
+		<li class="mobile-subnav__list-item">
+			<a class="mobile-subnav__link"
+				data-gtm="hoofdnavigatie/sub/Celebrities"
+				href="https://www.hln.be/celebrities/"
+				target="_self">Celebrities</a>
+		</li>
+		<li class="mobile-subnav__list-item">
+			<a class="mobile-subnav__link"
+				data-gtm="hoofdnavigatie/sub/Film"
+				href="https://www.hln.be/film/"
+				target="_self">Film</a>
+		</li>
+		<li class="mobile-subnav__list-item">
+			<a class="mobile-subnav__link"
+				data-gtm="hoofdnavigatie/sub/Royalty"
+				href="https://www.hln.be/royalty/"
+				target="_self">Royalty</a>
+		</li>
+		<li class="mobile-subnav__list-item">
+			<a class="mobile-subnav__link"
+				data-gtm="hoofdnavigatie/sub/Kunst &amp; Literatuur"
+				href="https://www.hln.be/kunst-en-literatuur/"
+				target="_self">Kunst & Literatuur</a>
+		</li>
+		<li class="mobile-subnav__list-item">
+			<a class="mobile-subnav__link"
+				data-gtm="hoofdnavigatie/sub/TV"
+				href="https://www.hln.be/tv/"
+				target="_self">TV</a>
+		</li>
+		<li class="mobile-subnav__list-item">
+			<a class="mobile-subnav__link"
+				data-gtm="hoofdnavigatie/sub/Muziek"
+				href="https://www.hln.be/muziek/"
+				target="_self">Muziek</a>
+		</li>
+	</ul>
+</div>
+<!-- / includes/general/includes/nav-item-label.html -->
+
+			</li>
+			<li class="mobile-nav__list-item">
+				
+				<!-- includes/general/includes/nav-item-label.html -->
+<input type="radio"
+	name="mobile-subnav"
+	class="mobile-subnav__trigger trigger--hide"
+	id="mobile-subnav-nina"/>
+<div class="mobile-subnav">
+	<label for="mobile-subnav-nina" class="mobile-nav__list-label"
+		data-gtm="hoofdnavigatie/Nina">
+		<span class="mobile-nav__list-text">Nina</span>
+	</label>
+	<ul class="mobile-subnav__list"
+		id="mobile-subnav__list-nina">
+		<li class="mobile-subnav__list-item">
+			<a class="mobile-subnav__link"
+				data-gtm="hoofdnavigatie/sub/Alle artikelen"
+				href="https://www.hln.be/nina/"
+				target="_self">Alle artikelen</a>
+		</li>
+		<li class="mobile-subnav__list-item">
+			<a class="mobile-subnav__link"
+				data-gtm="hoofdnavigatie/sub/Gezond &amp; Gelukkig"
+				href="https://www.hln.be/gezond-en-gelukkig/"
+				target="_self">Gezond & Gelukkig</a>
+		</li>
+		<li class="mobile-subnav__list-item">
+			<a class="mobile-subnav__link"
+				data-gtm="hoofdnavigatie/sub/Seks &amp; Liefde"
+				href="https://www.hln.be/seks-en-liefde/"
+				target="_self">Seks & Liefde</a>
+		</li>
+		<li class="mobile-subnav__list-item">
+			<a class="mobile-subnav__link"
+				data-gtm="hoofdnavigatie/sub/Lifestyle"
+				href="https://www.hln.be/lifestyle/"
+				target="_self">Lifestyle</a>
+		</li>
+		<li class="mobile-subnav__list-item">
+			<a class="mobile-subnav__link"
+				data-gtm="hoofdnavigatie/sub/Mode &amp; Beauty"
+				href="https://www.hln.be/mode-en-beauty/"
+				target="_self">Mode & Beauty</a>
+		</li>
+		<li class="mobile-subnav__list-item">
+			<a class="mobile-subnav__link"
+				data-gtm="hoofdnavigatie/sub/Familie"
+				href="https://www.hln.be/familie/"
+				target="_self">Familie</a>
+		</li>
+		<li class="mobile-subnav__list-item">
+			<a class="mobile-subnav__link"
+				data-gtm="hoofdnavigatie/sub/Carrière"
+				href="https://www.hln.be/carriere/"
+				target="_self">Carrière</a>
+		</li>
+		<li class="mobile-subnav__list-item">
+			<a class="mobile-subnav__link"
+				data-gtm="hoofdnavigatie/sub/Eropuit"
+				href="https://www.hln.be/eropuit/"
+				target="_self">Eropuit</a>
+		</li>
+	</ul>
+</div>
+<!-- / includes/general/includes/nav-item-label.html -->
+
+			</li>
+			<li class="mobile-nav__list-item">
+				<!-- includes/general/includes/nav-item-link.html -->
+<input type="radio"
+	name="mobile-subnav"
+	class="mobile-subnav__trigger trigger--hide"
+	id="mobile-subnav-kijk" />
+<div class="mobile-subnav">
+	<label for="mobile-subnav-kijk">
+		<a href="https://www.hln.be/videos" target="_self" data-gtm="hoofdnavigatie/Kijk" class="mobile-nav__list-label">
+			<span class="mobile-nav__list-text">Kijk</span>
+		</a>
+	</label>
+</div>
+<!-- includes/general/includes/nav-item-link.html -->
+
+				
+			</li>
+			<li class="mobile-nav__list-item">
+				
+				<!-- includes/general/includes/nav-item-label.html -->
+<input type="radio"
+	name="mobile-subnav"
+	class="mobile-subnav__trigger trigger--hide"
+	id="mobile-subnav-regio"/>
+<div class="mobile-subnav">
+	<label for="mobile-subnav-regio" class="mobile-nav__list-label"
+		data-gtm="hoofdnavigatie/Regio">
+		<span class="mobile-nav__list-text">Regio</span>
+	</label>
+	<ul class="mobile-subnav__list"
+		id="mobile-subnav__list-regio">
+		<li class="mobile-subnav__list-item">
+			<a class="mobile-subnav__link  sub-nav__link-secondary"
+				data-gtm="hoofdnavigatie/sub/Kies uw gemeente"
+				href="https://www.hln.be/regio/wijzigen/"
+				target="_self">Wijzig</a>
+		</li>
+	</ul>
+</div>
+<!-- / includes/general/includes/nav-item-label.html -->
+
+			</li>
+			<li class="mobile-nav__list-item">
+				<!-- includes/general/includes/nav-item-link.html -->
+<input type="radio"
+	name="mobile-subnav"
+	class="mobile-subnav__trigger trigger--hide"
+	id="mobile-subnav-binnenland" />
+<div class="mobile-subnav">
+	<label for="mobile-subnav-binnenland">
+		<a href="https://www.hln.be/binnenland/" target="_self" data-gtm="hoofdnavigatie/Binnenland" class="mobile-nav__list-label">
+			<span class="mobile-nav__list-text">Binnenland</span>
+		</a>
+	</label>
+</div>
+<!-- includes/general/includes/nav-item-link.html -->
+
+				
+			</li>
+			<li class="mobile-nav__list-item">
+				<!-- includes/general/includes/nav-item-link.html -->
+<input type="radio"
+	name="mobile-subnav"
+	class="mobile-subnav__trigger trigger--hide"
+	id="mobile-subnav-economie" />
+<div class="mobile-subnav">
+	<label for="mobile-subnav-economie">
+		<a href="https://www.hln.be/economie/" target="_self" data-gtm="hoofdnavigatie/Economie" class="mobile-nav__list-label">
+			<span class="mobile-nav__list-text">Economie</span>
+		</a>
+	</label>
+</div>
+<!-- includes/general/includes/nav-item-link.html -->
+
+				
+			</li>
+			<li class="mobile-nav__list-item">
+				<!-- includes/general/includes/nav-item-link.html -->
+<input type="radio"
+	name="mobile-subnav"
+	class="mobile-subnav__trigger trigger--hide"
+	id="mobile-subnav-buitenland" />
+<div class="mobile-subnav">
+	<label for="mobile-subnav-buitenland">
+		<a href="https://www.hln.be/buitenland/" target="_self" data-gtm="hoofdnavigatie/Buitenland" class="mobile-nav__list-label">
+			<span class="mobile-nav__list-text">Buitenland</span>
+		</a>
+	</label>
+</div>
+<!-- includes/general/includes/nav-item-link.html -->
+
+				
+			</li>
+			<li class="mobile-nav__list-item">
+				<!-- includes/general/includes/nav-item-link.html -->
+<input type="radio"
+	name="mobile-subnav"
+	class="mobile-subnav__trigger trigger--hide"
+	id="mobile-subnav-opinie" />
+<div class="mobile-subnav">
+	<label for="mobile-subnav-opinie">
+		<a href="https://www.hln.be/opinie/" target="_self" data-gtm="hoofdnavigatie/Opinie" class="mobile-nav__list-label">
+			<span class="mobile-nav__list-text">Opinie</span>
+		</a>
+	</label>
+</div>
+<!-- includes/general/includes/nav-item-link.html -->
+
+				
+			</li>
+			<li class="mobile-nav__list-item">
+				
+				<!-- includes/general/includes/nav-item-label.html -->
+<input type="radio"
+	name="mobile-subnav"
+	class="mobile-subnav__trigger trigger--hide"
+	id="mobile-subnav-mijn-geld"/>
+<div class="mobile-subnav">
+	<label for="mobile-subnav-mijn-geld" class="mobile-nav__list-label"
+		data-gtm="hoofdnavigatie/Mijn Geld">
+		<span class="mobile-nav__list-text">Mijn Geld</span>
+	</label>
+	<ul class="mobile-subnav__list"
+		id="mobile-subnav__list-mijn-geld">
+		<li class="mobile-subnav__list-item">
+			<a class="mobile-subnav__link"
+				data-gtm="hoofdnavigatie/sub/Alle artikelen"
+				href="https://www.hln.be/mijn-geld/"
+				target="_self">Alle artikelen</a>
+		</li>
+		<li class="mobile-subnav__list-item">
+			<a class="mobile-subnav__link"
+				data-gtm="hoofdnavigatie/sub/Beleggen &amp; investeren"
+				href="https://www.hln.be/beleggen-en-investeren/"
+				target="_self">Beleggen & investeren</a>
+		</li>
+		<li class="mobile-subnav__list-item">
+			<a class="mobile-subnav__link"
+				data-gtm="hoofdnavigatie/sub/Winkelkar"
+				href="https://www.hln.be/winkelkar/"
+				target="_self">Winkelkar</a>
+		</li>
+		<li class="mobile-subnav__list-item">
+			<a class="mobile-subnav__link"
+				data-gtm="hoofdnavigatie/sub/Werk &amp; Pensioenen"
+				href="https://www.hln.be/werk-en-pensioenen/"
+				target="_self">Werk & Pensioenen</a>
+		</li>
+		<li class="mobile-subnav__list-item">
+			<a class="mobile-subnav__link"
+				data-gtm="hoofdnavigatie/sub/Vastgoed"
+				href="https://www.hln.be/vastgoed/"
+				target="_self">Vastgoed</a>
+		</li>
+		<li class="mobile-subnav__list-item">
+			<a class="mobile-subnav__link"
+				data-gtm="hoofdnavigatie/sub/Erfenis"
+				href="https://www.hln.be/erfenis/"
+				target="_self">Erfenis</a>
+		</li>
+		<li class="mobile-subnav__list-item">
+			<a class="mobile-subnav__link"
+				data-gtm="hoofdnavigatie/sub/Energie"
+				href="https://www.hln.be/energie/"
+				target="_self">Energie</a>
+		</li>
+		<li class="mobile-subnav__list-item">
+			<a class="mobile-subnav__link"
+				data-gtm="hoofdnavigatie/sub/Belastingen"
+				href="https://www.hln.be/belastingen/"
+				target="_self">Belastingen</a>
+		</li>
+	</ul>
+</div>
+<!-- / includes/general/includes/nav-item-label.html -->
+
+			</li>
+			<li class="mobile-nav__list-item">
+				<!-- includes/general/includes/nav-item-link.html -->
+<input type="radio"
+	name="mobile-subnav"
+	class="mobile-subnav__trigger trigger--hide"
+	id="mobile-subnav-vtm-nieuws" />
+<div class="mobile-subnav">
+	<label for="mobile-subnav-vtm-nieuws">
+		<a href="https://www.hln.be/vtm-nieuws/" target="_self" data-gtm="hoofdnavigatie/VTM Nieuws" class="mobile-nav__list-label">
+			<span class="mobile-nav__list-text">VTM Nieuws</span>
+		</a>
+	</label>
+</div>
+<!-- includes/general/includes/nav-item-link.html -->
+
+				
+			</li>
+			<li class="mobile-nav__list-item">
+				
+				<!-- includes/general/includes/nav-item-label.html -->
+<input type="radio"
+	name="mobile-subnav"
+	class="mobile-subnav__trigger trigger--hide"
+	id="mobile-subnav-eten"/>
+<div class="mobile-subnav">
+	<label for="mobile-subnav-eten" class="mobile-nav__list-label"
+		data-gtm="hoofdnavigatie/Eten">
+		<span class="mobile-nav__list-text">Eten</span>
+	</label>
+	<ul class="mobile-subnav__list"
+		id="mobile-subnav__list-eten">
+		<li class="mobile-subnav__list-item">
+			<a class="mobile-subnav__link"
+				data-gtm="hoofdnavigatie/sub/Alle artikelen"
+				href="https://www.hln.be/eten/"
+				target="_self">Alle artikelen</a>
+		</li>
+		<li class="mobile-subnav__list-item">
+			<a class="mobile-subnav__link"
+				data-gtm="hoofdnavigatie/sub/Recepten"
+				href="https://www.hln.be/recepten/"
+				target="_self">Recepten</a>
+		</li>
+		<li class="mobile-subnav__list-item">
+			<a class="mobile-subnav__link"
+				data-gtm="hoofdnavigatie/sub/Beter koken"
+				href="https://www.hln.be/beter-koken/"
+				target="_self">Beter koken</a>
+		</li>
+		<li class="mobile-subnav__list-item">
+			<a class="mobile-subnav__link"
+				data-gtm="hoofdnavigatie/sub/Getest"
+				href="https://www.hln.be/getest/"
+				target="_self">Getest</a>
+		</li>
+		<li class="mobile-subnav__list-item">
+			<a class="mobile-subnav__link"
+				data-gtm="hoofdnavigatie/sub/Uit Eten"
+				href="https://www.hln.be/uit-eten/"
+				target="_self">Uit Eten</a>
+		</li>
+		<li class="mobile-subnav__list-item">
+			<a class="mobile-subnav__link"
+				data-gtm="hoofdnavigatie/sub/Eten &amp; Weten"
+				href="https://www.hln.be/eten-en-weten/"
+				target="_self">Eten & Weten</a>
+		</li>
+	</ul>
+</div>
+<!-- / includes/general/includes/nav-item-label.html -->
+
+			</li>
+			<li class="mobile-nav__list-item">
+				
+				<!-- includes/general/includes/nav-item-label.html -->
+<input type="radio"
+	name="mobile-subnav"
+	class="mobile-subnav__trigger trigger--hide"
+	id="mobile-subnav-tech"/>
+<div class="mobile-subnav">
+	<label for="mobile-subnav-tech" class="mobile-nav__list-label"
+		data-gtm="hoofdnavigatie/Tech">
+		<span class="mobile-nav__list-text">Tech</span>
+	</label>
+	<ul class="mobile-subnav__list"
+		id="mobile-subnav__list-tech">
+		<li class="mobile-subnav__list-item">
+			<a class="mobile-subnav__link"
+				data-gtm="hoofdnavigatie/sub/Alle artikelen"
+				href="https://www.hln.be/tech/"
+				target="_self">Alle artikelen</a>
+		</li>
+		<li class="mobile-subnav__list-item">
+			<a class="mobile-subnav__link"
+				data-gtm="hoofdnavigatie/sub/Multimedia"
+				href="https://www.hln.be/multimedia/"
+				target="_self">Multimedia</a>
+		</li>
+		<li class="mobile-subnav__list-item">
+			<a class="mobile-subnav__link"
+				data-gtm="hoofdnavigatie/sub/Internet"
+				href="https://www.hln.be/internet/"
+				target="_self">Internet</a>
+		</li>
+		<li class="mobile-subnav__list-item">
+			<a class="mobile-subnav__link"
+				data-gtm="hoofdnavigatie/sub/Games"
+				href="https://www.hln.be/games/"
+				target="_self">Games</a>
+		</li>
+	</ul>
+</div>
+<!-- / includes/general/includes/nav-item-label.html -->
+
+			</li>
+			<li class="mobile-nav__list-item">
+				
+				<!-- includes/general/includes/nav-item-label.html -->
+<input type="radio"
+	name="mobile-subnav"
+	class="mobile-subnav__trigger trigger--hide"
+	id="mobile-subnav-mobiliteit"/>
+<div class="mobile-subnav">
+	<label for="mobile-subnav-mobiliteit" class="mobile-nav__list-label"
+		data-gtm="hoofdnavigatie/Mobiliteit">
+		<span class="mobile-nav__list-text">Mobiliteit</span>
+	</label>
+	<ul class="mobile-subnav__list"
+		id="mobile-subnav__list-mobiliteit">
+		<li class="mobile-subnav__list-item">
+			<a class="mobile-subnav__link"
+				data-gtm="hoofdnavigatie/sub/Alle artikelen"
+				href="https://www.hln.be/mobiliteit/"
+				target="_self">Alle artikelen</a>
+		</li>
+		<li class="mobile-subnav__list-item">
+			<a class="mobile-subnav__link"
+				data-gtm="hoofdnavigatie/sub/Auto"
+				href="https://www.hln.be/auto/"
+				target="_self">Auto</a>
+		</li>
+		<li class="mobile-subnav__list-item">
+			<a class="mobile-subnav__link"
+				data-gtm="hoofdnavigatie/sub/Fiets"
+				href="https://www.hln.be/fiets/"
+				target="_self">Fiets</a>
+		</li>
+		<li class="mobile-subnav__list-item">
+			<a class="mobile-subnav__link"
+				data-gtm="hoofdnavigatie/sub/Motor"
+				href="https://www.hln.be/motor/"
+				target="_self">Motor</a>
+		</li>
+	</ul>
+</div>
+<!-- / includes/general/includes/nav-item-label.html -->
+
+			</li>
+			<li class="mobile-nav__list-item">
+				<!-- includes/general/includes/nav-item-link.html -->
+<input type="radio"
+	name="mobile-subnav"
+	class="mobile-subnav__trigger trigger--hide"
+	id="mobile-subnav-gezondheid" />
+<div class="mobile-subnav">
+	<label for="mobile-subnav-gezondheid">
+		<a href="https://www.hln.be/gezondheid/" target="_self" data-gtm="hoofdnavigatie/Gezondheid" class="mobile-nav__list-label">
+			<span class="mobile-nav__list-text">Gezondheid</span>
+		</a>
+	</label>
+</div>
+<!-- includes/general/includes/nav-item-link.html -->
+
+				
+			</li>
+			<li class="mobile-nav__list-item">
+				<!-- includes/general/includes/nav-item-link.html -->
+<input type="radio"
+	name="mobile-subnav"
+	class="mobile-subnav__trigger trigger--hide"
+	id="mobile-subnav-woon" />
+<div class="mobile-subnav">
+	<label for="mobile-subnav-woon">
+		<a href="https://www.hln.be/woon/" target="_self" data-gtm="hoofdnavigatie/Woon" class="mobile-nav__list-label">
+			<span class="mobile-nav__list-text">Woon</span>
+		</a>
+	</label>
+</div>
+<!-- includes/general/includes/nav-item-link.html -->
+
+				
+			</li>
+			<li class="mobile-nav__list-item">
+				<!-- includes/general/includes/nav-item-link.html -->
+<input type="radio"
+	name="mobile-subnav"
+	class="mobile-subnav__trigger trigger--hide"
+	id="mobile-subnav-reizen" />
+<div class="mobile-subnav">
+	<label for="mobile-subnav-reizen">
+		<a href="https://www.hln.be/reizen/" target="_self" data-gtm="hoofdnavigatie/Reizen" class="mobile-nav__list-label">
+			<span class="mobile-nav__list-text">Reizen</span>
+		</a>
+	</label>
+</div>
+<!-- includes/general/includes/nav-item-link.html -->
+
+				
+			</li>
+			<li class="mobile-nav__list-item">
+				
+				<!-- includes/general/includes/nav-item-label.html -->
+<input type="radio"
+	name="mobile-subnav"
+	class="mobile-subnav__trigger trigger--hide"
+	id="mobile-subnav-weer-en-wetenschap"/>
+<div class="mobile-subnav">
+	<label for="mobile-subnav-weer-en-wetenschap" class="mobile-nav__list-label"
+		data-gtm="hoofdnavigatie/Weer &amp; Wetenschap">
+		<span class="mobile-nav__list-text">Weer &amp; Wetenschap</span>
+	</label>
+	<ul class="mobile-subnav__list"
+		id="mobile-subnav__list-weer-en-wetenschap">
+		<li class="mobile-subnav__list-item">
+			<a class="mobile-subnav__link"
+				data-gtm="hoofdnavigatie/sub/Alle artikelen"
+				href="https://www.hln.be/weer-en-wetenschap/"
+				target="_self">Alle artikelen</a>
+		</li>
+		<li class="mobile-subnav__list-item">
+			<a class="mobile-subnav__link"
+				data-gtm="hoofdnavigatie/sub/Wetenschap"
+				href="https://www.hln.be/wetenschap/"
+				target="_self">Wetenschap</a>
+		</li>
+		<li class="mobile-subnav__list-item">
+			<a class="mobile-subnav__link"
+				data-gtm="hoofdnavigatie/sub/Weernieuws"
+				href="https://www.hln.be/weernieuws/"
+				target="_self">Weernieuws</a>
+		</li>
+		<li class="mobile-subnav__list-item">
+			<a class="mobile-subnav__link"
+				data-gtm="hoofdnavigatie/sub/Dieren"
+				href="https://www.hln.be/dieren/"
+				target="_self">Dieren</a>
+		</li>
+		<li class="mobile-subnav__list-item">
+			<a class="mobile-subnav__link"
+				data-gtm="hoofdnavigatie/sub/Milieu"
+				href="https://www.hln.be/milieu/"
+				target="_self">Milieu</a>
+		</li>
+		<li class="mobile-subnav__list-item">
+			<a class="mobile-subnav__link"
+				data-gtm="hoofdnavigatie/sub/Medisch"
+				href="https://www.hln.be/medisch/"
+				target="_self">Medisch</a>
+		</li>
+	</ul>
+</div>
+<!-- / includes/general/includes/nav-item-label.html -->
+
+			</li>
+			<li class="mobile-nav__list-item">
+				<!-- includes/general/includes/nav-item-link.html -->
+<input type="radio"
+	name="mobile-subnav"
+	class="mobile-subnav__trigger trigger--hide"
+	id="mobile-subnav-bizar" />
+<div class="mobile-subnav">
+	<label for="mobile-subnav-bizar">
+		<a href="https://www.hln.be/bizar/" target="_self" data-gtm="hoofdnavigatie/Bizar" class="mobile-nav__list-label">
+			<span class="mobile-nav__list-text">Bizar</span>
+		</a>
+	</label>
+</div>
+<!-- includes/general/includes/nav-item-link.html -->
+
+				
+			</li>
+			<li class="mobile-nav__list-item">
+				<!-- includes/general/includes/nav-item-link.html -->
+<input type="radio"
+	name="mobile-subnav"
+	class="mobile-subnav__trigger trigger--hide"
+	id="mobile-subnav-podcast" />
+<div class="mobile-subnav">
+	<label for="mobile-subnav-podcast">
+		<a href="https://www.hln.be/podcasts" target="_self" data-gtm="hoofdnavigatie/Podcast" class="mobile-nav__list-label">
+			<span class="mobile-nav__list-text">Podcast</span>
+		</a>
+	</label>
+</div>
+<!-- includes/general/includes/nav-item-link.html -->
+
+				
+			</li>
+			<li class="mobile-nav__list-item">
+				<!-- includes/general/includes/nav-item-link.html -->
+<input type="radio"
+	name="mobile-subnav"
+	class="mobile-subnav__trigger trigger--hide"
+	id="mobile-subnav-puzzel" />
+<div class="mobile-subnav">
+	<label for="mobile-subnav-puzzel">
+		<a href="https://www.hln.be/fun" target="_self" data-gtm="hoofdnavigatie/Puzzel" class="mobile-nav__list-label">
+			<span class="mobile-nav__list-text">Puzzel</span>
+		</a>
+	</label>
+</div>
+<!-- includes/general/includes/nav-item-link.html -->
+
+				
+			</li>
+			<li class="mobile-nav__list-item">
+				
+				<!-- includes/general/includes/nav-item-label.html -->
+<input type="radio"
+	name="mobile-subnav"
+	class="mobile-subnav__trigger trigger--hide"
+	id="mobile-subnav-service"/>
+<div class="mobile-subnav">
+	<label for="mobile-subnav-service" class="mobile-nav__list-label"
+		data-gtm="hoofdnavigatie/Service">
+		<span class="mobile-nav__list-text">Service</span>
+	</label>
+	<ul class="mobile-subnav__list"
+		id="mobile-subnav__list-service">
+		<li class="mobile-subnav__list-item">
+			<a class="mobile-subnav__link"
+				data-gtm="hoofdnavigatie/sub/HLN Shop"
+				href="https://shop.hln.be/?utm_source=hln&amp;utm_medium=referral&amp;utm_content=link-topnavigatie&amp;_ga=2.59370026.668906282.1584347945-115901266.1583739021"
+				target="_self">HLN Shop</a>
+		</li>
+		<li class="mobile-subnav__list-item">
+			<a class="mobile-subnav__link"
+				data-gtm="hoofdnavigatie/sub/Digitale krant"
+				href="https://krant.hln.be/"
+				target="_self">Digitale krant</a>
+		</li>
+		<li class="mobile-subnav__list-item">
+			<a class="mobile-subnav__link"
+				data-gtm="hoofdnavigatie/sub/Lezersservice"
+				href="https://www.hln.be/lezersservice/?_ga=2.3866039.668906282.1584347945-115901266.1583739021"
+				target="_self">Lezersservice</a>
+		</li>
+	</ul>
+</div>
+<!-- / includes/general/includes/nav-item-label.html -->
+
+			</li>
+			<li class="mobile-nav__list-item">
+				<!-- includes/general/includes/nav-item-link.html -->
+<input type="radio"
+	name="mobile-subnav"
+	class="mobile-subnav__trigger trigger--hide"
+	id="mobile-subnav-abonneren" />
+<div class="mobile-subnav">
+	<label for="mobile-subnav-abonneren">
+		<a href="https://abonnement.hln.be/?otag=t2ejen&amp;utm_source=hl&amp;utm_medium=interne_referral&amp;utm_content=tekstlink_header&amp;mid=CAM-koj66x|TCH-koj6xr|TCO-lx2qmx|CTY-5g6nol|CCO-5g6nol|PRG-4o96wo" target="_blank" data-gtm="hoofdnavigatie/Abonneren" class="mobile-nav__list-label">
+			<span class="mobile-nav__list-text">Abonneren</span>
+		</a>
+	</label>
+</div>
+<!-- includes/general/includes/nav-item-link.html -->
+
+				
+			</li>
+		</ul>
+	</nav>
+</div>
+<!-- /includes/header/mobile-nav.html -->
+
+				
+				<div class="nav nav--temptation" data-temptation-position="MENU">
+					
+						<a href="https://abonnement.hln.be/?otag=t2ejen&amp;utm_source=hl&amp;utm_medium=interne_referral&amp;utm_content=tekstlink_header&amp;mid=CAM-koj66x|TCH-koj6xr|TCO-lx2qmx|CTY-5g6nol|CCO-5g6nol|PRG-4o96wo" class="temptation-button"
+								target="_self" data-gtm="hoofdnavigatie/sub/abonneren"
+						>Abonneren</a>
+					
+				</div>
+				<div class="primary-nav__profile">
+					<a href="https://www.hln.be/login?dpg_source=hln&amp;dpg_campaign=stdc_hln&amp;dpg_medium=menu&amp;redirect_url=https://www.hln.be/justitie/rss.xml"
+							class="primary-nav__profile-link fjs-login-button"
+							data-gtm="hoofdnavigatie/login">
+							<span class="primary-nav__profile-text">Login</span>
+					</a>
+					
+				</div>
+			</div>
+		</div>
+	</div>
+	
+		<!-- includes/header/sub-nav.html -->
+<nav class="sub-nav" aria-label="thema's">
+	<input type="checkbox" id="sub-nav-more-trigger" class="sub-nav__trigger trigger--hide fjs-more-toggle"/>
+	<div class="sub-nav__wrapper fjs-sub-nav__wrapper">
+		<div class="container">
+			<label for="sub-nav-more-trigger" class="sub-nav__expand">
+				<span class="sub-nav__less">
+					Minder
+					<svg transform="rotate(180)" width="10" height="8" viewBox="0 0 10 8" xmlns="http://www.w3.org/2000/svg" class="arrow-up"><path d="M5 8L0.669873 0.499999L9.33013 0.5L5 8Z" /></svg>
+				</span>
+				<span class="sub-nav__more">
+					Meer
+					<svg class="arrow-down" width="9" height="8" viewBox="0 0 9 8" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+	<polygon points="4.5 8 0 0 9 0" />
+</svg>
+				</span>
+			</label>
+			<div class="sub-nav__list-wrapper">
+				<ul class="sub-nav__list fjs-sub-nav__list"
+				    id="sub-nav__list-home">
+					<!--first item in blue-->
+					<li class="sub-nav__list-item  ">
+						<a href="https://www.hln.be/opinie/"
+						   data-gtm="hoofdnavigatie/sub/Opinie"
+						   class="sub-nav__link">
+							
+							<span>Opinie</span>
+							
+						</a>
+					</li>
+					<li class="sub-nav__list-item  ">
+						<a href="https://www.hln.be/mijn-geld/"
+						   data-gtm="hoofdnavigatie/sub/Mijn Geld"
+						   class="sub-nav__link">
+							
+							<span>Mijn Geld</span>
+							
+						</a>
+					</li>
+					<li class="sub-nav__list-item  ">
+						<a href="https://www.hln.be/vtm-nieuws/"
+						   data-gtm="hoofdnavigatie/sub/VTM Nieuws"
+						   class="sub-nav__link">
+							
+							<span>VTM NIEUWS</span>
+							
+						</a>
+					</li>
+					<li class="sub-nav__list-item  ">
+						<a href="https://www.hln.be/eten/"
+						   data-gtm="hoofdnavigatie/sub/Eten"
+						   class="sub-nav__link">
+							
+							<span>Eten</span>
+							
+						</a>
+					</li>
+					<li class="sub-nav__list-item  ">
+						<a href="https://www.hln.be/tech/"
+						   data-gtm="hoofdnavigatie/sub/Tech"
+						   class="sub-nav__link">
+							
+							<span>Tech</span>
+							
+						</a>
+					</li>
+					<li class="sub-nav__list-item  ">
+						<a href="https://www.hln.be/mobiliteit/"
+						   data-gtm="hoofdnavigatie/sub/Mobiliteit"
+						   class="sub-nav__link">
+							
+							<span>Mobiliteit</span>
+							
+						</a>
+					</li>
+					<li class="sub-nav__list-item  ">
+						<a href="https://www.hln.be/gezondheid/"
+						   data-gtm="hoofdnavigatie/sub/Gezondheid"
+						   class="sub-nav__link">
+							
+							<span>Gezondheid</span>
+							
+						</a>
+					</li>
+					<li class="sub-nav__list-item  ">
+						<a href="https://www.hln.be/woon/"
+						   data-gtm="hoofdnavigatie/sub/Woon"
+						   class="sub-nav__link">
+							
+							<span>Woon</span>
+							
+						</a>
+					</li>
+					<li class="sub-nav__list-item  ">
+						<a href="https://www.hln.be/reizen/"
+						   data-gtm="hoofdnavigatie/sub/Reizen"
+						   class="sub-nav__link">
+							
+							<span>Reizen</span>
+							
+						</a>
+					</li>
+					<li class="sub-nav__list-item  ">
+						<a href="https://www.hln.be/weer-en-wetenschap/"
+						   data-gtm="hoofdnavigatie/sub/Weer &amp; Wetenschap"
+						   class="sub-nav__link">
+							
+							<span>Weer &amp; Wetenschap</span>
+							
+						</a>
+					</li>
+					<li class="sub-nav__list-item  ">
+						<a href="https://www.hln.be/bizar/"
+						   data-gtm="hoofdnavigatie/sub/Bizar"
+						   class="sub-nav__link">
+							
+							<span>Bizar</span>
+							
+						</a>
+					</li>
+					
+				</ul>
+			</div>
+		</div>
+	</div>
+</nav>
+<!-- / includes/header/sub-nav.html -->
+
+	
+	
+</div>
+
+	
+</header>
+<!-- htmllint tag-bans=[] -->
+<style></style>
+<!-- / includes/header.html -->
+
+
+<main id="page-main-content" class="page-main-content" role="main">
+	<div class="dfp-space-hpto fjs-dfp-space-hpto">
+	<div class="dfp-space-hpto--background fjs-hpto--background"></div>
+	<a class="dfp-space-hpto--clickbox fjs-hpto--clickbox" href="/">
+		<button class="dfp-space-hpto--clickbox-left fjs-hpto--clickbox-left"></button>
+		<button class="dfp-space-hpto--clickbox-right fjs-hpto--clickbox-right"></button>
+	</a>
+</div>
+
+	<div class="page-content">
+	<div class="container">
+		<div class="col-wrapper">
+			<section class="col col--primary">
+				<article class="article">
+					<div class="article__wrapper">
+						<header class="article__header">
+							<h2 class="article__title">Er ging iets fout</h2>
+						</header>
+						<div class="article__body">
+							<div class="article__component">
+								<p class="article__paragraph">Sorry, deze pagina kon niet gevonden worden. Mogelijk bestaat deze pagina niet meer, of is ze verhuisd. Tikte je zelf het webadres in? Mogelijk staat er een foutje in. Corrigeer het en probeer opnieuw.</p>
+								<p class="article__paragraph article__paragraph--center">
+									<a href="https://www.hln.be/" class="button--list-block"
+									>
+											<span class="button__text-desktop">Terug naar home</span>
+										<span class="button__text-mobile">Terug naar home</span>
+									</a>
+								</p>
+								<figure class="article__figure">
+									<img src="https://statics.hln.be//img/404-image.jpg" alt="Er ging iets fout" loading="lazy"/>
+								</figure>
+							</div>
+						</div>
+					</div>
+				</article>
+			</section>
+			<div class="col col--secondary">
+	<!-- widgets -->
+	
+		<!-- includes/sidebar/widget.html -->
+<div class="widget widget--teaser-list" role="region" aria-label="Net binnen">
+	<!-- includes/general/header-list.html -->
+<header
+    class="header-list"
+>
+    <h2 class="header-list__title">
+        <a
+            class="header-list__link"
+            href="/net-binnen"
+        >
+            <span>Net binnen</span>
+            <svg
+    width="8"
+    height="14"
+    viewBox="0 0 8 14"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+    class="icons"
+>
+    <path
+        d="M7.70859 6.29609C8.09922 6.68672 8.09922 7.32109 7.70859 7.71172L1.70859 13.7117C1.31797 14.1023 0.683594 14.1023 0.292969 13.7117C-0.0976562 13.3211 -0.0976562 12.6867 0.292969 12.2961L5.58672 7.00234L0.296093 1.70859C-0.0945315 1.31797 -0.0945315 0.683594 0.296093 0.292969C0.686718 -0.0976562 1.32109 -0.0976562 1.71172 0.292969L7.71172 6.29297L7.70859 6.29609Z"
+        fill="currentColor"
+    />
+</svg>
+
+        </a>
+        
+    </h2>
+</header>
+<!-- / includes/general/header-list.html -->
+
+	
+	
+	<div class="widget__content">
+		<ul class="articles-list fjs-articles-list" role="presentation">
+			<li class="widget-list__item articles-list__item has-timeline">
+				<!--   includes/ankeilers/simple.html -->
+<div class="ankeiler ankeiler--simple">
+	<a class="ankeiler__link"
+		data-gtm="Net binnen/item 1"
+		href="https://www.hln.be/veldrijden/na-onder-meer-een-val-van-michael-vanthourenhout-brit-cameron-mason-wint-in-niel-eerste-cross-op-belgische-bodem-bij-de-profs~aeb59f0c/"
+		target="_self"
+		data-category="teaser"
+		data-list="net binnen"
+		data-position="1"
+		data-content_id="eb59f0c"
+		data-element="text, image, label"
+		data-topic="Na onder meer een val van Michael Vanthourenhout: Brit Cameron Mason wint in Niel eerste cross op Belgische bodem bij de profs"
+		data-type="article">
+		<span class="sr-only">16:13: Na onder meer een val van Michael Vanthourenhout: Brit Cameron Mason wint in Niel eerste cross op Belgische bodem bij de profs: jaarmarktcross niel</span>
+		<div class="ankeiler__labels" aria-hidden="true">
+			<time class="ankeiler__timestamp">16:13</time>
+			
+
+			
+<div class="label label--full">
+	
+	<span class="label__text">Jaarmarktcross Niel</span>
+	
+</div>
+
+
+		</div>
+		<div class="ankeiler__title"
+			aria-hidden="true"
+			title="Na onder meer een val van Michael Vanthourenhout: Brit Cameron Mason wint in Niel eerste cross op Belgische bodem bij de profs">Na onder meer een val van Michael Vanthourenhout: Brit Cameron Mason wint in Niel eerste cross op Belgische bodem bij de profs</div>
+	</a>
+</div>
+<!-- / includes/ankeilers/simple.html -->
+
+			</li>
+			<li class="widget-list__item articles-list__item has-timeline">
+				<!--   includes/ankeilers/simple.html -->
+<div class="ankeiler ankeiler--simple">
+	<a class="ankeiler__link"
+		data-gtm="Net binnen/item 2"
+		href="https://www.hln.be/royalty/wie-lichtte-haakon-in-telefoontje-met-veiligheidsdiensten-voor-arrestatie-marius-borg-hoiby-roept-vragen-op~acf3d35a/"
+		target="_self"
+		data-category="teaser"
+		data-list="net binnen"
+		data-position="2"
+		data-content_id="cf3d35a"
+		data-element="text, image, label"
+		data-topic="Wie lichtte Haakon in? Telefoontje met veiligheidsdiensten vóór arrestatie Marius Borg Høiby roept vragen op"
+		data-type="article">
+		<span class="sr-only">16:06: Wie lichtte Haakon in? Telefoontje met veiligheidsdiensten vóór arrestatie Marius Borg Høiby roept vragen op: zaak marius</span>
+		<div class="ankeiler__labels" aria-hidden="true">
+			<time class="ankeiler__timestamp">16:06</time>
+			
+
+			
+<div class="label label--full">
+	
+	<span class="label__text">Zaak Marius</span>
+	
+</div>
+
+
+		</div>
+		<div class="ankeiler__title"
+			aria-hidden="true"
+			title="Wie lichtte Haakon in? Telefoontje met veiligheidsdiensten vóór arrestatie Marius Borg Høiby roept vragen op">Wie lichtte Haakon in? Telefoontje met veiligheidsdiensten vóór arrestatie Marius Borg Høiby roept vragen op</div>
+	</a>
+</div>
+<!-- / includes/ankeilers/simple.html -->
+
+			</li>
+			<li class="widget-list__item articles-list__item has-timeline">
+				<!--   includes/ankeilers/simple.html -->
+<div class="ankeiler ankeiler--simple">
+	<a class="ankeiler__link"
+		data-gtm="Net binnen/item 3"
+		href="https://www.hln.be/binnenland/ik-schudde-billie-tot-ze-stopte-met-wenen-daarna-vulde-ik-mijn-lotto-in-vader-62-van-creche-uitbaatster-is-hoofdbeklaagde-op-proces-t-sloeberhuisje~aa95f575/"
+		target="_self"
+		data-category="teaser"
+		data-list="net binnen"
+		data-position="3"
+		data-content_id="a95f575"
+		data-element="text, image, label"
+		data-topic="“Ik schudde Billie tot ze stopte met wenen. Daarna vulde ik mijn lotto in”: vader (62) van crèche-uitbaatster is hoofdbeklaagde op proces ’t Sloeberhuisje"
+		data-type="article">
+		<span class="sr-only">16:00, plus artikel: &quot;Ik schudde Billie tot ze stopte met wenen. Daarna vulde ik mijn lotto in&quot;: vader (62) van crèche-uitbaatster is hoofdbeklaagde op proces &#39;t Sloeberhuisje: reconstructie</span>
+		<div class="ankeiler__labels" aria-hidden="true">
+			<time class="ankeiler__timestamp">16:00</time>
+			<div class="label-article-state is-inline" aria-hidden="true">
+	
+		<span class="plus-label is-inline">
+			<div class="premium__text">PREMIUM</div>
+		</span>
+	
+	
+</div>
+
+			
+<div class="label label--full">
+	
+	<span class="label__text">Reconstructie</span>
+	
+</div>
+
+
+		</div>
+		<div class="ankeiler__title"
+			aria-hidden="true"
+			title="“Ik schudde Billie tot ze stopte met wenen. Daarna vulde ik mijn lotto in”: vader (62) van crèche-uitbaatster is hoofdbeklaagde op proces ’t Sloeberhuisje">“Ik schudde Billie tot ze stopte met wenen. Daarna vulde ik mijn lotto in”: vader (62) van crèche-uitbaatster is hoofdbeklaagde op proces ’t Sloeberhuisje</div>
+	</a>
+</div>
+<!-- / includes/ankeilers/simple.html -->
+
+			</li>
+			<li class="widget-list__item articles-list__item has-timeline">
+				<!--   includes/ankeilers/simple.html -->
+<div class="ankeiler ankeiler--simple">
+	<a class="ankeiler__link"
+		data-gtm="Net binnen/item 4"
+		href="https://www.hln.be/muziek/bvs-halen-herinneringen-op-aan-30-jaar-het-swingpaleis-na-ons-voedselgevecht-ging-de-koelkast-op-slot~a179be39/"
+		target="_self"
+		data-category="teaser"
+		data-list="net binnen"
+		data-position="4"
+		data-content_id="179be39"
+		data-element="text, image, label"
+		data-topic="BV’s halen herinneringen op aan 30 jaar ‘Het Swingpaleis’: “Na ons voedselgevecht ging de koelkast op slot”"
+		data-type="article">
+		<span class="sr-only">15:30, plus artikel: BV&#39;s halen herinneringen op aan 30 jaar &#39;Het Swingpaleis&#39;: &quot;Na ons voedselgevecht ging de koelkast op slot&quot;: deel 1</span>
+		<div class="ankeiler__labels" aria-hidden="true">
+			<time class="ankeiler__timestamp">15:30</time>
+			<div class="label-article-state is-inline" aria-hidden="true">
+	
+		<span class="plus-label is-inline">
+			<div class="premium__text">PREMIUM</div>
+		</span>
+	
+	
+</div>
+
+			
+<div class="label label--full">
+	
+	<span class="label__text">Deel 1</span>
+	
+</div>
+
+
+		</div>
+		<div class="ankeiler__title"
+			aria-hidden="true"
+			title="BV’s halen herinneringen op aan 30 jaar ‘Het Swingpaleis’: “Na ons voedselgevecht ging de koelkast op slot”">BV’s halen herinneringen op aan 30 jaar ‘Het Swingpaleis’: “Na ons voedselgevecht ging de koelkast op slot”</div>
+	</a>
+</div>
+<!-- / includes/ankeilers/simple.html -->
+
+			</li>
+			<li class="widget-list__item articles-list__item has-timeline">
+				<!--   includes/ankeilers/simple.html -->
+<div class="ankeiler ankeiler--simple">
+	<a class="ankeiler__link"
+		data-gtm="Net binnen/item 5"
+		href="https://www.hln.be/grimbergen/wraakactie-van-gefrustreerde-werknemer-of-ijskoude-liquidatiepoging-nieuwe-details-over-schietpartij-in-humbeek-roepen-vragen-op~a165892e/"
+		target="_self"
+		data-category="teaser"
+		data-list="net binnen"
+		data-position="5"
+		data-content_id="165892e"
+		data-element="text, image"
+		data-topic="Wraakactie van gefrustreerde werknemer of ijskoude liquidatiepoging? Nieuwe details over schietpartij in Humbeek roepen vragen op"
+		data-type="article">
+		<span class="sr-only">15:26, plus artikel: Wraakactie van gefrustreerde werknemer of ijskoude liquidatiepoging? Nieuwe details over schietpartij in Humbeek roepen vragen op</span>
+		<div class="ankeiler__labels" aria-hidden="true">
+			<time class="ankeiler__timestamp">15:26</time>
+			<div class="label-article-state is-inline" aria-hidden="true">
+	
+		<span class="plus-label is-inline">
+			<div class="premium__text">PREMIUM</div>
+		</span>
+	
+	
+</div>
+
+			
+
+		</div>
+		<div class="ankeiler__title"
+			aria-hidden="true"
+			title="Wraakactie van gefrustreerde werknemer of ijskoude liquidatiepoging? Nieuwe details over schietpartij in Humbeek roepen vragen op">Wraakactie van gefrustreerde werknemer of ijskoude liquidatiepoging? Nieuwe details over schietpartij in Humbeek roepen vragen op</div>
+	</a>
+</div>
+<!-- / includes/ankeilers/simple.html -->
+
+			</li>
+		</ul>
+	</div>
+	<footer class="widget__footer">
+		<a class="button--list-block"
+	href="/net-binnen"
+	target="_self">
+	<span>Meer berichten</span>
+</a>
+	</footer>
+</div>
+<!-- / includes/sidebar/widget.html -->
+
+	
+</div>
+
+		</div>
+	</div>
+</div>
+
+	<!-- includes/advertising/fixed-slot.html -->
+
+<!-- / includes/advertising/fixed-slot.html -->
+
+</main>
+
+<!-- includes/footer.html -->
+<!-- htmllint id-class-no-ad="false" -->
+<footer class="page-main-footer">
+	<section class="footer__bar" data-nosnippet="true">
+		<h2 class="sr-only">Nieuwsbrief en socials</h2>
+		<div class="container">
+			<div class="footer__identity">
+				<a class="footer__logo-link" href="https://www.hln.be/" aria-label="homepage"
+					data-gtm="footer/logo">
+					<div class="identity">
+						<div class="identity__image is-desktop">
+							<svg class="brand-logo" aria-hidden="true" viewBox="0 0 100 100" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+	<title>HLN logo</title>
+	<rect class="has-color-on-default has-white-on-reversed" fill="#EE0000" fill-rule="nonzero" x="0" y="0" width="100" height="100" rx="7.3125" />
+	<path class="has-white-on-default has-color-on-reversed" d="M52.1773,22.3163 L52.1773,25.5514 L51.9716,25.6578 C50.4489,26.4424 49.9353,27.0559 49.9353,28.0909 L49.9353,73.0838 L53.0733,73.0838 C54.6318,73.0838 56.0765,72.1808 57.2509,70.4729 C57.7927,69.7744 58.3077,68.2483 58.6084,66.4715 C58.861,64.7584 60.7024,64.1474 62.3423,64.1474 L62.7175,64.1474 L62.7175,77.7765 L39.2432,77.7765 L39.2432,74.0627 L39.4689,73.9628 C39.6521,73.8822 39.8295,73.8068 39.9993,73.7335 C41.3411,73.1597 41.9342,72.8698 41.9342,72.0026 L41.9342,28.0909 C41.9342,27.0362 41.1956,26.4424 39.7406,25.6538 L39.5417,25.5459 L39.5417,22.3163 L52.1773,22.3163 Z M74.0615,22.3163 L74.1522,22.5667 L84.7866,52.0578 L84.7866,28.0909 C84.7866,26.8766 84.1161,26.3611 82.6145,25.6644 L82.3948,25.5627 L82.3948,22.3163 L91.6664,22.3163 L91.6664,25.5627 L91.4467,25.6644 C90.0268,26.3224 89.7975,26.9185 89.7975,28.0909 L89.7975,77.7765 L86.2442,77.7765 L86.1538,77.5242 L73.0534,40.6672 L73.0534,71.9238 C73.0534,73.1746 73.272,73.7987 74.6285,74.4272 L74.8481,74.529 L74.8481,77.7765 L65.2773,77.7765 L65.2773,74.5341 L65.4899,74.4302 C67.0205,73.6843 67.9684,73.004 67.9684,71.9238 L67.9684,28.0909 C67.9684,26.921 67.1459,26.4646 65.6916,25.7596 L65.2773,25.5572 L65.2773,22.3163 L74.0615,22.3163 Z M36.6659,22.2222 L36.6659,24.9947 L36.4602,25.1011 C35.6241,25.5313 34.6479,26.5885 34.6479,28.1499 L34.6479,71.7531 C34.6479,73.0743 35.0345,73.6357 36.3713,74.2555 L36.591,74.3572 L36.591,77.7589 L24.1055,77.7589 L24.1055,74.3572 L24.3252,74.2555 C25.8307,73.5577 26.6467,72.9518 26.6467,71.7531 L26.6467,53.1868 C26.6467,52.0385 25.8092,51.1037 24.7796,51.1037 L20.4501,51.1799 C19.3219,51.1799 18.6514,52.2393 18.6514,53.2634 L18.6514,71.8297 C18.6514,73.1917 19.2115,74.0327 20.5246,74.6416 L20.7443,74.7433 L20.7443,77.7589 L8.33301,77.7589 L8.33301,74.3572 L8.55305,74.2555 C10.1209,73.5286 10.6499,72.8971 10.6499,71.7531 L10.6499,28.1499 C10.6499,27.0628 10.1209,26.4511 8.55305,25.7241 L8.33301,25.6224 L8.33301,22.2987 L20.5203,22.2987 L20.5203,25.1605 L20.3006,25.2622 C18.8678,25.9261 18.6514,26.3661 18.6514,27.5342 L18.6514,46.3338 L26.6467,46.3338 L26.6467,28.0734 C26.6467,26.9385 25.8307,26.3446 24.3252,25.6468 L24.1055,25.5451 L24.1055,22.2222 L36.6659,22.2222 Z" fill="#FFFFFF" />
+</svg>
+						</div>
+					</div>
+				</a>
+			</div>
+
+			<div data-temptation-position="FOOTER">
+				
+			</div>
+
+			<ul aria-label="social links" class="footer__social-links" role="presentation">
+				<li class="footer-social-links__item">
+					<a href="https://twitter.com/HLN_BE" class="footer-social-links__link"
+						rel="noopener" target="_blank" data-gtm="footer/volg_hln/twitter">
+						<svg xmlns="http://www.w3.org/2000/svg"  width="40" height="40" viewBox="0 0 512 462" class="icons"><path d="M403.229 0H481.735L310.219 195.702L512 462H354.002L230.261 300.487L88.669 462H10.109L193.564 252.679L0 0H161.999L273.855 147.625L403.229 0ZM375.673 415.087H419.178L138.363 44.4501H91.683L375.673 415.087Z"/></svg>
+
+						<span class="footer-social-links__text">Twitter</span>
+					</a>
+				</li>
+				<li class="footer-social-links__item">
+					<a href="https://www.facebook.com/hln.be" class="footer-social-links__link"
+						rel="noopener" target="_blank" data-gtm="footer/volg_hln/facebook">
+						<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 16 30" class="icons"><title >Facebook</title><path d="M13.445 5.123H16V0h-5.54C7.097 0 4.37 2.702 4.37 6.036V9.1H0v5.124h4.37V30h6.795V14.224H16V9.1h-4.835V7.383c0-1.248 1.02-2.26 2.28-2.26"/></svg>
+
+						<span class="footer-social-links__text">Facebook</span>
+					</a>
+				</li>
+				<li class="footer-social-links__item">
+					<a href="https://www.instagram.com/hln_be/" class="footer-social-links__link"
+						rel="noopener" target="_blank" data-gtm="footer/volg_hln/instagram">
+						<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 30 30" class="icons">
+	<path d="M26.488 20.546c-.065 1.423-.303 2.195-.503 2.71-.265.68-.58 1.166-1.092 1.677-.51.51-.998.826-1.68 1.09-.514.2-1.287.438-2.71.503-1.54.07-2.002.085-5.9.085-3.9 0-4.362-.014-5.902-.084-1.422-.065-2.195-.302-2.71-.502-.68-.265-1.168-.58-1.68-1.09-.51-.512-.826-.998-1.09-1.68-.2-.513-.44-1.285-.504-2.708-.07-1.538-.085-2-.085-5.894 0-3.895.016-4.357.086-5.895.065-1.422.303-2.195.503-2.71.264-.68.58-1.166 1.09-1.676.512-.51 1-.826 1.68-1.09.515-.2 1.288-.438 2.71-.503 1.54-.07 2.003-.085 5.902-.085 3.9 0 4.36.015 5.9.085 1.424.065 2.197.303 2.712.503.68.264 1.168.58 1.68 1.09.51.51.826.997 1.09 1.678.2.514.44 1.287.504 2.71.07 1.537.085 2 .085 5.894 0 3.895-.015 4.356-.085 5.894m2.628-11.91c-.07-1.55-.318-2.612-.68-3.54-.372-.96-.87-1.773-1.683-2.584-.812-.81-1.626-1.31-2.586-1.682-.93-.36-1.99-.607-3.545-.678-1.557-.07-2.054-.088-6.02-.088-3.966 0-4.463.017-6.02.088C7.027.222 5.966.47 5.037.83c-.96.373-1.774.87-2.586 1.682-.81.81-1.31 1.625-1.683 2.584-.36.928-.608 1.99-.68 3.54C.018 10.194 0 10.69 0 14.653s.017 4.458.088 6.014c.07 1.553.318 2.613.68 3.54.372.96.87 1.774 1.683 2.585.813.812 1.627 1.31 2.587 1.684.93.36 1.99.607 3.545.678 1.557.07 2.054.088 6.02.088 3.966 0 4.463-.017 6.02-.088 1.554-.07 2.616-.318 3.545-.678.96-.373 1.774-.872 2.586-1.683.812-.81 1.31-1.623 1.684-2.583.36-.928.608-1.988.68-3.54.07-1.557.087-2.053.087-6.015 0-3.962-.017-4.46-.088-6.015"/>
+	<path d="M14.602 19.514c-2.688 0-4.867-2.177-4.867-4.862 0-2.686 2.18-4.863 4.867-4.863 2.688 0 4.867 2.176 4.867 4.862 0 2.685-2.18 4.862-4.868 4.862m0-12.353c-4.14 0-7.498 3.355-7.498 7.492 0 4.137 3.357 7.49 7.498 7.49 4.14 0 7.498-3.353 7.498-7.49 0-4.137-3.357-7.49-7.498-7.49M22.396 5.114c-.967 0-1.752.784-1.752 1.75 0 .968.785 1.75 1.752 1.75.968 0 1.753-.782 1.753-1.75 0-.966-.786-1.75-1.754-1.75"/>
+</svg>
+
+						<span class="footer-social-links__text">Instagram</span>
+					</a>
+				</li>
+			</ul>
+		</div>
+	</section>
+
+	<section aria-label="Tip de redactie" class="footer__quote" data-nosnippet="true">
+		<div class="container">
+			<div class="news-tip">
+				<div class="news-tip__icon">
+					<svg xmlns="http://www.w3.org/2000/svg" width="90" height="100" viewBox="0 0 64 64" class="icons"><title >Quote</title><path d="M16.1 5.3H4.2C.4 9.2 0 16.4 0 22.7v35.6h29.4V22.7H12.9c.3-11.1 3.2-17.4 3.2-17.4zM47.5 23.1c.3-11.1 3.1-17.4 3.1-17.4H38.8c-3.9 3.9-4.2 11.1-4.2 17.4v35.6H64V23.1H47.5z"/></svg>
+				</div>
+				<div class="news-tip__content">
+					<p class="news-tip__text">Wij zijn altijd op zoek naar Het Laatste Nieuws.</p>
+					<a href="https://www.hln.be/4040" class="cta"
+						target="_self">
+						<span>Tip de redactie</span>
+						<span class="sr-only">Insturen nieuwstip</span>
+						<svg xmlns="http://www.w3.org/2000/svg" role="presentation" width="16" height="13" viewBox="0 0 64 64" class="icons">
+	<path d="M11.3 6.1L0 12.2l9.9 19.6L.3 51.6l11 6.4 20.6-26L11.3 6.1zm31.9 0l-11.3 6.1 10 19.6-9.7 19.6 11.2 6.4 20.6-26L43.2 6.1z"/>»</svg>
+
+					</a>
+				</div>
+			</div>
+			<hr class="footer__hr" />
+		</div>
+	</section>
+
+	<div class="footer__nav" data-nosnippet="true">
+		<div class="container">
+			<div class="footer__menu">
+				<section aria-label="Apps" class="footer-nav__item--last">
+					<h2 class="footer-nav__title">Apps</h2>
+					<ul class="footer__nav__list">
+						<li class="menu-list__item">
+							<a class="menu-list__link menu-list__link--appstore button"
+								data-gtm="footer/ad_apps/Download nu in Google Play"
+								rel="noreferrer"
+								href="https://play.google.com/store/apps/details?id=be.persgroep.android.news.mobilehln&amp;hl=nl&amp;utm_source=hln&amp;utm_campaign=google_play&amp;utm_medium=website&amp;utm_content=footer"
+								target="_blank">
+								<!-- htmllint tag-name-lowercase="false"  -->
+<svg xmlns="http://www.w3.org/2000/svg" width="184" height="57" viewBox="0 0 154 35" class="icons"><title >Android Playstore</title>
+	<path fill="#FFF" d="M40.95.86h1.3l1.79 5.65h.02L45.89.86h1.27L44.72 8h-1.39L40.95.86zm6.92 0h5.14v1.08h-3.89v1.87h3.6v1.02h-3.6v2.09h3.96V8h-5.21V.86zm6.3 0h3.41c.787 0 1.377.17 1.77.51.393.34.59.813.59 1.42 0 .34-.05.622-.15.845-.1.223-.217.403-.35.54-.133.137-.265.235-.395.295s-.225.1-.285.12v.02c.107.013.222.047.345.1.123.053.238.138.345.255.107.117.195.268.265.455s.105.42.105.7c0 .42.032.802.095 1.145.063.343.162.588.295.735h-1.34c-.093-.153-.148-.323-.165-.51-.017-.187-.025-.367-.025-.54 0-.327-.02-.608-.06-.845-.04-.237-.113-.433-.22-.59-.107-.157-.252-.272-.435-.345-.183-.073-.418-.11-.705-.11h-1.84V8h-1.25V.86zm1.25 3.25h2.05c.4 0 .703-.095.91-.285.207-.19.31-.475.31-.855 0-.227-.033-.412-.1-.555-.067-.143-.158-.255-.275-.335-.117-.08-.25-.133-.4-.16-.15-.027-.305-.04-.465-.04h-2.03v2.23zM61.21.86h1.25v3.25L65.64.86h1.54l-2.85 2.85L67.38 8h-1.56l-2.34-3.41-1.02 1.01V8h-1.25V.86zm6.85 0h3.41c.787 0 1.377.17 1.77.51.393.34.59.813.59 1.42 0 .34-.05.622-.15.845-.1.223-.217.403-.35.54-.133.137-.265.235-.395.295s-.225.1-.285.12v.02c.107.013.222.047.345.1.123.053.238.138.345.255.107.117.195.268.265.455s.105.42.105.7c0 .42.032.802.095 1.145.063.343.162.588.295.735h-1.34c-.093-.153-.148-.323-.165-.51-.017-.187-.025-.367-.025-.54 0-.327-.02-.608-.06-.845-.04-.237-.113-.433-.22-.59-.107-.157-.252-.272-.435-.345-.183-.073-.418-.11-.705-.11h-1.84V8h-1.25V.86zm1.25 3.25h2.05c.4 0 .703-.095.91-.285.207-.19.31-.475.31-.855 0-.227-.033-.412-.1-.555-.067-.143-.158-.255-.275-.335-.117-.08-.25-.133-.4-.16-.15-.027-.305-.04-.465-.04h-2.03v2.23zM75.1.86h1.25V8H75.1V.86zm6.69 4.84c0 .313-.027.617-.08.91-.053.293-.162.557-.325.79-.163.233-.4.42-.71.56-.31.14-.722.21-1.235.21-.38 0-.703-.058-.97-.175-.267-.117-.487-.277-.66-.48-.173-.203-.3-.445-.38-.725-.08-.28-.12-.583-.12-.91V5.5h1.25v.37c0 .407.068.722.205.945.137.223.395.335.775.335.2 0 .365-.03.495-.09s.233-.148.31-.265c.077-.117.128-.262.155-.435.027-.173.04-.37.04-.59V.86h1.25V5.7zM89.54 8h-.8l-.19-.84c-.333.38-.667.643-1 .79-.333.147-.717.22-1.15.22-.533 0-1.012-.098-1.435-.295-.423-.197-.782-.465-1.075-.805-.293-.34-.518-.737-.675-1.19-.157-.453-.235-.937-.235-1.45 0-.507.078-.987.235-1.44.157-.453.382-.85.675-1.19.293-.34.652-.61 1.075-.81.423-.2.902-.3 1.435-.3.387 0 .755.052 1.105.155.35.103.662.257.935.46s.5.458.68.765c.18.307.293.66.34 1.06h-1.22c-.033-.233-.105-.438-.215-.615s-.248-.325-.415-.445c-.167-.12-.353-.21-.56-.27-.207-.06-.423-.09-.65-.09-.38 0-.708.077-.985.23-.277.153-.502.358-.675.615-.173.257-.302.548-.385.875-.083.327-.125.66-.125 1 0 .34.042.673.125 1 .083.327.212.618.385.875.173.257.398.462.675.615.277.153.605.23.985.23.32.007.603-.035.85-.125s.455-.22.625-.39c.17-.17.298-.378.385-.625.087-.247.133-.52.14-.82h-1.9v-.95h3.04V8zm2.61-4.15h2.04c.3 0 .55-.085.75-.255.2-.17.3-.415.3-.735 0-.36-.09-.613-.27-.76-.18-.147-.44-.22-.78-.22h-2.04v1.97zM90.9.86h3.47c.64 0 1.153.147 1.54.44.387.293.58.737.58 1.33 0 .36-.088.668-.265.925-.177.257-.428.455-.755.595v.02c.44.093.773.302 1 .625.227.323.34.728.34 1.215 0 .28-.05.542-.15.785-.1.243-.257.453-.47.63-.213.177-.487.317-.82.42-.333.103-.73.155-1.19.155H90.9V.86zm1.25 6.12h2.21c.38 0 .675-.098.885-.295.21-.197.315-.475.315-.835 0-.353-.105-.625-.315-.815-.21-.19-.505-.285-.885-.285h-2.21v2.23zm7.7-6.12h1.33L103.93 8h-1.34l-.67-1.89h-2.85L98.4 8h-1.29L99.85.86zm-.44 4.3h2.18l-1.07-3.07h-.03l-1.08 3.07zm7.11-4.3h1.33L110.6 8h-1.34l-.67-1.89h-2.85L105.07 8h-1.29l2.74-7.14zm-.44 4.3h2.18l-1.07-3.07h-.03l-1.08 3.07zm5.2-4.3h3.41c.787 0 1.377.17 1.77.51.393.34.59.813.59 1.42 0 .34-.05.622-.15.845-.1.223-.217.403-.35.54-.133.137-.265.235-.395.295s-.225.1-.285.12v.02c.107.013.222.047.345.1.123.053.238.138.345.255.107.117.195.268.265.455s.105.42.105.7c0 .42.032.802.095 1.145.063.343.162.588.295.735h-1.34c-.093-.153-.148-.323-.165-.51-.017-.187-.025-.367-.025-.54 0-.327-.02-.608-.06-.845-.04-.237-.113-.433-.22-.59-.107-.157-.252-.272-.435-.345-.183-.073-.418-.11-.705-.11h-1.84V8h-1.25V.86zm1.25 3.25h2.05c.4 0 .703-.095.91-.285.207-.19.31-.475.31-.855 0-.227-.033-.412-.1-.555-.067-.143-.158-.255-.275-.335-.117-.08-.25-.133-.4-.16-.15-.027-.305-.04-.465-.04h-2.03v2.23zm7.76-3.25h1.3l1.79 5.65h.02l1.83-5.65h1.27L124.06 8h-1.39L120.29.86zm9.96.85c-.38 0-.708.077-.985.23-.277.153-.502.358-.675.615-.173.257-.302.548-.385.875-.083.327-.125.66-.125 1 0 .34.042.673.125 1 .083.327.212.618.385.875.173.257.398.462.675.615.277.153.605.23.985.23s.708-.077.985-.23c.277-.153.502-.358.675-.615.173-.257.302-.548.385-.875.083-.327.125-.66.125-1 0-.34-.042-.673-.125-1-.083-.327-.212-.618-.385-.875-.173-.257-.398-.462-.675-.615-.277-.153-.605-.23-.985-.23zm0-1.02c.533 0 1.012.1 1.435.3.423.2.782.47 1.075.81.293.34.518.737.675 1.19.157.453.235.933.235 1.44 0 .513-.078.997-.235 1.45-.157.453-.382.85-.675 1.19-.293.34-.652.608-1.075.805-.423.197-.902.295-1.435.295s-1.012-.098-1.435-.295c-.423-.197-.782-.465-1.075-.805-.293-.34-.518-.737-.675-1.19-.157-.453-.235-.937-.235-1.45 0-.507.078-.987.235-1.44.157-.453.382-.85.675-1.19.293-.34.652-.61 1.075-.81.423-.2.902-.3 1.435-.3zm7.6 1.02c-.38 0-.708.077-.985.23-.277.153-.502.358-.675.615-.173.257-.302.548-.385.875-.083.327-.125.66-.125 1 0 .34.042.673.125 1 .083.327.212.618.385.875.173.257.398.462.675.615.277.153.605.23.985.23s.708-.077.985-.23c.277-.153.502-.358.675-.615.173-.257.302-.548.385-.875.083-.327.125-.66.125-1 0-.34-.042-.673-.125-1-.083-.327-.212-.618-.385-.875-.173-.257-.398-.462-.675-.615-.277-.153-.605-.23-.985-.23zm0-1.02c.533 0 1.012.1 1.435.3.423.2.782.47 1.075.81.293.34.518.737.675 1.19.157.453.235.933.235 1.44 0 .513-.078.997-.235 1.45-.157.453-.382.85-.675 1.19-.293.34-.652.608-1.075.805-.423.197-.902.295-1.435.295s-1.012-.098-1.435-.295c-.423-.197-.782-.465-1.075-.805-.293-.34-.518-.737-.675-1.19-.157-.453-.235-.937-.235-1.45 0-.507.078-.987.235-1.44.157-.453.382-.85.675-1.19.293-.34.652-.61 1.075-.81.423-.2.902-.3 1.435-.3zm4.56.17h3.41c.787 0 1.377.17 1.77.51.393.34.59.813.59 1.42 0 .34-.05.622-.15.845-.1.223-.217.403-.35.54-.133.137-.265.235-.395.295s-.225.1-.285.12v.02c.107.013.222.047.345.1.123.053.238.138.345.255.107.117.195.268.265.455s.105.42.105.7c0 .42.032.802.095 1.145.063.343.162.588.295.735h-1.34c-.093-.153-.148-.323-.165-.51-.017-.187-.025-.367-.025-.54 0-.327-.02-.608-.06-.845-.04-.237-.113-.433-.22-.59-.107-.157-.252-.272-.435-.345-.183-.073-.418-.11-.705-.11h-1.84V8h-1.25V.86zm1.25 3.25h2.05c.4 0 .703-.095.91-.285.207-.19.31-.475.31-.855 0-.227-.033-.412-.1-.555-.067-.143-.158-.255-.275-.335-.117-.08-.25-.133-.4-.16-.15-.027-.305-.04-.465-.04h-2.03v2.23z"/>
+	<path fill="#FFF" d="M0 3.98c0-2.214 1.264-2.728 2.816-1.157l14.006 14.185-14.006 14.18C1.26 32.765 0 32.257 0 30.033V3.98zM22.816 11.36l-5.16 4.784L3.2 2.067M22.81 22.793l-5.177-4.88L3.2 32.404M23.776 12.078l5.445 2.63c2.523 1.22 2.566 3.27.09 4.586l-5.534 2.938-5.385-5.248 5.386-4.906z"/>
+	<g transform="translate(41 11)">
+		<g transform="translate(0 .1)">
+			<path fill="#FEFEFE" d="M16.597 10.14c0 2.292-.68 4.12-2.04 5.48-1.544 1.62-3.554 2.43-6.03 2.43-2.368 0-4.382-.822-6.04-2.466C.828 13.942 0 11.904 0 9.474S.828 5.01 2.488 3.367C4.145 1.723 6.158.902 8.528.902c1.176 0 2.3.228 3.37.687 1.07.457 1.926 1.07 2.567 1.833L13.02 4.868c-1.084-1.3-2.582-1.95-4.492-1.95-1.728 0-3.22.608-4.482 1.824-1.26 1.214-1.89 2.793-1.89 4.733 0 1.94.63 3.52 1.89 4.734 1.26 1.214 2.754 1.822 4.482 1.822 1.834 0 3.362-.612 4.585-1.834.795-.795 1.253-1.904 1.375-3.325h-5.96v-1.97h7.955c.076.427.114.84.114 1.237"/>
+		</g>
+		<path fill="#FEFEFE" d="M20.666 15.11c.726.74 1.585 1.11 2.58 1.11.992 0 1.852-.37 2.578-1.11.726-.742 1.09-1.724 1.09-2.946 0-1.223-.364-2.204-1.09-2.947-.726-.74-1.586-1.11-2.58-1.11-.993 0-1.852.37-2.578 1.11-.727.743-1.09 1.724-1.09 2.947 0 1.222.363 2.204 1.09 2.945m-1.57-7.222c1.085-1.138 2.467-1.708 4.15-1.708 1.68 0 3.063.57 4.15 1.708 1.083 1.14 1.625 2.564 1.625 4.276 0 1.712-.54 3.136-1.625 4.275-1.086 1.138-2.47 1.707-4.15 1.707-1.682 0-3.064-.57-4.15-1.708-1.084-1.14-1.627-2.564-1.627-4.276 0-1.712.543-3.137 1.628-4.276M32.93 15.11c.727.74 1.586 1.11 2.58 1.11.993 0 1.853-.37 2.58-1.11.725-.742 1.088-1.724 1.088-2.946 0-1.223-.363-2.204-1.09-2.947-.725-.74-1.585-1.11-2.578-1.11-.994 0-1.853.37-2.58 1.11-.726.743-1.088 1.724-1.088 2.947 0 1.222.362 2.204 1.09 2.945m-1.57-7.222C32.445 6.75 33.827 6.18 35.51 6.18c1.68 0 3.064.57 4.15 1.708 1.084 1.14 1.626 2.564 1.626 4.276 0 1.712-.542 3.136-1.626 4.275-1.086 1.138-2.47 1.707-4.15 1.707-1.682 0-3.064-.57-4.15-1.708-1.084-1.14-1.627-2.564-1.627-4.276 0-1.712.543-3.137 1.628-4.276M47.683 16.222c.993 0 1.838-.367 2.533-1.1.696-.734 1.043-1.72 1.043-2.958 0-1.238-.348-2.223-1.044-2.957-.695-.734-1.54-1.1-2.533-1.1-.98 0-1.82.37-2.52 1.11-.705.743-1.056 1.725-1.056 2.947 0 1.223.35 2.204 1.055 2.946.702.74 1.542 1.112 2.52 1.112m-.16 6.877c-1.33 0-2.414-.333-3.255-.998-.84-.665-1.444-1.426-1.81-2.28l1.925-.803c.214.61.608 1.122 1.18 1.534.573.413 1.226.62 1.96.62 1.162 0 2.075-.348 2.74-1.044.665-.695.997-1.638.997-2.83V16.22h-.093c-.367.55-.886 1.01-1.558 1.375-.674.367-1.43.55-2.27.55-1.453 0-2.706-.572-3.76-1.72-1.055-1.145-1.583-2.566-1.583-4.263 0-1.696.528-3.118 1.582-4.264 1.054-1.146 2.307-1.72 3.76-1.72.84 0 1.596.185 2.27.55.67.368 1.19.826 1.557 1.377h.092v-1.56h2.017v10.66c0 1.926-.56 3.39-1.674 4.39-1.115 1-2.476 1.502-4.08 1.502"/>
+		<path fill="#FEFEFE" d="M55.27 17.78h2.11V1.368h-2.11M67.374 10.812c-.046-.643-.34-1.253-.883-1.835-.542-.58-1.348-.87-2.418-.87-.78 0-1.455.244-2.028.732-.573.49-.967 1.146-1.18 1.972h6.51zm-3.026 7.336c-1.697 0-3.077-.567-4.138-1.697-1.063-1.13-1.594-2.56-1.594-4.286 0-1.636.516-3.04 1.548-4.218 1.03-1.176 2.35-1.765 3.954-1.765 1.666 0 3 .543 4 1.63 1 1.083 1.502 2.535 1.502 4.354l-.022.39h-8.873c.06 1.13.44 2.025 1.135 2.68.696.66 1.51.987 2.442.987 1.512.002 2.537-.64 3.072-1.924l1.88.78c-.367.87-.972 1.6-1.812 2.19-.84.587-1.872.882-3.094.882zM77.92 9.115h3.53c.885 0 1.596-.3 2.13-.895.536-.595.804-1.253.804-1.97 0-.72-.268-1.376-.803-1.972-.534-.597-1.245-.895-2.13-.895h-3.53v5.732zm0 8.665h-2.11V1.366h5.593c1.39 0 2.594.463 3.61 1.387 1.017.925 1.525 2.09 1.525 3.496 0 1.405-.508 2.57-1.524 3.495-1.017.925-2.22 1.387-3.61 1.387h-3.485v6.648zM87.914 17.78h2.108V1.368h-2.108M95.8 16.222c.87 0 1.66-.325 2.372-.975.71-.65 1.066-1.417 1.066-2.303-.596-.49-1.49-.734-2.682-.734-1.025 0-1.796.222-2.316.664-.52.445-.78.963-.78 1.56 0 .55.237.985.712 1.307.473.32 1.016.482 1.627.482m-.345 1.926c-1.192 0-2.19-.345-2.99-1.032-.804-.688-1.205-1.597-1.205-2.728 0-1.223.474-2.182 1.422-2.877.947-.694 2.116-1.042 3.507-1.042 1.237 0 2.254.23 3.048.688v-.322c0-.825-.283-1.486-.848-1.982-.566-.497-1.26-.745-2.086-.745-.61 0-1.166.145-1.662.435-.497.29-.837.688-1.02 1.192l-1.927-.825c.26-.673.772-1.296 1.537-1.87.763-.573 1.772-.86 3.026-.86 1.437 0 2.628.422 3.576 1.262.947.84 1.42 2.025 1.42 3.553v6.786H99.24v-1.558h-.09c-.842 1.283-2.073 1.926-3.693 1.926M105.84 22.73h-2.177l2.614-5.66-4.63-10.524h2.29l3.348 8.07h.046l3.256-8.07h2.292"/>
+	</g>
+</svg>
+							</a>
+						</li>
+						<li class="menu-list__item">
+							<a class="menu-list__link menu-list__link--appstore button"
+								data-gtm="footer/ad_apps/Download nu in de App Store"
+								rel="noreferrer"
+								href="https://itunes.apple.com/be/app/hln-be/id403025567?mt=8&amp;utm_source=hln&amp;utm_campaign=apple_appstore&amp;utm_medium=website&amp;utm_content=footer"
+								target="_blank">
+								<!-- htmllint tag-name-lowercase="false"  -->
+<svg xmlns="http://www.w3.org/2000/svg" width="184" height="57" viewBox="0 0 147 35" class="icons"><title >Apple Appstore</title>
+	<path fill="#FEFEFE" d="M13.867 3.696C15.88 1.013 18.677 1 18.677 1s.414 2.523-1.584 4.953c-2.134 2.595-4.56 2.17-4.56 2.17s-.455-2.04 1.334-4.427"/>
+	<g transform="translate(0 8.418)">
+		<path fill="#FEFEFE" d="M12.695 1.473c1.035 0 2.956-1.44 5.457-1.44 4.304 0 5.997 3.1 5.997 3.1s-3.313 1.712-3.313 5.87c0 4.69 4.125 6.306 4.125 6.306s-2.883 8.213-6.778 8.213c-1.79 0-3.18-1.22-5.065-1.22-1.922 0-3.828 1.265-5.07 1.265-3.557 0-8.05-7.79-8.05-14.054C0 3.352 3.803.12 7.37.12c2.32 0 4.12 1.353 5.325 1.353"/>
+	</g>
+	<path fill="#FFF" d="M40.95.86h1.3l1.79 5.65h.02L45.89.86h1.27L44.72 8h-1.39L40.95.86zm6.92 0h5.14v1.08h-3.89v1.87h3.6v1.02h-3.6v2.09h3.96V8h-5.21V.86zm6.3 0h3.41c.787 0 1.377.17 1.77.51.393.34.59.813.59 1.42 0 .34-.05.622-.15.845-.1.223-.217.403-.35.54-.133.137-.265.235-.395.295s-.225.1-.285.12v.02c.107.013.222.047.345.1.123.053.238.138.345.255.107.117.195.268.265.455s.105.42.105.7c0 .42.032.802.095 1.145.063.343.162.588.295.735h-1.34c-.093-.153-.148-.323-.165-.51-.017-.187-.025-.367-.025-.54 0-.327-.02-.608-.06-.845-.04-.237-.113-.433-.22-.59-.107-.157-.252-.272-.435-.345-.183-.073-.418-.11-.705-.11h-1.84V8h-1.25V.86zm1.25 3.25h2.05c.4 0 .703-.095.91-.285.207-.19.31-.475.31-.855 0-.227-.033-.412-.1-.555-.067-.143-.158-.255-.275-.335-.117-.08-.25-.133-.4-.16-.15-.027-.305-.04-.465-.04h-2.03v2.23zM61.21.86h1.25v3.25L65.64.86h1.54l-2.85 2.85L67.38 8h-1.56l-2.34-3.41-1.02 1.01V8h-1.25V.86zm6.85 0h3.41c.787 0 1.377.17 1.77.51.393.34.59.813.59 1.42 0 .34-.05.622-.15.845-.1.223-.217.403-.35.54-.133.137-.265.235-.395.295s-.225.1-.285.12v.02c.107.013.222.047.345.1.123.053.238.138.345.255.107.117.195.268.265.455s.105.42.105.7c0 .42.032.802.095 1.145.063.343.162.588.295.735h-1.34c-.093-.153-.148-.323-.165-.51-.017-.187-.025-.367-.025-.54 0-.327-.02-.608-.06-.845-.04-.237-.113-.433-.22-.59-.107-.157-.252-.272-.435-.345-.183-.073-.418-.11-.705-.11h-1.84V8h-1.25V.86zm1.25 3.25h2.05c.4 0 .703-.095.91-.285.207-.19.31-.475.31-.855 0-.227-.033-.412-.1-.555-.067-.143-.158-.255-.275-.335-.117-.08-.25-.133-.4-.16-.15-.027-.305-.04-.465-.04h-2.03v2.23zM75.1.86h1.25V8H75.1V.86zm6.69 4.84c0 .313-.027.617-.08.91-.053.293-.162.557-.325.79-.163.233-.4.42-.71.56-.31.14-.722.21-1.235.21-.38 0-.703-.058-.97-.175-.267-.117-.487-.277-.66-.48-.173-.203-.3-.445-.38-.725-.08-.28-.12-.583-.12-.91V5.5h1.25v.37c0 .407.068.722.205.945.137.223.395.335.775.335.2 0 .365-.03.495-.09s.233-.148.31-.265c.077-.117.128-.262.155-.435.027-.173.04-.37.04-.59V.86h1.25V5.7zM89.54 8h-.8l-.19-.84c-.333.38-.667.643-1 .79-.333.147-.717.22-1.15.22-.533 0-1.012-.098-1.435-.295-.423-.197-.782-.465-1.075-.805-.293-.34-.518-.737-.675-1.19-.157-.453-.235-.937-.235-1.45 0-.507.078-.987.235-1.44.157-.453.382-.85.675-1.19.293-.34.652-.61 1.075-.81.423-.2.902-.3 1.435-.3.387 0 .755.052 1.105.155.35.103.662.257.935.46s.5.458.68.765c.18.307.293.66.34 1.06h-1.22c-.033-.233-.105-.438-.215-.615s-.248-.325-.415-.445c-.167-.12-.353-.21-.56-.27-.207-.06-.423-.09-.65-.09-.38 0-.708.077-.985.23-.277.153-.502.358-.675.615-.173.257-.302.548-.385.875-.083.327-.125.66-.125 1 0 .34.042.673.125 1 .083.327.212.618.385.875.173.257.398.462.675.615.277.153.605.23.985.23.32.007.603-.035.85-.125s.455-.22.625-.39c.17-.17.298-.378.385-.625.087-.247.133-.52.14-.82h-1.9v-.95h3.04V8zm2.61-4.15h2.04c.3 0 .55-.085.75-.255.2-.17.3-.415.3-.735 0-.36-.09-.613-.27-.76-.18-.147-.44-.22-.78-.22h-2.04v1.97zM90.9.86h3.47c.64 0 1.153.147 1.54.44.387.293.58.737.58 1.33 0 .36-.088.668-.265.925-.177.257-.428.455-.755.595v.02c.44.093.773.302 1 .625.227.323.34.728.34 1.215 0 .28-.05.542-.15.785-.1.243-.257.453-.47.63-.213.177-.487.317-.82.42-.333.103-.73.155-1.19.155H90.9V.86zm1.25 6.12h2.21c.38 0 .675-.098.885-.295.21-.197.315-.475.315-.835 0-.353-.105-.625-.315-.815-.21-.19-.505-.285-.885-.285h-2.21v2.23zm7.7-6.12h1.33L103.93 8h-1.34l-.67-1.89h-2.85L98.4 8h-1.29L99.85.86zm-.44 4.3h2.18l-1.07-3.07h-.03l-1.08 3.07zm7.11-4.3h1.33L110.6 8h-1.34l-.67-1.89h-2.85L105.07 8h-1.29l2.74-7.14zm-.44 4.3h2.18l-1.07-3.07h-.03l-1.08 3.07zm5.2-4.3h3.41c.787 0 1.377.17 1.77.51.393.34.59.813.59 1.42 0 .34-.05.622-.15.845-.1.223-.217.403-.35.54-.133.137-.265.235-.395.295s-.225.1-.285.12v.02c.107.013.222.047.345.1.123.053.238.138.345.255.107.117.195.268.265.455s.105.42.105.7c0 .42.032.802.095 1.145.063.343.162.588.295.735h-1.34c-.093-.153-.148-.323-.165-.51-.017-.187-.025-.367-.025-.54 0-.327-.02-.608-.06-.845-.04-.237-.113-.433-.22-.59-.107-.157-.252-.272-.435-.345-.183-.073-.418-.11-.705-.11h-1.84V8h-1.25V.86zm1.25 3.25h2.05c.4 0 .703-.095.91-.285.207-.19.31-.475.31-.855 0-.227-.033-.412-.1-.555-.067-.143-.158-.255-.275-.335-.117-.08-.25-.133-.4-.16-.15-.027-.305-.04-.465-.04h-2.03v2.23zM121.1.86h1.25V8h-1.25V.86zm2.73 0h1.32l3.26 5.26h.02V.86h1.19V8h-1.32l-3.25-5.25h-.03V8h-1.19V.86zm10.05 0h2.96c.547 0 1.02.093 1.42.28.4.187.727.442.98.765s.442.702.565 1.135c.123.433.185.897.185 1.39 0 .493-.062.957-.185 1.39-.123.433-.312.812-.565 1.135-.253.323-.58.578-.98.765-.4.187-.873.28-1.42.28h-2.96V.86zm1.25 6.12h1.23c.487 0 .885-.065 1.195-.195.31-.13.553-.31.73-.54.177-.23.297-.5.36-.81.063-.31.095-.645.095-1.005 0-.36-.032-.695-.095-1.005-.063-.31-.183-.58-.36-.81-.177-.23-.42-.41-.73-.54-.31-.13-.708-.195-1.195-.195h-1.23v5.1zM141.1.86h5.14v1.08h-3.89v1.87h3.6v1.02h-3.6v2.09h3.96V8h-5.21V.86z"/>
+	<path fill="#FEFEFE" d="M121.166 25.189c-.635 1.08-1.523 1.61-2.647 1.61-1.157.002-2.05-.524-2.684-1.58-.535-.87-.797-1.914-.797-3.137 0-1.257.26-2.32.796-3.19.617-1.057 1.52-1.582 2.704-1.582 1.15.002 2.033.527 2.662 1.584.526.87.79 1.92.79 3.137 0 1.218-.274 2.276-.826 3.16m-2.518-10.04c-2.025 0-3.63.648-4.828 1.967-1.195 1.312-1.79 3.002-1.79 5.062 0 1.966.576 3.607 1.734 4.9 1.157 1.295 2.717 1.942 4.674 1.942 2.02 0 3.644-.674 4.87-2.02 1.168-1.32 1.75-2.99 1.75-5.04 0-1.99-.568-3.617-1.696-4.87-1.186-1.3-2.754-1.942-4.714-1.942M131.08 15.86c-.68.525-1.17 1.23-1.48 2.104h-.08l-.11-2.547h-2.572c.053 1.263.08 2.66.08 4.184v9.12h2.955v-6.98c0-1.066.245-1.93.74-2.624.567-.782 1.367-1.175 2.407-1.175.327 0 .64.024.93.076V15.2c-.214-.035-.462-.05-.733-.05-.766 0-1.48.23-2.138.71"/>
+	<g transform="translate(134 15.116)">
+		<path fill="#FEFEFE" d="M3.73 5.555c.09-.89.384-1.657.876-2.294.605-.797 1.39-1.21 2.353-1.21 1.056 0 1.842.418 2.356 1.236.4.642.588 1.396.572 2.27H3.73zm8.978.772c0-1.662-.395-3.06-1.177-4.194C10.55.71 9.1 0 7.18 0c-1.95 0-3.5.71-4.655 2.133C1.43 3.47.88 5.137.88 7.148c0 2.042.594 3.67 1.77 4.884 1.177 1.213 2.797 1.816 4.855 1.816 1.72 0 3.21-.268 4.464-.82l-.467-2.055c-1.077.426-2.27.635-3.586.635-1.187 0-2.153-.31-2.9-.933-.823-.692-1.252-1.692-1.287-3.005h8.87c.07-.37.108-.818.108-1.343z"/>
+	</g>
+	<path fill="#FEFEFE" d="M107.918 12.107l-2.898.875v2.436h-1.942v2.214h1.942v6.71c0 1.68.327 2.876.99 3.584.654.717 1.573 1.068 2.735 1.068.95 0 1.714-.11 2.3-.33l-.085-2.24c-.35.09-.783.13-1.313.13-1.15 0-1.73-.814-1.73-2.455V17.63h3.264v-2.214h-3.262v-3.31zM67.14 25.41c-.62.86-1.493 1.285-2.603 1.285-.948 0-1.72-.335-2.312-.995-.597-.666-.888-1.484-.888-2.453v-2.215c0-.238.045-.537.135-.904.184-.785.57-1.42 1.164-1.91.595-.483 1.253-.723 1.982-.723 1.078 0 1.934.446 2.576 1.318.585.837.873 1.906.873 3.198 0 1.41-.308 2.542-.928 3.4m-1.56-10.26c-2.01 0-3.504.792-4.495 2.374h-.05l-.164-2.107h-2.6c.075 1.494.113 2.95.113 4.372v14.326h2.954V27.13c.77 1.263 2.033 1.89 3.798 1.89 1.63 0 3-.583 4.1-1.746 1.233-1.316 1.847-3.097 1.847-5.367 0-2.023-.526-3.66-1.572-4.898-1.056-1.246-2.36-1.86-3.93-1.86"/>
+	<g transform="translate(41 10.116)">
+		<path fill="#FEFEFE" d="M5.226 10.915L6.76 6.097c.404-1.536.693-2.692.878-3.476h.052c.454 1.822.767 2.982.935 3.477l1.554 4.818H5.225zm.71-10.76L0 18.606h3.063l1.644-5.416h5.996l1.723 5.414h3.15L9.606.156h-3.67z"/>
+	</g>
+	<g transform="translate(90 9.116)">
+		<path fill="#FEFEFE" d="M7.766 8.984c-1.29-.51-2.186-.982-2.68-1.418-.564-.48-.847-1.086-.847-1.81 0-.656.246-1.213.737-1.676.588-.498 1.405-.763 2.447-.763 1.32 0 2.5.286 3.54.85l.746-2.41C10.595 1.177 9.2.883 7.52.883c-1.88 0-3.39.485-4.53 1.45-1.144.967-1.707 2.21-1.707 3.725 0 2.317 1.616 4.078 4.842 5.28 1.188.44 2.03.912 2.545 1.422.508.514.764 1.144.764 1.882 0 .85-.31 1.52-.928 2.02-.62.498-1.485.752-2.603.752-1.548 0-2.97-.387-4.265-1.15L.95 18.727c1.203.763 2.793 1.148 4.783 1.148 2.146 0 3.82-.536 5.027-1.614 1.087-.98 1.636-2.26 1.636-3.83 0-1.276-.376-2.342-1.122-3.2-.75-.86-1.915-1.612-3.508-2.246"/>
+	</g>
+	<path fill="#FEFEFE" d="M81.756 25.41c-.62.86-1.486 1.285-2.605 1.285-.944 0-1.716-.335-2.308-.995-.596-.666-.888-1.484-.888-2.453v-2.215c0-.238.043-.537.134-.904.184-.785.573-1.42 1.166-1.91.596-.483 1.25-.723 1.983-.723 1.075 0 1.933.446 2.577 1.318.582.837.876 1.906.876 3.198 0 1.41-.312 2.542-.934 3.4m-1.562-10.26c-2.007 0-3.498.792-4.49 2.374h-.05l-.172-2.107h-2.594c.07 1.494.11 2.95.11 4.372v14.326h2.956V27.13c.77 1.263 2.035 1.89 3.795 1.89 1.634 0 2.998-.583 4.1-1.746 1.233-1.316 1.847-3.097 1.847-5.367 0-2.023-.523-3.66-1.575-4.898-1.05-1.246-2.358-1.86-3.928-1.86"/>
+</svg>
+
+							</a>
+						</li>
+					</ul>
+				</section>
+
+				<div class="footer-nav__item--rest">
+					
+						<div class="footer-nav__item">
+							
+								<nav aria-label="Algemeen">
+									<h2 class="footer-nav__title">Algemeen</h2>
+									<ul class="footer__nav__list">
+										<li class="menu-list__item">
+											
+												<a class="menu-list__link"
+													data-gtm="footer/algemeen/Vragen over uw abonnement?"
+													href="https://www.hln.be/service/welkom"
+													target="_self">Vragen over uw abonnement?</a>
+											
+											
+										</li>
+										<li class="menu-list__item">
+											
+												<a class="menu-list__link"
+													data-gtm="footer/algemeen/Abonnementsvoorwaarden"
+													href="https://privacy.dpgmedia.be/nl/document/ABONNEMENTSVOORWAARDEN-ALGEMEEN-DPGMEDIA-BE?utm_source=HLN&amp;utm_medium=tekstlink&amp;utm_content=footer&amp;utm_campaign=abonnementsvoorwaarden"
+													target="_blank"
+													rel="noreferrer">Abonnementsvoorwaarden</a>
+											
+											
+										</li>
+										<li class="menu-list__item">
+											
+												<a class="menu-list__link"
+													data-gtm="footer/algemeen/Gebruiksvoorwaarden"
+													href="https://privacy.dpgmedia.be/nl/document/terms-of-use?utm_source=HLN&amp;utm_medium=tekstlink&amp;utm_content=footer&amp;utm_campaign=accountvoorwaarden"
+													target="_blank"
+													rel="noreferrer">Gebruiksvoorwaarden</a>
+											
+											
+										</li>
+										<li class="menu-list__item">
+											
+												<a class="menu-list__link"
+													data-gtm="footer/algemeen/Privacybeleid"
+													href="https://privacy.dpgmedia.be/nl/document/privacy-policy?utm_source=HLN&amp;utm_medium=tekstlink&amp;utm_content=footer&amp;utm_campaign=privacy"
+													target="_blank"
+													rel="noreferrer">Privacybeleid</a>
+											
+											
+										</li>
+										<li class="menu-list__item">
+											
+												<a class="menu-list__link"
+													data-gtm="footer/algemeen/Toegankelijkheidsverklaring"
+													href="https://www.hln.be/toegankelijkheidsverklaring"
+													target="_blank"
+													rel="noreferrer">Toegankelijkheidsverklaring</a>
+											
+											
+										</li>
+										<li class="menu-list__item">
+											
+												<a class="menu-list__link"
+													data-gtm="footer/algemeen/Wedstrijdreglement"
+													href="https://privacy.dpgmedia.be/nl/document/contest-rules"
+													target="_blank"
+													rel="noreferrer">Wedstrijdreglement</a>
+											
+											
+										</li>
+										<li class="menu-list__item">
+											
+												<a class="menu-list__link"
+													data-gtm="footer/algemeen/Cookiebeleid"
+													href="https://privacy.dpgmedia.be/nl/document/cookie-policy"
+													target="_blank"
+													rel="noreferrer">Cookiebeleid</a>
+											
+											
+										</li>
+										<li class="menu-list__item">
+											
+												<a class="menu-list__link"
+													data-gtm="footer/algemeen/Vacatures"
+													href="https://www.dpgmediagroup.com/nl-BE/werken-bij-dpgmedia"
+													target="_blank"
+													rel="noreferrer">Vacatures</a>
+											
+											
+										</li>
+										<li class="menu-list__item">
+											
+												<a class="menu-list__link"
+													data-gtm="footer/algemeen/Vraag voor de redactie?"
+													href="https://www.hln.be/4040"
+													target="_self">Vraag voor de redactie?</a>
+											
+											
+										</li>
+										<li class="menu-list__item">
+											
+												<a class="menu-list__link"
+													data-gtm="footer/algemeen/Adverteren"
+													href="https://www.dpgmediagroup.com/nl-BE/adverteren/ad-hln?utm_source=hln&amp;utm_medium=website"
+													target="_blank"
+													rel="noreferrer">Adverteren</a>
+											
+											
+										</li>
+										<li class="menu-list__item">
+											
+												<a class="menu-list__link"
+													data-gtm="footer/algemeen/Partners"
+													href="https://www.hln.be/partnersites"
+													target="_blank"
+													rel="noreferrer">Partners</a>
+											
+											
+										</li>
+										<li class="menu-list__item">
+											
+											
+												<button class="menu-list__button"
+													onclick="if(_privacy &amp;&amp; _privacy.openModal) _privacy.openModal();" data-gtm="footer/algemeen/Privacy-instellingen">Privacy-instellingen</button>
+											
+										</li>
+									</ul>
+								</nav>
+							
+						</div>
+					
+						<div class="footer-nav__item">
+							
+								<nav aria-label="Service">
+									<h2 class="footer-nav__title">Service</h2>
+									<ul class="footer__nav__list">
+										<li class="menu-list__item">
+											
+												<a class="menu-list__link"
+													data-gtm="footer/service/Neem een abonnement"
+													href="https://abonnement.hln.be/?otag=t2ejen&amp;utm_source=hl&amp;utm_medium=interne_referral&amp;utm_content=footer&amp;mid=CAM-koj66x|TCH-koj6xr|TCO-lx2qmx|CTY-5g6nol|CCO-5g6nol|PRG-4o96wo"
+													target="_blank"
+													rel="noreferrer">Neem een abonnement</a>
+											
+											
+										</li>
+										<li class="menu-list__item">
+											
+												<a class="menu-list__link"
+													data-gtm="footer/service/Klantenservice"
+													href="https://mijnomgeving.hln.be"
+													target="_blank"
+													rel="noreferrer">Klantenservice</a>
+											
+											
+										</li>
+										<li class="menu-list__item">
+											
+												<a class="menu-list__link"
+													data-gtm="footer/service/Bezorgklacht indienen"
+													href="https://mijnomgeving.hln.be/bezorgservice/klacht"
+													target="_blank"
+													rel="noreferrer">Bezorgklacht indienen</a>
+											
+											
+										</li>
+										<li class="menu-list__item">
+											
+												<a class="menu-list__link"
+													data-gtm="footer/service/Bezorging pauzeren of tijdelijk wijzigen"
+													href="https://mijnomgeving.hln.be/vakantieservice/doorgeven"
+													target="_blank"
+													rel="noreferrer">Bezorging pauzeren of tijdelijk wijzigen</a>
+											
+											
+										</li>
+										<li class="menu-list__item">
+											
+												<a class="menu-list__link"
+													data-gtm="footer/service/Bezorgadres wijzigen"
+													href="https://mijnomgeving.hln.be/verhuisservice/doorgeven"
+													target="_blank"
+													rel="noreferrer">Bezorgadres wijzigen</a>
+											
+											
+										</li>
+										<li class="menu-list__item">
+											
+												<a class="menu-list__link"
+													data-gtm="footer/service/Audiokrant"
+													href="https://www.kamelego.be/dpgmedia"
+													target="_blank"
+													rel="noreferrer">Audiokrant</a>
+											
+											
+										</li>
+									</ul>
+								</nav>
+							
+								<nav aria-label="Mijn omgeving">
+									<h2 class="footer-nav__title">Mijn omgeving</h2>
+									<ul class="footer__nav__list">
+										<li class="menu-list__item">
+											
+												<a class="menu-list__link"
+													data-gtm="footer/mijn_omgeving/Mijn account"
+													href="https://mijnomgeving.hln.be/"
+													target="_blank"
+													rel="noreferrer">Mijn account</a>
+											
+											
+										</li>
+										<li class="menu-list__item">
+											
+												<a class="menu-list__link"
+													data-gtm="footer/mijn_omgeving/Mijn abonnement(en)"
+													href="https://mijnomgeving.hln.be/abonnementen"
+													target="_blank"
+													rel="noreferrer">Mijn abonnement(en)</a>
+											
+											
+										</li>
+									</ul>
+								</nav>
+							
+						</div>
+					
+						<div class="footer-nav__item">
+							
+								<nav aria-label="Meer HLN">
+									<h2 class="footer-nav__title">Meer HLN</h2>
+									<ul class="footer__nav__list">
+										<li class="menu-list__item">
+											
+												<a class="menu-list__link"
+													data-gtm="footer/meer_hln/Facebook"
+													href="https://www.facebook.com/hln.be"
+													target="_blank"
+													rel="noreferrer">Facebook</a>
+											
+											
+										</li>
+										<li class="menu-list__item">
+											
+												<a class="menu-list__link"
+													data-gtm="footer/meer_hln/Twitter"
+													href="https://twitter.com/HLN_BE"
+													target="_blank"
+													rel="noreferrer">Twitter</a>
+											
+											
+										</li>
+										<li class="menu-list__item">
+											
+												<a class="menu-list__link"
+													data-gtm="footer/meer_hln/Instagram"
+													href="https://www.instagram.com/hln_be/"
+													target="_blank"
+													rel="noreferrer">Instagram</a>
+											
+											
+										</li>
+										<li class="menu-list__item">
+											
+												<a class="menu-list__link"
+													data-gtm="footer/meer_hln/Nieuwsbrieven"
+													href="https://www.hln.be/nieuwsbrieven"
+													target="_blank"
+													rel="noreferrer">Nieuwsbrieven</a>
+											
+											
+										</li>
+									</ul>
+								</nav>
+							
+						</div>
+					
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="footer__mobile-nav" data-nosnippet="true">
+		<div class="footer__mobile-menu">
+			<ul class="footer__mobile-menu__list">
+				<li class="footer__mobile-menu__list-item">
+					<a href="https://www.hln.be/4040" class="cta cta--icons-complementary"
+						target="_self">
+						<h2 class="footer-menu__title">
+							<label class="footer__mobile-sub-menu-label">
+								<div class="trigger-icon--collapsed"><svg xmlns="http://www.w3.org/2000/svg" role="presentation" width="15" height="15" viewBox="0 0 64 64" class="icons">
+	<path d="M11.3 6.1L0 12.2l9.9 19.6L.3 51.6l11 6.4 20.6-26L11.3 6.1zm31.9 0l-11.3 6.1 10 19.6-9.7 19.6 11.2 6.4 20.6-26L43.2 6.1z"/>»</svg>
+</div>
+								<span>Tip de redactie</span>
+							</label>
+						</h2>
+					</a>
+				</li>
+				
+					<li>
+						<input type="checkbox" id="trigger-algemeen" name="toggle-footer-menu" class="toggle-mobile trigger--hide" />
+						<div class="toggle-mobile__wrapper">
+							<h2 id="service" class="footer-menu__title">
+								<label class="footer__mobile-sub-menu-label"
+									for="trigger-algemeen">
+									<div class="trigger-icon--collapsed"><svg xmlns="http://www.w3.org/2000/svg" role="presentation" width="15" height="15" viewBox="0 0 64 64" class="icons">
+	<path d="M11.3 6.1L0 12.2l9.9 19.6L.3 51.6l11 6.4 20.6-26L11.3 6.1zm31.9 0l-11.3 6.1 10 19.6-9.7 19.6 11.2 6.4 20.6-26L43.2 6.1z"/>»</svg>
+</div>
+									<div class="trigger-icon--expanded"><svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 15 4" class="icons"><title >Minder</title><path d="M0 0h15v4H0z"/></svg></div>
+									<span>Algemeen</span>
+								</label>
+							</h2>
+							<ul class="footer__mobile-sub-menu">
+								<li class="footer__mobile-sub-menu__item">
+									
+										<a class="menu-list__link"
+											data-gtm="footer/algemeen/Vragen over uw abonnement?"
+											href="https://www.hln.be/service/welkom"
+											target="_self">Vragen over uw abonnement?</a>
+									
+									
+								</li>
+								<li class="footer__mobile-sub-menu__item">
+									
+										<a class="menu-list__link"
+											data-gtm="footer/algemeen/Abonnementsvoorwaarden"
+											href="https://privacy.dpgmedia.be/nl/document/ABONNEMENTSVOORWAARDEN-ALGEMEEN-DPGMEDIA-BE?utm_source=HLN&amp;utm_medium=tekstlink&amp;utm_content=footer&amp;utm_campaign=abonnementsvoorwaarden"
+											target="_blank"
+											rel="noreferrer">Abonnementsvoorwaarden</a>
+									
+									
+								</li>
+								<li class="footer__mobile-sub-menu__item">
+									
+										<a class="menu-list__link"
+											data-gtm="footer/algemeen/Gebruiksvoorwaarden"
+											href="https://privacy.dpgmedia.be/nl/document/terms-of-use?utm_source=HLN&amp;utm_medium=tekstlink&amp;utm_content=footer&amp;utm_campaign=accountvoorwaarden"
+											target="_blank"
+											rel="noreferrer">Gebruiksvoorwaarden</a>
+									
+									
+								</li>
+								<li class="footer__mobile-sub-menu__item">
+									
+										<a class="menu-list__link"
+											data-gtm="footer/algemeen/Privacybeleid"
+											href="https://privacy.dpgmedia.be/nl/document/privacy-policy?utm_source=HLN&amp;utm_medium=tekstlink&amp;utm_content=footer&amp;utm_campaign=privacy"
+											target="_blank"
+											rel="noreferrer">Privacybeleid</a>
+									
+									
+								</li>
+								<li class="footer__mobile-sub-menu__item">
+									
+										<a class="menu-list__link"
+											data-gtm="footer/algemeen/Toegankelijkheidsverklaring"
+											href="https://www.hln.be/toegankelijkheidsverklaring"
+											target="_blank"
+											rel="noreferrer">Toegankelijkheidsverklaring</a>
+									
+									
+								</li>
+								<li class="footer__mobile-sub-menu__item">
+									
+										<a class="menu-list__link"
+											data-gtm="footer/algemeen/Wedstrijdreglement"
+											href="https://privacy.dpgmedia.be/nl/document/contest-rules"
+											target="_blank"
+											rel="noreferrer">Wedstrijdreglement</a>
+									
+									
+								</li>
+								<li class="footer__mobile-sub-menu__item">
+									
+										<a class="menu-list__link"
+											data-gtm="footer/algemeen/Cookiebeleid"
+											href="https://privacy.dpgmedia.be/nl/document/cookie-policy"
+											target="_blank"
+											rel="noreferrer">Cookiebeleid</a>
+									
+									
+								</li>
+								<li class="footer__mobile-sub-menu__item">
+									
+										<a class="menu-list__link"
+											data-gtm="footer/algemeen/Vacatures"
+											href="https://www.dpgmediagroup.com/nl-BE/werken-bij-dpgmedia"
+											target="_blank"
+											rel="noreferrer">Vacatures</a>
+									
+									
+								</li>
+								<li class="footer__mobile-sub-menu__item">
+									
+										<a class="menu-list__link"
+											data-gtm="footer/algemeen/Vraag voor de redactie?"
+											href="https://www.hln.be/4040"
+											target="_self">Vraag voor de redactie?</a>
+									
+									
+								</li>
+								<li class="footer__mobile-sub-menu__item">
+									
+										<a class="menu-list__link"
+											data-gtm="footer/algemeen/Adverteren"
+											href="https://www.dpgmediagroup.com/nl-BE/adverteren/ad-hln?utm_source=hln&amp;utm_medium=website"
+											target="_blank"
+											rel="noreferrer">Adverteren</a>
+									
+									
+								</li>
+								<li class="footer__mobile-sub-menu__item">
+									
+										<a class="menu-list__link"
+											data-gtm="footer/algemeen/Partners"
+											href="https://www.hln.be/partnersites"
+											target="_blank"
+											rel="noreferrer">Partners</a>
+									
+									
+								</li>
+								<li class="footer__mobile-sub-menu__item">
+									
+									
+										<button class="menu-list__button"
+											onclick="if(_privacy &amp;&amp; _privacy.openModal) _privacy.openModal();" data-gtm="footer/algemeen/Privacy-instellingen">Privacy-instellingen</button>
+									
+								</li>
+							</ul>
+						</div>
+					</li>
+				
+					<li>
+						<input type="checkbox" id="trigger-service" name="toggle-footer-menu" class="toggle-mobile trigger--hide" />
+						<div class="toggle-mobile__wrapper">
+							<h2 id="service" class="footer-menu__title">
+								<label class="footer__mobile-sub-menu-label"
+									for="trigger-service">
+									<div class="trigger-icon--collapsed"><svg xmlns="http://www.w3.org/2000/svg" role="presentation" width="15" height="15" viewBox="0 0 64 64" class="icons">
+	<path d="M11.3 6.1L0 12.2l9.9 19.6L.3 51.6l11 6.4 20.6-26L11.3 6.1zm31.9 0l-11.3 6.1 10 19.6-9.7 19.6 11.2 6.4 20.6-26L43.2 6.1z"/>»</svg>
+</div>
+									<div class="trigger-icon--expanded"><svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 15 4" class="icons"><title >Minder</title><path d="M0 0h15v4H0z"/></svg></div>
+									<span>Service</span>
+								</label>
+							</h2>
+							<ul class="footer__mobile-sub-menu">
+								<li class="footer__mobile-sub-menu__item">
+									
+										<a class="menu-list__link"
+											data-gtm="footer/service/Neem een abonnement"
+											href="https://abonnement.hln.be/?otag=t2ejen&amp;utm_source=hl&amp;utm_medium=interne_referral&amp;utm_content=footer&amp;mid=CAM-koj66x|TCH-koj6xr|TCO-lx2qmx|CTY-5g6nol|CCO-5g6nol|PRG-4o96wo"
+											target="_blank"
+											rel="noreferrer">Neem een abonnement</a>
+									
+									
+								</li>
+								<li class="footer__mobile-sub-menu__item">
+									
+										<a class="menu-list__link"
+											data-gtm="footer/service/Klantenservice"
+											href="https://mijnomgeving.hln.be"
+											target="_blank"
+											rel="noreferrer">Klantenservice</a>
+									
+									
+								</li>
+								<li class="footer__mobile-sub-menu__item">
+									
+										<a class="menu-list__link"
+											data-gtm="footer/service/Bezorgklacht indienen"
+											href="https://mijnomgeving.hln.be/bezorgservice/klacht"
+											target="_blank"
+											rel="noreferrer">Bezorgklacht indienen</a>
+									
+									
+								</li>
+								<li class="footer__mobile-sub-menu__item">
+									
+										<a class="menu-list__link"
+											data-gtm="footer/service/Bezorging pauzeren of tijdelijk wijzigen"
+											href="https://mijnomgeving.hln.be/vakantieservice/doorgeven"
+											target="_blank"
+											rel="noreferrer">Bezorging pauzeren of tijdelijk wijzigen</a>
+									
+									
+								</li>
+								<li class="footer__mobile-sub-menu__item">
+									
+										<a class="menu-list__link"
+											data-gtm="footer/service/Bezorgadres wijzigen"
+											href="https://mijnomgeving.hln.be/verhuisservice/doorgeven"
+											target="_blank"
+											rel="noreferrer">Bezorgadres wijzigen</a>
+									
+									
+								</li>
+								<li class="footer__mobile-sub-menu__item">
+									
+										<a class="menu-list__link"
+											data-gtm="footer/service/Audiokrant"
+											href="https://www.kamelego.be/dpgmedia"
+											target="_blank"
+											rel="noreferrer">Audiokrant</a>
+									
+									
+								</li>
+							</ul>
+						</div>
+					</li>
+					<li>
+						<input type="checkbox" id="trigger-mijn_omgeving" name="toggle-footer-menu" class="toggle-mobile trigger--hide" />
+						<div class="toggle-mobile__wrapper">
+							<h2 id="service" class="footer-menu__title">
+								<label class="footer__mobile-sub-menu-label"
+									for="trigger-mijn_omgeving">
+									<div class="trigger-icon--collapsed"><svg xmlns="http://www.w3.org/2000/svg" role="presentation" width="15" height="15" viewBox="0 0 64 64" class="icons">
+	<path d="M11.3 6.1L0 12.2l9.9 19.6L.3 51.6l11 6.4 20.6-26L11.3 6.1zm31.9 0l-11.3 6.1 10 19.6-9.7 19.6 11.2 6.4 20.6-26L43.2 6.1z"/>»</svg>
+</div>
+									<div class="trigger-icon--expanded"><svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 15 4" class="icons"><title >Minder</title><path d="M0 0h15v4H0z"/></svg></div>
+									<span>Mijn omgeving</span>
+								</label>
+							</h2>
+							<ul class="footer__mobile-sub-menu">
+								<li class="footer__mobile-sub-menu__item">
+									
+										<a class="menu-list__link"
+											data-gtm="footer/mijn_omgeving/Mijn account"
+											href="https://mijnomgeving.hln.be/"
+											target="_blank"
+											rel="noreferrer">Mijn account</a>
+									
+									
+								</li>
+								<li class="footer__mobile-sub-menu__item">
+									
+										<a class="menu-list__link"
+											data-gtm="footer/mijn_omgeving/Mijn abonnement(en)"
+											href="https://mijnomgeving.hln.be/abonnementen"
+											target="_blank"
+											rel="noreferrer">Mijn abonnement(en)</a>
+									
+									
+								</li>
+							</ul>
+						</div>
+					</li>
+				
+					<li>
+						<input type="checkbox" id="trigger-meer_hln" name="toggle-footer-menu" class="toggle-mobile trigger--hide" />
+						<div class="toggle-mobile__wrapper">
+							<h2 id="service" class="footer-menu__title">
+								<label class="footer__mobile-sub-menu-label"
+									for="trigger-meer_hln">
+									<div class="trigger-icon--collapsed"><svg xmlns="http://www.w3.org/2000/svg" role="presentation" width="15" height="15" viewBox="0 0 64 64" class="icons">
+	<path d="M11.3 6.1L0 12.2l9.9 19.6L.3 51.6l11 6.4 20.6-26L11.3 6.1zm31.9 0l-11.3 6.1 10 19.6-9.7 19.6 11.2 6.4 20.6-26L43.2 6.1z"/>»</svg>
+</div>
+									<div class="trigger-icon--expanded"><svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 15 4" class="icons"><title >Minder</title><path d="M0 0h15v4H0z"/></svg></div>
+									<span>Meer HLN</span>
+								</label>
+							</h2>
+							<ul class="footer__mobile-sub-menu">
+								<li class="footer__mobile-sub-menu__item">
+									
+										<a class="menu-list__link"
+											data-gtm="footer/meer_hln/Facebook"
+											href="https://www.facebook.com/hln.be"
+											target="_blank"
+											rel="noreferrer">Facebook</a>
+									
+									
+								</li>
+								<li class="footer__mobile-sub-menu__item">
+									
+										<a class="menu-list__link"
+											data-gtm="footer/meer_hln/Twitter"
+											href="https://twitter.com/HLN_BE"
+											target="_blank"
+											rel="noreferrer">Twitter</a>
+									
+									
+								</li>
+								<li class="footer__mobile-sub-menu__item">
+									
+										<a class="menu-list__link"
+											data-gtm="footer/meer_hln/Instagram"
+											href="https://www.instagram.com/hln_be/"
+											target="_blank"
+											rel="noreferrer">Instagram</a>
+									
+									
+								</li>
+								<li class="footer__mobile-sub-menu__item">
+									
+										<a class="menu-list__link"
+											data-gtm="footer/meer_hln/Nieuwsbrieven"
+											href="https://www.hln.be/nieuwsbrieven"
+											target="_blank"
+											rel="noreferrer">Nieuwsbrieven</a>
+									
+									
+								</li>
+							</ul>
+						</div>
+					</li>
+				
+				<li>
+					<ul class="footer__mobile-social-links">
+						<li class="footer-social-links__item">
+							<a href="https://twitter.com/HLN_BE" class="footer-social-links__link"
+								rel="noopener" target="_blank" data-gtm="footer/volg_hln/twitter">
+								<svg xmlns="http://www.w3.org/2000/svg"  width="30" height="30" viewBox="0 0 512 462" class="icons"><path d="M403.229 0H481.735L310.219 195.702L512 462H354.002L230.261 300.487L88.669 462H10.109L193.564 252.679L0 0H161.999L273.855 147.625L403.229 0ZM375.673 415.087H419.178L138.363 44.4501H91.683L375.673 415.087Z"/></svg>
+
+								<span class="footer-social-links__text">Twitter</span>
+							</a>
+						</li>
+						<li class="footer-social-links__item">
+							<a href="https://www.facebook.com/hln.be" class="footer-social-links__link"
+								rel="noopener" target="_blank" data-gtm="footer/volg_hln/facebook">
+								<svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 16 30" class="icons"><title >Facebook</title><path d="M13.445 5.123H16V0h-5.54C7.097 0 4.37 2.702 4.37 6.036V9.1H0v5.124h4.37V30h6.795V14.224H16V9.1h-4.835V7.383c0-1.248 1.02-2.26 2.28-2.26"/></svg>
+
+								<span class="footer-social-links__text">Facebook</span>
+							</a>
+						</li>
+						<li class="footer-social-links__item">
+							<a href="https://www.instagram.com/hln_be/" class="footer-social-links__link"
+								rel="noopener" target="_blank" data-gtm="footer/volg_hln/instagram">
+								<svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30" class="icons">
+	<path d="M26.488 20.546c-.065 1.423-.303 2.195-.503 2.71-.265.68-.58 1.166-1.092 1.677-.51.51-.998.826-1.68 1.09-.514.2-1.287.438-2.71.503-1.54.07-2.002.085-5.9.085-3.9 0-4.362-.014-5.902-.084-1.422-.065-2.195-.302-2.71-.502-.68-.265-1.168-.58-1.68-1.09-.51-.512-.826-.998-1.09-1.68-.2-.513-.44-1.285-.504-2.708-.07-1.538-.085-2-.085-5.894 0-3.895.016-4.357.086-5.895.065-1.422.303-2.195.503-2.71.264-.68.58-1.166 1.09-1.676.512-.51 1-.826 1.68-1.09.515-.2 1.288-.438 2.71-.503 1.54-.07 2.003-.085 5.902-.085 3.9 0 4.36.015 5.9.085 1.424.065 2.197.303 2.712.503.68.264 1.168.58 1.68 1.09.51.51.826.997 1.09 1.678.2.514.44 1.287.504 2.71.07 1.537.085 2 .085 5.894 0 3.895-.015 4.356-.085 5.894m2.628-11.91c-.07-1.55-.318-2.612-.68-3.54-.372-.96-.87-1.773-1.683-2.584-.812-.81-1.626-1.31-2.586-1.682-.93-.36-1.99-.607-3.545-.678-1.557-.07-2.054-.088-6.02-.088-3.966 0-4.463.017-6.02.088C7.027.222 5.966.47 5.037.83c-.96.373-1.774.87-2.586 1.682-.81.81-1.31 1.625-1.683 2.584-.36.928-.608 1.99-.68 3.54C.018 10.194 0 10.69 0 14.653s.017 4.458.088 6.014c.07 1.553.318 2.613.68 3.54.372.96.87 1.774 1.683 2.585.813.812 1.627 1.31 2.587 1.684.93.36 1.99.607 3.545.678 1.557.07 2.054.088 6.02.088 3.966 0 4.463-.017 6.02-.088 1.554-.07 2.616-.318 3.545-.678.96-.373 1.774-.872 2.586-1.683.812-.81 1.31-1.623 1.684-2.583.36-.928.608-1.988.68-3.54.07-1.557.087-2.053.087-6.015 0-3.962-.017-4.46-.088-6.015"/>
+	<path d="M14.602 19.514c-2.688 0-4.867-2.177-4.867-4.862 0-2.686 2.18-4.863 4.867-4.863 2.688 0 4.867 2.176 4.867 4.862 0 2.685-2.18 4.862-4.868 4.862m0-12.353c-4.14 0-7.498 3.355-7.498 7.492 0 4.137 3.357 7.49 7.498 7.49 4.14 0 7.498-3.353 7.498-7.49 0-4.137-3.357-7.49-7.498-7.49M22.396 5.114c-.967 0-1.752.784-1.752 1.75 0 .968.785 1.75 1.752 1.75.968 0 1.753-.782 1.753-1.75 0-.966-.786-1.75-1.754-1.75"/>
+</svg>
+
+								<span class="footer-social-links__text">Instagram</span>
+							</a>
+						</li>
+					</ul>
+					<h3 class="footer-menu__title">Volg ons ook op</h3>
+				</li>
+				<li>
+					<ul class="footer__mobile-app-button-list" role="presentation">
+						<li class="menu-list__item">
+							<a href="https://play.google.com/store/apps/details?id=be.persgroep.android.news.mobilehln&amp;hl=nl&amp;utm_source=hln&amp;utm_campaign=google_play&amp;utm_medium=website&amp;utm_content=footer"
+								target="_blank"
+								class="menu-list__link--appstore button"
+								data-gtm="footer/ad_apps/Download nu in Google Play">
+								<!-- htmllint tag-name-lowercase="false"  -->
+<svg xmlns="http://www.w3.org/2000/svg" width="184" height="57" viewBox="0 0 154 35" class="icons"><title >Android Playstore</title>
+	<path fill="#FFF" d="M40.95.86h1.3l1.79 5.65h.02L45.89.86h1.27L44.72 8h-1.39L40.95.86zm6.92 0h5.14v1.08h-3.89v1.87h3.6v1.02h-3.6v2.09h3.96V8h-5.21V.86zm6.3 0h3.41c.787 0 1.377.17 1.77.51.393.34.59.813.59 1.42 0 .34-.05.622-.15.845-.1.223-.217.403-.35.54-.133.137-.265.235-.395.295s-.225.1-.285.12v.02c.107.013.222.047.345.1.123.053.238.138.345.255.107.117.195.268.265.455s.105.42.105.7c0 .42.032.802.095 1.145.063.343.162.588.295.735h-1.34c-.093-.153-.148-.323-.165-.51-.017-.187-.025-.367-.025-.54 0-.327-.02-.608-.06-.845-.04-.237-.113-.433-.22-.59-.107-.157-.252-.272-.435-.345-.183-.073-.418-.11-.705-.11h-1.84V8h-1.25V.86zm1.25 3.25h2.05c.4 0 .703-.095.91-.285.207-.19.31-.475.31-.855 0-.227-.033-.412-.1-.555-.067-.143-.158-.255-.275-.335-.117-.08-.25-.133-.4-.16-.15-.027-.305-.04-.465-.04h-2.03v2.23zM61.21.86h1.25v3.25L65.64.86h1.54l-2.85 2.85L67.38 8h-1.56l-2.34-3.41-1.02 1.01V8h-1.25V.86zm6.85 0h3.41c.787 0 1.377.17 1.77.51.393.34.59.813.59 1.42 0 .34-.05.622-.15.845-.1.223-.217.403-.35.54-.133.137-.265.235-.395.295s-.225.1-.285.12v.02c.107.013.222.047.345.1.123.053.238.138.345.255.107.117.195.268.265.455s.105.42.105.7c0 .42.032.802.095 1.145.063.343.162.588.295.735h-1.34c-.093-.153-.148-.323-.165-.51-.017-.187-.025-.367-.025-.54 0-.327-.02-.608-.06-.845-.04-.237-.113-.433-.22-.59-.107-.157-.252-.272-.435-.345-.183-.073-.418-.11-.705-.11h-1.84V8h-1.25V.86zm1.25 3.25h2.05c.4 0 .703-.095.91-.285.207-.19.31-.475.31-.855 0-.227-.033-.412-.1-.555-.067-.143-.158-.255-.275-.335-.117-.08-.25-.133-.4-.16-.15-.027-.305-.04-.465-.04h-2.03v2.23zM75.1.86h1.25V8H75.1V.86zm6.69 4.84c0 .313-.027.617-.08.91-.053.293-.162.557-.325.79-.163.233-.4.42-.71.56-.31.14-.722.21-1.235.21-.38 0-.703-.058-.97-.175-.267-.117-.487-.277-.66-.48-.173-.203-.3-.445-.38-.725-.08-.28-.12-.583-.12-.91V5.5h1.25v.37c0 .407.068.722.205.945.137.223.395.335.775.335.2 0 .365-.03.495-.09s.233-.148.31-.265c.077-.117.128-.262.155-.435.027-.173.04-.37.04-.59V.86h1.25V5.7zM89.54 8h-.8l-.19-.84c-.333.38-.667.643-1 .79-.333.147-.717.22-1.15.22-.533 0-1.012-.098-1.435-.295-.423-.197-.782-.465-1.075-.805-.293-.34-.518-.737-.675-1.19-.157-.453-.235-.937-.235-1.45 0-.507.078-.987.235-1.44.157-.453.382-.85.675-1.19.293-.34.652-.61 1.075-.81.423-.2.902-.3 1.435-.3.387 0 .755.052 1.105.155.35.103.662.257.935.46s.5.458.68.765c.18.307.293.66.34 1.06h-1.22c-.033-.233-.105-.438-.215-.615s-.248-.325-.415-.445c-.167-.12-.353-.21-.56-.27-.207-.06-.423-.09-.65-.09-.38 0-.708.077-.985.23-.277.153-.502.358-.675.615-.173.257-.302.548-.385.875-.083.327-.125.66-.125 1 0 .34.042.673.125 1 .083.327.212.618.385.875.173.257.398.462.675.615.277.153.605.23.985.23.32.007.603-.035.85-.125s.455-.22.625-.39c.17-.17.298-.378.385-.625.087-.247.133-.52.14-.82h-1.9v-.95h3.04V8zm2.61-4.15h2.04c.3 0 .55-.085.75-.255.2-.17.3-.415.3-.735 0-.36-.09-.613-.27-.76-.18-.147-.44-.22-.78-.22h-2.04v1.97zM90.9.86h3.47c.64 0 1.153.147 1.54.44.387.293.58.737.58 1.33 0 .36-.088.668-.265.925-.177.257-.428.455-.755.595v.02c.44.093.773.302 1 .625.227.323.34.728.34 1.215 0 .28-.05.542-.15.785-.1.243-.257.453-.47.63-.213.177-.487.317-.82.42-.333.103-.73.155-1.19.155H90.9V.86zm1.25 6.12h2.21c.38 0 .675-.098.885-.295.21-.197.315-.475.315-.835 0-.353-.105-.625-.315-.815-.21-.19-.505-.285-.885-.285h-2.21v2.23zm7.7-6.12h1.33L103.93 8h-1.34l-.67-1.89h-2.85L98.4 8h-1.29L99.85.86zm-.44 4.3h2.18l-1.07-3.07h-.03l-1.08 3.07zm7.11-4.3h1.33L110.6 8h-1.34l-.67-1.89h-2.85L105.07 8h-1.29l2.74-7.14zm-.44 4.3h2.18l-1.07-3.07h-.03l-1.08 3.07zm5.2-4.3h3.41c.787 0 1.377.17 1.77.51.393.34.59.813.59 1.42 0 .34-.05.622-.15.845-.1.223-.217.403-.35.54-.133.137-.265.235-.395.295s-.225.1-.285.12v.02c.107.013.222.047.345.1.123.053.238.138.345.255.107.117.195.268.265.455s.105.42.105.7c0 .42.032.802.095 1.145.063.343.162.588.295.735h-1.34c-.093-.153-.148-.323-.165-.51-.017-.187-.025-.367-.025-.54 0-.327-.02-.608-.06-.845-.04-.237-.113-.433-.22-.59-.107-.157-.252-.272-.435-.345-.183-.073-.418-.11-.705-.11h-1.84V8h-1.25V.86zm1.25 3.25h2.05c.4 0 .703-.095.91-.285.207-.19.31-.475.31-.855 0-.227-.033-.412-.1-.555-.067-.143-.158-.255-.275-.335-.117-.08-.25-.133-.4-.16-.15-.027-.305-.04-.465-.04h-2.03v2.23zm7.76-3.25h1.3l1.79 5.65h.02l1.83-5.65h1.27L124.06 8h-1.39L120.29.86zm9.96.85c-.38 0-.708.077-.985.23-.277.153-.502.358-.675.615-.173.257-.302.548-.385.875-.083.327-.125.66-.125 1 0 .34.042.673.125 1 .083.327.212.618.385.875.173.257.398.462.675.615.277.153.605.23.985.23s.708-.077.985-.23c.277-.153.502-.358.675-.615.173-.257.302-.548.385-.875.083-.327.125-.66.125-1 0-.34-.042-.673-.125-1-.083-.327-.212-.618-.385-.875-.173-.257-.398-.462-.675-.615-.277-.153-.605-.23-.985-.23zm0-1.02c.533 0 1.012.1 1.435.3.423.2.782.47 1.075.81.293.34.518.737.675 1.19.157.453.235.933.235 1.44 0 .513-.078.997-.235 1.45-.157.453-.382.85-.675 1.19-.293.34-.652.608-1.075.805-.423.197-.902.295-1.435.295s-1.012-.098-1.435-.295c-.423-.197-.782-.465-1.075-.805-.293-.34-.518-.737-.675-1.19-.157-.453-.235-.937-.235-1.45 0-.507.078-.987.235-1.44.157-.453.382-.85.675-1.19.293-.34.652-.61 1.075-.81.423-.2.902-.3 1.435-.3zm7.6 1.02c-.38 0-.708.077-.985.23-.277.153-.502.358-.675.615-.173.257-.302.548-.385.875-.083.327-.125.66-.125 1 0 .34.042.673.125 1 .083.327.212.618.385.875.173.257.398.462.675.615.277.153.605.23.985.23s.708-.077.985-.23c.277-.153.502-.358.675-.615.173-.257.302-.548.385-.875.083-.327.125-.66.125-1 0-.34-.042-.673-.125-1-.083-.327-.212-.618-.385-.875-.173-.257-.398-.462-.675-.615-.277-.153-.605-.23-.985-.23zm0-1.02c.533 0 1.012.1 1.435.3.423.2.782.47 1.075.81.293.34.518.737.675 1.19.157.453.235.933.235 1.44 0 .513-.078.997-.235 1.45-.157.453-.382.85-.675 1.19-.293.34-.652.608-1.075.805-.423.197-.902.295-1.435.295s-1.012-.098-1.435-.295c-.423-.197-.782-.465-1.075-.805-.293-.34-.518-.737-.675-1.19-.157-.453-.235-.937-.235-1.45 0-.507.078-.987.235-1.44.157-.453.382-.85.675-1.19.293-.34.652-.61 1.075-.81.423-.2.902-.3 1.435-.3zm4.56.17h3.41c.787 0 1.377.17 1.77.51.393.34.59.813.59 1.42 0 .34-.05.622-.15.845-.1.223-.217.403-.35.54-.133.137-.265.235-.395.295s-.225.1-.285.12v.02c.107.013.222.047.345.1.123.053.238.138.345.255.107.117.195.268.265.455s.105.42.105.7c0 .42.032.802.095 1.145.063.343.162.588.295.735h-1.34c-.093-.153-.148-.323-.165-.51-.017-.187-.025-.367-.025-.54 0-.327-.02-.608-.06-.845-.04-.237-.113-.433-.22-.59-.107-.157-.252-.272-.435-.345-.183-.073-.418-.11-.705-.11h-1.84V8h-1.25V.86zm1.25 3.25h2.05c.4 0 .703-.095.91-.285.207-.19.31-.475.31-.855 0-.227-.033-.412-.1-.555-.067-.143-.158-.255-.275-.335-.117-.08-.25-.133-.4-.16-.15-.027-.305-.04-.465-.04h-2.03v2.23z"/>
+	<path fill="#FFF" d="M0 3.98c0-2.214 1.264-2.728 2.816-1.157l14.006 14.185-14.006 14.18C1.26 32.765 0 32.257 0 30.033V3.98zM22.816 11.36l-5.16 4.784L3.2 2.067M22.81 22.793l-5.177-4.88L3.2 32.404M23.776 12.078l5.445 2.63c2.523 1.22 2.566 3.27.09 4.586l-5.534 2.938-5.385-5.248 5.386-4.906z"/>
+	<g transform="translate(41 11)">
+		<g transform="translate(0 .1)">
+			<path fill="#FEFEFE" d="M16.597 10.14c0 2.292-.68 4.12-2.04 5.48-1.544 1.62-3.554 2.43-6.03 2.43-2.368 0-4.382-.822-6.04-2.466C.828 13.942 0 11.904 0 9.474S.828 5.01 2.488 3.367C4.145 1.723 6.158.902 8.528.902c1.176 0 2.3.228 3.37.687 1.07.457 1.926 1.07 2.567 1.833L13.02 4.868c-1.084-1.3-2.582-1.95-4.492-1.95-1.728 0-3.22.608-4.482 1.824-1.26 1.214-1.89 2.793-1.89 4.733 0 1.94.63 3.52 1.89 4.734 1.26 1.214 2.754 1.822 4.482 1.822 1.834 0 3.362-.612 4.585-1.834.795-.795 1.253-1.904 1.375-3.325h-5.96v-1.97h7.955c.076.427.114.84.114 1.237"/>
+		</g>
+		<path fill="#FEFEFE" d="M20.666 15.11c.726.74 1.585 1.11 2.58 1.11.992 0 1.852-.37 2.578-1.11.726-.742 1.09-1.724 1.09-2.946 0-1.223-.364-2.204-1.09-2.947-.726-.74-1.586-1.11-2.58-1.11-.993 0-1.852.37-2.578 1.11-.727.743-1.09 1.724-1.09 2.947 0 1.222.363 2.204 1.09 2.945m-1.57-7.222c1.085-1.138 2.467-1.708 4.15-1.708 1.68 0 3.063.57 4.15 1.708 1.083 1.14 1.625 2.564 1.625 4.276 0 1.712-.54 3.136-1.625 4.275-1.086 1.138-2.47 1.707-4.15 1.707-1.682 0-3.064-.57-4.15-1.708-1.084-1.14-1.627-2.564-1.627-4.276 0-1.712.543-3.137 1.628-4.276M32.93 15.11c.727.74 1.586 1.11 2.58 1.11.993 0 1.853-.37 2.58-1.11.725-.742 1.088-1.724 1.088-2.946 0-1.223-.363-2.204-1.09-2.947-.725-.74-1.585-1.11-2.578-1.11-.994 0-1.853.37-2.58 1.11-.726.743-1.088 1.724-1.088 2.947 0 1.222.362 2.204 1.09 2.945m-1.57-7.222C32.445 6.75 33.827 6.18 35.51 6.18c1.68 0 3.064.57 4.15 1.708 1.084 1.14 1.626 2.564 1.626 4.276 0 1.712-.542 3.136-1.626 4.275-1.086 1.138-2.47 1.707-4.15 1.707-1.682 0-3.064-.57-4.15-1.708-1.084-1.14-1.627-2.564-1.627-4.276 0-1.712.543-3.137 1.628-4.276M47.683 16.222c.993 0 1.838-.367 2.533-1.1.696-.734 1.043-1.72 1.043-2.958 0-1.238-.348-2.223-1.044-2.957-.695-.734-1.54-1.1-2.533-1.1-.98 0-1.82.37-2.52 1.11-.705.743-1.056 1.725-1.056 2.947 0 1.223.35 2.204 1.055 2.946.702.74 1.542 1.112 2.52 1.112m-.16 6.877c-1.33 0-2.414-.333-3.255-.998-.84-.665-1.444-1.426-1.81-2.28l1.925-.803c.214.61.608 1.122 1.18 1.534.573.413 1.226.62 1.96.62 1.162 0 2.075-.348 2.74-1.044.665-.695.997-1.638.997-2.83V16.22h-.093c-.367.55-.886 1.01-1.558 1.375-.674.367-1.43.55-2.27.55-1.453 0-2.706-.572-3.76-1.72-1.055-1.145-1.583-2.566-1.583-4.263 0-1.696.528-3.118 1.582-4.264 1.054-1.146 2.307-1.72 3.76-1.72.84 0 1.596.185 2.27.55.67.368 1.19.826 1.557 1.377h.092v-1.56h2.017v10.66c0 1.926-.56 3.39-1.674 4.39-1.115 1-2.476 1.502-4.08 1.502"/>
+		<path fill="#FEFEFE" d="M55.27 17.78h2.11V1.368h-2.11M67.374 10.812c-.046-.643-.34-1.253-.883-1.835-.542-.58-1.348-.87-2.418-.87-.78 0-1.455.244-2.028.732-.573.49-.967 1.146-1.18 1.972h6.51zm-3.026 7.336c-1.697 0-3.077-.567-4.138-1.697-1.063-1.13-1.594-2.56-1.594-4.286 0-1.636.516-3.04 1.548-4.218 1.03-1.176 2.35-1.765 3.954-1.765 1.666 0 3 .543 4 1.63 1 1.083 1.502 2.535 1.502 4.354l-.022.39h-8.873c.06 1.13.44 2.025 1.135 2.68.696.66 1.51.987 2.442.987 1.512.002 2.537-.64 3.072-1.924l1.88.78c-.367.87-.972 1.6-1.812 2.19-.84.587-1.872.882-3.094.882zM77.92 9.115h3.53c.885 0 1.596-.3 2.13-.895.536-.595.804-1.253.804-1.97 0-.72-.268-1.376-.803-1.972-.534-.597-1.245-.895-2.13-.895h-3.53v5.732zm0 8.665h-2.11V1.366h5.593c1.39 0 2.594.463 3.61 1.387 1.017.925 1.525 2.09 1.525 3.496 0 1.405-.508 2.57-1.524 3.495-1.017.925-2.22 1.387-3.61 1.387h-3.485v6.648zM87.914 17.78h2.108V1.368h-2.108M95.8 16.222c.87 0 1.66-.325 2.372-.975.71-.65 1.066-1.417 1.066-2.303-.596-.49-1.49-.734-2.682-.734-1.025 0-1.796.222-2.316.664-.52.445-.78.963-.78 1.56 0 .55.237.985.712 1.307.473.32 1.016.482 1.627.482m-.345 1.926c-1.192 0-2.19-.345-2.99-1.032-.804-.688-1.205-1.597-1.205-2.728 0-1.223.474-2.182 1.422-2.877.947-.694 2.116-1.042 3.507-1.042 1.237 0 2.254.23 3.048.688v-.322c0-.825-.283-1.486-.848-1.982-.566-.497-1.26-.745-2.086-.745-.61 0-1.166.145-1.662.435-.497.29-.837.688-1.02 1.192l-1.927-.825c.26-.673.772-1.296 1.537-1.87.763-.573 1.772-.86 3.026-.86 1.437 0 2.628.422 3.576 1.262.947.84 1.42 2.025 1.42 3.553v6.786H99.24v-1.558h-.09c-.842 1.283-2.073 1.926-3.693 1.926M105.84 22.73h-2.177l2.614-5.66-4.63-10.524h2.29l3.348 8.07h.046l3.256-8.07h2.292"/>
+	</g>
+</svg>
+							</a>
+						</li>
+						<li class="menu-list__item">
+							<a href="https://itunes.apple.com/be/app/hln-be/id403025567?mt=8&amp;utm_source=hln&amp;utm_campaign=apple_appstore&amp;utm_medium=website&amp;utm_content=footer"
+								target="_blank"
+								class="menu-list__link--appstore button"
+								data-gtm="footer/ad_apps/Download nu in de App Store">
+								<!-- htmllint tag-name-lowercase="false"  -->
+<svg xmlns="http://www.w3.org/2000/svg" width="184" height="57" viewBox="0 0 147 35" class="icons"><title >Apple Appstore</title>
+	<path fill="#FEFEFE" d="M13.867 3.696C15.88 1.013 18.677 1 18.677 1s.414 2.523-1.584 4.953c-2.134 2.595-4.56 2.17-4.56 2.17s-.455-2.04 1.334-4.427"/>
+	<g transform="translate(0 8.418)">
+		<path fill="#FEFEFE" d="M12.695 1.473c1.035 0 2.956-1.44 5.457-1.44 4.304 0 5.997 3.1 5.997 3.1s-3.313 1.712-3.313 5.87c0 4.69 4.125 6.306 4.125 6.306s-2.883 8.213-6.778 8.213c-1.79 0-3.18-1.22-5.065-1.22-1.922 0-3.828 1.265-5.07 1.265-3.557 0-8.05-7.79-8.05-14.054C0 3.352 3.803.12 7.37.12c2.32 0 4.12 1.353 5.325 1.353"/>
+	</g>
+	<path fill="#FFF" d="M40.95.86h1.3l1.79 5.65h.02L45.89.86h1.27L44.72 8h-1.39L40.95.86zm6.92 0h5.14v1.08h-3.89v1.87h3.6v1.02h-3.6v2.09h3.96V8h-5.21V.86zm6.3 0h3.41c.787 0 1.377.17 1.77.51.393.34.59.813.59 1.42 0 .34-.05.622-.15.845-.1.223-.217.403-.35.54-.133.137-.265.235-.395.295s-.225.1-.285.12v.02c.107.013.222.047.345.1.123.053.238.138.345.255.107.117.195.268.265.455s.105.42.105.7c0 .42.032.802.095 1.145.063.343.162.588.295.735h-1.34c-.093-.153-.148-.323-.165-.51-.017-.187-.025-.367-.025-.54 0-.327-.02-.608-.06-.845-.04-.237-.113-.433-.22-.59-.107-.157-.252-.272-.435-.345-.183-.073-.418-.11-.705-.11h-1.84V8h-1.25V.86zm1.25 3.25h2.05c.4 0 .703-.095.91-.285.207-.19.31-.475.31-.855 0-.227-.033-.412-.1-.555-.067-.143-.158-.255-.275-.335-.117-.08-.25-.133-.4-.16-.15-.027-.305-.04-.465-.04h-2.03v2.23zM61.21.86h1.25v3.25L65.64.86h1.54l-2.85 2.85L67.38 8h-1.56l-2.34-3.41-1.02 1.01V8h-1.25V.86zm6.85 0h3.41c.787 0 1.377.17 1.77.51.393.34.59.813.59 1.42 0 .34-.05.622-.15.845-.1.223-.217.403-.35.54-.133.137-.265.235-.395.295s-.225.1-.285.12v.02c.107.013.222.047.345.1.123.053.238.138.345.255.107.117.195.268.265.455s.105.42.105.7c0 .42.032.802.095 1.145.063.343.162.588.295.735h-1.34c-.093-.153-.148-.323-.165-.51-.017-.187-.025-.367-.025-.54 0-.327-.02-.608-.06-.845-.04-.237-.113-.433-.22-.59-.107-.157-.252-.272-.435-.345-.183-.073-.418-.11-.705-.11h-1.84V8h-1.25V.86zm1.25 3.25h2.05c.4 0 .703-.095.91-.285.207-.19.31-.475.31-.855 0-.227-.033-.412-.1-.555-.067-.143-.158-.255-.275-.335-.117-.08-.25-.133-.4-.16-.15-.027-.305-.04-.465-.04h-2.03v2.23zM75.1.86h1.25V8H75.1V.86zm6.69 4.84c0 .313-.027.617-.08.91-.053.293-.162.557-.325.79-.163.233-.4.42-.71.56-.31.14-.722.21-1.235.21-.38 0-.703-.058-.97-.175-.267-.117-.487-.277-.66-.48-.173-.203-.3-.445-.38-.725-.08-.28-.12-.583-.12-.91V5.5h1.25v.37c0 .407.068.722.205.945.137.223.395.335.775.335.2 0 .365-.03.495-.09s.233-.148.31-.265c.077-.117.128-.262.155-.435.027-.173.04-.37.04-.59V.86h1.25V5.7zM89.54 8h-.8l-.19-.84c-.333.38-.667.643-1 .79-.333.147-.717.22-1.15.22-.533 0-1.012-.098-1.435-.295-.423-.197-.782-.465-1.075-.805-.293-.34-.518-.737-.675-1.19-.157-.453-.235-.937-.235-1.45 0-.507.078-.987.235-1.44.157-.453.382-.85.675-1.19.293-.34.652-.61 1.075-.81.423-.2.902-.3 1.435-.3.387 0 .755.052 1.105.155.35.103.662.257.935.46s.5.458.68.765c.18.307.293.66.34 1.06h-1.22c-.033-.233-.105-.438-.215-.615s-.248-.325-.415-.445c-.167-.12-.353-.21-.56-.27-.207-.06-.423-.09-.65-.09-.38 0-.708.077-.985.23-.277.153-.502.358-.675.615-.173.257-.302.548-.385.875-.083.327-.125.66-.125 1 0 .34.042.673.125 1 .083.327.212.618.385.875.173.257.398.462.675.615.277.153.605.23.985.23.32.007.603-.035.85-.125s.455-.22.625-.39c.17-.17.298-.378.385-.625.087-.247.133-.52.14-.82h-1.9v-.95h3.04V8zm2.61-4.15h2.04c.3 0 .55-.085.75-.255.2-.17.3-.415.3-.735 0-.36-.09-.613-.27-.76-.18-.147-.44-.22-.78-.22h-2.04v1.97zM90.9.86h3.47c.64 0 1.153.147 1.54.44.387.293.58.737.58 1.33 0 .36-.088.668-.265.925-.177.257-.428.455-.755.595v.02c.44.093.773.302 1 .625.227.323.34.728.34 1.215 0 .28-.05.542-.15.785-.1.243-.257.453-.47.63-.213.177-.487.317-.82.42-.333.103-.73.155-1.19.155H90.9V.86zm1.25 6.12h2.21c.38 0 .675-.098.885-.295.21-.197.315-.475.315-.835 0-.353-.105-.625-.315-.815-.21-.19-.505-.285-.885-.285h-2.21v2.23zm7.7-6.12h1.33L103.93 8h-1.34l-.67-1.89h-2.85L98.4 8h-1.29L99.85.86zm-.44 4.3h2.18l-1.07-3.07h-.03l-1.08 3.07zm7.11-4.3h1.33L110.6 8h-1.34l-.67-1.89h-2.85L105.07 8h-1.29l2.74-7.14zm-.44 4.3h2.18l-1.07-3.07h-.03l-1.08 3.07zm5.2-4.3h3.41c.787 0 1.377.17 1.77.51.393.34.59.813.59 1.42 0 .34-.05.622-.15.845-.1.223-.217.403-.35.54-.133.137-.265.235-.395.295s-.225.1-.285.12v.02c.107.013.222.047.345.1.123.053.238.138.345.255.107.117.195.268.265.455s.105.42.105.7c0 .42.032.802.095 1.145.063.343.162.588.295.735h-1.34c-.093-.153-.148-.323-.165-.51-.017-.187-.025-.367-.025-.54 0-.327-.02-.608-.06-.845-.04-.237-.113-.433-.22-.59-.107-.157-.252-.272-.435-.345-.183-.073-.418-.11-.705-.11h-1.84V8h-1.25V.86zm1.25 3.25h2.05c.4 0 .703-.095.91-.285.207-.19.31-.475.31-.855 0-.227-.033-.412-.1-.555-.067-.143-.158-.255-.275-.335-.117-.08-.25-.133-.4-.16-.15-.027-.305-.04-.465-.04h-2.03v2.23zM121.1.86h1.25V8h-1.25V.86zm2.73 0h1.32l3.26 5.26h.02V.86h1.19V8h-1.32l-3.25-5.25h-.03V8h-1.19V.86zm10.05 0h2.96c.547 0 1.02.093 1.42.28.4.187.727.442.98.765s.442.702.565 1.135c.123.433.185.897.185 1.39 0 .493-.062.957-.185 1.39-.123.433-.312.812-.565 1.135-.253.323-.58.578-.98.765-.4.187-.873.28-1.42.28h-2.96V.86zm1.25 6.12h1.23c.487 0 .885-.065 1.195-.195.31-.13.553-.31.73-.54.177-.23.297-.5.36-.81.063-.31.095-.645.095-1.005 0-.36-.032-.695-.095-1.005-.063-.31-.183-.58-.36-.81-.177-.23-.42-.41-.73-.54-.31-.13-.708-.195-1.195-.195h-1.23v5.1zM141.1.86h5.14v1.08h-3.89v1.87h3.6v1.02h-3.6v2.09h3.96V8h-5.21V.86z"/>
+	<path fill="#FEFEFE" d="M121.166 25.189c-.635 1.08-1.523 1.61-2.647 1.61-1.157.002-2.05-.524-2.684-1.58-.535-.87-.797-1.914-.797-3.137 0-1.257.26-2.32.796-3.19.617-1.057 1.52-1.582 2.704-1.582 1.15.002 2.033.527 2.662 1.584.526.87.79 1.92.79 3.137 0 1.218-.274 2.276-.826 3.16m-2.518-10.04c-2.025 0-3.63.648-4.828 1.967-1.195 1.312-1.79 3.002-1.79 5.062 0 1.966.576 3.607 1.734 4.9 1.157 1.295 2.717 1.942 4.674 1.942 2.02 0 3.644-.674 4.87-2.02 1.168-1.32 1.75-2.99 1.75-5.04 0-1.99-.568-3.617-1.696-4.87-1.186-1.3-2.754-1.942-4.714-1.942M131.08 15.86c-.68.525-1.17 1.23-1.48 2.104h-.08l-.11-2.547h-2.572c.053 1.263.08 2.66.08 4.184v9.12h2.955v-6.98c0-1.066.245-1.93.74-2.624.567-.782 1.367-1.175 2.407-1.175.327 0 .64.024.93.076V15.2c-.214-.035-.462-.05-.733-.05-.766 0-1.48.23-2.138.71"/>
+	<g transform="translate(134 15.116)">
+		<path fill="#FEFEFE" d="M3.73 5.555c.09-.89.384-1.657.876-2.294.605-.797 1.39-1.21 2.353-1.21 1.056 0 1.842.418 2.356 1.236.4.642.588 1.396.572 2.27H3.73zm8.978.772c0-1.662-.395-3.06-1.177-4.194C10.55.71 9.1 0 7.18 0c-1.95 0-3.5.71-4.655 2.133C1.43 3.47.88 5.137.88 7.148c0 2.042.594 3.67 1.77 4.884 1.177 1.213 2.797 1.816 4.855 1.816 1.72 0 3.21-.268 4.464-.82l-.467-2.055c-1.077.426-2.27.635-3.586.635-1.187 0-2.153-.31-2.9-.933-.823-.692-1.252-1.692-1.287-3.005h8.87c.07-.37.108-.818.108-1.343z"/>
+	</g>
+	<path fill="#FEFEFE" d="M107.918 12.107l-2.898.875v2.436h-1.942v2.214h1.942v6.71c0 1.68.327 2.876.99 3.584.654.717 1.573 1.068 2.735 1.068.95 0 1.714-.11 2.3-.33l-.085-2.24c-.35.09-.783.13-1.313.13-1.15 0-1.73-.814-1.73-2.455V17.63h3.264v-2.214h-3.262v-3.31zM67.14 25.41c-.62.86-1.493 1.285-2.603 1.285-.948 0-1.72-.335-2.312-.995-.597-.666-.888-1.484-.888-2.453v-2.215c0-.238.045-.537.135-.904.184-.785.57-1.42 1.164-1.91.595-.483 1.253-.723 1.982-.723 1.078 0 1.934.446 2.576 1.318.585.837.873 1.906.873 3.198 0 1.41-.308 2.542-.928 3.4m-1.56-10.26c-2.01 0-3.504.792-4.495 2.374h-.05l-.164-2.107h-2.6c.075 1.494.113 2.95.113 4.372v14.326h2.954V27.13c.77 1.263 2.033 1.89 3.798 1.89 1.63 0 3-.583 4.1-1.746 1.233-1.316 1.847-3.097 1.847-5.367 0-2.023-.526-3.66-1.572-4.898-1.056-1.246-2.36-1.86-3.93-1.86"/>
+	<g transform="translate(41 10.116)">
+		<path fill="#FEFEFE" d="M5.226 10.915L6.76 6.097c.404-1.536.693-2.692.878-3.476h.052c.454 1.822.767 2.982.935 3.477l1.554 4.818H5.225zm.71-10.76L0 18.606h3.063l1.644-5.416h5.996l1.723 5.414h3.15L9.606.156h-3.67z"/>
+	</g>
+	<g transform="translate(90 9.116)">
+		<path fill="#FEFEFE" d="M7.766 8.984c-1.29-.51-2.186-.982-2.68-1.418-.564-.48-.847-1.086-.847-1.81 0-.656.246-1.213.737-1.676.588-.498 1.405-.763 2.447-.763 1.32 0 2.5.286 3.54.85l.746-2.41C10.595 1.177 9.2.883 7.52.883c-1.88 0-3.39.485-4.53 1.45-1.144.967-1.707 2.21-1.707 3.725 0 2.317 1.616 4.078 4.842 5.28 1.188.44 2.03.912 2.545 1.422.508.514.764 1.144.764 1.882 0 .85-.31 1.52-.928 2.02-.62.498-1.485.752-2.603.752-1.548 0-2.97-.387-4.265-1.15L.95 18.727c1.203.763 2.793 1.148 4.783 1.148 2.146 0 3.82-.536 5.027-1.614 1.087-.98 1.636-2.26 1.636-3.83 0-1.276-.376-2.342-1.122-3.2-.75-.86-1.915-1.612-3.508-2.246"/>
+	</g>
+	<path fill="#FEFEFE" d="M81.756 25.41c-.62.86-1.486 1.285-2.605 1.285-.944 0-1.716-.335-2.308-.995-.596-.666-.888-1.484-.888-2.453v-2.215c0-.238.043-.537.134-.904.184-.785.573-1.42 1.166-1.91.596-.483 1.25-.723 1.983-.723 1.075 0 1.933.446 2.577 1.318.582.837.876 1.906.876 3.198 0 1.41-.312 2.542-.934 3.4m-1.562-10.26c-2.007 0-3.498.792-4.49 2.374h-.05l-.172-2.107h-2.594c.07 1.494.11 2.95.11 4.372v14.326h2.956V27.13c.77 1.263 2.035 1.89 3.795 1.89 1.634 0 2.998-.583 4.1-1.746 1.233-1.316 1.847-3.097 1.847-5.367 0-2.023-.523-3.66-1.575-4.898-1.05-1.246-2.358-1.86-3.928-1.86"/>
+</svg>
+
+							</a>
+						</li>
+					</ul>
+					<h2 class="footer-menu__title">Apps</h2>
+				</li>
+			</ul>
+		</div>
+	</div>
+
+	<section data-nosnippet="true">
+		<!-- includes/footer/footer-hln.html -->
+<section class="footer__dpgmedia">
+	<div class="container center-content">
+		<svg width="200" height="118" viewBox="0 0 1183.54961 698.79685" xmlns="http://www.w3.org/2000/svg">
+	<title >DPG Media logo</title>
+	<path d="M168.03,384.34209c0-56.22879,41.29135-82.58642,77.18283-82.58642,20.64847,0,36.84619,7.61474,47.32322,18.74289v-88.626h43.52347V463.75134H292.53605V445.9631c-10.477,12.38266-27.30862,20.95976-47.95721,20.95976-33.66891,0-76.54884-26.6804-76.54884-82.58077m125.78346-.32271c0-23.82576-16.83742-42.56294-40.65747-42.56294-23.82587,0-42.56876,18.109-42.56876,42.56294,0,24.14281,18.74289,42.88576,42.56876,42.88576,23.82005,0,40.65747-19.05988,40.65747-42.88576M401.82553,448.18v88.62027h-43.512V304.933h43.512v18.09748c10.16574-12.3826,26.04834-21.27476,47.64593-21.27476,35.89719,0,76.86583,26.35763,76.86583,82.58642,0,55.90037-42.24035,82.58077-76.232,82.58077-21.27675,0-38.11406-6.977-48.2798-18.74289m81.95453-64.16059c0-24.45392-18.109-42.56294-42.56876-42.56294-23.82016,0-40.65747,18.73718-40.65747,42.56294s16.83731,42.88576,40.65747,42.88576c24.45975,0,42.56876-18.743,42.56876-42.88576m55.59492.32271c0-56.22879,41.297-82.58642,77.18283-82.58642,20.6466,0,36.85178,8.57715,47.32892,20.32576V304.933H707.4045V461.20606c0,47.65163-35.25773,78.77147-76.87166,78.77147-44.77794,0-74.00368-26.03691-83.21855-60.6663h47.012c6.03759,12.71486,15.5656,20.01459,36.2065,20.01459,19.05977,0,33.35389-16.19953,33.35389-36.84619V445.9631c-10.47714,12.38266-27.31444,20.95976-47.96291,20.95976-33.66891,0-76.54884-26.6804-76.54884-82.58077m125.78346-.32271c0-23.82576-16.83171-42.56294-40.65747-42.56294-23.82005,0-42.56306,18.109-42.56306,42.56294,0,24.14281,18.743,42.88576,42.56306,42.88576,23.82576,0,40.65747-19.05988,40.65747-42.88576"/>
+	<path d="M421.26278,229.10563h10.391v5.88677c3.14489-4.321,8.14757-6.87,14.42383-6.87,7.842,0,13.33732,3.3415,16.18048,8.8311,3.4331-5.4896,9.21685-8.8311,16.57765-8.8311,13.43475,0,20.29722,7.94316,20.29722,20.597v29.42234H488.4421V249.40284c0-7.45054-3.91815-12.16106-11.37451-12.16106-6.67344,0-11.67042,4.51193-11.67042,13.24187v27.658h-10.5896V248.91791c0-7.1642-4.02513-11.67613-11.08234-11.67613-6.96561,0-11.96829,4.61309-11.96829,13.63707v27.26281H421.26278Zm88.11169,24.71742c0,13.83006,9.80877,25.30188,25.30572,25.30188,12.65368,0,20.78984-6.57612,24.61242-17.45976h-11.2751c-1.86549,5.1-6.473,8.33836-13.24,8.33836-8.62867,0-14.22141-5.49531-15.4014-13.04328h40.7013v-3.62982c0-14.61474-10.78633-25.21017-25.2999-25.21017-14.418,0-25.403,11.28478-25.403,25.70279m10.691-5.68819a15.28558,15.28558,0,0,1,14.80749-10.69659c7.45823,0,12.6538,3.7311,14.51929,10.69659H520.06546m49.93469,5.49018c0,15.59427,11.96445,25.50036,24.41966,25.50036a20.88406,20.88406,0,0,0,16.37907-7.74656V278.142h10.39684V206.54622H610.79888v28.93543c-3.62983-4.6075-9.7075-7.3608-16.27779-7.3608-12.94784,0-24.52094,9.81063-24.52094,25.50419m41.38691-.09556c0,8.82539-6.57041,15.98387-15.49695,15.98387-8.72994,0-15.49312-6.96561-15.49312-15.98387,0-8.93226,6.76318-15.89215,15.49312-15.89215,8.92654,0,15.49695,7.25964,15.49695,15.89215m29.12761-46.09568a7.06106,7.06106,0,1,0,7.06106,7.05535,6.69085,6.69085,0,0,0-7.06106-7.05535m-5.29311,70.70612h10.59531v-49.036H635.22156Zm20.89-24.51488c0,15.59427,11.96445,25.50036,24.41954,25.50036a20.8811,20.8811,0,0,0,16.37906-7.74656V278.142H707.4045v-49.0379H696.91011v6.37754c-3.62982-4.6075-9.70749-7.3608-16.27767-7.3608-12.94783,0-24.52093,9.81063-24.52093,25.50419m41.38691-.09556c0,8.82539-6.57041,15.98387-15.49708,15.98387-8.72993,0-15.49311-6.96561-15.49311-15.98387,0-8.93226,6.76318-15.89215,15.49311-15.89215,8.92667,0,15.49708,7.25964,15.49708,15.89215"/>
+	<rect fill="#783c96" x="760.98498" y="206.54483" width="43.52289" height="71.59481"/>
+	<rect fill="#fabb22" x="971.99672" y="152.29971" width="43.52289" height="76.79313"/>
+	<rect fill="#d23278" x="831.32223" y="152.29971" width="43.52289" height="152.63327"/>
+	<rect fill="#e6463c" x="901.69698" y="94.17553" width="43.44787" height="183.95556"/>
+</svg>
+		<div class="footer__dpgmedia-copy">DPG Media NV<br/> Mediaplein 1, 2018 Antwerpen - RPR Antwerpen nr. 0432.306.234</div>
+	</div>
+</section>
+<section class="footer__partner-list">
+	<div class="container center-content">
+		<ul class="footer__partner-list__item-holder" role="presentation">
+			<li class="footer__partner-list__item">
+				<a href="https://www.rvdj.be/" rel="noopener" target="_blank" data-gtm="footer/rvdj/picture">
+					<img src="https://statics.hln.be/img/rvdj-5dc0bc3f28.png" alt="Raad voor de Journalistiek" loading="lazy" />
+				</a>
+			</li>
+			<li class="footer__partner-list__item">
+				<a href="https://belga.press/" rel="noopener" target="_blank" data-gtm="footer/belgapress/picture">
+					<img src="https://statics.hln.be/img/belgapress-f285c64d6b.png" alt="BelgaPress" loading="lazy" />
+				</a>
+			</li>
+			<li class="footer__partner-list__item">
+				<a href="https://www.license2publish.be/" rel="noopener" target="_blank" data-gtm="footer/license2publish/picture">
+					<img src="https://statics.hln.be/img/license2publish-f98b0fec40.png" alt="License 2 Publish" loading="lazy" />
+				</a>
+			</li>
+			<li class="footer__partner-list__item">
+				<a href="https://www.jep.be" rel="noopener" target="_blank" data-gtm="footer/JEP/picture">
+					<img src="https://statics.hln.be/img/jep-935278f5bf.png" alt="Jury voor Ethische Praktijken" loading="lazy"/>
+				</a>
+			</li>
+			<li class="footer__partner-list__item">
+				<a href="https://www.cim.be/nl/internet/disclaimer-cim-internet" rel="noopener" target="_blank" data-gtm="footer/CIM/picture">
+					<img src="https://statics.hln.be/img/cim-f68a5ca0b8.jpg" alt="CIM" loading="lazy" width="108px" />
+				</a>
+			</li>
+		</ul>
+	</div>
+</section>
+<!-- / includes/footer/footer-hln.html -->
+
+	</section>
+
+</footer>
+<!-- / includes/footer.html -->
+
+
+<script src="https://statics.hln.be/js/main-663302b8d3.js" defer="defer"></script>
+
+<!-- TemptationJS -->
+<!-- https://www.thymeleaf.org/doc/tutorials/2.1/usingthymeleaf.html#script-inlining-javascript-and-dart -->
+
+	<script type="module" src="https://temptation.hln.be/temptation.js?v=20220407" async></script>
+	<script type="text/javascript" src="https://temptation.hln.be/temptation.legacy.js?v=20220407" async nomodule></script>
+
+
+
+<!-- PianoJS -->
+
+
+<!-- google tagmanager noscript fallbacks -->
+
+	<noscript>
+		<iframe src="https://t.hln.be/ns.html?id=GTM-WCJFQQ"
+				height="0" width="0" style="display:none;visibility:hidden"></iframe>
+	</noscript>
+
+<!-- /google tagmanager noscript fallbacks -->
+
+
+
+
+
+
+
+	<script>
+		(function () {
+			
+			var baitPath = "https:\/\/t.hln.be"+'/ads-min.js';
+			var pixelPath = "https:\/\/t.hln.be"+'/4dchk';
+			
+
+			// Inject the bait file
+			var el = document.createElement('script');
+			el.src = baitPath;
+			document.body.appendChild(el);
+
+			// this function pre-fetches the SP JS. If that doesn't work, it means it's blocked
+			function isSpBlocked() {
+				return fetch("https://sp.dpgmedia.net/Cd47FPkRXzy5tMeertNeUPW_v3.js", {
+					method: "HEAD",
+					mode: "no-cors"
+				}).then(function () {
+					return false;
+				}).catch(function () {
+					return true;
+				})
+			}
+
+			// this function pre-fetches the GA JS. If that doesn't work, it means it's blocked
+			function isGaBlocked() {
+				return fetch("https://www.google-analytics.com/analytics.js", {
+					method: "HEAD",
+					mode: "no-cors"
+				}).then(function () {
+					return false
+				}).catch(function () {
+						return true
+					});
+			};
+
+			function getSPCookie() {
+				var cookieStart = '_sp_id';
+				var match = document.cookie.match(new RegExp(cookieStart + '.([^;]+)=([^;]+)'));
+				if (match && match.length > 2) {
+					return match[2];
+				}
+
+				return '';
+			};
+
+			window.addEventListener('load', function () {
+				// we try to fetch the ga and sp files together. They will return true if they're blocked, false if they work
+				Promise.all([isGaBlocked(), isSpBlocked()]).then(function ([gaBlocked, spBlocked]) {
+					// Build the GA4 parameters, add additional parameters at your leisure
+					var adsBlocked = !document.querySelector("#GxsCRdhiJi");
+					var gtmBlocked = !(window.google_tag_manager && window.google_tag_manager.dataLayer);
+
+					if (!gaBlocked && !spBlocked && !adsBlocked && !gtmBlocked) return;
+
+					var params = {
+						ads_blocked: adsBlocked, // Detect if the bait file was blocked
+						gtm_blocked: gtmBlocked, // Detect if gtm.js was blocked
+						ga_blocked: gaBlocked, // Detect if analytics.js was blocked
+						sp_blocked: spBlocked // Detect if SP was blocked
+					};
+
+					// Build the pixel request with a unique, random Client ID
+					var duid = getSPCookie(); //get cookie value that starts with _sp_id. and is placed on main domain
+					var cid = Math.floor(Math.random() * 1000000 + 1) + "_" + new Date().getTime();
+					var img = document.createElement("img");
+					img.style = "width: 1; height: 1; display: none;";
+					img.src =
+						pixelPath +
+						"?client_id=" +
+						cid +
+						"&duid=" +
+						duid +
+						"&" +
+						Object.keys(params)
+							.reduce(function (acc, cur) {
+								return acc.concat(cur + "=" + params[cur]);
+							}, [])
+							.join("&");
+					document.body.appendChild(img);
+				});
+			});
+		})();
+	</script>
+
+
+
+
+<!-- includes/advertising/fixed-slot.html -->
+
+<!-- / includes/advertising/fixed-slot.html -->
+
+
+<!-- Temptation OR Piano position, suitable for overlays -->
+
+<div data-temptation-position="PAGE_BOTTOM" class="layout__component layout__component--temptation"></div>
+</body>
+</html>
