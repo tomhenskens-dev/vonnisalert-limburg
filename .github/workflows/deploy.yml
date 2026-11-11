@@ -194,7 +194,7 @@ jobs:
         if: always()
         run: |
           mkdir -p /tmp/status
-          if [ ! -f /tmp/status/status.json ]; then
+          if [ "${{ job.status }}" != "success" ] || [ ! -f /tmp/status/status.json ]; then
             jq -n --arg stap "$(cat /tmp/status/stap.txt 2>/dev/null || echo controle)" --arg fout "$(cat /tmp/status/fout.txt 2>/dev/null)" \
               --arg stderr "$(tail -c 3000 /tmp/status/stderr.txt 2>/dev/null)" --arg at "$(date -u +%FT%TZ)" \
               '{ok:false, mislukt_bij:$stap, fout:$fout, stderr:$stderr, at:$at}' > /tmp/status/status.json
