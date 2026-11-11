@@ -179,6 +179,15 @@ test("Geerts vaste formulering: 'Vonnis op …'", () => {
     ["De verdediging vroeg de vrijspraak, vonnis op 2 december.", "2026-12-02"],
     ["Vonnis op maandag.", "2026-11-16"],
     ["Vonnis op 2/12.", "2026-12-02"],
+    ["vonnis op 2 december", "2026-12-02"],
+    ["Vonnis op dinsdag 2 december.", "2026-12-02"],
+    ["Vonnis op 02/12/2026.", "2026-12-02"],
+    ["Vonnis op 2-12.", "2026-12-02"],
+    ["Vonnis op 2.12.", "2026-12-02"],
+    ["Vonnis op 2 dec.", "2026-12-02"],
+    ["Vonnis: 2 december.", "2026-12-02"],
+    ["Vonnis op 2december", "2026-12-02"],
+    ["Vonnis op 2 december om 9 uur in Hasselt.", "2026-12-02"],
   ]) {
     const r = an(t);
     assert.equal(r.verdictDate, d, t);

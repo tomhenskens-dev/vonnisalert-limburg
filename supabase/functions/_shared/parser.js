@@ -101,7 +101,8 @@ export function splitSentences(text) {
 }
 
 function clauses(sentence) {
-  return sentence.split(/\s*[;:]\s*|,\s*(?=maar\b|terwijl\b|nadat\b|want\b)/i).filter(Boolean);
+  // Niet splitsen na "Vonnis:" – dat is Geerts korte notatie ("Vonnis: 2 december").
+  return sentence.split(/\s*;\s*|(?<!\b(?:vonnis|uitspraak|verdict))\s*:\s*|,\s*(?=maar\b|terwijl\b|nadat\b|want\b)/i).filter(Boolean);
 }
 
 // ---------- tijdsuitdrukkingen ----------
@@ -117,7 +118,7 @@ export function parseWhen(text, pubDate) {
   let m;
 
   // 12 november (2026) / 12 nov.
-  m = t.match(new RegExp(`\\b(\\d{1,2})(?:ste|de|e)?\\s+${MONTH_RE}(?:\\s+(\\d{4}))?`));
+  m = t.match(new RegExp(`\\b(\\d{1,2})(?:ste|de|e)?\\s*${MONTH_RE}(?:\\s+(\\d{4}))?`));
   if (m) {
     const d = Number(m[1]), mo = MONTHS[m[2]];
     let y = m[3] ? Number(m[3]) : Number(pubDate.slice(0, 4));
@@ -127,7 +128,7 @@ export function parseWhen(text, pubDate) {
   }
 
   // 12/11 of 12/11/2026
-  m = t.match(/\b(\d{1,2})\/(\d{1,2})(?:\/(\d{2,4}))?\b/);
+  m = t.match(/\b(\d{1,2})[\/.-](\d{1,2})(?:[\/.-](\d{2,4}))?\b(?![.,]?\d)(?!\s*(?:jaar|maand|maanden|uur|%|euro|miljoen|procent))/);
   if (m) {
     const d = Number(m[1]), mo = Number(m[2]);
     let y = m[3] ? Number(m[3].length === 2 ? "20" + m[3] : m[3]) : Number(pubDate.slice(0, 4));
@@ -203,7 +204,7 @@ const FUTURE_PATTERNS = [
   { re: /\b(kent|kennen|krijgt|krijgen|hoort|horen|verneemt|vernemen)\b[^.]{0,60}?\b(?:zijn|haar|hun|het|de)\s+(?:straf|strafmaat|vonnis|verdict|lot|uitspraak|vonnissen)\b/i, weight: 3 },
   { re: /\b(velt|vellen)\b[^.]{0,40}?\b(?:zijn|haar|hun|het|een)\s+(?:vonnis|oordeel|eindoordeel|uitspraak)\b/i, weight: 3 },
   // Geerts vaste formulering: "Vonnis op 2 december." / "Vonnis op maandag."
-  { re: /\b(?:vonnis|uitspraak|verdict)\s+(?:volgt\s+|valt\s+)?op\s+(?:\d{1,2}(?:\/|\s)|(?:maandag|dinsdag|woensdag|donderdag|vrijdag|zaterdag|zondag|morgen|overmorgen)\b)/i, weight: 3 },
+  { re: /\b(?:vonnis|uitspraak|verdict)(?:\s+(?:volgt\s+|valt\s+)?op|\s*:)\s*(?:\d{1,2}(?:[\/.\-\s]|[a-z])|(?:maandag|dinsdag|woensdag|donderdag|vrijdag|zaterdag|zondag|morgen|overmorgen)\b)/i, weight: 3 },
   // in beraad tot ... / uitspraak op 12 november
   { re: /\bin beraad\b[^.]{0,40}?\b(tot|op|genomen tot)\b/i, weight: 3 },
   { re: new RegExp(`^\\s*(?:het\\s+|de\\s+)?${NOUN}\\s+(?:op|is op|volgt op|valt op)\\b`, "i"), weight: 2 },
