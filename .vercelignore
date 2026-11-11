@@ -1,0 +1,5 @@
+tests
+.github
+supabase/migrations
+supabase/functions/vonnisalert
+supabase/config.toml

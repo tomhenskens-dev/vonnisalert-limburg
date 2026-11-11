@@ -1,0 +1,5 @@
+# Minimale configuratie voor de Supabase CLI (gebruikt door GitHub Actions).
+project_id = "vonnisalert-limburg"
+
+[functions.vonnisalert]
+verify_jwt = false
