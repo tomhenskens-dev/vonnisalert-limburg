@@ -119,14 +119,14 @@ async function pollFeeds(db: SupabaseClient, now: Date, minute: number, force: b
   try {
     items.push(...parseRss(await fetchText(HBVL_URL), "hbvl"));
     report.hbvl = items.length;
-  } catch (e) { report.hbvl_error = String(e); }
+  } catch (e) { report.hbvl_error = errText(e); }
   // Google News (alleen titels, ruimere periode) één keer per uur
   if (force || minute < 15) {
     try {
       const g = parseRss(await fetchText(GOOGLE_URL), "google");
       items.push(...g);
       report.google = g.length;
-    } catch (e) { report.google_error = String(e); }
+    } catch (e) { report.google_error = errText(e); }
   }
   if (!items.length) return report;
 
@@ -178,6 +178,15 @@ async function run(db: SupabaseClient, opts: { force?: boolean; action?: string 
   return report;
 }
 
+function errText(e: unknown): string {
+  if (e instanceof Error) return e.message;
+  if (e && typeof e === "object") {
+    const o = e as Record<string, unknown>;
+    return [o.message, o.code, o.details, o.hint].filter(Boolean).join(" | ") || JSON.stringify(e);
+  }
+  return String(e);
+}
+
 Deno.serve(async (req) => {
   if (req.method === "OPTIONS") return new Response("ok", { headers: cors });
   if (req.method !== "POST") return json({ error: "Alleen POST" }, 405);
@@ -207,7 +216,7 @@ Deno.serve(async (req) => {
     await db.from("run_log").insert({ kind: who, ok: true, details: report });
     return json({ ok: true, report });
   } catch (e) {
-    await db.from("run_log").insert({ kind: who, ok: false, details: { error: String(e) } });
-    return json({ ok: false, error: String(e) }, 500);
+    await db.from("run_log").insert({ kind: who, ok: false, details: { error: errText(e) } });
+    return json({ ok: false, error: errText(e) }, 500);
   }
 });
