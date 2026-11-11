@@ -1,0 +1,39 @@
+name: probe-hbvl
+on:
+  push:
+    branches: [probe/hbvl]
+permissions:
+  contents: write
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Probe
+        run: |
+          mkdir out; cd out
+          UA="Mozilla/5.0 (compatible; VonnisalertLimburg/0.1; persoonlijk gebruik)"
+          get(){ n=$1; u=$2; echo "== $u" >> index.txt; curl -sSL -A "$UA" -m 30 -o "$n" -w "%{http_code} %{content_type} %{size_download}\n" "$u" >> index.txt 2>&1 || echo fail >> index.txt; }
+          get robots.txt https://www.hbvl.be/robots.txt
+          get home.html https://www.hbvl.be/
+          get rss.xml https://www.hbvl.be/rss
+          get rss2.xml https://www.hbvl.be/rss.xml
+          get feed.xml https://www.hbvl.be/feed
+          get sport.xml https://www.hbvl.be/rss/section/0aecea6e-9e2f-4509-a874-a2ad00adeaa4
+          get regio.html https://www.hbvl.be/regio
+          get sitemap.xml https://www.hbvl.be/sitemap.xml
+          get newssitemap.xml https://www.hbvl.be/sitemap-news.xml
+          get gn.xml "https://news.google.com/rss/search?q=site:hbvl.be+rechtbank&hl=nl&gl=BE&ceid=BE:nl"
+          grep -oiE '<link[^>]+(rss|atom)[^>]*>' home.html > home_feeds.txt || true
+          grep -oiE 'https://www\.hbvl\.be/[^"]*rss[^"]*' home.html | sort -u >> home_feeds.txt || true
+          grep -oiE 'https://www\.hbvl\.be/cnt/[a-z0-9_]+' home.html | sort -u | head -5 > arts.txt || true
+          i=0; for a in $(cat arts.txt); do i=$((i+1)); get art$i.html "$a"; done
+          for f in art*.html; do [ -f "$f" ] && grep -oE '<script type="application/ld\+json">[^<]{0,4000}' "$f" > "$f.ld.txt"; done
+          for f in *.html *.xml; do head -c 300000 "$f" > "$f.tmp" && mv "$f.tmp" "$f"; done
+          ls -la >> index.txt
+      - name: Commit
+        run: |
+          git init -q r && cd r
+          git config user.name probe && git config user.email probe@users.noreply.github.com
+          cp -r ../out/* .
+          git checkout -q -b probe-results && git add . && git commit -qm results
+          git push -f "https://x-access-token:${{ github.token }}@github.com/${{ github.repository }}" probe-results
