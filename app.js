@@ -395,7 +395,7 @@ function currentPrompt() {
 function renderWrite() {
   const cases = state.cases.filter((c) => !c.archived).sort((a, b) => String(b.verdict_date || "").localeCompare(String(a.verdict_date || "")));
   const custom = typeof state.settings.style_guide === "string" && state.settings.style_guide.trim();
-  app.innerHTML = `<h1>Artikel schrijven</h1>
+  app.innerHTML = `<h1 style="display:flex;align-items:center;gap:10px">Artikel schrijven <button class="secondary sm" id="wInfoBtn" title="Uitleg">ℹ️ Uitleg</button></h1>
     <p class="muted">De tool maakt de juiste opdracht (prompt) met jouw schrijfstijl. Die plak je in je eigen Claude-account, samen met het vonnis. Er gaat niets automatisch naar Claude, en bronteksten worden hier niet bewaard.</p>
     <div class="wsteps"><span><b>1</b> Kies en vul aan</span><span><b>2</b> Kopieer de prompt</span><span><b>3</b> Plak in Claude + vonnis-PDF</span><span><b>4</b> Plak het resultaat terug voor de teller</span></div>
 
@@ -463,6 +463,7 @@ function renderWrite() {
     }));
   };
 
+  $("wInfoBtn").onclick = () => $("wInfo").showModal();
   $("wKind").onchange = (e) => { draft.kind = e.target.value; refresh(); };
   app.querySelectorAll("[data-lim]").forEach((b) => (b.onclick = () => {
     draft.limit = Number(b.dataset.lim);

@@ -13,7 +13,7 @@
 <link rel="apple-touch-icon" href="/icon-180.png">
 <link rel="icon" type="image/svg+xml" href="/logo.svg">
 <link rel="alternate icon" type="image/png" href="/icon-192.png">
-<link rel="stylesheet" href="/styles.css?v=6">
+<link rel="stylesheet" href="/styles.css?v=7">
 <script src="/config.js?v=2"></script>
 <script src="/vendor/supabase-2.119.0.js"></script>
 </head>
@@ -41,6 +41,32 @@
 <main id="app"><p class="muted">Laden…</p></main>
 <footer id="footer"></footer>
 
+<dialog id="wInfo"><div class="modalhead"><h2>ℹ️ Zo werkt Artikel schrijven</h2><button type="button" class="secondary sm" onclick="this.closest('dialog').close()">Sluiten</button></div><div class="modalbody winfo">
+<h3>Wat doet dit tabblad?</h3>
+<p>Het maakt een kant-en-klare opdracht (prompt) voor Claude, met jouw schrijfstijl, de juiste lengte en de gegevens van het dossier. Die plak je in je <b>eigen Claude-account</b>. De tool stuurt zelf niets door en bewaart geen bronteksten.</p>
+<h3>In 5 stappen</h3>
+<ol>
+<li><b>Kies</b> het soort artikel (vonnis, zitting of beide samen) en de lengte: <b>2.100</b> of <b>3.300 tekens</b> incl. spaties. Vink aan of de kop meetelt.</li>
+<li><b>Optioneel:</b> kies het dossier (zaak, initialen, rechtbank en data komen er dan automatisch in) en noteer wat je zelf zag of hoorde, bv. reacties in de zaal.</li>
+<li>Tik op <b>📋 Kopieer prompt</b> en dan op <b>Open Claude</b>.</li>
+<li>In Claude: start een nieuw gesprek, <b>plak</b> de prompt, voeg met de <b>paperclip</b> het vonnis (PDF) en je zittingsverslag toe, en verstuur.</li>
+<li><b>Plak het resultaat terug</b> in de tool. De teller toont of het past. Te lang? Tik op <b>Kopieer inkort-opdracht</b> en plak die in hetzelfde Claude-gesprek. Ook een versie in de andere lengte nodig? Daar is een knop voor.</li>
+</ol>
+<h3>Waar Claude zich altijd aan houdt</h3>
+<ul>
+<li>Beklaagden enkel met <b>initialen</b> en leeftijd.</li>
+<li>Alleen feiten en citaten uit de bronnen. Niets verzinnen.</li>
+<li>Ontbreekt iets, dan staat er <b>[CHECK: …]</b> in de tekst. Onder de streep volgt een lijstje “Om na te kijken”.</li>
+</ul>
+<h3>Je stijl bijsturen</h3>
+<p>Onder <b>Stijlgids</b> staat wat Claude over jouw schrijfstijl te horen krijgt. Voeg gerust regels toe (“nooit…”, “altijd…”) en tik op <b>Bewaar</b>. Dat geldt voor elke volgende prompt. <b>Terug naar standaard</b> zet de oorspronkelijke versie terug.</p>
+<h3>Tips</h3>
+<ul>
+<li>Een vonnis van tientallen pagina's vraagt veel van Claude: met een gratis account bots je snel op de limiet, met <b>Claude Pro</b> lukt het wel.</li>
+<li>Werk je vaak zo, maak dan eenmalig een <b>Claude-project</b> “Vonnisartikels”. Plak er de projectinstructies in (knop onderaan) en upload een paar eigen artikels als voorbeeld. Vink daarna “Ik gebruik een Claude-project” aan.</li>
+<li>Lees het artikel altijd zelf na vóór publicatie: cijfers, namen en citaten.</li>
+</ul>
+</div></dialog>
 <dialog id="caseDialog">
   <form id="caseForm" method="dialog">
     <div class="modalhead"><h2 id="dialogTitle">Nieuw dossier</h2><button type="button" class="secondary sm" data-close>Sluiten</button></div>
@@ -124,7 +150,7 @@
   </form>
 </dialog>
 
-<script type="module" src="/app.js?v=7"></script>
+<script type="module" src="/app.js?v=8"></script>
 <script>
 if ("serviceWorker" in navigator) window.addEventListener("load", () => navigator.serviceWorker.register("/sw.js").catch(() => {}));
 </script>

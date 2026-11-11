@@ -149,3 +149,4 @@ footer{text-align:center}
 .field .check input{width:auto;flex:0 0 auto;margin:0}
 .field .check{justify-content:flex-start;padding:3px 0}
 .wcount .big{white-space:nowrap}
+.winfo h3{font-size:14.5px;margin:14px 0 4px;color:#173f67}.winfo h3:first-child{margin-top:0}.winfo p,.winfo li{font-size:14px}.winfo ol,.winfo ul{padding-left:20px;margin:4px 0}.winfo li{margin-bottom:5px}
