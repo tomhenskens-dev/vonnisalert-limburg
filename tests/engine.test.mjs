@@ -128,3 +128,11 @@ test("HLN-feed: auteur uit <author>, artikel-id uit ~a-code, filter op gevolgde 
   assert.equal(r.inserts[0].court, "Hasselt");
   assert.equal(r.inserts[0].author_is_geert, true); // = auteur is een gevolgde journalist
 });
+
+test("artikel van gevolgde journalist zonder gerechtswoorden in de titel wordt toch bewaard", async () => {
+  const { processItems } = await import("../supabase/functions/_shared/engine.js");
+  const it = (author, id) => ({ id, source: "hbvl", url: `https://www.hbvl.be/x/${id}.html`, title: "Truienaar houdt zwangere inbreekster bij de enkels in bedwang", lead: "", author, publishedAt: "2026-11-12T10:00:00Z" });
+  const r = processItems([it("Geert Houben", "1"), it("Iemand Anders", "2")], { authors: [{ name: "Geert Houben" }] });
+  assert.deepEqual(r.articles.map((a) => a.article_id), ["1"]);
+  assert.equal(r.inserts.length, 0);
+});
