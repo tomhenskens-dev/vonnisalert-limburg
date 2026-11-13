@@ -100,6 +100,23 @@ for path in sorted(glob.glob("agenda/updates/*.json")):
             f"(select 1 from public.cases where lower(title) = lower({lit(f['title'])})) returning id) "
             f"insert into public.case_events (case_id, kind, message) select id, 'aangemaakt', {lit(msg)} from ins;"
         )
+    # Bestaande dossiers bijwerken, gezocht op titel
+    for c in data.get("case_updates", []):
+        if not c.get("match_title"): raise ValueError("case_update zonder match_title")
+        f = {k: c[k] for k in CASE_FIELDS + ["article_id", "review_reasons"] if k in c and k != "title"}
+        sets = []
+        for k, v in f.items():
+            if k == "review_reasons":
+                sets.append("review_reasons = array[" + ", ".join(lit(x) for x in v) + "]::text[]" if v else "review_reasons = '{}'::text[]")
+            elif k == "article_id":
+                sets.append(f"article_id = {lit(v)}")
+            else:
+                sets.append(f"{k} = {case_val(k, v)}")
+        msg = c.get("event", "Bijgewerkt door Claude.")
+        sql.append(
+            f"with upd as (update public.cases set {', '.join(sets)} where lower(title) = lower({lit(c['match_title'])}) returning id) "
+            f"insert into public.case_events (case_id, kind, message) select id, 'handmatig', {lit(msg)} from upd;"
+        )
     # Gerechtsartikels (enkel titel, link, auteur en datum – geen artikeltekst in de publieke repo)
     for a in data.get("articles", []):
         if not a.get("article_id") or not a.get("url") or not a.get("title"):
