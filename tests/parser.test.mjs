@@ -180,7 +180,7 @@ test("Geerts vaste formulering: 'Vonnis op …'", () => {
     ["Vonnis op maandag.", "2026-11-16"],
     ["Vonnis op 2/12.", "2026-12-02"],
     ["vonnis op 2 december", "2026-12-02"],
-    ["Vonnis op dinsdag 2 december.", "2026-12-02"],
+    ["Vonnis op woensdag 2 december.", "2026-12-02"],
     ["Vonnis op 02/12/2026.", "2026-12-02"],
     ["Vonnis op 2-12.", "2026-12-02"],
     ["Vonnis op 2.12.", "2026-12-02"],
@@ -201,4 +201,14 @@ test("aangekondigde zitting wordt als zittingsdatum herkend, niet als uitspraak"
   assert.equal(r.hasAnnouncement, false);
   assert.equal(r.hearingDate, "2027-09-06");
   assert.equal(r.court, "Hasselt");
+});
+
+test("weekdag die niet bij de datum past → te controleren", async () => {
+  const { analyzeArticle } = await import("../supabase/functions/_shared/parser.js");
+  const bad = analyzeArticle({ title: "Inbreekster voor de rechter", text: "Vonnis op maandag 10 december", publishedAt: "2026-11-12T10:00:00Z" });
+  assert.equal(bad.verdictDate, "2026-12-10");
+  assert.equal(bad.status, "check");
+  assert.match(bad.reasons.join(" "), /donderdag/);
+  const ok = analyzeArticle({ title: "Inbreekster voor de rechter", text: "Vonnis op donderdag 10 december", publishedAt: "2026-11-12T10:00:00Z" });
+  assert.equal(ok.status, "aangekondigd");
 });

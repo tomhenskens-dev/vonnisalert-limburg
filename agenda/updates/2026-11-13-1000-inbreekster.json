@@ -1,0 +1,20 @@
+{
+  "cases": [
+    {
+      "title": "Truienaar houdt zwangere inbreekster bij de enkels in bedwang",
+      "author": "Geert Houben",
+      "author_is_geert": true,
+      "article_url": "https://www.hbvl.be/regio/limburg/sint-truiden/truienaar-houdt-zwangere-inbreekster-bij-de-enkels-in-bedwang/164471444.html",
+      "published_at": "2026-11-12T12:00:00+01:00",
+      "verdict_date": "2026-12-10",
+      "verdict_date_text": "maandag 10 december",
+      "date_certainty": "onzeker",
+      "court": "Te controleren",
+      "status": "check",
+      "needs_review": true,
+      "source": "geplakt",
+      "notes": "Artikel van Geert (12/11/2026), onderaan: \"Vonnis op maandag 10 december\". Let op: 10 december 2026 is een donderdag, maandag is 14 december. Navragen welke dag juist is. Rechtbank (Hasselt of Tongeren) staat niet in de gegevens die Tom doorgaf: aanvullen.",
+      "event": "Toegevoegd door Claude op vraag van Tom (automatische opvolging staat uit). Weekdag en datum kloppen niet."
+    }
+  ]
+}

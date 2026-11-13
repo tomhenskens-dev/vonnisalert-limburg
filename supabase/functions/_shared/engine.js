@@ -121,7 +121,10 @@ export function processItems(items, { cases = [], knownArticles = {}, now = new 
 
     const analysis = analyzeArticle({ title: item.title, text: item.lead, publishedAt: item.publishedAt, author: item.author });
     const futureHearing = analysis.hearingDate && analysis.pubDate && analysis.hearingDate > analysis.pubDate;
-    if (!analysis.isCourtRelated && !analysis.hasAnnouncement) continue;
+    // Artikels van gevolgde journalisten altijd bewaren: de "Vonnis op …"-regel staat vaak onderaan
+    // en zit dan niet in de korte feedtekst. Zo verschijnen ze toch in de lijst om snel na te kijken.
+    const byFollowed = Boolean(followedAuthor(item.author, authors || undefined));
+    if (!analysis.isCourtRelated && !analysis.hasAnnouncement && !byFollowed) continue;
 
     const article = {
       article_id: item.id, source: item.source, url: item.url, title: item.title, lead: item.lead || null,

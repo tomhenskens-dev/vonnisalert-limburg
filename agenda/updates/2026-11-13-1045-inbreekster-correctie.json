@@ -1,0 +1,17 @@
+{
+  "case_updates": [
+    {
+      "match_title": "Truienaar houdt zwangere inbreekster bij de enkels in bedwang",
+      "article_id": "164471444",
+      "verdict_date": "2026-12-10",
+      "verdict_date_text": "10 december",
+      "date_certainty": "exact",
+      "court": "Te controleren",
+      "status": "check",
+      "needs_review": true,
+      "review_reasons": ["Rechtbanklocatie niet uitdrukkelijk vermeld."],
+      "notes": "Artikel van Geert (12/11/2026), onderaan: \"Vonnis op 10 december\" (donderdag 10 december 2026). Rechtbank (Hasselt of Tongeren) nog aanvullen; daarna mag het vinkje 'nagekeken' aan.",
+      "event": "Gecorrigeerd: in het artikel staat enkel \"Vonnis op 10 december\" (geen weekdag). Alleen de rechtbank moet nog aangevuld worden."
+    }
+  ]
+}
