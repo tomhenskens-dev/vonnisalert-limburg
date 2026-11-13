@@ -1,0 +1,43 @@
+name: Diagnose
+# Eenmalige controle: waarom kwam een artikel niet binnen? Schrijft alleen metadata (geen artikeltekst) naar branch diag-results.
+on:
+  push:
+    branches: ["diag/run"]
+permissions:
+  contents: write
+jobs:
+  diag:
+    runs-on: ubuntu-latest
+    env:
+      SUPABASE_ACCESS_TOKEN: ${{ secrets.SUPABASE_ACCESS_TOKEN }}
+      REF: ${{ secrets.SUPABASE_PROJECT_REF || secrets.SUPABASE_ACCESS_REF }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: 22 }
+      - name: Diagnose
+        run: |
+          set -u
+          REF=$(echo "$REF" | tr -d '[:space:]')
+          q() { jq -n --arg q "$1" '{query:$q}' | curl -sS -X POST "https://api.supabase.com/v1/projects/$REF/database/query" -H "Authorization: Bearer $SUPABASE_ACCESS_TOKEN" -H "Content-Type: application/json" --data @- ; }
+          mkdir -p out
+          q "select key, value, updated_at from public.app_state order by key" > out/state.json
+          q "select at, kind, ok, details from public.run_log order by at desc limit 8" > out/runs.json
+          q "select source, count(*) n, max(first_seen) laatst, count(*) filter (where court_related) gerecht, count(*) filter (where announcement) aankondiging from public.articles group by source" > out/articles.json
+          q "select article_id, author, published_at, first_seen, court_related, announcement, case_id is not null as dossier from public.articles where article_id like '%164471444%' or url like '%164471444%'" > out/target.json
+          q "select (select count(*) from cron.job) jobs, (select json_agg(json_build_object('job',jobname,'schedule',schedule,'active',active)) from cron.job) lijst, (select json_agg(r) from (select status, start_time from cron.job_run_details order by start_time desc limit 5) r) laatste" > out/cron.json
+          curl -sS -A "Mozilla/5.0 Vonnisalert" "https://www.hbvl.be/rss" -o /tmp/hbvl.xml -w "%{http_code}" > out/rss_http.txt || true
+          node --input-type=module -e '
+            import fs from "node:fs";
+            import { parseRss } from "./supabase/functions/_shared/engine.js";
+            import { analyzeArticle } from "./supabase/functions/_shared/parser.js";
+            let xml=""; try{ xml=fs.readFileSync("/tmp/hbvl.xml","utf8"); }catch{}
+            const items = xml ? parseRss(xml,"rss") : [];
+            const t = items.find(i => (i.link||"").includes("164471444") || String(i.article_id||i.id||"").includes("164471444"));
+            const authors = {}; items.forEach(i => authors[i.author||"?"] = (authors[i.author||"?"]||0)+1);
+            let a=null; if(t){ try{ const r=analyzeArticle({title:t.title,lead:t.lead||t.description||"",text:"",published:t.published_at||t.pubDate}); a={court_related:r.courtRelated??r.court_related, announcements:(r.announcements||[]).length, court:r.court, keys:Object.keys(r)}; }catch(e){a={error:String(e)}} }
+            fs.writeFileSync("out/feed.json", JSON.stringify({items:items.length, in_feed:!!t, item:t?{author:t.author,published:t.published_at||t.pubDate, premium:t.premium, has_lead:!!(t.lead||t.description), keys:Object.keys(t)}:null, analysis:a, authors, oldest:items.at(-1)?.published_at, newest:items[0]?.published_at},null,1));'
+          # geheimen nooit wegschrijven
+          sed -i "s/$REF/<ref>/g" out/*.json || true
+          git config user.name "diag"; git config user.email "diag@users.noreply.github.com"
+          git checkout --orphan diag-results; git rm -rfq --cached . ; git add out; git commit -qm "diag $(date -u +%FT%TZ)"; git push -f origin HEAD:diag-results
