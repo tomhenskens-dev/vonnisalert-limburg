@@ -25,6 +25,7 @@ jobs:
           q "select at, kind, ok, details from public.run_log order by at desc limit 8" > out/runs.json
           q "select source, count(*) n, max(first_seen) laatst, count(*) filter (where court_related) gerecht, count(*) filter (where announcement) aankondiging from public.articles group by source" > out/articles.json
           q "select article_id, author, published_at, first_seen, court_related, announcement, case_id is not null as dossier from public.articles where article_id like '%164471444%' or url like '%164471444%'" > out/target.json
+          q "select title, verdict_date, court, status, needs_review, created_at from public.cases order by created_at desc limit 3" > out/cases.json
           q "select (select count(*) from cron.job) jobs, (select json_agg(json_build_object('job',jobname,'schedule',schedule,'active',active)) from cron.job) lijst, (select json_agg(r) from (select status, start_time from cron.job_run_details order by start_time desc limit 5) r) laatste" > out/cron.json
           curl -sS -A "Mozilla/5.0 Vonnisalert" "https://www.hbvl.be/rss" -o /tmp/hbvl.xml -w "%{http_code}" > out/rss_http.txt || true
           node --input-type=module -e '
