@@ -1,0 +1,13 @@
+key types: [{"name":"anon","type":"legacy"},{"name":"service_role","type":"legacy"},{"name":"default","type":"publishable"},{"name":"default","type":"secret"}]
+login ok: ja
+token alg: {"alg":"ES256","kid":"d38e199c-66d7-4118-accb-bc1bc8739d4d","typ":"JWT"}
+functie (user): {"subject":"Vonnisalert 13 november 2026: 0 vandaag, 0 morgen, 1 nieuw","html":"<!doctype html><html><body style=\"font:15px/1.5 -apple-system,Segoe UI,sans-serif;color:#172536;max-width:640px;margin:auto;padding:16px\">\n<h2 style=\"margin:0 0 6px;color:#173f67\">Vonnisalert Limburg</h2>\n<p style=
+functie (pubkey): {"error":"Niet toegelaten"} HTTP401
+getUser met publishable: {"id":"262ffe6f-0e65-4b1d-8b18-984bc5a0bfdc","aud":"authenticated","role":"authe
+app_users gelijk aan GEERT_EMAIL: [{"count":1}]
+aantal app_users: [{"count":1}]
+dossier: [{"verdict_date":"2026-12-10","verdict_date_text":"maandag 10 december","date_certainty":"onzeker","court":"Te controleren","status":"check","article_id":null}]
+upd-sql-len: 861
+upd-resultaat: []
+na: [{"verdict_date_text":"10 december","date_certainty":"exact","article_id":"164471444"}]
+events: [{"kind":"aangemaakt","message":"Toegevoegd door Claude op vraag van Tom (automatische opvolging staat uit). Weekdag en datum kloppen niet."},{"kind":"handmatig","message":"Gecorrigeerd: in het artikel staat enkel \"Vonnis op 10 december\" (geen weekdag). Alleen de rechtbank moet nog aangevuld worden."}]
