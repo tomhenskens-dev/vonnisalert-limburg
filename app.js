@@ -355,7 +355,11 @@ function renderSettings() {
 async function callFn(action, btn) {
   btn.disabled = true; const old = btn.textContent; btn.textContent = "Bezig…";
   try {
-    const { data, error } = await db.functions.invoke("vonnisalert", { body: { action } });
+    // Altijd expliciet het inlogtoken meesturen: na herladen stuurt supabase-js anders soms de publieke sleutel mee.
+    const { data: sess } = await db.auth.getSession();
+    const token = sess?.session?.access_token;
+    if (!token) { toast("Je sessie is verlopen. Log opnieuw in."); btn.disabled = false; btn.textContent = old; return; }
+    const { data, error } = await db.functions.invoke("vonnisalert", { body: { action }, headers: { Authorization: `Bearer ${token}` } });
     const out = $("runOut");
     out.hidden = false;
     if (error) {
@@ -640,14 +644,47 @@ function openNew(prefill = {}) {
 }
 $("addBtn").onclick = () => openNew();
 
+// Link opschonen (utm-parameters weg) en een leesbare titel uit de link halen.
+function cleanUrl(u) {
+  try { const x = new URL(u); x.search = ""; x.hash = ""; return x.toString(); } catch { return u; }
+}
+function titleFromUrl(u) {
+  try {
+    const parts = new URL(u).pathname.split("/").filter(Boolean);
+    const slug = parts.reverse().find((p) => /[a-z]-[a-z]/i.test(p) && !/^\d+(\.html)?$/.test(p) && !/^dmf\d/i.test(p));
+    if (!slug) return "";
+    const t = decodeURIComponent(slug).replace(/~a[0-9a-f]+\/?$/i, "").replace(/\.html?$/, "").replace(/-/g, " ").trim();
+    return t.charAt(0).toUpperCase() + t.slice(1);
+  } catch { return ""; }
+}
+
 function analyze() {
-  const url = $("pasteUrl").value.trim();
-  const text = $("pasteText").value.trim();
-  if (!text) return toast("Plak eerst de tekst van het artikel.");
+  let url = $("pasteUrl").value.trim();
+  let text = $("pasteText").value.trim();
+  // Alleen een link in het tekstvak geplakt? Dan is dat de link, niet de tekst.
+  if (/^https?:\/\/\S+$/i.test(text)) { if (!url) url = text; text = ""; $("pasteText").value = ""; }
+  if (url) { url = cleanUrl(url); $("pasteUrl").value = url; }
+  if (!text && !url) return toast("Plak de link of de tekst van het artikel.");
   const aid = articleIdFromUrl(url);
-  const dup = state.cases.find((c) => (aid && c.article_id === aid) || (url && c.article_url === url));
+  const dup = url && state.cases.find((c) => (aid && (c.article_id === aid || articleIdFromUrl(c.article_url || "") === aid)) || cleanUrl(c.article_url || "") === url);
   if (dup) { dlg.close(); toast("Dit artikel zit al in een dossier."); return openCase(dup.id); }
-  const [title, ...rest] = text.split(/\n+/);
+  const slugTitle = url ? titleFromUrl(url) : "";
+  // Enkel een link (of een link + één regel zoals "Vonnis op 10 december"): titel uit de link halen.
+  const lines = text ? text.split(/\n+/) : [];
+  const useSlug = slugTitle && lines.length <= 1;
+  const title = useSlug ? slugTitle : (lines[0] || slugTitle);
+  const rest = useSlug ? lines : lines.slice(1);
+  if (!text) {
+    lastAnalysis = { reasons: ["Enkel de link geplakt: uitspraakdatum en rechtbank nog invullen."] };
+    $("analysisOut").innerHTML = `<div class="analysis"><strong>ℹ️ Dossier klaargezet op basis van de link</strong>
+      <div style="margin-top:4px">De tool kan HBVL-artikels niet zelf openen. Vul hieronder de <b>uitspraakdatum</b> en de <b>rechtbank</b> in en bewaar.<br>
+      Of plak in het tekstvak de regel <b>“Vonnis op …”</b> (of de hele tekst) en tik opnieuw op <b>Analyseer</b>.</div></div>`;
+    fillForm({ title: (slugTitle || url).slice(0, 400), author: $("pasteAuthor").value.trim() || null,
+      author_is_geert: $("pasteAuthor").value.trim() ? isGeertHouben($("pasteAuthor").value) : null,
+      published_at: `${$("pastePub").value || today()}T10:00:00Z`, court: "Te controleren", status: "check", article_url: url });
+    $("formBox").hidden = false;
+    return;
+  }
   const pub = $("pastePub").value || today();
   const r = analyzeArticle({ title, text: rest.join("\n"), publishedAt: `${pub}T10:00:00Z`, author: $("pasteAuthor").value });
   lastAnalysis = r;

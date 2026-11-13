@@ -77,7 +77,7 @@
       </div>
       <div id="pasteBox">
         <div class="field full"><label for="pasteUrl">Link naar het HBVL-artikel</label><input id="pasteUrl" type="url" placeholder="https://www.hbvl.be/…"></div>
-        <div class="field full" style="margin-top:10px"><label for="pasteText">Tekst van het artikel (plakken)</label><textarea id="pasteText" rows="7" placeholder="Plak hier de titel en tekst van het artikel. De app zoekt zelf de uitspraakdatum, rechtbank en beklaagde."></textarea></div>
+        <div class="field full" style="margin-top:10px"><label for="pasteText">Tekst van het artikel (plakken)</label><textarea id="pasteText" rows="7" placeholder="Plak de tekst van het artikel – of enkel de regel “Vonnis op …”. Alleen een link kan ook: dan vul je de datum zelf in."></textarea></div>
         <div class="formgrid" style="margin-top:10px">
           <div class="field"><label for="pastePub">Publicatiedatum</label><input id="pastePub" type="date"></div>
           <div class="field"><label for="pasteAuthor">Auteur</label><input id="pasteAuthor" placeholder="bv. Geert Houben"></div>
@@ -150,7 +150,7 @@
   </form>
 </dialog>
 
-<script type="module" src="/app.js?v=9"></script>
+<script type="module" src="/app.js?v=10"></script>
 <script>
 if ("serviceWorker" in navigator) window.addEventListener("load", () => navigator.serviceWorker.register("/sw.js").catch(() => {}));
 </script>
