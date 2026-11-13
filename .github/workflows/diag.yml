@@ -36,6 +36,7 @@ jobs:
           q() { jq -n --arg q "$1" '{query:$q}' | curl -sS -X POST "https://api.supabase.com/v1/projects/$REF/database/query" -H "Authorization: Bearer $SUPABASE_ACCESS_TOKEN" -H "Content-Type: application/json" --data @- ; }
           echo "app_users gelijk aan GEERT_EMAIL: $(q "select count(*) from public.app_users where lower(email)=lower('$E')" )" >> out/report.txt
           echo "aantal app_users: $(q "select count(*) from public.app_users")" >> out/report.txt
+          echo "dossier: $(q "select verdict_date, verdict_date_text, date_certainty, court, status, article_id from public.cases where title ilike '%inbreekster%'")" >> out/report.txt
           sed -i "s/$REF/<ref>/g; s/$E/<mail>/g" out/report.txt
           git config user.name diag; git config user.email diag@users.noreply.github.com
           git checkout --orphan diag-results; git rm -rfq --cached .; git add out; git commit -qm "diag $(date -u +%T)"; git push -f origin HEAD:diag-results
