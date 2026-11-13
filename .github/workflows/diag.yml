@@ -37,6 +37,7 @@ jobs:
           echo "app_users gelijk aan GEERT_EMAIL: $(q "select count(*) from public.app_users where lower(email)=lower('$E')" )" >> out/report.txt
           echo "aantal app_users: $(q "select count(*) from public.app_users")" >> out/report.txt
           echo "dossier: $(q "select verdict_date, verdict_date_text, date_certainty, court, status, article_id from public.cases where title ilike '%inbreekster%'")" >> out/report.txt
+          applied=$(q "select coalesce(json_agg(name), '[]'::json) as n from public.agenda_updates_applied" | jq -c '.[0].n'); echo "applied: $applied" >> out/report.txt; SQL=$(python3 .github/scripts/agenda_apply.py "$applied" 2>>out/report.txt); echo "sql-resultaat: $(q "$SQL" | head -c 400)" >> out/report.txt
           sed -i "s/$REF/<ref>/g; s/$E/<mail>/g" out/report.txt
           git config user.name diag; git config user.email diag@users.noreply.github.com
           git checkout --orphan diag-results; git rm -rfq --cached .; git add out; git commit -qm "diag $(date -u +%T)"; git push -f origin HEAD:diag-results
