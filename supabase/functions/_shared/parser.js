@@ -116,6 +116,14 @@ function clauses(sentence) {
 export function parseWhen(text, pubDate) {
   const t = String(text || "").toLowerCase();
   let m;
+  // "maandag 10 december": klopt de weekdag niet met de datum, dan is de datum onzeker (tikfout in weekdag of datum).
+  const checkWd = (res, idx) => {
+    const w = t.slice(0, idx).match(new RegExp(`\\b${WD_RE}\\s*,?\\s*$`));
+    if (!w) return res;
+    const said = WEEKDAYS.indexOf(w[1]), actual = weekday(res.date);
+    if (said === actual) return { ...res, text: `${w[1]} ${res.text}` };
+    return { ...res, certainty: "onzeker", text: `${w[1]} ${res.text}`, weekdayConflict: { said: WEEKDAYS[said], actual: WEEKDAYS[actual] } };
+  };
 
   // 12 november (2026) / 12 nov.
   m = t.match(new RegExp(`\\b(\\d{1,2})(?:ste|de|e)?\\s*${MONTH_RE}(?:\\s+(\\d{4}))?`));
@@ -124,7 +132,7 @@ export function parseWhen(text, pubDate) {
     let y = m[3] ? Number(m[3]) : Number(pubDate.slice(0, 4));
     let iso = isoOf(y, mo, d);
     if (iso && !m[3] && diffDays(pubDate, iso) < -60) iso = isoOf(y + 1, mo, d); // jaarwissel
-    if (iso) return { date: iso, certainty: "exact", text: m[0].trim() };
+    if (iso) return checkWd({ date: iso, certainty: "exact", text: m[0].trim() }, m.index);
   }
 
   // 12/11 of 12/11/2026
@@ -134,7 +142,7 @@ export function parseWhen(text, pubDate) {
     let y = m[3] ? Number(m[3].length === 2 ? "20" + m[3] : m[3]) : Number(pubDate.slice(0, 4));
     let iso = mo <= 12 ? isoOf(y, mo, d) : null;
     if (iso && !m[3] && diffDays(pubDate, iso) < -60) iso = isoOf(y + 1, mo, d);
-    if (iso) return { date: iso, certainty: "exact", text: m[0] };
+    if (iso) return checkWd({ date: iso, certainty: "exact", text: m[0] }, m.index);
   }
 
   if (/\bovermorgen\b/.test(t)) return { date: addDays(pubDate, 2), certainty: "afgeleid", text: "overmorgen" };
@@ -401,7 +409,9 @@ export function analyzeArticle(a) {
     if (best.confidence !== "hoog") reasons.push("Formulering niet eenduidig (voorwaardelijk, citaat of zwak patroon).");
     if (!verdictDate) reasons.push(dateText ? `Geen exacte datum: “${dateText}”.` : "Geen uitspraakdatum gevonden.");
     if (dateCertainty === "afgeleid") reasons.push(`Datum afgeleid uit “${dateText}” en de publicatiedatum.`);
-    if (dateCertainty === "onzeker" && verdictDate) reasons.push(`Datum onzeker: “${dateText}”.`);
+    const wc = best.when?.weekdayConflict;
+    if (wc) reasons.push(`Weekdag en datum kloppen niet: “${dateText}” – ${verdictDate} is een ${wc.actual}. Controleer welke dag juist is.`);
+    else if (dateCertainty === "onzeker" && verdictDate) reasons.push(`Datum onzeker: “${dateText}”.`);
   }
   if (postponed) { status = "uitgesteld"; reasons.push("Artikel vermeldt uitstel."); }
   if (court.court === "Te controleren") reasons.push("Rechtbanklocatie niet uitdrukkelijk vermeld.");
