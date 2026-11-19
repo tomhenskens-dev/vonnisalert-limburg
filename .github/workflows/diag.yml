@@ -19,25 +19,10 @@ jobs:
           set -u
           REF=$(echo "$REF" | tr -d '[:space:]'); E=$(echo "$GEERT_EMAIL" | tr -d '[:space:]')
           U="https://$REF.supabase.co"; mkdir -p out
-          KEYS=$(curl -sS "https://api.supabase.com/v1/projects/$REF/api-keys?reveal=true" -H "Authorization: Bearer $SUPABASE_ACCESS_TOKEN")
-          PUB=$(echo "$KEYS" | jq -r '[.[]|select(.type=="publishable")][0].api_key // empty'); ANON=$(echo "$KEYS" | jq -r '[.[]|select(.name=="anon")][0].api_key // empty')
-          echo "key types: $(echo "$KEYS" | jq -c '[.[]|{name,type}]')" > out/report.txt
-          K=${PUB:-$ANON}
-          LOGIN=$(jq -n --arg e "$E" --arg p "$GEERT_PASSWORD" '{email:$e,password:$p}' | curl -sS "$U/auth/v1/token?grant_type=password" -H "apikey: $K" -H "Content-Type: application/json" --data @-)
-          TOK=$(echo "$LOGIN" | jq -r '.access_token // empty')
-          echo "login ok: $([ -n "$TOK" ] && echo ja || echo "nee $(echo "$LOGIN" | jq -c '{error,error_description,msg}')")" >> out/report.txt
-          echo "token alg: $(echo "$TOK" | cut -d. -f1 | base64 -d 2>/dev/null | jq -c . )" >> out/report.txt
-          for mode in user pubkey; do
-            AUTH=$([ $mode = user ] && echo "$TOK" || echo "$K")
-            R=$(curl -sS -w " HTTP%{http_code}" -X POST "$U/functions/v1/vonnisalert" -H "apikey: $K" -H "Authorization: Bearer $AUTH" -H "Content-Type: application/json" -d '{"action":"preview"}' | head -c 300)
-            echo "functie ($mode): $R" >> out/report.txt
-          done
-          echo "getUser met publishable: $(curl -sS -w ' HTTP%{http_code}' "$U/auth/v1/user" -H "apikey: $K" -H "Authorization: Bearer $TOK" | jq -Rr '.[0:80]')" >> out/report.txt
           q() { jq -n --arg q "$1" '{query:$q}' | curl -sS -X POST "https://api.supabase.com/v1/projects/$REF/database/query" -H "Authorization: Bearer $SUPABASE_ACCESS_TOKEN" -H "Content-Type: application/json" --data @- ; }
-          echo "app_users gelijk aan GEERT_EMAIL: $(q "select count(*) from public.app_users where lower(email)=lower('$E')" )" >> out/report.txt
-          echo "aantal app_users: $(q "select count(*) from public.app_users")" >> out/report.txt
-          echo "dossier: $(q "select verdict_date, verdict_date_text, date_certainty, court, status, article_id from public.cases where title ilike '%inbreekster%'")" >> out/report.txt
-          SQL=$(python3 .github/scripts/agenda_apply.py '["2026-11-11-1700-dossiers.json","2026-11-11-1715-nienke.json","2026-11-12-0735.json","2026-11-13-1000-inbreekster.json"]' 2>/dev/null | grep -v agenda_events | grep -v agenda_updates_applied); echo "upd-sql-len: ${#SQL}" >> out/report.txt; echo "upd-resultaat: $(q "$SQL" | head -c 300)" >> out/report.txt; echo "na: $(q "select verdict_date_text, date_certainty, article_id from public.cases where title ilike '%inbreekster%'")" >> out/report.txt; echo "events: $(q "select e.kind, e.message from public.case_events e join public.cases c on c.id=e.case_id where c.title ilike '%inbreekster%' order by e.at" | head -c 400)" >> out/report.txt
-          sed -i "s/$REF/<ref>/g; s/$E/<mail>/g" out/report.txt
+          q "select source, author, published_at::date d, first_seen::date f, announcement, premium, left(title,110) t, left(coalesce(lead,''),160) l from public.articles where case_id is null and not dismissed order by published_at desc" > out/arts.json
+          q "select key, value from public.app_state where key in ('rss_enabled','only_geert','followed_authors')" > out/state.json
+          q "select count(*) filter (where case_id is not null) gekoppeld, count(*) filter (where dismissed) weggeklikt, count(*) totaal from public.articles" > out/tot.json
+          sed -i "s/$REF/<ref>/g; s/$E/<mail>/g" out/*.json
           git config user.name diag; git config user.email diag@users.noreply.github.com
           git checkout --orphan diag-results; git rm -rfq --cached .; git add out; git commit -qm "diag $(date -u +%T)"; git push -f origin HEAD:diag-results
