@@ -19,10 +19,13 @@ jobs:
           set -u
           REF=$(echo "$REF" | tr -d '[:space:]'); E=$(echo "$GEERT_EMAIL" | tr -d '[:space:]')
           U="https://$REF.supabase.co"; mkdir -p out
-          q() { jq -n --arg q "$1" '{query:$q}' | curl -sS -X POST "https://api.supabase.com/v1/projects/$REF/database/query" -H "Authorization: Bearer $SUPABASE_ACCESS_TOKEN" -H "Content-Type: application/json" --data @- ; }
-          q "select source, author, published_at::date d, first_seen::date f, announcement, premium, left(title,110) t, left(coalesce(lead,''),160) l from public.articles where case_id is null and not dismissed order by published_at desc" > out/arts.json
-          q "select key, value from public.app_state where key in ('rss_enabled','only_geert','followed_authors')" > out/state.json
-          q "select count(*) filter (where case_id is not null) gekoppeld, count(*) filter (where dismissed) weggeklikt, count(*) totaal from public.articles" > out/tot.json
+          K=$(grep -o 'sb_publishable_[A-Za-z0-9_-]*' config.js); U=$(grep -o 'https://[a-z0-9]*\.supabase\.co' config.js)
+          TOK=$(jq -n --arg e "$E" --arg p "$GEERT_PASSWORD" '{email:$e,password:$p}' | curl -sS "$U/auth/v1/token?grant_type=password" -H "apikey: $K" -H "Content-Type: application/json" --data @- | jq -r .access_token)
+          g() { curl -sS "$U/rest/v1/$1" -H "apikey: $K" -H "Authorization: Bearer $TOK"; }
+          g "articles?select=source,author,published_at,first_seen,announcement,premium,title,lead&case_id=is.null&dismissed=eq.false&order=published_at.desc" > out/arts.json
+          g "app_state?select=key,value&key=in.(rss_enabled,only_geert,followed_authors)" > out/state.json
+          g "run_log?select=at,kind,ok,details&order=at.desc&limit=3" > out/runs.json
+          curl -sS "https://api.supabase.com/v1/projects/$REF" -H "Authorization: Bearer $SUPABASE_ACCESS_TOKEN" | jq -c '{message, status}' > out/token.json
           sed -i "s/$REF/<ref>/g; s/$E/<mail>/g" out/*.json
           git config user.name diag; git config user.email diag@users.noreply.github.com
           git checkout --orphan diag-results; git rm -rfq --cached .; git add out; git commit -qm "diag $(date -u +%T)"; git push -f origin HEAD:diag-results
