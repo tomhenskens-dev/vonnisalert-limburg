@@ -150,3 +150,10 @@ footer{text-align:center}
 .field .check{justify-content:flex-start;padding:3px 0}
 .wcount .big{white-space:nowrap}
 .winfo h3{font-size:14.5px;margin:14px 0 4px;color:#173f67}.winfo h3:first-child{margin-top:0}.winfo p,.winfo li{font-size:14px}.winfo ol,.winfo ul{padding-left:20px;margin:4px 0}.winfo li{margin-bottom:5px}
+
+/* gerechtsartikels per soort + snelle vonnisdatum */
+.artgroup{margin:0 0 14px}.artgroup>summary{cursor:pointer;list-style:none}.artgroup>summary::-webkit-details-marker{display:none}
+.artgroup>summary h2{display:inline;font-size:16px}.artgroup>summary::before{content:"▸ ";color:#7a8797}.artgroup[open]>summary::before{content:"▾ "}
+.quickdate{background:#fff7e6;border:1px solid #f0d9a6;border-radius:12px;padding:10px 12px;margin:0 0 10px}
+.quickdate label{font-size:13.5px;display:block;margin-bottom:6px}.quickdate .row{display:flex;gap:8px;align-items:center}
+.quickdate .row span{font-weight:700;white-space:nowrap}.quickdate input{flex:1;min-width:0}

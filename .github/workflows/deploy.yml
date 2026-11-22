@@ -184,6 +184,12 @@ jobs:
             git add config.js && git commit -m "Supabase-configuratie frontend bijwerken" && git push
           fi
 
+      - name: Inhaalslag zittingsverslagen
+        if: steps.check.outputs.configured == 'true'
+        run: |
+          echo "Inhaalslag zittingen" > /tmp/status/stap.txt
+          node .github/scripts/backfill_zittingen.mjs
+
       - name: Agenda-updates toepassen en agenda exporteren
         if: steps.check.outputs.configured == 'true'
         run: |

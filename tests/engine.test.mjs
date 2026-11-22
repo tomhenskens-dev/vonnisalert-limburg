@@ -136,3 +136,18 @@ test("artikel van gevolgde journalist zonder gerechtswoorden in de titel wordt t
   assert.deepEqual(r.articles.map((a) => a.article_id), ["1"]);
   assert.equal(r.inserts.length, 0);
 });
+
+test("vangnet: zittingsverslag van Geert wordt dossier zonder datum; uitspraak niet", async () => {
+  const { processItems, buildDigest } = await import("../supabase/functions/_shared/engine.js");
+  const mk = (id, title, lead) => ({ id, source: "hbvl", url: `https://www.hbvl.be/x/${id}.html`, title, lead, author: "Geert Houben", publishedAt: "2026-11-20T15:55:00Z" });
+  const r = processItems([
+    mk("10", "Peltenaar met vals Snapchat-profiel riskeert 8 jaar cel voor verkrachting minderjarige", "Een 58-jarige man uit Pelt hangt 8 jaar cel boven het hoofd."),
+    mk("11", "Gestolen Limburgse juwelen belanden in Luiks café: tot drie jaar cel", "Drie inbrekers zijn maandag veroordeeld tot drie jaar cel."),
+  ], { authors: [{ name: "Geert Houben" }], now: new Date("2026-11-20T16:00:00Z") });
+  assert.equal(r.inserts.length, 1);
+  assert.equal(r.inserts[0].verdict_date, null);
+  assert.equal(r.inserts[0].status, "check");
+  assert.deepEqual(r.articles.map((a) => a.analysis.kind), ["zitting", "uitspraak"]);
+  const d = buildDigest({ cases: r.inserts, today: "2026-11-21", since: "2026-11-20T00:00:00Z" });
+  assert.match(d.html, /Zittingen zonder vonnisdatum – datum invullen \(1\)/);
+});

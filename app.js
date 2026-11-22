@@ -3,7 +3,7 @@
 const { createClient } = window.supabase;
 import {
   analyzeArticle, STATUS, brusselsDate, addDays, weekday, formatDateNL, greetingFor, diffDays,
-  articleIdFromUrl, isGeertHouben, greetingAt, followedAuthor, DEFAULT_AUTHORS,
+  articleIdFromUrl, isGeertHouben, greetingAt, followedAuthor, DEFAULT_AUTHORS, classifyCourtArticle,
 } from "/supabase/functions/_shared/parser.js";
 import { LIMITS, KINDS, DEFAULT_STYLE, buildArticlePrompt, buildProjectInstructions, buildShortenPrompt, countChars, fmt } from "/artikel.js?v=1";
 
@@ -82,9 +82,9 @@ setTodayLabel();
 
 function updateBadges() {
   $("badgeCheck").textContent = state.cases.filter(isOpenCheck).length;
-  $("badgeArt").textContent = state.articles.filter((a) => !isColleagueItem(a.author)).length;
+  $("badgeArt").textContent = state.articles.filter((a) => !isColleagueItem(a.author) && ["zitting", "gerecht"].includes(artKind(a))).length;
   $("authorTabs").innerHTML = colleagues().map((c) => {
-    const n = state.articles.filter((a) => ownerOf(a.author)?.name === c.name).length;
+    const n = state.articles.filter((a) => ownerOf(a.author)?.name === c.name && ["zitting", "gerecht"].includes(artKind(a))).length;
     const h = "j/" + slug(c.name);
     return `<a href="#${h}" data-view="${h}" class="${location.hash === "#" + h ? "active" : ""}">${esc(c.name.split(" ")[0])} <span class="badge">${n}</span></a>`;
   }).join("");
@@ -250,15 +250,41 @@ function bindArticleButtons() {
   app.querySelectorAll("[data-mk]").forEach((b) => (b.onclick = () => {
     const a = state.articles.find((x) => x.article_id === b.dataset.mk);
     openNew({ url: a.url, text: [a.title, a.lead].filter(Boolean).join("\n"), pub: a.published_at, author: a.author, articleId: a.article_id });
+    // Snel de regel onderaan het artikel invullen, zonder in het tekstvak te moeten scrollen
+    const box = document.createElement("div");
+    box.className = "quickdate";
+    box.innerHTML = `<label>Staat er onderaan <b>“Vonnis op …”</b>? Vul de datum in:</label>
+      <div class="row"><span>Vonnis op</span><input id="qdInput" placeholder="bv. 18 december"><button type="button" class="primary sm" id="qdBtn">Toepassen</button></div>`;
+    $("analysisOut").prepend(box);
+    const apply = () => {
+      const v = $("qdInput").value.trim(); if (!v) return toast("Vul eerst de datum in, bv. 18 december.");
+      $("pasteText").value = $("pasteText").value.replace(/\n?Vonnis op [^\n]*$/i, "").trimEnd() + `\nVonnis op ${v}.`;
+      analyze();
+    };
+    $("qdBtn").onclick = apply;
+    $("qdInput").onkeydown = (e) => { if (e.key === "Enter") { e.preventDefault(); apply(); } };
+    setTimeout(() => $("qdInput")?.focus(), 50);
   }));
+}
+
+const artKind = (a) => a.analysis?.kind || classifyCourtArticle(a.title || "", a.lead || "");
+function groupedArticles(arts) {
+  const g = { zitting: [], gerecht: [], uitspraak: [], ander: [] };
+  for (const a of arts) (g[artKind(a)] || g.gerecht).push(a);
+  const sec = (title, hint, list, open) => list.length ? `<details class="artgroup" ${open ? "open" : ""}><summary><h2>${title} <span class="muted small">(${list.length})</span></h2></summary>
+    <p class="muted small" style="margin:4px 0 10px">${hint}</p><div class="list">${list.map(artItem).join("")}</div></details>` : "";
+  return sec("Vonnis volgt – datum nakijken", "Proces gevoerd, het vonnis volgt nog. Open het artikel, zoek onderaan “Vonnis op …” en tik op <b>Maak dossier</b>.", g.zitting, true)
+    + sec("Gerechtsartikels om na te kijken", "Over justitie, maar uit titel en intro is niet op te maken of er nog een vonnis volgt.", g.gerecht, true)
+    + sec("Vonnis al gevallen", "Hier valt niets meer op te volgen. Tik op <b>Negeer</b> om ze op te ruimen.", g.uitspraak, false)
+    + sec("Geen rechtbankartikel", "Andere artikels van de gevolgde journalisten.", g.ander, false);
 }
 
 function renderArticles() {
   const arts = state.articles.filter((a) => !isColleagueItem(a.author));
   app.innerHTML = `<h1>Gerechtsartikels</h1>
-    <p class="muted">Rechtbankartikels zonder herkende aankondiging in titel of intro. De aankondiging staat soms pas verderop in het artikel: open het, en plak de tekst als dossier als er een uitspraak wordt aangekondigd.${colleagues().length ? ` Artikels van ${colleagues().map((c) => esc(c.name)).join(", ")} staan in een eigen tabblad.` : ""}</p>
+    <p class="muted">Artikels zonder vonnisdatum in titel of intro. Zittingsverslagen worden automatisch een dossier (“datum invullen”); wat hier nog staat, is ingedeeld per soort.${colleagues().length ? ` Artikels van ${colleagues().map((c) => esc(c.name)).join(", ")} staan in een eigen tabblad.` : ""}</p>
     ${state.settings.rss_enabled ? "" : `<div class="notice">De automatische opvolging staat uit, dus deze lijst wordt niet automatisch aangevuld.</div>`}
-    ${arts.length ? `<div class="list">${arts.map(artItem).join("")}</div>` : `<div class="empty">Geen openstaande gerechtsartikels.</div>`}`;
+    ${arts.length ? groupedArticles(arts) : `<div class="empty">Geen openstaande gerechtsartikels.</div>`}`;
   bindArticleButtons();
 }
 
@@ -273,7 +299,7 @@ function renderJournalist(sl) {
     <p class="muted">Alles van ${esc(j.name.split(" ")[0])} op één plaats: dossiers met een aangekondigde uitspraak en rechtbankartikels om na te kijken.</p>
     ${block("Dossiers", cases, "Nog geen dossiers.")}
     <section class="block"><div class="blockhead"><h2>Rechtbankartikels om na te kijken <span class="muted small">(${arts.length})</span></h2></div>
-      ${arts.length ? `<div class="list">${arts.map(artItem).join("")}</div>` : `<div class="empty">Geen openstaande artikels.</div>`}</section>
+      ${arts.length ? groupedArticles(arts) : `<div class="empty">Geen openstaande artikels.</div>`}</section>
     ${arch.length ? block("Afgewerkt", arch, "") : ""}`;
   bindArticleButtons();
 }

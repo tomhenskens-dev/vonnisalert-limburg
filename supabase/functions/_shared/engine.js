@@ -3,7 +3,7 @@
 
 import {
   analyzeArticle, autoStatus, brusselsDate, addDays, diffDays, formatDateNL,
-  normalizeDefendant, articleIdFromUrl, greetingFor, STATUS, followedAuthor,
+  normalizeDefendant, articleIdFromUrl, greetingFor, STATUS, followedAuthor, classifyCourtArticle,
 } from "./parser.js";
 
 export const HBVL_RSS = "https://www.hbvl.be/rss";
@@ -132,6 +132,8 @@ export function processItems(items, { cases = [], knownArticles = {}, now = new 
       premium: item.premium, court_related: analysis.isCourtRelated, announcement: analysis.hasAnnouncement,
       analysis: compactAnalysis(analysis), last_seen: now.toISOString(),
     };
+    const kind = analysis.hasAnnouncement ? "aankondiging" : classifyCourtArticle(item.title, item.lead || "");
+    article.analysis.kind = kind;
 
     const match = findMatchingCase(item, analysis, workingCases);
     if (match) {
@@ -171,6 +173,23 @@ export function processItems(items, { cases = [], knownArticles = {}, now = new 
         out.updates.push({ id: c.id, patch });
         for (const e of ev) out.events.push({ case_id: c.id, ...e });
       }
+    } else if (!analysis.hasAnnouncement && !futureHearing && kind === "zitting" && byFollowed) {
+      // Vangnet: zittingsverslag van een gevolgde journalist. De "Vonnis op …"-regel staat meestal onderaan
+      // (niet in de feed), dus meteen een dossier zonder datum, dat in de mail opvalt tot de datum ingevuld is.
+      const id = cryptoId();
+      const c = {
+        id, title: item.title, defendant: analysis.defendant, author: item.author || null,
+        author_is_geert: true, article_url: item.url, article_id: item.id, published_at: item.publishedAt,
+        hearing_date: null, verdict_date: null, verdict_date_text: null, date_certainty: null,
+        court: analysis.court, status: "check", status_manual: false, needs_review: true,
+        notes: "Zittingsverslag: het vonnis volgt nog. De datum staat meestal onderaan het artikel (“Vonnis op …”).",
+        review_reasons: ["Uitspraakdatum nog invullen: open het artikel en zoek onderaan “Vonnis op …”.", ...(analysis.court === "Te controleren" ? ["Rechtbanklocatie niet uitdrukkelijk vermeld."] : [])],
+        source: item.source === "hln" ? "hln" : "rss", extra_links: [], created_at: now.toISOString(),
+      };
+      article.case_id = id;
+      workingCases.push(c);
+      out.inserts.push(c);
+      out.events.push({ case_id: id, kind: "aangemaakt", message: `Automatisch aangemaakt als zittingsverslag (vonnisdatum nog onbekend): “${item.title}”` });
     } else if (analysis.hasAnnouncement || futureHearing) {
       const id = cryptoId();
       const notes = [];
@@ -264,6 +283,7 @@ export function digestSections(cases, events, today, since) {
     vandaag: open.filter((c) => c.verdict_date === today && c.status !== "uitgesteld"),
     morgen: open.filter((c) => c.verdict_date === tomorrow && c.status !== "uitgesteld"),
     onbevestigd: open.filter((c) => c.verdict_date && c.verdict_date < today && c.status !== "uitgesteld").sort(byDate),
+    zonderDatum: open.filter((c) => !c.verdict_date && c.status !== "uitgesteld").sort((a, b) => String(a.published_at || "").localeCompare(String(b.published_at || ""))),
     gewijzigd: cases.filter((c) => changedIds.has(c.id) || (c.status === "uitgesteld" && c.updated_at && new Date(c.updated_at).getTime() > sinceTs)),
   };
 }
@@ -293,6 +313,7 @@ export function buildDigest({ cases, events = [], agenda = [], today, since, app
     ["3. Uitspraken morgen", s.morgen],
     ["4. Aangekondigd maar nog niet bevestigd", s.onbevestigd],
     ["5. Uitgesteld of gewijzigd", s.gewijzigd],
+    ["6. Zittingen zonder vonnisdatum – datum invullen", s.zonderDatum],
   ];
   const week = addDays(today, 7);
   const agendaWeek = agenda.filter((e) => e.start_date && (e.end_date || e.start_date) >= today && e.start_date <= week)

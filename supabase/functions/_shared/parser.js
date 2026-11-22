@@ -584,3 +584,22 @@ export function greetingAt(iso, hour) {
   const list = PERIODS[period].lines;
   return { period, kicker: PERIODS[period].kicker, line: list[hash(iso + period) % list.length], isTomDay: false };
 }
+
+/**
+ * Soort gerechtsartikel op basis van titel + intro (de feed geeft niet meer):
+ *  - "zitting":   proces gevoerd, vonnis volgt nog (vordering, "riskeert", "moet zich verantwoorden")
+ *  - "uitspraak": het vonnis is al gevallen (veroordeeld, vrijgesproken, "12 jaar cel")
+ *  - "gerecht":   over justitie, maar niet duidelijk welke van beide
+ *  - "ander":     geen gerechtsartikel
+ */
+const PENDING_STRONG = /\b(riskeer\w*|hangt\b[^.]{0,60}\bboven het hoofd|ge(vorderd|eist|vraagd)\b|vordert|vorderde|eist(e)?\b|cel gevraagd|straf gevraagd|vrijspraak gevraagd|vroeg(en)? (de|het) (procureur|parket|openbaar ministerie|aanklager)|(weer|opnieuw) voor de (rechter|rechtbank|strafrechter)|\bzich\b[^.]{0,60}\b(moeten |moest(en)? )?verantwoorden)/i;
+const PENDING_SOFT = /\b(moet(en)?|moest(en)?) zich\b[^.]{0,60}\bverantwoorden|\b(sta(at|an)|stond(en)?) (\w+ )?terecht|\bterechtsta\w*|\bvoor de (rechter|rechtbank|strafrechter|correctionele)|\bproces\b|\bpleit(te|ten)?\b|\bde procureur\b|\bopenbare aanklager\b/i;
+const VERDICT_DONE = /\b(veroordeeld|vrijgesproken|vrijspraak voor|geïnterneerd|kreeg|kregen|krijg(t|en)\b[^.]{0,40}\b(cel|celstraf|werkstraf|boete|jaar|maanden)|teruggebracht|(jaar|maanden) cel\b(?!\s*(gevraagd|gevorderd|geëist))|celstraffen\b|hof van beroep heeft|niet meer schuldig|schuldig bevonden)/i;
+
+export function classifyCourtArticle(title = "", lead = "") {
+  const t = `${title}. ${lead}`;
+  if (PENDING_STRONG.test(t)) return "zitting";
+  if (VERDICT_DONE.test(t)) return "uitspraak";
+  if (PENDING_SOFT.test(t)) return "zitting";
+  return courtScore(t) >= 2 ? "gerecht" : "ander";
+}
