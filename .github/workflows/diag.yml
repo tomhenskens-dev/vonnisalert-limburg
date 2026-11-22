@@ -22,10 +22,19 @@ jobs:
           K=$(grep -o 'sb_publishable_[A-Za-z0-9_-]*' config.js); U=$(grep -o 'https://[a-z0-9]*\.supabase\.co' config.js)
           TOK=$(jq -n --arg e "$E" --arg p "$GEERT_PASSWORD" '{email:$e,password:$p}' | curl -sS "$U/auth/v1/token?grant_type=password" -H "apikey: $K" -H "Content-Type: application/json" --data @- | jq -r .access_token)
           g() { curl -sS "$U/rest/v1/$1" -H "apikey: $K" -H "Authorization: Bearer $TOK"; }
-          g "articles?select=source,author,published_at,first_seen,announcement,premium,title,lead&case_id=is.null&dismissed=eq.false&order=published_at.desc" > out/arts.json
-          g "app_state?select=key,value&key=in.(rss_enabled,only_geert,followed_authors)" > out/state.json
-          g "run_log?select=at,kind,ok,details&order=at.desc&limit=3" > out/runs.json
-          curl -sS "https://api.supabase.com/v1/projects/$REF" -H "Authorization: Bearer $SUPABASE_ACCESS_TOKEN" | jq -c '{message, status}' > out/token.json
+          g "articles?select=url,title,premium,published_at&author=ilike.*houben*&source=eq.hbvl&order=published_at.desc&limit=12" > out/geert.json
+          jq -r '.[].url' out/geert.json > /tmp/urls.txt
+          echo "https://www.hbvl.be/regio/limburg/sint-truiden/truienaar-houdt-zwangere-inbreekster-bij-de-enkels-in-bedwang/164471444.html" >> /tmp/urls.txt
+          : > out/probe.txt
+          while read -r url; do
+            code=$(curl -sS -L -A "Mozilla/5.0 (Vonnisalert; toegestaan door HBVL)" -o /tmp/p.html -w "%{http_code}" "$url" || echo ERR)
+            sz=$(wc -c < /tmp/p.html 2>/dev/null || echo 0)
+            vo=$(grep -oiE ".{0,40}vonnis (op|valt|volgt|wordt)[^<]{0,40}" /tmp/p.html | head -2 | tr '\n' ' ')
+            ld=$(grep -c '"articleBody"' /tmp/p.html || true)
+            pw=$(grep -oiE 'isAccessibleForFree"?:\s*"?(true|false)|paywall|plus-artikel|premium' /tmp/p.html | sort | uniq -c | tr '\n' ' ' | head -c 160)
+            echo "$code | ${sz}B | articleBody:$ld | $pw | $(basename "$url" | cut -c1-50) | VONNIS: $vo" >> out/probe.txt
+            sleep 2
+          done < /tmp/urls.txt
           sed -i "s/$REF/<ref>/g; s/$E/<mail>/g" out/*.json
           git config user.name diag; git config user.email diag@users.noreply.github.com
           git checkout --orphan diag-results; git rm -rfq --cached .; git add out; git commit -qm "diag $(date -u +%T)"; git push -f origin HEAD:diag-results
