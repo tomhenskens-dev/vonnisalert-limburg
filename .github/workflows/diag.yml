@@ -22,7 +22,8 @@ jobs:
           K=$(grep -o 'sb_publishable_[A-Za-z0-9_-]*' config.js); U=$(grep -o 'https://[a-z0-9]*\.supabase\.co' config.js)
           TOK=$(jq -n --arg e "$E" --arg p "$GEERT_PASSWORD" '{email:$e,password:$p}' | curl -sS "$U/auth/v1/token?grant_type=password" -H "apikey: $K" -H "Content-Type: application/json" --data @- | jq -r .access_token)
           g() { curl -sS "$U/rest/v1/$1" -H "apikey: $K" -H "Authorization: Bearer $TOK"; }
-          curl -sS "https://api.supabase.com/v1/projects/$REF" -H "Authorization: Bearer $SUPABASE_ACCESS_TOKEN" | jq -c '{message, status, name}' > out/token.json
+          g "cases?select=title,verdict_date,status,court,created_at&verdict_date=is.null&archived=eq.false&order=created_at.desc" > out/zonderdatum.json
+          g "articles?select=title,analysis->>kind&case_id=is.null&dismissed=eq.false&author=ilike.*houben*&order=published_at.desc" > out/kinds.json
           sed -i "s/$REF/<ref>/g; s/$E/<mail>/g" out/*.json
           git config user.name diag; git config user.email diag@users.noreply.github.com
           git checkout --orphan diag-results; git rm -rfq --cached .; git add out; git commit -qm "diag $(date -u +%T)"; git push -f origin HEAD:diag-results
