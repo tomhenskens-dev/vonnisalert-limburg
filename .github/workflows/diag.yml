@@ -35,6 +35,10 @@ jobs:
             echo "$code | ${sz}B | articleBody:$ld | $pw | $(basename "$url" | cut -c1-50) | VONNIS: $vo" >> out/probe.txt
             sleep 2
           done < /tmp/urls.txt
+          head -1 /tmp/urls.txt > /tmp/one.txt; u=$(cat /tmp/one.txt)
+          curl -sS -D out/headers.txt -A "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0 Safari/537.36" -o /tmp/p2.html "$u"; sed -e 's/<[^>]*>/ /g' /tmp/p2.html | tr -s ' \n' | head -c 700 > out/body403.txt
+          curl -sS -o /dev/null -w "rss: %{http_code}\n" https://www.hbvl.be/rss >> out/headers.txt
+          curl -sS -o /dev/null -w "amp?: %{http_code}\n" "${u%.html}.amp.html" >> out/headers.txt
           sed -i "s/$REF/<ref>/g; s/$E/<mail>/g" out/*.json
           git config user.name diag; git config user.email diag@users.noreply.github.com
           git checkout --orphan diag-results; git rm -rfq --cached .; git add out; git commit -qm "diag $(date -u +%T)"; git push -f origin HEAD:diag-results
